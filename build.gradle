@@ -35,7 +35,7 @@ tasks.named('test') {
 
 
 // 리액트 프로젝트 폴더를 변수에 저장
-def frontendDir = "$projectDir/frontend"
+def frontendDir = "$projectDir/front"
 
 // 리액트 소스코드 복사 장소
 sourceSets{
