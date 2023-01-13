@@ -1,0 +1,96 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.7'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.Fproject'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+
+
+// 리액트 프로젝트 폴더를 변수에 저장
+def frontendDir = "$projectDir/frontend"
+
+// 리액트 소스코드 복사 장소
+sourceSets{
+    main{
+        resources{
+            srcDirs = ["$projectDir/src/main/resources"]
+        }
+    }
+}
+
+processResources{
+    dependsOn "copyReactBuildFiles"
+}
+
+// 리액트 프로젝트의 모듈 install, 함수 선언
+task installReact(type: Exec){
+    workingDir "$frontendDir"
+    inputs.dir "$frontendDir"
+    group = BasePlugin.BUILD_GROUP
+//    os에 따라 실행 방법 변경
+    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+        commandLine "npm.cmd", "audit", "fix"
+        commandLine "npm.cmd", "install"
+    }
+    else {
+        commandLine "npm", "audit", "fix"
+        commandLine "npm", "install"
+    }
+}
+
+// 리액트 프로젝트 빌드, 함수 선언
+task buildReact(type: Exec){
+    dependsOn "installReact"
+    workingDir "$frontendDir"
+    inputs.dir "$frontendDir"
+    group = BasePlugin.BUILD_GROUP
+//    os에 따라서 npm build 방식 변경, 리액트 프로젝트 빌드
+    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+        commandLine "npm.cmd", "run-script", "build"
+    }
+    else {
+        commandLine "npm", "run-script", "build"
+    }
+}
+
+// 리액트 프로젝트 빌드 파일을 스프링 프로젝트로 복사, 함수 선언
+task copyReactBuildFiles(type: Copy){
+    dependsOn "buildReact"
+//    리액트 프로젝트 빌드 완료 파일 위치
+    from "$frontendDir/build"
+//     스프링부트 프로젝트 빌드 파일 위치 중 resources/main/static 폴더
+    into "$buildDir/resources/main/static"
+}
+
+// 배포 시 리액트 프로젝트의 배포 파일도 함께 포함
+tasks.bootJar{
+    dependsOn "copyReactBuildFiles"
+}
