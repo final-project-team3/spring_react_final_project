@@ -2,6 +2,7 @@ import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ProductDetail from "./HSH/ProductDetail";
 import ProductList from "./HSH/ProductList";
+import Header from "./Header";
 
 
 const ProjectRouter = () => {
@@ -9,7 +10,7 @@ const ProjectRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path={'/'} element={<ProductDetail/>}>
+                <Route path={'/'} element={<Header/>}>
                     {/*HSH*/}
                     <Route path={'/productDetail'} element={<ProductDetail/>}/>
                     <Route path={'/productList'} element={<ProductList/>}/>
