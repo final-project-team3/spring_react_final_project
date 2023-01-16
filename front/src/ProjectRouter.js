@@ -2,6 +2,8 @@ import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ProductDetail from "./HSH/ProductDetail";
 import ProductList from "./HSH/ProductList";
+import ProductMain from "./BJH/ProductMain";
+import LoginPage from "./BJH/LoginPage";
 
 
 const ProjectRouter = () => {
@@ -9,10 +11,10 @@ const ProjectRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path={'/'} element={<ProductDetail/>}>
+                <Route path={'/'} element={<LoginPage/>}>
                     {/*HSH*/}
-                    <Route path={'/productDetail'} element={<ProductDetail/>}/>
-                    <Route path={'/productList'} element={<ProductList/>}/>
+                    <Route path={'productDetail'} element={<ProductDetail/>}/>
+                    <Route path={'productList'} element={<ProductList/>}/>
                     {/*HSH*/}
 
                     {/*LYS*/}
@@ -24,7 +26,7 @@ const ProjectRouter = () => {
                     {/*GJY*/}
 
                     {/*BJH*/}
-
+                    <Route path={'loginPage'} element={<LoginPage/>}/>
                     {/*BJH*/}
 
                     {/*LSH*/}
