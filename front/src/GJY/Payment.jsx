@@ -100,7 +100,7 @@ const styles = {
       <br/>
       <div className={'col-12'}>
         <div className={'row'}>
-          <img src="/logo192.png" alt="제품 사진" className={'col-3'} />
+          <img src="/java505/intellij/team3_project/spring_react_final_project/front/public/logo192.png" alt="제품 사진" className={'col-3'} />
           <div className={'col-3 ms-5'}>
             <div className={'row'}>
               <label className={'float-start col-3'} htmlFor={'productName'}>제품명</label>
