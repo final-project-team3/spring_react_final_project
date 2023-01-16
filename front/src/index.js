@@ -4,7 +4,7 @@ import './index.css';
 import App from './HSH/ProductDetail';
 import reportWebVitals from './reportWebVitals';
 import styled from "styled-components";
-import SignUp from "./LYS/SignUp";
+import UserSignUp from "./LYS/UserSignUp";
 import SellerSignUp from "./LYS/SellerSignUp";
 import ProjectRouter from "./ProjectRouter";
 
@@ -12,8 +12,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         {/*<App/>*/}
-        <SignUp/>
-        <SellerSignUp/>
         <ProjectRouter/>
     </React.StrictMode>
 );

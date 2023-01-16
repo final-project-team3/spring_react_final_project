@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
+import DaumPostcode from 'react-daum-postcode';
+import Popup from "./Popup";
 
-function SignUp() {
+function UserSignUp() {
     const [isAllChecked, setIsAllChecked] = useState(false);
     const [checkedItems, setCheckedItems] = useState([]);
 
@@ -48,54 +50,55 @@ function SignUp() {
         nickname: nickname,
     };
 
-    const onSubmit = async () => {
-        try {
-            const response = await axios.post(
-                "https://backend.alittlevanilla.kro.kr/member/signup",
-                body,
-                {
-                    headers: {"Content-Type": "application/json"},
-                }
-            );
-            console.log(response.data.code);
-            if (response.data.code === 1000) {
-                window.location.href = "/emailcheck";
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    };
-
-    // 유효성 검사
-    const emailCheck = async () => {
-        if (email === "") {
-            setCheckedEmail("필수 항목입니다.");
-        } else {
-            var regex =
-                /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-            console.log("비밀번호 유효성 검사 :: ", regex.test(email));
-
-            if (regex.test(email)) {
-                try {
-                    const response = await axios.get(
-                        "https://backend.alittlevanilla.kro.kr/member/" + email
-                    );
-                    if (response.data === true) {
-                        setCheckedEmail("이미 존재하는 이메일 입니다.");
-                    } else {
-                        setCheckedEmail("가능");
-                        console.log("가능");
-                    }
-                } catch (e) {
-                    console.log(e);
-                }
-            } else {
-                setCheckedEmail("이메일 주소를 확인해 주세요.");
-            }
-        }
-    };
+    // const onSubmit = async () => {
+    //     try {
+    //         const response = await axios.post(
+    //             "https://backend.alittlevanilla.kro.kr/member/signup",
+    //             body,
+    //             {
+    //                 headers: {"Content-Type": "application/json"},
+    //             }
+    //         );
+    //         console.log(response.data.code);
+    //         if (response.data.code === 1000) {
+    //             window.location.href = "/emailcheck";
+    //         }
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // };
+    //
+    // // 유효성 검사
+    // const emailCheck = async () => {
+    //     if (email === "") {
+    //         setCheckedEmail("필수 항목입니다.");
+    //     } else {
+    //         var regex =
+    //             /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    //         console.log("비밀번호 유효성 검사 :: ", regex.test(email));
+    //
+    //         if (regex.test(email)) {
+    //             try {
+    //                 const response = await axios.get(
+    //                     "https://backend.alittlevanilla.kro.kr/member/" + email
+    //                 );
+    //                 if (response.data === true) {
+    //                     setCheckedEmail("이미 존재하는 이메일 입니다.");
+    //                 } else {
+    //                     setCheckedEmail("가능");
+    //                     console.log("가능");
+    //                 }
+    //             } catch (e) {
+    //                 console.log(e);
+    //             }
+    //         } else {
+    //             setCheckedEmail("이메일 주소를 확인해 주세요.");
+    //         }
+    //     }
+    // };
 
     const [checkedEmail, setCheckedEmail] = useState("");
+
     return (
         <WrapLogin>
             <HeadBannerGroup/>
@@ -121,7 +124,7 @@ function SignUp() {
 
                             <FormBlockBody>
                                 <InputTextSizeW>
-                                    <EmailInput
+                                    <Input
                                         id="email"
                                         type="email"
                                         value={email}
@@ -130,7 +133,7 @@ function SignUp() {
                                         onChange={(e) => {
                                             setEmail(e.target.value);
                                         }}
-                                        onBlur={() => emailCheck()}
+                                        // onBlur={() => emailCheck()}
                                     />
                                 </InputTextSizeW>
                                 <FormError>{checkedEmail}</FormError>
@@ -142,7 +145,7 @@ function SignUp() {
                             </FormBlockHead>
                             <FormBlockBody>
                                 <InputTextSizeW>
-                                    <EmailInput
+                                    <Input
                                         id="password"
                                         // type="password"
                                         value={password}
@@ -156,7 +159,7 @@ function SignUp() {
                             </FormBlockBody>
                             <FormBlockBody>
                                 <InputTextSizeW>
-                                    <EmailInput placeholder="비밀번호 확인" required/>
+                                    <Input placeholder="비밀번호 확인" required/>
                                 </InputTextSizeW>
                             </FormBlockBody>
                         </FormBlock>
@@ -167,7 +170,7 @@ function SignUp() {
                             </FormBlockHead>
                             <FormBlockBody>
                                 <InputTextSizeWTypeL>
-                                    <EmailInput
+                                    <Input
                                         id="name"
                                         value={nickname}
                                         type="text"
@@ -187,8 +190,8 @@ function SignUp() {
                             </FormBlockHead>
                             <FormBlockBody>
                                 <InputTextSizeWTypeL>
-                                    <EmailInput type="hidden" required/>
-                                    <EmailInput
+                                    <Input type="hidden" required/>
+                                    <Input
                                         type="tel"
                                         placeholder="ex) 010-1234-5678"
                                         data-auth="cell_phone"
@@ -203,10 +206,24 @@ function SignUp() {
                                 <AsteriskRed>*</AsteriskRed> 주민등록번호
                             </FormBlockHead>
                             <FormBlockBody>
-                                <InputTextSizeWTypeL className={""}>
-                                    <EmailInput className={""}/>
-                                    <EmailInput/>
-                                </InputTextSizeWTypeL>
+                                <InputTextSizeW className={"row"}>
+                                    {/*<RegistrationNumberInput type="hidden" required/>*/}
+                                    <RegistrationNumberInput className={"col-6"} placeholder="생년월일 6자리를 입력"/>
+                                    <RegistrationNumberInput className={"col-6"} placeholder="주민번호 뒷번호 첫번째 숫자 입력"/>
+                                </InputTextSizeW>
+                            </FormBlockBody>
+                        </FormBlock>
+
+                        <FormBlock>
+                            <FormBlockHead>
+                                <AsteriskRed>*</AsteriskRed> 주소
+                            </FormBlockHead>
+                            <FormBlockBody>
+                                <Popup/>
+                                    <Input id={"jibunAddress"}/>
+                                    <Input id={"roadAddress"}/>
+                                    <Input id={"sigunguCode"}/>
+                                    <Input id={""}/>
                             </FormBlockBody>
                         </FormBlock>
 
@@ -273,7 +290,7 @@ function SignUp() {
                                 <BtnLogin
                                     type="button"
                                     onClick={() => {
-                                        onSubmit();
+                                        // onSubmit();
                                     }}
                                 >
                                     회원가입하기
@@ -284,7 +301,8 @@ function SignUp() {
                 </LoginWrap>
             </ReauthPhone>
         </WrapLogin>
-    );
+    )
+        ;
 }
 
 //
@@ -469,13 +487,26 @@ const UiInputBtnCombo = styled.div`
   padding-right: 105px;
 `;
 
-const EmailInput = styled.input`
+const Input = styled.input`
   font-size: 14px;
   height: 48px;
   background: #fff;
   line-height: 16px;
   border: 1px solid #acacac;
   width: 100%;
+  box-sizing: border-box;
+  padding: 2px 8px;
+  border-radius: 2px;
+  appearance: none;
+`;
+
+const RegistrationNumberInput = styled.input`
+  font-size: 14px;
+  height: 48px;
+  background: #fff;
+  line-height: 16px;
+  border: 1px solid #acacac;
+  width: 50%;
   box-sizing: border-box;
   padding: 2px 8px;
   border-radius: 2px;
@@ -646,4 +677,4 @@ const WrapLogin = styled.div`
   background: #fff;
 `;
 
-export default SignUp;
+export default UserSignUp;
