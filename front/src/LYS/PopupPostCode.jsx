@@ -58,12 +58,6 @@ const PopupPostCode = (props) => {
             document.getElementById("roadAddress").value = addrRoad;
             // 커서를 상세주소 필드로 이동한다.
             document.getElementById("addressDetail").focus();
-            // console.log(data);
-            // console.log(fullAddress);
-            // console.log(data.zonecode);
-            // document.querySelector("#jibunAddress").value = data.jibunAddress;
-            // document.querySelector("#roadAddress").value = data.roadAddress;
-            // document.querySelector("#sigunguCode").value = data.sigunguCode;
             props.onClose()
         }
     }
