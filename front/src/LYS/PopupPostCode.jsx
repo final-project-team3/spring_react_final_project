@@ -27,23 +27,27 @@ const PopupPostCode = (props) => {
 
     const postCodeStyle = {
         display: "block",
-        position: "absolute",
+        position: "center",
         left: '310px',
         top: "10%",
-        width: "600px",
-        height: "600px",
+        width: "400px",
+        height: "500px",
         padding: "7px",
         bodyClose: false,
-        background: '#fff',
+        background: '#fff'
     };
 
     return (
         <div>
-            <DaumPostcode style={postCodeStyle} onComplete={handlePostCode}/>
+            <div className={'d-flex justify-content-end'}>
             <button type='button' onClick={() => {
                 props.onClose()
-            }} className='postCode_btn'>팝업창 닫기
+            }} className='mb-2 btn btn-danger postCode_btn'>닫기
             </button>
+            </div>
+            <div className={'border border-dark border-end-1'}>
+            <DaumPostcode style={postCodeStyle} onComplete={handlePostCode}/>
+            </div>
         </div>
     )
 }

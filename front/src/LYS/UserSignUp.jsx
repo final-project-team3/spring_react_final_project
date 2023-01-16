@@ -206,10 +206,15 @@ function UserSignUp() {
                                 <AsteriskRed>*</AsteriskRed> 주민등록번호
                             </FormBlockHead>
                             <FormBlockBody>
-                                <InputTextSizeW className={"row"}>
+                                <InputTextSizeW>
                                     {/*<RegistrationNumberInput type="hidden" required/>*/}
-                                    <RegistrationNumberInput className={"col-6"} placeholder="생년월일 6자리를 입력"/>
-                                    <RegistrationNumberInput className={"col-6"} placeholder="주민번호 뒷번호 첫번째 숫자 입력"/>
+                                    <Input style={{
+                                        width:241
+                                    }} className={"col-6"} placeholder="생년월일 6자리를 입력"/>
+                                    &nbsp;-&nbsp;
+                                    <Input style={{
+                                        width:241
+                                    }} className={"col-6"} placeholder="주민번호 뒷자리 하나 입력"/>
                                 </InputTextSizeW>
                             </FormBlockBody>
                         </FormBlock>
@@ -660,7 +665,7 @@ const LoginWrap = styled.div`
 `;
 
 const ReauthPhone = styled.form`
-  width: 384px;
+  width: 500px;
   display: block;
   margin: 0 auto;
 `;
