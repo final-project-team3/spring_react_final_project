@@ -210,11 +210,12 @@ function UserSignUp() {
                                     {/*<RegistrationNumberInput type="hidden" required/>*/}
                                     <Input style={{
                                         width:241
-                                    }} className={"col-6"} placeholder="생년월일 6자리를 입력"/>
+                                    }} maxLength={6} className={"col-6"} placeholder="* * * * * *"/>
                                     &nbsp;-&nbsp;
                                     <Input style={{
-                                        width:241
-                                    }} className={"col-6"} placeholder="주민번호 뒷자리 하나 입력"/>
+                                        width:50
+                                    }} maxLength={1} className={"col-6"} placeholder="*"/>
+                                    &nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*
                                 </InputTextSizeW>
                             </FormBlockBody>
                         </FormBlock>
@@ -225,10 +226,10 @@ function UserSignUp() {
                             </FormBlockHead>
                             <FormBlockBody>
                                 <Popup/>
-                                    <Input id={"jibunAddress"}/>
-                                    <Input id={"roadAddress"}/>
-                                    <Input id={"sigunguCode"}/>
-                                    <Input id={""}/>
+                                <Input className={'my-1'} id={"sigunguCode"} placeholder={'우편번호'} readOnly={true}/>
+                                <Input className={'my-1'} id={"jibunAddress"} placeholder={'지번 주소'} readOnly={true}/>
+                                <Input className={'my-1'} id={"roadAddress"} placeholder={'도로명 주소'} readOnly={true}/>
+                                <Input className={'my-1'} id={""} placeholder={'상세주소를 입력해주세요.'}/>
                             </FormBlockBody>
                         </FormBlock>
 
