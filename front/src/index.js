@@ -3,12 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './HSH/ProductDetail';
 import reportWebVitals from './reportWebVitals';
+import AppGJY from "./AppGJY";
 import ProjectRouter from "./ProjectRouter";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    {/*<App />*/}
+    <AppGJY/>
+
     <ProjectRouter/>
+
   </React.StrictMode>
 );
 

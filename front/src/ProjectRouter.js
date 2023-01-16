@@ -3,7 +3,12 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ProductDetail from "./HSH/ProductDetail";
 import ProductList from "./HSH/ProductList";
 import Header from "./Header";
+import Payment from "./Payment";
 
+
+function Header() {
+  return null;
+}
 
 const ProjectRouter = () => {
 
@@ -21,7 +26,7 @@ const ProjectRouter = () => {
                     {/*LYS*/}
 
                     {/*GJY*/}
-
+                      <Route path={'/payment'} element={<Payment/>}/>
                     {/*GJY*/}
 
                     {/*BJH*/}
