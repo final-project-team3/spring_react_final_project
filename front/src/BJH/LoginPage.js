@@ -61,7 +61,6 @@ function LoginPage(props) {
                                 <br/>
 
                                 <p className="member-join"><a href="#"> 회원가입</a></p>
-
                             </form>
                 </div>
             </div>
