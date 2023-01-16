@@ -10,10 +10,26 @@ const ProjectRouter = () => {
         <BrowserRouter>
             <Routes>
                 <Route path={'/'} element={<ProductDetail/>}>
-                {/*    HSH*/}
+                    {/*HSH*/}
                     <Route path={'/productDetail'} element={<ProductDetail/>}/>
                     <Route path={'/productList'} element={<ProductList/>}/>
-                {/*    HSH*/}
+                    {/*HSH*/}
+
+                    {/*LYS*/}
+
+                    {/*LYS*/}
+
+                    {/*GJY*/}
+
+                    {/*GJY*/}
+
+                    {/*BJH*/}
+
+                    {/*BJH*/}
+
+                    {/*LSH*/}
+
+                    {/*LSH*/}
                 </Route>
             </Routes>
         </BrowserRouter>
