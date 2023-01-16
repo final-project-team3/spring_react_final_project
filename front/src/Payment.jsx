@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 
 /*function PaymentFnc() {
@@ -29,6 +29,8 @@ import React from "react";
   }
 }*/
 
+
+
 const styles = {
   vertical: {
     borderLeft: 'solid lightgray',
@@ -40,7 +42,32 @@ const styles = {
 }
 
 
-function Payment(props) {
+
+  function Payment(props) {
+    const [order, setOrder] = useState(0);
+    const [delivery, setDelivery] = useState(3000);
+
+    useEffect(() => {
+      if (order >= 30000) {
+        setDelivery(0);
+      }
+    }, [order]);
+
+
+    const discount = 1200;
+    const cost = order + delivery - discount;
+    const productName = 'productName';
+    const productOpt = 'productOpt';
+    const productCnt = 'productCnt';
+
+    const ChangeOpt = () => {
+      setOrder(40000);
+      if (order >= 30000) {
+        setDelivery(0);
+      } else if (order < 30000){
+        setDelivery(3000);
+      }
+    }
   return (
     <div className={'container'}>
 
@@ -71,33 +98,42 @@ function Payment(props) {
       <br/>
       <hr/>
       <br/>
-
       <div className={'col-12'}>
         <div className={'row'}>
           <img src="/logo192.png" alt="제품 사진" className={'col-3'} />
-          <div className={'col-3 ms-3'}>
-            <p className={'text-start'}>제품명</p>
-            <p className={'text-start'}>옵션</p>
-            <p className={'text-start'}>수량</p>
-            <button className={'btn btn-warning'}>옵션 변경</button>
+          <div className={'col-3 ms-5'}>
+            <div className={'row'}>
+              <label className={'float-start col-3'} htmlFor={'productName'}>제품명</label>
+              <p id={'productName'} className={'col-3'}>{productName}</p>
+            </div>
+            <div className={'row'}>
+              <label className={'float-start col-3'} htmlFor={'productOpt'}>옵션</label>
+              <p id={'productOpt'} className={'col-3'}>{productOpt}</p>
+            </div>
+            <div className={'row'}>
+              <label className={'float-start col-3'} htmlFor={'productCnt'}>수량</label>
+              <p id={'productCnt'} className={'col-3'}>{productCnt}</p>
+            </div>
+            <button className={'btn btn-warning'} onClick={ChangeOpt}>옵션 변경</button>
           </div>
           <div className={'col-6'} style={styles.vertical}>
-            <div>
-            <label className={'text-start'} htmlFor={'order'}>주문금액</label>
-            <input type="text" id={'order'} name={'order'} className={'ms-3 me-2'}/>원
+            <div className={'row'}>
+              <label className={'float-start col-3'} htmlFor={'order'}>주문금액</label>
+              <p id={'order'} className={'col-3'}>{order} 원</p>
             </div>
-            <label className={'text-start'} htmlFor={'delivery'}>배송비</label>
-            <input type="text" id={'delivery'} name={'delivery'} className={'ms-3 me-2'}/>원
-
-            <div>
-              <label htmlFor={"discount"}>할인 적용</label>
-              <input type="text" id={'discount'} name={'discount'} className={'ms-3'}/>
-            <button className={'btn btn-success ms-3'}>포인트/쿠폰</button>
+            <div className={'row'}>
+              <label className={'float-start col-3'} htmlFor={'delivery'}>배송비</label>
+              <p id={'delivery'} className={'col-3'}>{delivery} 원</p>
             </div>
-
-
-            <p className={'float-start mt-1'}>결제 금액</p>
-
+            <div className={'row'}>
+              <label htmlFor={"discount"} className={'float-start col-3'}>할인 적용</label>
+              <p id={'discount'} className={'col-3'}>{discount} 원</p>
+              <button className={'btn btn-success col-2'}>포인트/쿠폰</button>
+            </div>
+            <div className={'row'}>
+              <label className={'float-start col-3'} htmlFor={'cost'}>결제 금액</label>
+              <p id={'cost'} className={'col-3'}>{cost} 원</p>
+            </div>
           </div>
         </div>
 
