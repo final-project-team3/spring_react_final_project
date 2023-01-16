@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import DaumPostcode from 'react-daum-postcode';
 import Popup from "./Popup";
 
 function UserSignUp() {
@@ -50,52 +49,52 @@ function UserSignUp() {
         nickname: nickname,
     };
 
-    // const onSubmit = async () => {
-    //     try {
-    //         const response = await axios.post(
-    //             "https://backend.alittlevanilla.kro.kr/member/signup",
-    //             body,
-    //             {
-    //                 headers: {"Content-Type": "application/json"},
-    //             }
-    //         );
-    //         console.log(response.data.code);
-    //         if (response.data.code === 1000) {
-    //             window.location.href = "/emailcheck";
-    //         }
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-    // };
-    //
-    // // 유효성 검사
-    // const emailCheck = async () => {
-    //     if (email === "") {
-    //         setCheckedEmail("필수 항목입니다.");
-    //     } else {
-    //         var regex =
-    //             /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-    //         console.log("비밀번호 유효성 검사 :: ", regex.test(email));
-    //
-    //         if (regex.test(email)) {
-    //             try {
-    //                 const response = await axios.get(
-    //                     "https://backend.alittlevanilla.kro.kr/member/" + email
-    //                 );
-    //                 if (response.data === true) {
-    //                     setCheckedEmail("이미 존재하는 이메일 입니다.");
-    //                 } else {
-    //                     setCheckedEmail("가능");
-    //                     console.log("가능");
-    //                 }
-    //             } catch (e) {
-    //                 console.log(e);
-    //             }
-    //         } else {
-    //             setCheckedEmail("이메일 주소를 확인해 주세요.");
-    //         }
-    //     }
-    // };
+    const onSubmit = async () => {
+        try {
+            const response = await axios.post(
+                "https://backend.alittlevanilla.kro.kr/member/signup",
+                body,
+                {
+                    headers: {"Content-Type": "application/json"},
+                }
+            );
+            console.log(response.data.code);
+            if (response.data.code === 1000) {
+                window.location.href = "/emailcheck";
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    // 유효성 검사
+    const emailCheck = async () => {
+        if (email === "") {
+            setCheckedEmail("필수 항목입니다.");
+        } else {
+            var regex =
+                /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+            console.log("비밀번호 유효성 검사 :: ", regex.test(email));
+
+            if (regex.test(email)) {
+                try {
+                    const response = await axios.get(
+                        "https://backend.alittlevanilla.kro.kr/member/" + email
+                    );
+                    if (response.data === true) {
+                        setCheckedEmail("이미 존재하는 이메일 입니다.");
+                    } else {
+                        setCheckedEmail("가능");
+                        console.log("가능");
+                    }
+                } catch (e) {
+                    console.log(e);
+                }
+            } else {
+                setCheckedEmail("이메일 주소를 확인해 주세요.");
+            }
+        }
+    };
 
     const [checkedEmail, setCheckedEmail] = useState("");
 
@@ -301,11 +300,9 @@ function UserSignUp() {
                 </LoginWrap>
             </ReauthPhone>
         </WrapLogin>
-    )
-        ;
+    );
 }
 
-//
 const AuthBtn = styled.button`
   display: inline-block;
   vertical-align: middle;
