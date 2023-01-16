@@ -1,24 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './HSH/ProductDetail';
 import reportWebVitals from './reportWebVitals';
-import styled from "styled-components";
-import UserSignUp from "./LYS/UserSignUp";
-import SellerSignUp from "./LYS/SellerSignUp";
 import ProjectRouter from "./ProjectRouter";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <ProjectRouter/>
-  </React.StrictMode>
-  <React.StrictMode>
-    <ProjectRouter/>
-  </React.StrictMode>
     <React.StrictMode>
-        {/*<App/>*/}
         <ProjectRouter/>
     </React.StrictMode>
 );
