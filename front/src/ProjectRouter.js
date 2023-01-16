@@ -44,7 +44,7 @@ const ProjectRouter = () => {
                 </Route>
             </Routes>
         </BrowserRouter>
-    )
+    );
 }
 
 export default ProjectRouter;
