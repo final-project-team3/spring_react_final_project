@@ -6,6 +6,7 @@ import Payment from "./Payment";
 import UserSignUp from "./LYS/UserSignUp";
 import SellerSignUp from "./LYS/SellerSignUp";
 import Header from "./Header";
+import LoginPage from "./BJH/LoginPage";
 
 function Header() {
   return null;
@@ -16,10 +17,12 @@ const ProjectRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path={'/'} element={<ProductDetail/>}>
                 <Route path={'/'} element={<Header/>}>
+                <Route path={'/'} element={<LoginPage/>}>
                     {/*HSH*/}
-                    <Route path={'/productDetail'} element={<ProductDetail/>}/>
-                    <Route path={'/productList'} element={<ProductList/>}/>
+                    <Route path={'productDetail'} element={<ProductDetail/>}/>
+                    <Route path={'productList'} element={<ProductList/>}/>
                     {/*HSH*/}
 
                     {/*LYS*/}
@@ -32,7 +35,7 @@ const ProjectRouter = () => {
                     {/*GJY*/}
 
                     {/*BJH*/}
-
+                    <Route path={'loginPage'} element={<LoginPage/>}/>
                     {/*BJH*/}
 
                     {/*LSH*/}
