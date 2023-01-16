@@ -18,7 +18,7 @@ const Popup = () => {
 
     return(
         <div>
-            <button type='button' onClick={openPostCode}>우편번호 검색</button>
+            <button type='button' className={'my-2 btn btn-primary'} onClick={openPostCode}>주소 찾기</button>
             <div id='popupDom'>
                 {isPopupOpen && (
                     <PopupDom>
