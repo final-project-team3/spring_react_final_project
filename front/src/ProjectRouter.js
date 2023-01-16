@@ -2,7 +2,6 @@ import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ProductDetail from "./HSH/ProductDetail";
 import ProductList from "./HSH/ProductList";
-import ProductMain from "./BJH/ProductMain";
 import LoginPage from "./BJH/LoginPage";
 
 

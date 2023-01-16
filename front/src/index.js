@@ -4,13 +4,11 @@ import './index.css';
 import App from './HSH/ProductDetail';
 import reportWebVitals from './reportWebVitals';
 import ProjectRouter from "./ProjectRouter";
-import ProductMain from "./BJH/ProductMain";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ProjectRouter/>
-    {/*<ProductMain />*/}
   </React.StrictMode>
 );
 
