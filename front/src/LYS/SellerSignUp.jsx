@@ -5,344 +5,153 @@ import DaumPostcode from 'react-daum-postcode';
 import Popup from "./Popup";
 
 function UserSignUp() {
-    const [isAllChecked, setIsAllChecked] = useState(false);
-    const [checkedItems, setCheckedItems] = useState([]);
-
-    const allAgreeHandler = (checked) => {
-        setIsAllChecked(!isAllChecked);
-        if (checked) {
-            setCheckedItems([...checkedItems, "provision", "privacy"]);
-        } else if (
-            (!checked && checkedItems.includes("provision")) ||
-            (!checked && checkedItems.includes("privacy"))
-        ) {
-            setCheckedItems([]);
-        }
-    };
-
-    const agreeHandler = (checked, value) => {
-        if (checked) {
-            setCheckedItems([...checkedItems, value]);
-        } else if (!checked && checkedItems.includes(value)) {
-            setCheckedItems(checkedItems.filter((el) => el !== value));
-        }
-    };
-
-    const fake = () => {
-        alert("현재 개인정보를 수집하고 있지 않습니다🙂 안심하고 테스트 해보세요.");
-    };
-
-    useEffect(() => {
-        if (checkedItems.length >= 2) {
-            setIsAllChecked(true);
-        } else {
-            setIsAllChecked(false);
-        }
-    }, [checkedItems]);
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [nickname, setNickname] = useState("");
-
-    let body = {
-        email: email,
-        password: password,
-        nickname: nickname,
-    };
-
-    // const onSubmit = async () => {
-    //     try {
-    //         const response = await axios.post(
-    //             "https://backend.alittlevanilla.kro.kr/member/signup",
-    //             body,
-    //             {
-    //                 headers: {"Content-Type": "application/json"},
-    //             }
-    //         );
-    //         console.log(response.data.code);
-    //         if (response.data.code === 1000) {
-    //             window.location.href = "/emailcheck";
-    //         }
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-    // };
-    //
-    // // 유효성 검사
-    // const emailCheck = async () => {
-    //     if (email === "") {
-    //         setCheckedEmail("필수 항목입니다.");
-    //     } else {
-    //         var regex =
-    //             /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-    //         console.log("비밀번호 유효성 검사 :: ", regex.test(email));
-    //
-    //         if (regex.test(email)) {
-    //             try {
-    //                 const response = await axios.get(
-    //                     "https://backend.alittlevanilla.kro.kr/member/" + email
-    //                 );
-    //                 if (response.data === true) {
-    //                     setCheckedEmail("이미 존재하는 이메일 입니다.");
-    //                 } else {
-    //                     setCheckedEmail("가능");
-    //                     console.log("가능");
-    //                 }
-    //             } catch (e) {
-    //                 console.log(e);
-    //             }
-    //         } else {
-    //             setCheckedEmail("이메일 주소를 확인해 주세요.");
-    //         }
-    //     }
-    // };
-
-    const [checkedEmail, setCheckedEmail] = useState("");
 
     return (
         <WrapLogin>
             <HeadBannerGroup/>
             <ReauthPhone>
                 <LoginWrap>
-                    <LoginLogo>
-                        <h1>
-                            {/* <LogoA href="/">
-                <SpIcon />
-              </LogoA> */}
-                        </h1>
-                    </LoginLogo>
-
                     <LoginSection>
                         <LoginTitle>회원가입하기 (판매자용)</LoginTitle>
                         <SignupStep className="wrap">
                             <Title>환영합니다. 가입 정보를 입력해주세요</Title>
                         </SignupStep>
-                        <FormBlock>
-                            <FormBlockHead>
-                                <AsteriskRed>*</AsteriskRed> 이메일
-                            </FormBlockHead>
+                        <form action={'/signUpSeller'} method={'post'}>
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 이메일
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeW>
+                                        <Input type="email" name={'sellerId'} placeholder="이메일을 입력해주세요."/>
+                                    </InputTextSizeW>
+                                </FormBlockBody>
+                            </FormBlock>
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 비밀번호
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeW>
+                                        <Input type={'password'} name={"sellerPass"} placeholder="비밀번호 (영문+숫자+특수문자 8자 이상)"/>
+                                    </InputTextSizeW>
+                                </FormBlockBody>
+                                <FormBlockBody>
+                                    <InputTextSizeW>
+                                        <Input type={'password'} placeholder="비밀번호 확인"/>
+                                    </InputTextSizeW>
+                                </FormBlockBody>
+                            </FormBlock>
 
-                            <FormBlockBody>
-                                <InputTextSizeW>
-                                    <Input
-                                        id="email"
-                                        type="email"
-                                        value={email}
-                                        placeholder="이메일을 입력해주세요."
-                                        required
-                                        onChange={(e) => {
-                                            setEmail(e.target.value);
-                                        }}
-                                        // onBlur={() => emailCheck()}
-                                    />
-                                </InputTextSizeW>
-                                <FormError>{checkedEmail}</FormError>
-                            </FormBlockBody>
-                        </FormBlock>
-                        <FormBlock>
-                            <FormBlockHead>
-                                <AsteriskRed>*</AsteriskRed> 비밀번호
-                            </FormBlockHead>
-                            <FormBlockBody>
-                                <InputTextSizeW>
-                                    <Input
-                                        id="password"
-                                        // type="password"
-                                        value={password}
-                                        placeholder="비밀번호 (영문+숫자+특수문자 8자 이상)"
-                                        required
-                                        onChange={(e) => {
-                                            setPassword(e.target.value);
-                                        }}
-                                    />
-                                </InputTextSizeW>
-                            </FormBlockBody>
-                            <FormBlockBody>
-                                <InputTextSizeW>
-                                    <Input placeholder="비밀번호 확인" required/>
-                                </InputTextSizeW>
-                            </FormBlockBody>
-                        </FormBlock>
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 이름
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeWTypeL>
+                                        <Input type="text" name={"sellerName"} placeholder="이름을 입력해 주세요"/>
+                                    </InputTextSizeWTypeL>
+                                </FormBlockBody>
+                            </FormBlock>
 
-                        <FormBlock>
-                            <FormBlockHead>
-                                <AsteriskRed>*</AsteriskRed> 이름
-                            </FormBlockHead>
-                            <FormBlockBody>
-                                <InputTextSizeWTypeL>
-                                    <Input
-                                        id="name"
-                                        value={nickname}
-                                        type="text"
-                                        placeholder="이름을 입력해 주세요"
-                                        required
-                                        onChange={(e) => {
-                                            setNickname(e.target.value);
-                                        }}
-                                    />
-                                </InputTextSizeWTypeL>
-                            </FormBlockBody>
-                        </FormBlock>
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 전화번호
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeWTypeL>
+                                        <Input type="hidden" required/>
+                                        <Input type="tel" name={"sellerTel"} placeholder="ex) 010-1234-5678" data-auth="cell_phone"/>
+                                    </InputTextSizeWTypeL>
+                                </FormBlockBody>
+                            </FormBlock>
 
-                        <FormBlock>
-                            <FormBlockHead>
-                                <AsteriskRed>*</AsteriskRed> 전화번호
-                            </FormBlockHead>
-                            <FormBlockBody>
-                                <InputTextSizeWTypeL>
-                                    <Input type="hidden" required/>
-                                    <Input
-                                        type="tel"
-                                        placeholder="ex) 010-1234-5678"
-                                        data-auth="cell_phone"
-                                        required
-                                    />
-                                </InputTextSizeWTypeL>
-                            </FormBlockBody>
-                        </FormBlock>
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 주민등록번호
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeW>
+                                        <Input name={"sellerBirth"} style={{width: 241}} maxLength={6} className={"col-6"}
+                                               placeholder="* * * * * *"/>
+                                        &nbsp;-&nbsp;
+                                        <Input name={"sellerGender"} style={{width: 50}} maxLength={1} className={"col-6"} placeholder="*"/>
+                                        &nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*
+                                    </InputTextSizeW>
+                                </FormBlockBody>
+                            </FormBlock>
 
-                        <FormBlock>
-                            <FormBlockHead>
-                                <AsteriskRed>*</AsteriskRed> 주민등록번호
-                            </FormBlockHead>
-                            <FormBlockBody>
-                                <InputTextSizeW>
-                                    {/*<RegistrationNumberInput type="hidden" required/>*/}
-                                    <Input style={{
-                                        width:241
-                                    }} maxLength={6} className={"col-6"} placeholder="* * * * * *"/>
-                                    &nbsp;-&nbsp;
-                                    <Input style={{
-                                        width:50
-                                    }} maxLength={1} className={"col-6"} placeholder="*"/>
-                                    &nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*
-                                </InputTextSizeW>
-                            </FormBlockBody>
-                        </FormBlock>
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 사업자명
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeWTypeL>
+                                        <Input name={"sellerBusinessName"} type="text" placeholder="사업자명을 입력해주세요"/>
+                                    </InputTextSizeWTypeL>
+                                </FormBlockBody>
+                            </FormBlock>
 
-                        <FormBlock>
-                            <FormBlockHead>
-                                <AsteriskRed>*</AsteriskRed> 사업자명
-                            </FormBlockHead>
-                            <FormBlockBody>
-                                <InputTextSizeWTypeL>
-                                    <Input
-                                        id="name"
-                                        value={nickname}
-                                        type="text"
-                                        placeholder="사업자명을 입력해주세요"
-                                        required
-                                        onChange={(e) => {
-                                            setNickname(e.target.value);
-                                        }}
-                                    />
-                                </InputTextSizeWTypeL>
-                            </FormBlockBody>
-                        </FormBlock>
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 사업자 등록번호
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeWTypeL>
+                                        <Input name={"sellerBusinessNum"} type="text" placeholder="ex) ???-??-?????"/>
+                                    </InputTextSizeWTypeL>
+                                </FormBlockBody>
+                            </FormBlock>
 
-                        <FormBlock>
-                            <FormBlockHead>
-                                <AsteriskRed>*</AsteriskRed> 사업자 등록번호
-                            </FormBlockHead>
-                            <FormBlockBody>
-                                <InputTextSizeWTypeL>
-                                    <Input
-                                        id="name"
-                                        value={nickname}
-                                        type="text"
-                                        placeholder="ex) ???-??-?????"
-                                        required
-                                        onChange={(e) => {
-                                            setNickname(e.target.value);
-                                        }}
-                                    />
-                                </InputTextSizeWTypeL>
-                            </FormBlockBody>
-                        </FormBlock>
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 주소
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <Popup/>
+                                    <Input name={"sellerAddrNum"} className={'my-1'} id={"sigunguCode"} placeholder={'우편번호'} readOnly={true}/>
+                                    <Input name={"sellerAddrJibun"} className={'my-1'} id={"jibunAddress"} placeholder={'지번 주소'}
+                                           readOnly={true}/>
+                                    <Input name={"sellerAddrRoad"} className={'my-1'} id={"roadAddress"} placeholder={'도로명 주소'}
+                                           readOnly={true}/>
+                                    <Input name={"sellerAddrDetail"} className={'my-1'} id={"addressDetail"} placeholder={'상세주소를 입력해주세요.'}/>
+                                </FormBlockBody>
+                            </FormBlock>
 
-                        <FormBlock>
-                            <FormBlockHead>
-                                <AsteriskRed>*</AsteriskRed> 주소
-                            </FormBlockHead>
-                            <FormBlockBody>
-                                <Popup/>
-                                <Input className={'my-1'} id={"sigunguCode"} placeholder={'우편번호'} readOnly={true}/>
-                                <Input className={'my-1'} id={"jibunAddress"} placeholder={'지번 주소'} readOnly={true}/>
-                                <Input className={'my-1'} id={"roadAddress"} placeholder={'도로명 주소'} readOnly={true}/>
-                                <Input className={'my-1'} id={"addressDetail"} placeholder={'상세주소를 입력해주세요.'}/>
-                            </FormBlockBody>
-                        </FormBlock>
-
-                        <FormBlockCheckAllWrap>
-                            <Terms>
-                                <TermsHead>
-                                    <InputCheckBox>
-                                        <input
-                                            type="checkbox"
-                                            value="agree"
-                                            onChange={(e) => {
-                                                allAgreeHandler(e.currentTarget.checked);
-                                            }}
-                                            checked={isAllChecked}
-                                        />
-                                    </InputCheckBox>
-                                    <TermsLabel onClick={fake}>모두 동의합니다.</TermsLabel>
-                                </TermsHead>
-
-                                <TermsBody>
-                                    <TermsItem>
+                            <FormBlockCheckAllWrap>
+                                <Terms>
+                                    <TermsHead>
                                         <InputCheckBox>
-                                            {/* <Terms1 type="checkbox"></Terms1> */}
-                                            <input
-                                                type="checkbox"
-                                                value="provision"
-                                                onChange={(e) => {
-                                                    agreeHandler(e.currentTarget.checked, e.target.value);
-                                                }}
-                                                checked={
-                                                    checkedItems.includes("provision") ? true : false
-                                                }
-                                            />
+                                            <input type="checkbox"/>
                                         </InputCheckBox>
-                                        <Terms1Label>만 14세 이상입니다.</Terms1Label>
-                                    </TermsItem>
-                                    {/*  */}
-                                    <TermsItem>
-                                        <InputCheckBox>
-                                            {/* <Terms1 type="checkbox"></Terms1> */}
-                                            <input
-                                                type="checkbox"
-                                                value="privacy"
-                                                onChange={(e) => {
-                                                    agreeHandler(e.currentTarget.checked, e.target.value);
-                                                }}
-                                                checked={
-                                                    checkedItems.includes("privacy") ? true : false
-                                                }
-                                            />
-                                        </InputCheckBox>
-                                        <Terms2A onClick={fake}>이용약관 필수 동의</Terms2A>
-                                    </TermsItem>
-                                    {/*  */}
-                                </TermsBody>
-                            </Terms>
+                                        <TermsLabel>모두 동의합니다.</TermsLabel>
+                                    </TermsHead>
 
-                            <Terms1Error/>
-                            <TermsError/>
-                        </FormBlockCheckAllWrap>
+                                    <TermsBody>
+                                        <TermsItem>
+                                            <InputCheckBox>
+                                                <input type="checkbox"/>
+                                            </InputCheckBox>
+                                        </TermsItem>
+                                        <TermsItem>
+                                            <InputCheckBox>
+                                                <input type="checkbox"/>
+                                            </InputCheckBox>
+                                            <Terms2A>이용약관 필수 동의</Terms2A>
+                                        </TermsItem>
+                                    </TermsBody>
+                                </Terms>
 
-                        <FormBlockSubmit>
-                            <FormBlockBody>
-                                <BtnLogin
-                                    type="button"
-                                    onClick={() => {
-                                        // onSubmit();
-                                    }}
-                                >
-                                    회원가입하기
-                                </BtnLogin>
-                            </FormBlockBody>
-                        </FormBlockSubmit>
+                                <Terms1Error/>
+                                <TermsError/>
+                            </FormBlockCheckAllWrap>
+
+                            <FormBlockSubmit>
+                                <FormBlockBody>
+                                    <BtnLogin type="submit">회원가입하기</BtnLogin>
+                                </FormBlockBody>
+                            </FormBlockSubmit>
+                        </form>
                     </LoginSection>
                 </LoginWrap>
             </ReauthPhone>

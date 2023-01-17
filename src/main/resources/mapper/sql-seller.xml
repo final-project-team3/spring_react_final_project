@@ -2,7 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fproject.project_team3.mapper.sellerMapper">
     <!-- HSH -->
-
+    <!--     사업자 회원가입-->
+    <insert id="insertSelle" parameterType="com.fproject.project_team3.dto.seller.sellerInfoDto">
+        INSERT INTO seller_info(seller_name, seller_tel, seller_id, seller_pass, seller_birth, seller_gender,
+                                seller_addr_num, seller_addr_jibun, seller_addr_road, seller_addr_detail,
+                                seller_business_name, seller_business_num)
+        VALUES (#{sellerInfoNum}, #{sellerName}, #{sellerTel}, #{sellerId}, #{sellerPass},#{sellerBirth}, #{sellerGender},
+                #{sellerAddrNum}, #{sellerAddrJibun}, #{sellerAddrRoad}, #{sellerAddrDetail}, #{sellerBusinessName},
+                #{sellerBusinessNum})
+    </insert>
     <!-- HSH -->
 
     <!-- LYS -->
