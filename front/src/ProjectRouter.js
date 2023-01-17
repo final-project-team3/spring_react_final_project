@@ -7,6 +7,7 @@ import UserSignUp from "./LYS/UserSignUp";
 import SellerSignUp from "./LYS/SellerSignUp";
 import Header from "./Header";
 import LoginPage from "./BJH/LoginPage";
+import OrderListPage from "./GJY/OrderListPage";
 
 const ProjectRouter = () => {
 
@@ -26,6 +27,7 @@ const ProjectRouter = () => {
 
                     {/*GJY*/}
                     <Route path={'/payment'} element={<PaymentPage/>}/>
+                    <Route path={'/orderList'} element={<OrderListPage/>}/>
                     {/*GJY*/}
 
                     {/*BJH*/}

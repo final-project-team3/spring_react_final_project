@@ -9,6 +9,8 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.2",
     "bootstrap": "^5.2.3",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "jquery": "^3.6.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
@@ -42,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.8.3"
   }
 }
