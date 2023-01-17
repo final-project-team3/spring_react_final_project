@@ -5,50 +5,6 @@ import DaumPostcode from 'react-daum-postcode';
 import Popup from "./Popup";
 
 function UserSignUp() {
-    const [isAllChecked, setIsAllChecked] = useState(false);
-    const [checkedItems, setCheckedItems] = useState([]);
-
-    const allAgreeHandler = (checked) => {
-        setIsAllChecked(!isAllChecked);
-        if (checked) {
-            setCheckedItems([...checkedItems, "provision", "privacy"]);
-        } else if (
-            (!checked && checkedItems.includes("provision")) ||
-            (!checked && checkedItems.includes("privacy"))
-        ) {
-            setCheckedItems([]);
-        }
-    };
-
-    const agreeHandler = (checked, value) => {
-        if (checked) {
-            setCheckedItems([...checkedItems, value]);
-        } else if (!checked && checkedItems.includes(value)) {
-            setCheckedItems(checkedItems.filter((el) => el !== value));
-        }
-    };
-
-    const fake = () => {
-        alert("현재 개인정보를 수집하고 있지 않습니다🙂 안심하고 테스트 해보세요.");
-    };
-
-    useEffect(() => {
-        if (checkedItems.length >= 2) {
-            setIsAllChecked(true);
-        } else {
-            setIsAllChecked(false);
-        }
-    }, [checkedItems]);
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [nickname, setNickname] = useState("");
-
-    let body = {
-        email: email,
-        password: password,
-        nickname: nickname,
-    };
 
     return (
         <WrapLogin>
@@ -56,193 +12,129 @@ function UserSignUp() {
             <ReauthPhone>
                 <LoginWrap>
                     <LoginSection>
-                        <LoginTitle>회원가입하기 (일반 회원용)</LoginTitle>
+                        <LoginTitle>회원가입하기 (일반회원용)</LoginTitle>
                         <SignupStep className="wrap">
                             <Title>환영합니다. 가입 정보를 입력해주세요</Title>
                         </SignupStep>
-                        <FormBlock>
-                            <FormBlockHead>
-                                <AsteriskRed>*</AsteriskRed> 이메일
-                            </FormBlockHead>
+                        <form action={'/signUpUser'} method={'post'}>
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 이메일
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeW>
+                                        <Input style={{width: 400}} type="email" name={'userId'} placeholder="이메일을 입력해주세요."/>
+                                        <button className={"btn btn-primary ms-1"} style={{width: 90}}><p className={"p-0 m-0"}>인증코드전송</p></button>
+                                    </InputTextSizeW>
+                                    <InputTextSizeW>
+                                        <Input style={{width: 400}} type="text" placeholder="인증번호를 입력해주세요"></Input>
+                                        <button className={"btn btn-primary ms-1"} style={{width: 90}}><p className={"p-0 m-0"}>인증하기</p></button>
+                                    </InputTextSizeW>
+                                </FormBlockBody>
+                            </FormBlock>
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 비밀번호
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeW>
+                                        <Input type={'password'} name={"userPass"} placeholder="비밀번호 (영문+숫자+특수문자 8자 이상)"/>
+                                    </InputTextSizeW>
+                                </FormBlockBody>
+                                <FormBlockBody>
+                                    <InputTextSizeW>
+                                        <Input type={'password'} placeholder="비밀번호 확인"/>
+                                    </InputTextSizeW>
+                                </FormBlockBody>
+                            </FormBlock>
 
-                            <FormBlockBody>
-                                <InputTextSizeW>
-                                    <Input
-                                        id="email"
-                                        type="email"
-                                        value={email}
-                                        placeholder="이메일을 입력해주세요."
-                                        required
-                                        onChange={(e) => {
-                                            setEmail(e.target.value);
-                                        }}
-                                    />
-                                </InputTextSizeW>
-                            </FormBlockBody>
-                        </FormBlock>
-                        <FormBlock>
-                            <FormBlockHead>
-                                <AsteriskRed>*</AsteriskRed> 비밀번호
-                            </FormBlockHead>
-                            <FormBlockBody>
-                                <InputTextSizeW>
-                                    <Input
-                                        id="password"
-                                        value={password}
-                                        placeholder="비밀번호 (영문+숫자+특수문자 8자 이상)"
-                                        required
-                                        onChange={(e) => {
-                                            setPassword(e.target.value);
-                                        }}
-                                    />
-                                </InputTextSizeW>
-                            </FormBlockBody>
-                            <FormBlockBody>
-                                <InputTextSizeW>
-                                    <Input placeholder="비밀번호 확인" required/>
-                                </InputTextSizeW>
-                            </FormBlockBody>
-                        </FormBlock>
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 이름
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeWTypeL>
+                                        <Input type="text" name={"userName"} placeholder="이름을 입력해 주세요"/>
+                                    </InputTextSizeWTypeL>
+                                </FormBlockBody>
+                            </FormBlock>
 
-                        <FormBlock>
-                            <FormBlockHead>
-                                <AsteriskRed>*</AsteriskRed> 이름
-                            </FormBlockHead>
-                            <FormBlockBody>
-                                <InputTextSizeWTypeL>
-                                    <Input
-                                        id="name"
-                                        value={nickname}
-                                        type="text"
-                                        placeholder="이름을 입력해 주세요"
-                                        required
-                                        onChange={(e) => {
-                                            setNickname(e.target.value);
-                                        }}
-                                    />
-                                </InputTextSizeWTypeL>
-                            </FormBlockBody>
-                        </FormBlock>
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 전화번호
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeWTypeL>
+                                        <Input type="hidden" required/>
+                                        <Input type="tel" name={"userTel"} placeholder="ex) 010-1234-5678" data-auth="cell_phone"/>
+                                    </InputTextSizeWTypeL>
+                                </FormBlockBody>
+                            </FormBlock>
 
-                        <FormBlock>
-                            <FormBlockHead>
-                                <AsteriskRed>*</AsteriskRed> 전화번호
-                            </FormBlockHead>
-                            <FormBlockBody>
-                                <InputTextSizeWTypeL>
-                                    <Input type="hidden" required/>
-                                    <Input
-                                        type="tel"
-                                        placeholder="ex) 010-1234-5678"
-                                        data-auth="cell_phone"
-                                        required
-                                    />
-                                </InputTextSizeWTypeL>
-                            </FormBlockBody>
-                        </FormBlock>
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 주민등록번호
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeW>
+                                        <Input name={"userBirth"} style={{width: 241}} maxLength={6} className={"col-6"}
+                                               placeholder="* * * * * *"/>
+                                        &nbsp;-&nbsp;
+                                        <Input name={"userGender"} style={{width: 50}} maxLength={1} className={"col-6"} placeholder="*"/>
+                                        &nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*
+                                    </InputTextSizeW>
+                                </FormBlockBody>
+                            </FormBlock>
 
-                        <FormBlock>
-                            <FormBlockHead>
-                                <AsteriskRed>*</AsteriskRed> 주민등록번호
-                            </FormBlockHead>
-                            <FormBlockBody>
-                                <InputTextSizeW>
-                                    {/*<RegistrationNumberInput type="hidden" required/>*/}
-                                    <Input style={{
-                                        width:241
-                                    }} maxLength={6} className={"col-6"} placeholder="* * * * * *"/>
-                                    &nbsp;-&nbsp;
-                                    <Input style={{
-                                        width:50
-                                    }} maxLength={1} className={"col-6"} placeholder="*"/>
-                                    &nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*
-                                </InputTextSizeW>
-                            </FormBlockBody>
-                        </FormBlock>
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 주소
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <Popup/>
+                                    <Input name={"userAddrNum"} className={'my-1'} id={"sigunguCode"} placeholder={'우편번호'} readOnly={true}/>
+                                    <Input name={"userAddrJibun"} className={'my-1'} id={"jibunAddress"} placeholder={'지번 주소'}
+                                           readOnly={true}/>
+                                    <Input name={"userAddrRoad"} className={'my-1'} id={"roadAddress"} placeholder={'도로명 주소'}
+                                           readOnly={true}/>
+                                    <Input name={"userAddrDetail"} className={'my-1'} id={"addressDetail"} placeholder={'상세주소를 입력해주세요.'}/>
+                                </FormBlockBody>
+                            </FormBlock>
 
-                        <FormBlock>
-                            <FormBlockHead>
-                                <AsteriskRed>*</AsteriskRed> 주소
-                            </FormBlockHead>
-                            <FormBlockBody>
-                                <Popup/>
-                                <Input className={'my-1'} id={"sigunguCode"} placeholder={'우편번호'} readOnly={true}/>
-                                <Input className={'my-1'} id={"jibunAddress"} placeholder={'지번 주소'} readOnly={true}/>
-                                <Input className={'my-1'} id={"roadAddress"} placeholder={'도로명 주소'} readOnly={true}/>
-                                <Input className={'my-1'} id={"addressDetail"} placeholder={'상세주소를 입력해주세요.'}/>
-                            </FormBlockBody>
-                        </FormBlock>
-
-                        <FormBlockCheckAllWrap>
-                            <Terms>
-                                <TermsHead>
-                                    <InputCheckBox>
-                                        <input
-                                            type="checkbox"
-                                            value="agree"
-                                            onChange={(e) => {
-                                                allAgreeHandler(e.currentTarget.checked);
-                                            }}
-                                            checked={isAllChecked}
-                                        />
-                                    </InputCheckBox>
-                                    <TermsLabel onClick={fake}>모두 동의합니다.</TermsLabel>
-                                </TermsHead>
-
-                                <TermsBody>
-                                    <TermsItem>
+                            <FormBlockCheckAllWrap>
+                                <Terms>
+                                    <TermsHead>
                                         <InputCheckBox>
-                                            {/* <Terms1 type="checkbox"></Terms1> */}
-                                            <input
-                                                type="checkbox"
-                                                value="provision"
-                                                onChange={(e) => {
-                                                    agreeHandler(e.currentTarget.checked, e.target.value);
-                                                }}
-                                                checked={
-                                                    checkedItems.includes("provision") ? true : false
-                                                }
-                                            />
+                                            <input type="checkbox"/>
                                         </InputCheckBox>
-                                        <Terms1Label>만 14세 이상입니다.</Terms1Label>
-                                    </TermsItem>
-                                    {/*  */}
-                                    <TermsItem>
-                                        <InputCheckBox>
-                                            {/* <Terms1 type="checkbox"></Terms1> */}
-                                            <input
-                                                type="checkbox"
-                                                value="privacy"
-                                                onChange={(e) => {
-                                                    agreeHandler(e.currentTarget.checked, e.target.value);
-                                                }}
-                                                checked={
-                                                    checkedItems.includes("privacy") ? true : false
-                                                }
-                                            />
-                                        </InputCheckBox>
-                                        <Terms2A onClick={fake}>이용약관 필수 동의</Terms2A>
-                                    </TermsItem>
-                                    {/*  */}
-                                </TermsBody>
-                            </Terms>
+                                        <TermsLabel>모두 동의합니다.</TermsLabel>
+                                    </TermsHead>
 
-                            <Terms1Error/>
-                            <TermsError/>
-                        </FormBlockCheckAllWrap>
+                                    <TermsBody>
+                                        <TermsItem>
+                                            <InputCheckBox>
+                                                <input type="checkbox"/>
+                                            </InputCheckBox>
+                                        </TermsItem>
+                                        <TermsItem>
+                                            <InputCheckBox>
+                                                <input type="checkbox"/>
+                                            </InputCheckBox>
+                                            <Terms2A>이용약관 필수 동의</Terms2A>
+                                        </TermsItem>
+                                    </TermsBody>
+                                </Terms>
 
-                        <FormBlockSubmit>
-                            <FormBlockBody>
-                                <BtnLogin
-                                    type="button"
-                                    onClick={() => {
-                                        // onSubmit();
-                                    }}
-                                >
-                                    회원가입하기
-                                </BtnLogin>
-                            </FormBlockBody>
-                        </FormBlockSubmit>
+                                <Terms1Error/>
+                                <TermsError/>
+                            </FormBlockCheckAllWrap>
+
+                            <FormBlockSubmit>
+                                <FormBlockBody>
+                                    <BtnLogin type="submit">회원가입하기</BtnLogin>
+                                </FormBlockBody>
+                            </FormBlockSubmit>
+                        </form>
                     </LoginSection>
                 </LoginWrap>
             </ReauthPhone>
