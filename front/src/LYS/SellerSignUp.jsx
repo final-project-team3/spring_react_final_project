@@ -23,7 +23,12 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input type="email" name={'sellerId'} placeholder="이메일을 입력해주세요."/>
+                                        <Input style={{width: 400}} type="email" name={'sellerId'} placeholder="이메일을 입력해주세요."/>
+                                        <button className={"btn btn-primary ms-1"} style={{width: 90}}><p className={"p-0 m-0"}>인증코드전송</p></button>
+                                    </InputTextSizeW>
+                                    <InputTextSizeW>
+                                        <Input style={{width: 400}} type="text" placeholder="인증번호를 입력해주세요"></Input>
+                                        <button className={"btn btn-primary ms-1"} style={{width: 90}}><p className={"p-0 m-0"}>인증하기</p></button>
                                     </InputTextSizeW>
                                 </FormBlockBody>
                             </FormBlock>
