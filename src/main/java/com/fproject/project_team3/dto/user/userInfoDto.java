@@ -3,10 +3,11 @@ package com.fproject.project_team3.dto.user;
 import lombok.Data;
 
 @Data
-public class userInfo {
+public class userInfoDto {
    int userInfoNum;
    String userId;
    String userPass;
+   String userName;
    String userTel;
    String userBirth;
    String userGender;
