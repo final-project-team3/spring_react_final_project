@@ -7,6 +7,8 @@ import UserSignUp from "./LYS/UserSignUp";
 import SellerSignUp from "./LYS/SellerSignUp";
 import Header from "./Header";
 import LoginPage from "./BJH/LoginPage";
+import TestLoginPage from "./BJH/TestLoginPage";
+import NewLogin from "./BJH/NewLogin";
 
 const ProjectRouter = () => {
 
@@ -29,6 +31,8 @@ const ProjectRouter = () => {
                     {/*GJY*/}
 
                     {/*BJH*/}
+                    <Route path={'newlogin'} element={<NewLogin/>}/>
+                    <Route path={'testloginpage'} element={<TestLoginPage/>}/>
                     <Route path={'loginPage'} element={<LoginPage/>}/>
                     {/*BJH*/}
                 </Route>
