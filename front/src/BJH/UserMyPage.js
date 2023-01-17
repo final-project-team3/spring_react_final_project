@@ -78,52 +78,52 @@ function UserMyPage(props) {
 
                 </div>
                 <div className={'row'}>
-                    <div className="listContainer col-6">
+                    <div className="border-end border-dark listContainer col-6">
                         <a href="#" className="item">
-                            <div className="icon"><img style={{
+                            <div className="ps-5 icon"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/jang.png"}/>
                             </div>
                             <div className="text">장바구니</div>
-                            <div className="right"><img style={{
+                            <div className="pe-5 right"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/right.png"}/></div>
                         </a>
                         <a href="#" className="item">
-                            <div className="icon"><img style={{
+                            <div className="ps-5 icon"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/order.png"}/>
                             </div>
                             <div className="text">주문 내역</div>
                             {/* <span className="circle"></span> 붉은 점 */}
-                            <div className="right"><img style={{
+                            <div className="pe-5 right"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/right.png"}/></div>
                         </a>
                         <a href="#" className="item">
-                            <div className="icon"><img style={{
+                            <div className="ps-5 icon"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/payment.png"}/>
                             </div>
                             <div className="text">결제 내역</div>
-                            <div className="right"><img style={{
+                            <div className="pe-5 right"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/right.png"}/></div>
                         </a>
                         <a href="#" className="item">
-                            <div className="icon"><img style={{
+                            <div className="ps-5 icon"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/contact.png"}/>
                             </div>
                             <div className="text">상품 문의</div>
-                            <div className="right"><img style={{
+                            <div className="pe-5 right"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/right.png"}/></div>
@@ -131,13 +131,13 @@ function UserMyPage(props) {
 
 
                         <a href="#" className="item">
-                            <div className="icon"><img style={{
+                            <div className="ps-5 icon"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/wish.png"}/>
                             </div>
                             <div className="text">찜한 상품</div>
-                            <div className="right"><img style={{
+                            <div className="pe-5 right"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/right.png"}/></div>
@@ -145,7 +145,7 @@ function UserMyPage(props) {
                     </div>
                     <div className="listContainer col-6">
                         <a href="#" className="item">
-                            <div className="icon"><img style={{
+                            <div className="ps-5 icon"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/wallet.png"}/>
@@ -157,54 +157,54 @@ function UserMyPage(props) {
             <span>보유 포인트</span>
           </span>
                             </div>
-                            <div className="right">
+                            <div className="pe-5 right">
                                 <span className="point">1027 포인트</span>
                             </div>
                         </a>
                         <a href="#" className="item">
-                            <div className="icon"><img style={{
+                            <div className="ps-5 icon"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/reviewWrite.png"}/>
                             </div>
                             <div className="text">리뷰 작성</div>
-                            <div className="right"><img style={{
+                            <div className="pe-5 right"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/right.png"}/></div>
                         </a>
                         <a href="#" className="item">
-                            <div className="icon"><img style={{
+                            <div className="ps-5 icon"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/review.png"}/>
                             </div>
                             <div className="text">작성한 리뷰</div>
-                            <div className="right"><img style={{
+                            <div className="pe-5 right"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/right.png"}/></div>
                         </a>
                         <a href="#" className="item">
-                            <div className="icon"><img style={{
+                            <div className="ps-5 icon"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/coupon.png"}/>
                             </div>
                             <div className="text">쿠폰 목록</div>
-                            <div className="right"><img style={{
+                            <div className="pe-5 right"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/right.png"}/></div>
                         </a>
                         <a href="#" className="item">
-                            <div className="icon"><img style={{
+                            <div className="ps-5 icon"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/user.png"}/>
                             </div>
                             <div className="text">개인정보 수정</div>
-                            <div className="right"><img style={{
+                            <div className="pe-5 right"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/right.png"}/></div>
@@ -212,7 +212,7 @@ function UserMyPage(props) {
                     </div>
                 </div>
                 <div className="infoContainer">
-                    <a href="#" className="item">
+                    <a href="#" className="ps-5 item">
                         <div><img style={{
                             width: 48,
                             height: 48
