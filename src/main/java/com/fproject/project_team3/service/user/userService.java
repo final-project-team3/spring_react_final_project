@@ -1,9 +1,9 @@
-package com.fproject.project_team3.dto;
+package com.fproject.project_team3.service.user;
 
-import lombok.Data;
+import org.springframework.stereotype.Service;
 
-@Data
-public class productDto {
+public interface userService {
+
     //    HSH
 
     //    HSH
