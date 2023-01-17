@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @RestController
 public class sellerRestController {
 
@@ -15,10 +18,10 @@ public class sellerRestController {
     //    HSH
 //     사업자 회원가입
     @PostMapping("/signUpSeller")
-    public String signUpSeller(sellerInfoDto sellerInfoDto) {
+    public void signUpSeller(sellerInfoDto sellerInfoDto, HttpServletResponse httpServletResponse) throws Exception {
         System.out.println(sellerInfoDto);
         sellerService.insertSeller(sellerInfoDto);
-        return "redirect:/";
+        httpServletResponse.sendRedirect("/");
     }
     //    HSH
 
