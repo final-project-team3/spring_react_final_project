@@ -209,11 +209,11 @@ function UserSignUp() {
                                     {/*<RegistrationNumberInput type="hidden" required/>*/}
                                     <Input style={{
                                         width:241
-                                    }} className={"col-6"} placeholder="생년월일 6자리를 입력"/>
+                                    }} className={"col-6"} placeholder="생년월일 6자리를 입력" maxLength="6"/>
                                     &nbsp;-&nbsp;
                                     <Input style={{
                                         width:241
-                                    }} className={"col-6"} placeholder="주민번호 뒷자리 하나 입력"/>
+                                    }} className={"col-6"} placeholder="주민번호 뒷자리 하나 입력" maxLength="1"/>
                                 </InputTextSizeW>
                             </FormBlockBody>
                         </FormBlock>
@@ -224,10 +224,10 @@ function UserSignUp() {
                             </FormBlockHead>
                             <FormBlockBody>
                                 <Popup/>
-                                    <Input id={"jibunAddress"}/>
-                                    <Input id={"roadAddress"}/>
-                                    <Input id={"sigunguCode"}/>
-                                    <Input id={""}/>
+                                    <Input className={"my-1"} id={"jibunAddress"} readOnly/>
+                                    <Input className={"my-1"} id={"roadAddress"} readOnly/>
+                                    <Input className={"my-1"} id={"sigunguCode"} readOnly/>
+                                    <Input className={"my-1"} placeholder="상세주소를 입력해주세요" id={""}/>
                             </FormBlockBody>
                         </FormBlock>
 
@@ -496,19 +496,6 @@ const Input = styled.input`
   line-height: 16px;
   border: 1px solid #acacac;
   width: 100%;
-  box-sizing: border-box;
-  padding: 2px 8px;
-  border-radius: 2px;
-  appearance: none;
-`;
-
-const RegistrationNumberInput = styled.input`
-  font-size: 14px;
-  height: 48px;
-  background: #fff;
-  line-height: 16px;
-  border: 1px solid #acacac;
-  width: 50%;
   box-sizing: border-box;
   padding: 2px 8px;
   border-radius: 2px;
