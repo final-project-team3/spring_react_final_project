@@ -9,7 +9,7 @@ public interface sellerMapper {
 
     //    HSH
 //     사업자 회원가입
-    void insertSeller(sellerInfoDto sellerDto);
+    void insertSeller(sellerInfoDto sellerInfoDto);
     //    HSH
 
     //    LYS

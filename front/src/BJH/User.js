@@ -1,38 +1,29 @@
-import React from "react";
-import './LoginPage.css'
+import React, {Component} from "react";
+import './style.css';
 
-function LoginPage(props) {
-    return (
-        <div>
-            <h2 className={"text-center"}>로그인 페이지</h2>
-            <div id={"content"}>
-                <img className={"logo"} alt={""} src={""}/>
+class User extends React.Component {
+    constructor(props) {
+        super();
 
-                <ul className="list-tab mx-auto" id="login-tab">
-                    <li className="list-item-tab">
-                        <button style={{
-                            borderBottomWidth: 0
-                        }} className="button-tab" id="login-tab-member">일반회원 로그인
-                        </button>
-                    </li>
-                    <li className="list-item-tab">
-                        <button style={{
-                            borderBottomWidth: 0
-                        }} className="button-tab" id="login-tab-non-member">판매자 로그인
-                        </button>
-                    </li>
-                </ul>
+        this.state = {
+            menu: 0,
+        };
+    }
 
-
-                <form>
+    render() {
+        return (
+            <div>
+                <form className={"text-center"}>
                     <input type={"text"} name={"id"} className={"login-input-text"}
-                           placeholder={"아이디를 입력하세요"}/>
+                           placeholder={"아이디"}/>
+                    <br/>
                     <input type={"password"} name={"password"} className={"login-input-text"}
-                           placeholder={"비밀번호를 입력하세요"}/>
-
+                           placeholder={"비밀번호"}/>
+                    <br/>
                     <button style={{
                         width: 330,
-                        height: 40
+                        height: 40,
+                        border: 0
                     }} type="button" className="btn-log">로그인
                     </button>
                     <br/>
@@ -44,9 +35,7 @@ function LoginPage(props) {
                         <div>
                             <input className="form-check-input" type="checkbox" value=""
                                    id="loginCheckbox"/>
-                            <label style={{
-                                marginLeft: 5
-                            }} className="form-check-label" htmlFor="loginCheckbox">
+                            <label className="form-check-label" htmlFor="loginCheckbox">
                                 자동 로그인
                             </label>
                         </div>
@@ -64,8 +53,9 @@ function LoginPage(props) {
 
                 </form>
             </div>
-        </div>
-    );
+        )
+    }
 }
 
-export default LoginPage;
+
+export default User;
