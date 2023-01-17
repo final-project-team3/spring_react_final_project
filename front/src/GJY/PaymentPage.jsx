@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Popup from "../LYS/Popup";
 import styled from "styled-components";
+import Pay from "./pay";
 
 
 /*function PaymentFnc() {
@@ -37,7 +38,7 @@ const styles = {
   vertical: {
     borderLeft: 'solid lightgray',
     borderWidth: 0.5,
-    height: 400,
+    height: 260,
     position:'absolute',
     left: '50%',
   },
@@ -61,56 +62,40 @@ const FormBlockBody = styled.div`
   text-align: left;
 `;
 
-const Input = styled.input`
-  font-size: 14px;
-  height: 48px;
-  background: #fff;
-  line-height: 16px;
-  border: 1px solid #acacac;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 2px 8px;
-  border-radius: 2px;
-  appearance: none;
-`;
 
-  function Payment(props) {
-    const [order, setOrder] = useState(0);
-    const [delivery, setDelivery] = useState(3000);
+function PaymentPage(props) {
+  const [order, setOrder] = useState(0);
+  const [delivery, setDelivery] = useState(3000);
 
-    useEffect(() => {
-      if (order >= 30000) {
-        setDelivery(0);
-      }
-    }, [order]);
-
-
-    const discount = 1200;
-    const cost = order + delivery - discount;
-    const productName = 'productName';
-    const productOpt = 'productOpt';
-    const productCnt = 'productCnt';
-
-    const ChangeOpt = () => {
-      setOrder(40000);
-      if (order >= 30000) {
-        setDelivery(0);
-      } else if (order < 30000){
-        setDelivery(3000);
-      }
+  useEffect(() => {
+    if (order >= 30000) {
+      setDelivery(0);
     }
+  }, [order]);
+
+
+  const discount = 1200;
+  const cost = order + delivery - discount;
+  const productName = 'productName';
+  const productOpt = 'productOpt';
+  const productCnt = 'productCnt';
+
+  const ChangeOpt = () => {
+    setOrder(40000);
+  }
+
   return (
     <div className={'container'}>
-
+      <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
       <h1 className={'mt-4 text-center'}>결제 페이지</h1>
       <h3 className={'text-start mt-5'}>회원 주문 정보</h3>
       <hr/>
       <div className={'col-6'}>
-        <label htmlFor={'name'}>이름</label>
-        <input type="text" id={'name'} className={'form-control mt-2'} placeholder={'이름을 입력해주세요.'}/>
+        <AsteriskRed>*</AsteriskRed><label htmlFor={'name'} className={'ms-1'}>이름</label>
+        <input type="text" id={'name'} className={'form-control mt-2 '} placeholder={'이름을 입력해주세요.'}/>
       </div>
       <div className={'col-6'}>
-        <label htmlFor={'phone'} className={'mt-3'}>휴대폰</label>
+        <AsteriskRed>*</AsteriskRed><label htmlFor={'phone'} className={'mt-3 ms-1'}>휴대폰</label>
         <input type="tel" id={'phone'} className={'form-control mt-2'} placeholder={'휴대폰번호를 입력해주세요. 하이픈(-) 제외'}/>
       </div>
       <div className={'col-6'}>
@@ -120,10 +105,18 @@ const Input = styled.input`
           </FormBlockHead>
           <FormBlockBody>
             <Popup/>
-            <Input className={'my-1'} id={"sigunguCode"} placeholder={'우편번호'} readOnly={true}/>
-            <Input className={'my-1'} id={"jibunAddress"} placeholder={'지번 주소'} readOnly={true}/>
-            <Input className={'my-1'} id={"roadAddress"} placeholder={'도로명 주소'} readOnly={true}/>
-            <Input className={'my-1'} id={"addressDetail"} placeholder={'상세주소를 입력해주세요.'}/>
+            <div className={'row ms-1'}>
+              <input className={'my-1'} id={"sigunguCode"} placeholder={'우편번호'} readOnly={true}/>
+            </div>
+            <div className={'row ms-1'}>
+              <input className={'my-1'} id={"jibunAddress"} placeholder={'지번 주소'} readOnly={true}/>
+            </div>
+            <div className={'row ms-1'}>
+              <input className={'my-1'} id={"roadAddress"} placeholder={'도로명 주소'} readOnly={true}/>
+            </div>
+            <div className={'row ms-1'}>
+              <input className={'my-1'} id={"addressDetail"} placeholder={'상세주소를 입력해주세요.'}/>
+            </div>
           </FormBlockBody>
         </FormBlock>
       </div>
@@ -141,7 +134,7 @@ const Input = styled.input`
       <br/>
       <div className={'col-12'}>
         <div className={'row'}>
-          <img src="/java505/intellij/team3_project/spring_react_final_project/front/public/logo192.png" alt="제품 사진" className={'col-3'} />
+          <img src="/logo192.png" alt="제품 사진" className={'col-3'}/>
           <div className={'col-3 ms-5'}>
             <div className={'row'}>
               <label className={'float-start col-3'} htmlFor={'productName'}>제품명</label>
@@ -177,14 +170,16 @@ const Input = styled.input`
             </div>
           </div>
         </div>
-
+        <div className={'d-flex justify-content-end me-5'}>
+          <img src="" alt=""/>
+          <Pay/>
+          <button className={'btn btn-dark fs-3'}>취소</button>
+        </div>
       </div>
-
-
-
-
+      <br/>
     </div>
   );
 }
 
-export default Payment;
+
+export default PaymentPage;
