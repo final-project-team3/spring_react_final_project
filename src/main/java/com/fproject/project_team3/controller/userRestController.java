@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 @RestController
 public class userRestController {
     @Autowired
@@ -18,10 +21,10 @@ public class userRestController {
 
     //    LYS
     @PostMapping("/signUpUser")
-    public String signUpUser(userInfoDto userInfoDto) {
+    public void signUpUser(userInfoDto userInfoDto, HttpServletResponse httpServletResponse) throws IOException {
         System.out.println(userInfoDto);
         userService.insertUser(userInfoDto);
-        return "redirect:/";
+        httpServletResponse.sendRedirect("http://localhost:3000/");
     }
 
     //    LYS
