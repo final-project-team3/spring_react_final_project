@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
+import DaumPostcode from 'react-daum-postcode';
 import Popup from "./Popup";
 
-
-function SellerSignUp() {
+function UserSignUp() {
     const [isAllChecked, setIsAllChecked] = useState(false);
     const [checkedItems, setCheckedItems] = useState([]);
 
@@ -50,52 +50,52 @@ function SellerSignUp() {
         nickname: nickname,
     };
 
-    const onSubmit = async () => {
-        try {
-            const response = await axios.post(
-                "https://backend.alittlevanilla.kro.kr/member/signup",
-                body,
-                {
-                    headers: {"Content-Type": "application/json"},
-                }
-            );
-            console.log(response.data.code);
-            if (response.data.code === 1000) {
-                window.location.href = "/emailcheck";
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    };
-
-    // 유효성 검사
-    const emailCheck = async () => {
-        if (email === "") {
-            setCheckedEmail("필수 항목입니다.");
-        } else {
-            var regex =
-                /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-            console.log("비밀번호 유효성 검사 :: ", regex.test(email));
-
-            if (regex.test(email)) {
-                try {
-                    const response = await axios.get(
-                        "https://backend.alittlevanilla.kro.kr/member/" + email
-                    );
-                    if (response.data === true) {
-                        setCheckedEmail("이미 존재하는 이메일 입니다.");
-                    } else {
-                        setCheckedEmail("가능");
-                        console.log("가능");
-                    }
-                } catch (e) {
-                    console.log(e);
-                }
-            } else {
-                setCheckedEmail("이메일 주소를 확인해 주세요.");
-            }
-        }
-    };
+    // const onSubmit = async () => {
+    //     try {
+    //         const response = await axios.post(
+    //             "https://backend.alittlevanilla.kro.kr/member/signup",
+    //             body,
+    //             {
+    //                 headers: {"Content-Type": "application/json"},
+    //             }
+    //         );
+    //         console.log(response.data.code);
+    //         if (response.data.code === 1000) {
+    //             window.location.href = "/emailcheck";
+    //         }
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // };
+    //
+    // // 유효성 검사
+    // const emailCheck = async () => {
+    //     if (email === "") {
+    //         setCheckedEmail("필수 항목입니다.");
+    //     } else {
+    //         var regex =
+    //             /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    //         console.log("비밀번호 유효성 검사 :: ", regex.test(email));
+    //
+    //         if (regex.test(email)) {
+    //             try {
+    //                 const response = await axios.get(
+    //                     "https://backend.alittlevanilla.kro.kr/member/" + email
+    //                 );
+    //                 if (response.data === true) {
+    //                     setCheckedEmail("이미 존재하는 이메일 입니다.");
+    //                 } else {
+    //                     setCheckedEmail("가능");
+    //                     console.log("가능");
+    //                 }
+    //             } catch (e) {
+    //                 console.log(e);
+    //             }
+    //         } else {
+    //             setCheckedEmail("이메일 주소를 확인해 주세요.");
+    //         }
+    //     }
+    // };
 
     const [checkedEmail, setCheckedEmail] = useState("");
 
@@ -113,7 +113,7 @@ function SellerSignUp() {
                     </LoginLogo>
 
                     <LoginSection>
-                        <LoginTitle>회원가입하기 (판매자 회원용)</LoginTitle>
+                        <LoginTitle>회원가입하기 (판매자용)</LoginTitle>
                         <SignupStep className="wrap">
                             <Title>환영합니다. 가입 정보를 입력해주세요</Title>
                         </SignupStep>
@@ -206,11 +206,57 @@ function SellerSignUp() {
                                 <AsteriskRed>*</AsteriskRed> 주민등록번호
                             </FormBlockHead>
                             <FormBlockBody>
-                                <InputTextSizeW className={"row"}>
+                                <InputTextSizeW>
                                     {/*<RegistrationNumberInput type="hidden" required/>*/}
-                                    <RegistrationNumberInput className={"col-6"} placeholder="생년월일 6자리를 입력"/>
-                                    <RegistrationNumberInput className={"col-6"} placeholder="주민번호 뒷번호 첫번째 숫자 입력"/>
+                                    <Input style={{
+                                        width:241
+                                    }} maxLength={6} className={"col-6"} placeholder="* * * * * *"/>
+                                    &nbsp;-&nbsp;
+                                    <Input style={{
+                                        width:50
+                                    }} maxLength={1} className={"col-6"} placeholder="*"/>
+                                    &nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*
                                 </InputTextSizeW>
+                            </FormBlockBody>
+                        </FormBlock>
+
+                        <FormBlock>
+                            <FormBlockHead>
+                                <AsteriskRed>*</AsteriskRed> 사업자명
+                            </FormBlockHead>
+                            <FormBlockBody>
+                                <InputTextSizeWTypeL>
+                                    <Input
+                                        id="name"
+                                        value={nickname}
+                                        type="text"
+                                        placeholder="사업자명을 입력해주세요"
+                                        required
+                                        onChange={(e) => {
+                                            setNickname(e.target.value);
+                                        }}
+                                    />
+                                </InputTextSizeWTypeL>
+                            </FormBlockBody>
+                        </FormBlock>
+
+                        <FormBlock>
+                            <FormBlockHead>
+                                <AsteriskRed>*</AsteriskRed> 사업자 등록번호
+                            </FormBlockHead>
+                            <FormBlockBody>
+                                <InputTextSizeWTypeL>
+                                    <Input
+                                        id="name"
+                                        value={nickname}
+                                        type="text"
+                                        placeholder="ex) ???-??-?????"
+                                        required
+                                        onChange={(e) => {
+                                            setNickname(e.target.value);
+                                        }}
+                                    />
+                                </InputTextSizeWTypeL>
                             </FormBlockBody>
                         </FormBlock>
 
@@ -220,10 +266,10 @@ function SellerSignUp() {
                             </FormBlockHead>
                             <FormBlockBody>
                                 <Popup/>
-                                <Input id={"jibunAddress"}/>
-                                <Input id={"roadAddress"}/>
-                                <Input id={"sigunguCode"}/>
-                                <Input id={""}/>
+                                <Input className={'my-1'} id={"sigunguCode"} placeholder={'우편번호'} readOnly={true}/>
+                                <Input className={'my-1'} id={"jibunAddress"} placeholder={'지번 주소'} readOnly={true}/>
+                                <Input className={'my-1'} id={"roadAddress"} placeholder={'도로명 주소'} readOnly={true}/>
+                                <Input className={'my-1'} id={"addressDetail"} placeholder={'상세주소를 입력해주세요.'}/>
                             </FormBlockBody>
                         </FormBlock>
 
@@ -301,8 +347,11 @@ function SellerSignUp() {
                 </LoginWrap>
             </ReauthPhone>
         </WrapLogin>
-    );
+    )
+        ;
 }
+
+//
 const AuthBtn = styled.button`
   display: inline-block;
   vertical-align: middle;
@@ -657,7 +706,7 @@ const LoginWrap = styled.div`
 `;
 
 const ReauthPhone = styled.form`
-  width: 384px;
+  width: 500px;
   display: block;
   margin: 0 auto;
 `;
@@ -674,4 +723,4 @@ const WrapLogin = styled.div`
   background: #fff;
 `;
 
-export default SellerSignUp;
+export default UserSignUp;

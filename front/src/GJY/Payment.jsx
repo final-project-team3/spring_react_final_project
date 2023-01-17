@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from "react";
+import Popup from "../LYS/Popup";
+import styled from "styled-components";
 
 
 /*function PaymentFnc() {
@@ -40,8 +42,37 @@ const styles = {
     left: '50%',
   },
 }
+const FormBlockHead = styled.label`
+  font-size: 14px;
+`;
 
+const FormBlock = styled.div`
+  text-align: left;
+  margin: 20px 0 0;
+`;
 
+const AsteriskRed = styled.em`
+  color: #ff4b50;
+  font-size: 18px;
+  display: inline-block;
+`;
+
+const FormBlockBody = styled.div`
+  text-align: left;
+`;
+
+const Input = styled.input`
+  font-size: 14px;
+  height: 48px;
+  background: #fff;
+  line-height: 16px;
+  border: 1px solid #acacac;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2px 8px;
+  border-radius: 2px;
+  appearance: none;
+`;
 
   function Payment(props) {
     const [order, setOrder] = useState(0);
@@ -83,8 +114,18 @@ const styles = {
         <input type="tel" id={'phone'} className={'form-control mt-2'} placeholder={'휴대폰번호를 입력해주세요. 하이픈(-) 제외'}/>
       </div>
       <div className={'col-6'}>
-        <label htmlFor={'address'} className={'mt-3'}>배송지 주소</label>
-        <input type="text" id={'address'} className={'form-control mt-2'} placeholder={'주소를 입력해주세요'}/>
+        <FormBlock>
+          <FormBlockHead>
+            <AsteriskRed>*</AsteriskRed> 주소
+          </FormBlockHead>
+          <FormBlockBody>
+            <Popup/>
+            <Input className={'my-1'} id={"sigunguCode"} placeholder={'우편번호'} readOnly={true}/>
+            <Input className={'my-1'} id={"jibunAddress"} placeholder={'지번 주소'} readOnly={true}/>
+            <Input className={'my-1'} id={"roadAddress"} placeholder={'도로명 주소'} readOnly={true}/>
+            <Input className={'my-1'} id={"addressDetail"} placeholder={'상세주소를 입력해주세요.'}/>
+          </FormBlockBody>
+        </FormBlock>
       </div>
       <div className={'col-6'}>
         <label htmlFor={'request'} className={'mt-3'}>배송 메모</label>
