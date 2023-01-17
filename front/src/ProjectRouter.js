@@ -2,7 +2,7 @@ import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ProductDetail from "./HSH/ProductDetail";
 import ProductList from "./HSH/ProductList";
-import Payment from "./GJY/Payment";
+import PaymentPage from "./GJY/PaymentPage";
 import UserSignUp from "./LYS/UserSignUp";
 import SellerSignUp from "./LYS/SellerSignUp";
 import Header from "./Header";
@@ -25,7 +25,7 @@ const ProjectRouter = () => {
                     {/*LYS*/}
 
                     {/*GJY*/}
-                    <Route path={'/payment'} element={<Payment/>}/>
+                    <Route path={'/payment'} element={<PaymentPage/>}/>
                     {/*GJY*/}
 
                     {/*BJH*/}
