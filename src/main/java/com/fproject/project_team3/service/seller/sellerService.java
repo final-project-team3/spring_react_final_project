@@ -6,7 +6,7 @@ public interface sellerService {
 
 
     //    HSH
-    void insertSeller(sellerInfoDto sellerDto);
+    void insertSeller(sellerInfoDto sellerInfoDto);
     //    HSH
 
     //    LYS
