@@ -50,7 +50,7 @@ div{
     color: #ffffff;
 }
 
-/* 단골상점 , 상품후기 , 적립금 박스 */
+/* 결제내역 , 작성리뷰 , 포인트 */
 .summaryContainer{
     background-color: white;
     display: flex;
