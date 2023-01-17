@@ -23,9 +23,11 @@ class NewLogin extends React.Component {
 
     render() {
         return (
-            <div className="wrap">
-                <h2 className={"text-center"}>로그인</h2>
-                <br/>
+            <div className="container">
+                <h2 className={"mt-4 text-center"}>로그인 페이지</h2>
+                <div>
+                    <img className={"logo"} alt={""} src={""}/>
+                </div>
                 <div className="contentArea">
                     <ul style={{
                         paddingLeft: 80,

@@ -20,7 +20,7 @@
     /*padding: 1rem;*/
 }
 .tabs button.active{
-    background-color: #ffb715;
+    background-color: #ffecb5;
     font-weight: bold;
     /*background-color: #282c34;*/
     /*height: 100%;*/
@@ -57,7 +57,7 @@
 
 .contentArea {
     position: relative;
-    top: calc(50vh - 270px);
+    top: calc(50vh - 290px);
     width: 500px;
     height: 500px;
     background-color: rgba(255, 255, 255, 0.5);

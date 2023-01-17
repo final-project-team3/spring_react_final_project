@@ -49,7 +49,7 @@ class User extends React.Component {
 
                     <br/>
 
-                    <p className="member-join"><a href="#"> 회원가입</a></p>
+                    <p className="member-join"><a href="sellersignup"> 회원가입</a></p>
 
                 </form>
             </div>
