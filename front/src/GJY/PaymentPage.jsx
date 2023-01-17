@@ -39,6 +39,9 @@ const styles = {
     position: "absolute",
     left: "50%",
   },
+  btnDiscount: {
+    color: 'red',
+  },
 };
 const FormBlockHead = styled.label`
   font-size: 14px;
@@ -171,7 +174,7 @@ function PaymentPage(props) {
         <div className={"row"}>
           <img src="/logo192.png" alt="제품 사진" className={"col-3"} />
           <div className={"col-3 ms-5"}>
-            <div className={"row"}>
+            <div className={"row mb-3"}>
               <label className={"float-start col-3"} htmlFor={"productName"}>
                 제품명
               </label>
@@ -179,7 +182,7 @@ function PaymentPage(props) {
                 {productName}
               </p>
             </div>
-            <div className={"row"}>
+            <div className={"row mb-3"}>
               <label className={"float-start col-3"} htmlFor={"productOpt"}>
                 옵션
               </label>
@@ -195,9 +198,11 @@ function PaymentPage(props) {
                 {productCnt}
               </p>
             </div>
-            <button className={"btn btn-warning"} onClick={ChangeOpt}>
+            <div className={'row col-6 d-flex justify-content-end ms-3'}>
+            <button className={"btn btn-warning mt-3"} onClick={ChangeOpt}>
               옵션 변경
             </button>
+            </div>
           </div>
           <div className={"col-6"} style={styles.vertical}>
             <div className={"row"}>
@@ -208,25 +213,22 @@ function PaymentPage(props) {
                 {order} 원
               </p>
             </div>
-            <div className={"row"}>
+            <div className={"row mt-3"}>
               <label className={"float-start col-3"} htmlFor={"delivery"}>
                 배송비
               </label>
-              <p id={"delivery"} className={"col-3"}>
-                {delivery} 원
-              </p>
-              <p>
-                ddd
-              </p>
+              <p id={"delivery"} className={"col-5"}>
+                {delivery} 원</p>
+              <p style={styles.btnDiscount}>{delivery !== 0 && `\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a03만원이상 주문 시 배송비 무료`}</p>
             </div>
             <div className={"row"}>
               <label htmlFor={"discount"} className={"float-start col-3"}>
                 할인 적용
               </label>
-              <p id={"discount"} className={"col-3"}>
-                {discount}원
+              <p id={"discount"} className={"col"}>
+                {discount}원{`\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0`}<button className={"btn btn-success col-2"}>포인트/쿠폰</button>
               </p>
-              <button className={"btn btn-success col-2"}>포인트/쿠폰</button>
+
             </div>
             <div className={"row"}>
               <label className={"float-start col-3"} htmlFor={"cost"}>
