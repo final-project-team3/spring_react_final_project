@@ -86,17 +86,16 @@ function PaymentPage(props) {
 
   return (
     <div className={'container'}>
-      <Pay/>
       <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
       <h1 className={'mt-4 text-center'}>결제 페이지</h1>
       <h3 className={'text-start mt-5'}>회원 주문 정보</h3>
       <hr/>
       <div className={'col-6'}>
-        <label htmlFor={'name'}>이름</label>
-        <input type="text" id={'name'} className={'form-control mt-2'} placeholder={'이름을 입력해주세요.'}/>
+        <AsteriskRed>*</AsteriskRed><label htmlFor={'name'} className={'ms-1'}>이름</label>
+        <input type="text" id={'name'} className={'form-control mt-2 '} placeholder={'이름을 입력해주세요.'}/>
       </div>
       <div className={'col-6'}>
-        <label htmlFor={'phone'} className={'mt-3'}>휴대폰</label>
+        <AsteriskRed>*</AsteriskRed><label htmlFor={'phone'} className={'mt-3 ms-1'}>휴대폰</label>
         <input type="tel" id={'phone'} className={'form-control mt-2'} placeholder={'휴대폰번호를 입력해주세요. 하이픈(-) 제외'}/>
       </div>
       <div className={'col-6'}>
@@ -172,7 +171,8 @@ function PaymentPage(props) {
           </div>
         </div>
         <div className={'d-flex justify-content-end me-5'}>
-          <button className={'btn btn-info me-5 fs-3'}>결제하기</button>
+          <img src="" alt=""/>
+          <Pay/>
           <button className={'btn btn-dark fs-3'}>취소</button>
         </div>
       </div>

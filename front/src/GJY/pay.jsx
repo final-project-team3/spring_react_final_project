@@ -43,7 +43,7 @@ const Payment = (effect, deps) => {
 
   return (
     <>
-      <button onClick={onClickPayment}>결제하기</button>
+      <button onClick={onClickPayment} className={'btn btn-info me-5 fs-3'}>결제하기</button>
     </>
   );
 }
