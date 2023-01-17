@@ -53,15 +53,6 @@ function UserSignUp() {
     // 이윤성) 각 input태그마다 onChange()를 두어 실시간으로 setState를 통해 state값을 저장하게 합니다. 다 입력 후 "회원가입"
     //        버튼을 누르면 API통신을 통해 DB에 저장
 
-    function constructor(props) {
-
-        this
-    }
-
-
-
-
-
     return (
         <WrapLogin>
             <HeadBannerGroup/>

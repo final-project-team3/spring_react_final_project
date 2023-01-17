@@ -6,6 +6,13 @@
     <!-- HSH -->
 
     <!-- LYS -->
+    <insert id="insertUser" parameterType="com.fproject.project_team3.dto.user.userInfo">
+        INSERT INTO user-info(user_id, user_pass, user_tel, user_birth, user_gender, user_addr_num,
+                              user_addr_jibun, user_addr_road, user_addr_detail, seller_addr_detail,
+                              seller_business_name, seller_business_num)
+        VALUES (#{userId}, #{userPass}, #{userTel}, #{user_birth}, #{user_gender}, #{userAddrNum},
+            #{userAddrJibun}, #{userAddrRoad}, #{userAddrDetail})
+    </insert>
 
     <!-- LYS -->
 
