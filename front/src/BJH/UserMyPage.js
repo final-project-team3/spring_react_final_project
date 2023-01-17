@@ -128,18 +128,8 @@ function UserMyPage(props) {
                                 height: 24
                             }} src={"./Img/Bjh/right.png"}/></div>
                         </a>
-                        <a href="#" className="item">
-                            <div className="icon"><img style={{
-                                width: 24,
-                                height: 24
-                            }} src={"./Img/Bjh/review.png"}/>
-                            </div>
-                            <div className="text">작성한 리뷰</div>
-                            <div className="right"><img style={{
-                                width: 24,
-                                height: 24
-                            }} src={"./Img/Bjh/right.png"}/></div>
-                        </a>
+
+
                         <a href="#" className="item">
                             <div className="icon"><img style={{
                                 width: 24,
@@ -170,6 +160,30 @@ function UserMyPage(props) {
                             <div className="right">
                                 <span className="point">1027 포인트</span>
                             </div>
+                        </a>
+                        <a href="#" className="item">
+                            <div className="icon"><img style={{
+                                width: 24,
+                                height: 24
+                            }} src={"./Img/Bjh/reviewWrite.png"}/>
+                            </div>
+                            <div className="text">리뷰 작성</div>
+                            <div className="right"><img style={{
+                                width: 24,
+                                height: 24
+                            }} src={"./Img/Bjh/right.png"}/></div>
+                        </a>
+                        <a href="#" className="item">
+                            <div className="icon"><img style={{
+                                width: 24,
+                                height: 24
+                            }} src={"./Img/Bjh/review.png"}/>
+                            </div>
+                            <div className="text">작성한 리뷰</div>
+                            <div className="right"><img style={{
+                                width: 24,
+                                height: 24
+                            }} src={"./Img/Bjh/right.png"}/></div>
                         </a>
                         <a href="#" className="item">
                             <div className="icon"><img style={{
