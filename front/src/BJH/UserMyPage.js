@@ -11,15 +11,15 @@ function UserMyPage(props) {
                     }}>
                         <div style={{
                             textAlign: "center"
-                        }} className="grade">마이페이지
+                        }} className="text-center grade">마이페이지
                         </div>
                         <div style={{
                             textAlign: "center"
-                        }} className="name">유저 페이지
+                        }} className="text-center name">유저 페이지
                         </div>
                     </div>
                 </div>
-                <div className="summaryContainer">
+                <div className="summaryContainer text-center">
                     <div className="item">
                         <div className="number">102</div>
                         <div>결제 내역</div>
@@ -78,7 +78,7 @@ function UserMyPage(props) {
 
                 </div>
                 <div className={'row'}>
-                    <div className="border-end border-dark listContainer col-6">
+                    <div className="border-end border-opacity-10 listContainer col-6">
                         <a href="#" className="item">
                             <div className="ps-5 icon"><img style={{
                                 width: 24,
@@ -212,7 +212,7 @@ function UserMyPage(props) {
                     </div>
                 </div>
                 <div className="infoContainer">
-                    <a href="#" className="ps-5 item">
+                    <a href="#" className="item">
                         <div><img style={{
                             width: 48,
                             height: 48
