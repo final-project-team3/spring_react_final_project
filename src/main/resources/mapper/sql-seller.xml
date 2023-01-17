@@ -7,7 +7,7 @@
         INSERT INTO seller_info(seller_name, seller_tel, seller_id, seller_pass, seller_birth, seller_gender,
                                 seller_addr_num, seller_addr_jibun, seller_addr_road, seller_addr_detail,
                                 seller_business_name, seller_business_num)
-        VALUES (#{sellerInfoNum}, #{sellerName}, #{sellerTel}, #{sellerId}, #{sellerPass},#{sellerBirth}, #{sellerGender},
+        VALUES (#{sellerName}, #{sellerTel}, #{sellerId}, #{sellerPass},#{sellerBirth}, #{sellerGender},
                 #{sellerAddrNum}, #{sellerAddrJibun}, #{sellerAddrRoad}, #{sellerAddrDetail}, #{sellerBusinessName},
                 #{sellerBusinessNum})
     </insert>

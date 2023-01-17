@@ -8,6 +8,7 @@ public class sellerInfoDto {
     String sellerName;
     String sellerTel;
     String sellerId;
+    String sellerPass;
     String sellerBirth;
     String sellerGender;
     String sellerAddrNum;

@@ -15,9 +15,10 @@ public class sellerRestController {
     //    HSH
 //     사업자 회원가입
     @PostMapping("/signUpSeller")
-    public void signUpSeller(sellerInfoDto sellerDto) {
-        System.out.println(sellerDto);
-        sellerService.insertSeller(sellerDto);
+    public String signUpSeller(sellerInfoDto sellerInfoDto) {
+        System.out.println(sellerInfoDto);
+        sellerService.insertSeller(sellerInfoDto);
+        return "redirect:/";
     }
     //    HSH
 

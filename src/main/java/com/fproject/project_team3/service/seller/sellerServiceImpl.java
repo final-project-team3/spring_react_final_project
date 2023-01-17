@@ -12,8 +12,8 @@ public class sellerServiceImpl implements sellerService {
     private sellerMapper sellerMapper;
 
     @Override
-    public void insertSeller(sellerInfoDto sellerDto) {
-        sellerMapper.insertSeller(sellerDto);
+    public void insertSeller(sellerInfoDto sellerInfoDto) {
+        sellerMapper.insertSeller(sellerInfoDto);
     }
 
     //    HSH
