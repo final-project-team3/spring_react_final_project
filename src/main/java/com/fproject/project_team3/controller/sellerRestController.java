@@ -21,7 +21,7 @@ public class sellerRestController {
     public void signUpSeller(sellerInfoDto sellerInfoDto, HttpServletResponse httpServletResponse) throws Exception {
         System.out.println(sellerInfoDto);
         sellerService.insertSeller(sellerInfoDto);
-        httpServletResponse.sendRedirect("/");
+        httpServletResponse.sendRedirect("http://localhost:3000/");
     }
     //    HSH
 
