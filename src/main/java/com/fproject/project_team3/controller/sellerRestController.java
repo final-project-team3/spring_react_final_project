@@ -1,6 +1,6 @@
 package com.fproject.project_team3.controller;
 
-import com.fproject.project_team3.dto.sellerDto;
+import com.fproject.project_team3.dto.seller.sellerInfoDto;
 import com.fproject.project_team3.service.seller.sellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +15,7 @@ public class sellerRestController {
     //    HSH
 //     사업자 회원가입
     @PostMapping("/signUpSeller")
-    public void signUpSeller(sellerDto sellerDto) {
+    public void signUpSeller(sellerInfoDto sellerDto) {
         System.out.println(sellerDto);
         sellerService.insertSeller(sellerDto);
     }
