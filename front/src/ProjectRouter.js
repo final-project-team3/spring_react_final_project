@@ -9,6 +9,9 @@ import Header from "./Header";
 import LoginPage from "./BJH/LoginPage";
 import TestLoginPage from "./BJH/TestLoginPage";
 import NewLogin from "./BJH/NewLogin";
+import UserMyPage from "./BJH/UserMyPage";
+import SellerMyPage from "./BJH/SellerMyPage";
+import MasterPage from "./BJH/MasterPage";
 
 const ProjectRouter = () => {
 
@@ -32,7 +35,9 @@ const ProjectRouter = () => {
 
                     {/*BJH*/}
                     <Route path={'newlogin'} element={<NewLogin/>}/>
-                    <Route path={'testloginpage'} element={<TestLoginPage/>}/>
+                    <Route path={'usermypage'} element={<UserMyPage/>}/>
+                    <Route path={'sellermypage'} element={<SellerMyPage/>}/>
+                    <Route path={'masterpage'} element={<MasterPage/>}/>
                     <Route path={'loginPage'} element={<LoginPage/>}/>
                     {/*BJH*/}
                 </Route>
