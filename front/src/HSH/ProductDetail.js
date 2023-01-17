@@ -1,5 +1,6 @@
 import logo from '../logo.svg';
 import '../App.css';
+import Review from "../LYS/Review";
 
 function ProductDetail(props) {
     return (
@@ -47,6 +48,8 @@ function ProductDetail(props) {
             <div className={'mt-3 border border-dark'}>
                 <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci aliquid assumenda commodi culpa, eos esse est eum excepturi expedita ipsa laudantium natus numquam praesentium quibusdam, quisquam repellat totam voluptatem!</h4>
             </div>
+            <hr/>
+            <Review/>
         </div>
     );
 }
