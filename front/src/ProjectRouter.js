@@ -5,7 +5,7 @@ import ProductList from "./HSH/ProductList";
 import PaymentPage from "./GJY/PaymentPage";
 import UserSignUp from "./LYS/UserSignUp";
 import SellerSignUp from "./LYS/SellerSignUp";
-import Header from "./Header";
+import Main from "./Main";
 import LoginPage from "./BJH/LoginPage";
 import TestLoginPage from "./BJH/TestLoginPage";
 import NewLogin from "./BJH/NewLogin";
@@ -18,7 +18,7 @@ const ProjectRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path={'/'} element={<Header/>}>
+                <Route path={'/'} element={<Main/>}>
                     {/*HSH*/}
                     <Route path={'productDetail'} element={<ProductDetail/>}/>
                     <Route path={'productList'} element={<ProductList/>}/>
