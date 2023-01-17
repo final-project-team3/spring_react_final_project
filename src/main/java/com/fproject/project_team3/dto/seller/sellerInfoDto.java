@@ -1,9 +1,9 @@
-package com.fproject.project_team3.dto;
+package com.fproject.project_team3.dto.seller;
 
 import lombok.Data;
 
 @Data
-public class productInfoDto {
+public class sellerInfoDto {
     int sellerInfoNum;
     String sellerName;
     String sellerTel;
