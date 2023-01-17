@@ -3,34 +3,6 @@ import Popup from "../LYS/Popup";
 import styled from "styled-components";
 import Pay from "./pay";
 
-/*function PaymentFnc() {
-  var goPayment = checkAll();
-  if (goPayment == true) {
-    IMP.init('imp07475837');//아임포트 관리자 콘솔에서 확인한 '가맹점 식별코드' 입력
-    IMP.request_pay({// param
-      pg: "kakaopay.TC0ONETIME", //pg사명 or pg사명.CID (잘못 입력할 경우, 기본 PG사가 띄워짐)
-      pay_method: "card", //지불 방법
-      // merchant_uid: "iamport_test_id23642466433123", //가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
-      name: "Promise Hair", //결제창에 노출될 상품명
-      amount: $('#apointPrice').val(), //금액
-      buyer_email: $("#apointUserMail").val(),
-      buyer_name: $("#apointUserName").val(),
-      buyer_tel: $("#apointUserPh").val(),
-    }, function (rsp) { // callback
-      if (rsp.success) {
-        alert("결제 완료");
-        $('#dp2').disable = false;
-        $('#apointTime').val($('#dp2').val());
-        frm.submit();
-      } else {
-        alert("결제 취소");
-      }
-    });
-  } else {
-    alert("모두 선택해주세요");
-  }
-}*/
-
 const styles = {
   vertical: {
     borderLeft: "solid lightgray",
@@ -40,7 +12,7 @@ const styles = {
     left: "50%",
   },
   btnDiscount: {
-    color: 'red',
+    color: "red",
   },
 };
 const FormBlockHead = styled.label`
@@ -198,10 +170,10 @@ function PaymentPage(props) {
                 {productCnt}
               </p>
             </div>
-            <div className={'row col-6 d-flex justify-content-end ms-3'}>
-            <button className={"btn btn-warning mt-3"} onClick={ChangeOpt}>
-              옵션 변경
-            </button>
+            <div className={"row col-6 d-flex justify-content-end ms-3"}>
+              <button className={"btn btn-warning mt-3"} onClick={ChangeOpt}>
+                옵션 변경
+              </button>
             </div>
           </div>
           <div className={"col-6"} style={styles.vertical}>
@@ -218,17 +190,22 @@ function PaymentPage(props) {
                 배송비
               </label>
               <p id={"delivery"} className={"col-5"}>
-                {delivery} 원</p>
-              <p style={styles.btnDiscount}>{delivery !== 0 && `\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a03만원이상 주문 시 배송비 무료`}</p>
+                {delivery} 원
+              </p>
+              <p style={styles.btnDiscount}>
+                {delivery !== 0 &&
+                  `\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a03만원이상 주문 시 배송비 무료!`}
+              </p>
             </div>
             <div className={"row"}>
               <label htmlFor={"discount"} className={"float-start col-3"}>
                 할인 적용
               </label>
               <p id={"discount"} className={"col"}>
-                {discount}원{`\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0`}<button className={"btn btn-success col-2"}>포인트/쿠폰</button>
+                {discount}원
+                {`\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0`}
+                <button className={"btn btn-success col-2"}>포인트/쿠폰</button>
               </p>
-
             </div>
             <div className={"row"}>
               <label className={"float-start col-3"} htmlFor={"cost"}>

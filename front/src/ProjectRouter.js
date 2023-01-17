@@ -12,6 +12,7 @@ import NewLogin from "./BJH/NewLogin";
 import UserMyPage from "./BJH/UserMyPage";
 import SellerMyPage from "./BJH/SellerMyPage";
 import MasterPage from "./BJH/MasterPage";
+import OrderListPage from "./GJY/OrderListPage";
 
 const ProjectRouter = () => {
 
@@ -31,6 +32,7 @@ const ProjectRouter = () => {
 
                     {/*GJY*/}
                     <Route path={'/payment'} element={<PaymentPage/>}/>
+                    <Route path={'/orderList'} element={<OrderListPage/>}/>
                     {/*GJY*/}
 
                     {/*BJH*/}
