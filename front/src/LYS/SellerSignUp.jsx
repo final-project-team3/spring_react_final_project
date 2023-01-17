@@ -3,8 +3,24 @@ import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import DaumPostcode from 'react-daum-postcode';
 import Popup from "./Popup";
+import $ from "jquery";
 
 function UserSignUp() {
+    let confirmNum = '';
+    /**
+     * 이메일 인증 보내는 함수
+     * */
+    const sendEmail = async () => {
+        $("#emailCheck").attr('hidden', false);
+        const {data} = await axios.post('http://localhost:8080/emailConfirm', null, {params: {email: $("#email").val()}});
+        confirmNum = data;
+        console.log(confirmNum);
+    }
+    /**
+     * 인증번호 체크하는 함수
+     * */
+    const confirmNumCheck = () => $("#confirmNum").val() == confirmNum ? alert("인증되었습니다.") : alert("인증번호가 일치하지 않습니다.");
+
 
     return (
         <WrapLogin>
@@ -23,12 +39,15 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input style={{width: 400}} type="email" name={'sellerId'} placeholder="이메일을 입력해주세요."/>
-                                        <button className={"btn btn-primary ms-1"} style={{width: 90}}><p className={"p-0 m-0"}>인증코드전송</p></button>
+                                        <Input style={{width: 400}} type="email" id={'email'} name={'sellerId'}
+                                               placeholder="이메일을 입력해주세요."/>
+                                        <button className={"btn btn-primary ms-1"} type={'button'} style={{width: 90}}><p
+                                            className={"p-0 m-0"} onClick={sendEmail}>인증코드전송</p></button>
                                     </InputTextSizeW>
-                                    <InputTextSizeW>
-                                        <Input style={{width: 400}} type="text" placeholder="인증번호를 입력해주세요"></Input>
-                                        <button className={"btn btn-primary ms-1"} style={{width: 90}}><p className={"p-0 m-0"}>인증하기</p></button>
+                                    <InputTextSizeW id={'emailCheck'} hidden={true}>
+                                        <Input id={'confirmNum'} style={{width: 400}} type="text" placeholder="인증번호를 입력해주세요"></Input>
+                                        <button className={"btn btn-primary ms-1"} type={'button'} style={{width: 90}} onClick={confirmNumCheck}><p
+                                            className={"p-0 m-0"}>인증하기</p></button>
                                     </InputTextSizeW>
                                 </FormBlockBody>
                             </FormBlock>
@@ -38,7 +57,8 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input type={'password'} name={"sellerPass"} placeholder="비밀번호 (영문+숫자+특수문자 8자 이상)"/>
+                                        <Input type={'password'} name={"sellerPass"}
+                                               placeholder="비밀번호 (영문+숫자+특수문자 8자 이상)"/>
                                     </InputTextSizeW>
                                 </FormBlockBody>
                                 <FormBlockBody>
@@ -66,7 +86,8 @@ function UserSignUp() {
                                 <FormBlockBody>
                                     <InputTextSizeWTypeL>
                                         <Input type="hidden" required/>
-                                        <Input type="tel" name={"sellerTel"} placeholder="ex) 010-1234-5678" data-auth="cell_phone"/>
+                                        <Input type="tel" name={"sellerTel"} placeholder="ex) 010-1234-5678"
+                                               data-auth="cell_phone"/>
                                     </InputTextSizeWTypeL>
                                 </FormBlockBody>
                             </FormBlock>
@@ -77,10 +98,12 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input name={"sellerBirth"} style={{width: 241}} maxLength={6} className={"col-6"}
+                                        <Input name={"sellerBirth"} style={{width: 241}} maxLength={6}
+                                               className={"col-6"}
                                                placeholder="* * * * * *"/>
                                         &nbsp;-&nbsp;
-                                        <Input name={"sellerGender"} style={{width: 50}} maxLength={1} className={"col-6"} placeholder="*"/>
+                                        <Input name={"sellerGender"} style={{width: 50}} maxLength={1}
+                                               className={"col-6"} placeholder="*"/>
                                         &nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*
                                     </InputTextSizeW>
                                 </FormBlockBody>
@@ -114,12 +137,16 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <Popup/>
-                                    <Input name={"sellerAddrNum"} className={'my-1'} id={"sigunguCode"} placeholder={'우편번호'} readOnly={true}/>
-                                    <Input name={"sellerAddrJibun"} className={'my-1'} id={"jibunAddress"} placeholder={'지번 주소'}
+                                    <Input name={"sellerAddrNum"} className={'my-1'} id={"sigunguCode"}
+                                           placeholder={'우편번호'} readOnly={true}/>
+                                    <Input name={"sellerAddrJibun"} className={'my-1'} id={"jibunAddress"}
+                                           placeholder={'지번 주소'}
                                            readOnly={true}/>
-                                    <Input name={"sellerAddrRoad"} className={'my-1'} id={"roadAddress"} placeholder={'도로명 주소'}
+                                    <Input name={"sellerAddrRoad"} className={'my-1'} id={"roadAddress"}
+                                           placeholder={'도로명 주소'}
                                            readOnly={true}/>
-                                    <Input name={"sellerAddrDetail"} className={'my-1'} id={"addressDetail"} placeholder={'상세주소를 입력해주세요.'}/>
+                                    <Input name={"sellerAddrDetail"} className={'my-1'} id={"addressDetail"}
+                                           placeholder={'상세주소를 입력해주세요.'}/>
                                 </FormBlockBody>
                             </FormBlock>
 
