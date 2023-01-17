@@ -44,6 +44,12 @@ function UserSignUp() {
     const [password, setPassword] = useState("");
     const [nickname, setNickname] = useState("");
 
+    let body = {
+        email: email,
+        password: password,
+        nickname: nickname,
+    };
+
     return (
         <WrapLogin>
             <HeadBannerGroup/>
@@ -82,7 +88,6 @@ function UserSignUp() {
                                 <InputTextSizeW>
                                     <Input
                                         id="password"
-                                        // type="password"
                                         value={password}
                                         placeholder="비밀번호 (영문+숫자+특수문자 8자 이상)"
                                         required

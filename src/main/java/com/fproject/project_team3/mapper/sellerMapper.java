@@ -1,12 +1,15 @@
 package com.fproject.project_team3.mapper;
 
+import com.fproject.project_team3.dto.sellerDto;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public class sellerMapper {
+public interface sellerMapper {
+
 
     //    HSH
-
+//     사업자 회원가입
+    void insertSeller(sellerDto sellerDto);
     //    HSH
 
     //    LYS

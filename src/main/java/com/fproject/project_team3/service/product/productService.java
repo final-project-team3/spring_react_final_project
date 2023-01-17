@@ -1,10 +1,10 @@
-package com.fproject.project_team3.controller;
+package com.fproject.project_team3.service.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
-@RestController
-public class productRestController {
+public interface productService {
+
     //    HSH
 
     //    HSH
