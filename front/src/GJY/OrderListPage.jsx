@@ -9,7 +9,6 @@ function OrderListPage(props) {
       const { data } = await axios.post("http://localhost:8080/order", null, {
         params: { id: "aaa" },
       });
-
       setOrderListData(data);
     };
   },[] );
@@ -35,7 +34,7 @@ function OrderListPage(props) {
           <tbody>
             {orderListData.map((item, index) => {
               return (
-                <tr className="table-secondary">
+                <tr className="table-secondary" key={index}>
                   <td>{item.userOrderDate}</td>
                   <td>{item.userId}</td>
                   <td>{item.productNum}</td>
@@ -47,15 +46,7 @@ function OrderListPage(props) {
             })}
           </tbody>
         </table>
-        <hr />
-        <div className={"my-3 d-flex justify-content-end"}>
-          {/*<button*/}
-          {/*  className={"btn btn-outline-primary btn-sm"}*/}
-          {/*  onClick={orderFnc}*/}
-          {/*>*/}
-          {/*  주문 목록 조회*/}
-          {/*</button>*/}
-        </div>
+        <hr/>
       </div>
     </div>
   );
