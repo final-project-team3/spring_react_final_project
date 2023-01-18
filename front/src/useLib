@@ -4,4 +4,7 @@ npm install react-daum-postcode
 npm install styled-components
 // 제이쿼리
 npm install jquery
+// 별점 (lys)
+npm install react-icons --save
+
 
