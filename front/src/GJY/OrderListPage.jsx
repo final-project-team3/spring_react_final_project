@@ -4,22 +4,12 @@ import axios from "axios";
 function OrderListPage(props) {
   const [orderListData, setOrderListData] = useState([]);
 
-  // useEffect(() => {
-  //   return async () => {
-  //     const { data } = await axios.post("http://localhost:8080/order", null, {
-  //       params: { id: "aaa" },
-  //     });
-  //     setOrderListData(data);
-  //   };
-  // },[] );
-
   useEffect(() => {
     return async () => {
-      const data = await axios.post("http://localhost:8080/order", null, {
+      const {data} = await axios.post("http://localhost:8080/order", null, {
         params: { id: "aaa" },
       });
-      console.log(data);
-      // setOrderListData(data);
+      setOrderListData(data);
     };
   },[] );
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fproject.project_team3.mapper.OrderListMapper">
+
     <!-- HSH -->
 
     <!-- HSH -->
@@ -10,8 +11,8 @@
     <!-- LYS -->
 
     <!-- GJY -->
-    <select id="getOrderList" parameterType="String" resultType="Object" >
-        SELECT pi.product_name
+    <select id="getOrderList" parameterType="String" resultType="com.fproject.project_team3.dto.join.UserOrderListProductInfoDto">
+        SELECT *
         FROM user_order_list as uol
                  left join product_info as pi
                            on uol.product_num = pi.product_num
