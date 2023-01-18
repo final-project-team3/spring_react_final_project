@@ -4,6 +4,7 @@ import axios from "axios";
 import {
     Link, Switch, Route, BrowserRouter
 } from 'react-router-dom';
+import Rating from "./Rating";
 
 const ReviewText = styled.textarea`
     width: 50%;
@@ -12,26 +13,28 @@ const ReviewText = styled.textarea`
 `;
 
 function Review() {
-
     return (
         <div className="mt-5 container">
-            <h1 className={"text-start"}>제품 리뷰</h1>
+            <h2 className={"text-start"}>제품 리뷰</h2>
             <div className={"row mt-5"}>
                 <ul>
                     <li>
                         <article>
                             <div className="text-md-start">
                                 <div className={"review_info"}>
-                                    <div className={"reviewer_id"}></div>
-                                    <div className={"star_point"}></div>
-                                    <div className={"seller_id"}></div>
-                                    <div className={"registration_date"}></div>
+                                    <div className={"reviewer_id"}>tmvmfld1234</div>
+                                    <Rating/>
+                                    <div className={"seller_id"}>외길물산(주)</div>
+                                    <div className={"registration_date"}>2023.01.18</div>
                                 </div>
                             </div>
+
                             {/*<div className={"review_img"}></div>*/}
+
                             <div className={"text-md-start"}>
                                 <div className={"review_content"}>
-                                    <ReviewText disabled={true}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A animi, assumenda at autem blanditiis consectetur </ReviewText>
+                                    <ReviewText disabled={true}>Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit. A animi, assumenda at autem blanditiis consectetur </ReviewText>
                                 </div>
                             </div>
 
@@ -44,6 +47,7 @@ function Review() {
                                     <p className={"my-2"}>총 {}명의 회원이 도움이 되었습니다.</p>
                                 </div>
                             </div>
+                            <hr/>
                         </article>
                     </li>
                 </ul>
