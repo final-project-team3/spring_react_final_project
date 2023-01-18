@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class OrderRestController {
@@ -21,7 +22,8 @@ public class OrderRestController {
   @PostMapping("/order")
   public Object order(@RequestParam("id") String id, UserOrderListDto userOrderListDto) throws Exception {
     System.out.println(id);
-    List<UserOrderListDto> userOrderList = orderService.getOrderList(id);
+    Object userOrderList = orderService.getOrderList(id);
+    System.out.println(userOrderList);
     return userOrderList;
   }
   // GJY

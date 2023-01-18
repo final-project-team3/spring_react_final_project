@@ -7,6 +7,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -15,7 +16,7 @@ public class OrderServiceImpl implements OrderService {
   private OrderListMapper orderListMapper;
 
   @Override
-  public List<UserOrderListDto> getOrderList(String id) throws Exception {
+  public Object getOrderList(String id) throws Exception {
     return orderListMapper.getOrderList(id);
   }
 }
