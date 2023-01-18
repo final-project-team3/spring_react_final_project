@@ -17,4 +17,6 @@ public class sellerInfoDto {
     String sellerAddrDetail;
     String sellerBusinessName;
     String sellerBusinessNum;
+    String sellerDeliveryPrice;
+    String sellerDeliveryFree;
 }
