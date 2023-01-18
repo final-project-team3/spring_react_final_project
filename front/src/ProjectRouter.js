@@ -12,6 +12,8 @@ import NewLogin from "./BJH/NewLogin";
 import UserMyPage from "./BJH/UserMyPage";
 import SellerMyPage from "./BJH/SellerMyPage";
 import MasterPage from "./BJH/MasterPage";
+import Cart from "./BJH/Cart/Cart";
+import SellerLogin from "./BJH/SellerLogin";
 
 const ProjectRouter = () => {
 
@@ -35,9 +37,11 @@ const ProjectRouter = () => {
 
                     {/*BJH*/}
                     <Route path={'newlogin'} element={<NewLogin/>}/>
+                    <Route path={'sellerlogin'} element={<SellerLogin/>}/>
                     <Route path={'usermypage'} element={<UserMyPage/>}/>
                     <Route path={'sellermypage'} element={<SellerMyPage/>}/>
                     <Route path={'masterpage'} element={<MasterPage/>}/>
+                    <Route path={'cart'} element={<Cart/>}/>
                     <Route path={'loginPage'} element={<LoginPage/>}/>
                     {/*BJH*/}
                 </Route>
