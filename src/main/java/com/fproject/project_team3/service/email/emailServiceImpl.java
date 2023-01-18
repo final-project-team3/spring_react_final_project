@@ -12,7 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmailServiceImpl implements EmailService{
+public class emailServiceImpl implements emailService {
 
     @Autowired
     JavaMailSender emailSender;
@@ -20,29 +20,29 @@ public class EmailServiceImpl implements EmailService{
     public static final String ePw = createKey();
 
     private MimeMessage createMessage(String to)throws Exception{
-        System.out.println("보내는 대상 : "+ to);
-        System.out.println("인증 번호 : "+ePw);
+//        System.out.println("보내는 대상 : "+ to);
+//        System.out.println("인증 번호 : "+ePw);
         MimeMessage  message = emailSender.createMimeMessage();
 
         message.addRecipients(RecipientType.TO, to);//보내는 대상
-        message.setSubject("이메일 인증 테스트");//제목
+        message.setSubject("이메일 인증 번호입니다.");//제목
 
         String msgg="";
         msgg+= "<div style='margin:20px;'>";
-        msgg+= "<h1> 환영합니다 새로운 스타일의 생활 한복 ??? 입니다. </h1>";
+        msgg+= "<h1> 환영합니다 새로운 스타일의 생활 한복 시옷 입니다.</h1>";
         msgg+= "<br>";
         msgg+= "<p>아래 코드를 복사해 입력해주세요<p>";
         msgg+= "<br>";
         msgg+= "<p>감사합니다.<p>";
         msgg+= "<br>";
         msgg+= "<div align='center' style='border:1px solid black; font-family:verdana';>";
-        msgg+= "<h3 style='color:blue;'>회원가입 인증 코드입니다.</h3>";
+        msgg+= "<h3 style='color:blue;'>이메일 인증 코드입니다.</h3>";
         msgg+= "<div style='font-size:130%'>";
         msgg+= "CODE : <strong>";
         msgg+= ePw+"</strong><div><br/> ";
         msgg+= "</div>";
         message.setText(msgg, "utf-8", "html");//내용
-        message.setFrom(new InternetAddress("properties에 입력한 이메일","limjunho"));//보내는 사람
+        message.setFrom(new InternetAddress("dbstjd608@gmail.com","시옷"));//보내는 사람
 
         return message;
     }
