@@ -1,5 +1,6 @@
 import React from "react";
 import './MyPage.css';
+import {Link} from "react-router-dom";
 
 function UserMyPage(props) {
     return (
@@ -228,14 +229,14 @@ function UserMyPage(props) {
                         </div>
                         <div>이용안내</div>
                     </a>
-                    <a href="#" className="item">
+                    <Link to={"/"} className="item">
                         <div><img style={{
                             width: 48,
                             height: 48
                         }} src={"./Img/Bjh/logout.png"}/>
                         </div>
                         <div>로그아웃</div>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>
