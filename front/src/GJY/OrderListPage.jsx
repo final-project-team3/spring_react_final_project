@@ -4,18 +4,27 @@ import axios from "axios";
 function OrderListPage(props) {
   const [orderListData, setOrderListData] = useState([]);
 
+  // useEffect(() => {
+  //   return async () => {
+  //     const { data } = await axios.post("http://localhost:8080/order", null, {
+  //       params: { id: "aaa" },
+  //     });
+  //     setOrderListData(data);
+  //   };
+  // },[] );
+
   useEffect(() => {
     return async () => {
-      const { data } = await axios.post("http://localhost:8080/order", null, {
+      const data = await axios.post("http://localhost:8080/order", null, {
         params: { id: "aaa" },
       });
-      setOrderListData(data);
+      console.log(data);
+      // setOrderListData(data);
     };
   },[] );
 
   return (
     <div className={"container"}>
-      <h2>commit</h2>
       <div className={"row"}>
         <h1 className={"mt-4 text-center"}>주문/배송 조회</h1>
         <h3 className={"text-start mt-5"}>주문내역</h3>
@@ -37,7 +46,7 @@ function OrderListPage(props) {
                 <tr className="table-secondary" key={index}>
                   <td>{item.userOrderDate}</td>
                   <td>{item.userId}</td>
-                  <td>{item.productNum}</td>
+                  <td>{item.productName}</td>
                   <td>{item.productNum}</td>
                   <td>{item.productOrderQuantity}</td>
                   <td>{item.userOrderState}</td>
