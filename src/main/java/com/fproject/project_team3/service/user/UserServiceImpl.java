@@ -1,17 +1,17 @@
 package com.fproject.project_team3.service.user;
 
-import com.fproject.project_team3.dto.user.userInfoDto;
-import com.fproject.project_team3.mapper.userMapper;
+import com.fproject.project_team3.dto.user.UserInfoDto;
+import com.fproject.project_team3.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class userServiceImpl implements userService {
+public class UserServiceImpl implements UserService {
     @Autowired
-    private userMapper userMapper;
+    private UserMapper userMapper;
 
     @Override
-    public void insertUser(userInfoDto userInfoDto) {userMapper.insertUser(userInfoDto);}
+    public void insertUser(UserInfoDto userInfoDto) {userMapper.insertUser(userInfoDto);}
 
     //    HSH
 

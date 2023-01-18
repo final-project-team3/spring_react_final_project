@@ -1,18 +1,18 @@
 package com.fproject.project_team3.service.seller;
 
-import com.fproject.project_team3.dto.seller.sellerInfoDto;
-import com.fproject.project_team3.mapper.sellerMapper;
+import com.fproject.project_team3.dto.seller.SellerInfoDto;
+import com.fproject.project_team3.mapper.SellerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class sellerServiceImpl implements sellerService {
+public class SellerServiceImpl implements SellerService {
 
     @Autowired
-    private sellerMapper sellerMapper;
+    private SellerMapper sellerMapper;
 
     @Override
-    public void insertSeller(sellerInfoDto sellerInfoDto) {
+    public void insertSeller(SellerInfoDto sellerInfoDto) {
         sellerMapper.insertSeller(sellerInfoDto);
     }
 

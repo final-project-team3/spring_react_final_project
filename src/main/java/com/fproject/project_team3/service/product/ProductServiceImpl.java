@@ -1,9 +1,10 @@
 package com.fproject.project_team3.service.product;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-public interface productService {
+@Service
+public class ProductServiceImpl implements ProductService {
+
+
 
     //    HSH
 
