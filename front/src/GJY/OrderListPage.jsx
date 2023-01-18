@@ -29,24 +29,6 @@ function OrderListPage() {
           <td>Column content</td>
           <td>Column content</td>
           <td>Column content</td>
-        </tr><tr className="table-light">
-          <th scope="row">Light</th>
-          <td>Column content</td>
-          <td>Column content</td>
-          <td>Column content</td>
-          <td>Column content</td>
-          <td>Column content</td>
-          <td>Column content</td>
-          <td>Column content</td>
-        </tr><tr className="table-light">
-          <th scope="row">Light</th>
-          <td>Column content</td>
-          <td>Column content</td>
-          <td>Column content</td>
-          <td>Column content</td>
-          <td>Column content</td>
-          <td>Column content</td>
-          <td>Column content</td>
         </tr>
         </tbody>
       </table>
