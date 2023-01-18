@@ -1,10 +1,15 @@
-import {Outlet} from "react-router-dom";
+import {Link, Outlet} from "react-router-dom";
 
 const Main = () => {
     return (
-        <body>
-        <div>
-            <h1 className={'text-center'}>헤더입니다.</h1>
+        <body width={'100%'} background={'../Img/bg-1.jpg'}>
+        <div style={{
+            width: '100%',
+            height: 1000
+        }} className={'text-center'}>
+            <div className={'d-flex justify-content-start'}>
+                <Link to={"/"}><img className={'ms-3'} width={200} src={'../Img/logo.png'}/></Link>
+            </div>
             <Outlet/>
         </div>
         </body>
