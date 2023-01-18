@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fproject.project_team3.mapper.OrderListMapper">
+    <!-- HSH -->
+
+    <!-- HSH -->
+
+    <!-- LYS -->
+
+    <!-- LYS -->
+
+    <!-- GJY -->
+    <select id="getOrderList" parameterType="String" resultType="com.fproject.project_team3.dto.user.UserOrderListDto">
+        SELECT *
+        FROM user_order_list
+        WHERE user_id = #{id}
+    </select>
+    <!-- GJY -->
+
+    <!-- BJH -->
+
+    <!-- BJH -->
+
+    <!-- LSH -->
+
+    <!-- LSH -->
+
+</mapper>

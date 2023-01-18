@@ -1,22 +1,28 @@
 package com.fproject.project_team3.controller;
 
-import com.fproject.project_team3.dto.user.userOrderList;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.fproject.project_team3.dto.seller.SellerInfoDto;
+import com.fproject.project_team3.dto.user.UserOrderListDto;
+import com.fproject.project_team3.service.order.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
 
 @RestController
 public class OrderRestController {
 
+  @Autowired
+  private OrderService orderService;
+
   // GJY
   // 주문 내역 조회(테이블)
-  @GetMapping("/order")
-  public List<String> order(){
-    return Arrays.asList("서버서버", "뷰뷰");
+  @PostMapping("/order")
+  public Object order(@RequestParam("id") String id, UserOrderListDto userOrderListDto) throws Exception {
+    System.out.println(id);
+    List<UserOrderListDto> userOrderList = orderService.getOrderList(id);
+    return userOrderList;
   }
   // GJY
 
