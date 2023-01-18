@@ -3,7 +3,7 @@ package com.fproject.project_team3.dto.user;
 import lombok.Data;
 
 @Data
-public class userInfoDto {
+public class UserInfoDto {
    int userInfoNum;
    String userId;
    String userPass;

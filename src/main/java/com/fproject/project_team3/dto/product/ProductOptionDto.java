@@ -3,7 +3,7 @@ package com.fproject.project_team3.dto.product;
 import lombok.Data;
 
 @Data
-public class productOption {
+public class ProductOptionDto {
     int productOptionNum;
     int productNum;
     String productCouponUseable;

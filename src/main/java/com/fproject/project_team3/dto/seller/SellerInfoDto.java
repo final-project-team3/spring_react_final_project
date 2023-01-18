@@ -3,7 +3,7 @@ package com.fproject.project_team3.dto.seller;
 import lombok.Data;
 
 @Data
-public class sellerInfoDto {
+public class SellerInfoDto {
     int sellerInfoNum;
     String sellerName;
     String sellerTel;
@@ -17,4 +17,6 @@ public class sellerInfoDto {
     String sellerAddrDetail;
     String sellerBusinessName;
     String sellerBusinessNum;
+    String sellerDeliveryPrice;
+    String sellerDeliveryFree;
 }

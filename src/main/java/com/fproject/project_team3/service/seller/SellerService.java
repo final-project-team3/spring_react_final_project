@@ -1,12 +1,12 @@
 package com.fproject.project_team3.service.seller;
 
-import com.fproject.project_team3.dto.seller.sellerInfoDto;
+import com.fproject.project_team3.dto.seller.SellerInfoDto;
 
-public interface sellerService {
+public interface SellerService {
 
 
     //    HSH
-    void insertSeller(sellerInfoDto sellerInfoDto);
+    void insertSeller(SellerInfoDto sellerInfoDto);
     //    HSH
 
     //    LYS

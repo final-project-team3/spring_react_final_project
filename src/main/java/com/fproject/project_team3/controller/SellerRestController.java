@@ -1,24 +1,23 @@
 package com.fproject.project_team3.controller;
 
-import com.fproject.project_team3.dto.seller.sellerInfoDto;
-import com.fproject.project_team3.service.seller.sellerService;
+import com.fproject.project_team3.dto.seller.SellerInfoDto;
+import com.fproject.project_team3.service.seller.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-public class sellerRestController {
+public class SellerRestController {
 
     @Autowired
-    private sellerService sellerService;
+    private SellerService sellerService;
 
     //    HSH
 //     사업자 회원가입
     @PostMapping("/signUpSeller")
-    public void signUpSeller(sellerInfoDto sellerInfoDto, HttpServletResponse httpServletResponse) throws Exception {
+    public void signUpSeller(SellerInfoDto sellerInfoDto, HttpServletResponse httpServletResponse) throws Exception {
         System.out.println(sellerInfoDto);
         sellerService.insertSeller(sellerInfoDto);
         httpServletResponse.sendRedirect("http://localhost:3000/");
