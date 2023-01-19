@@ -60,7 +60,7 @@ function NewLogin() {
 
                     </LoginHeadText>
                     <BorderAndText>
-                        <Link to={"/newlogin"}><span>일반회원 로그인</span></Link>
+                        <Link to={"/newLogin"}><span>일반회원 로그인</span></Link>
                     </BorderAndText>
 
                     <EmailLoginContainer>
