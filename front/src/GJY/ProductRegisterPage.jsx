@@ -6,7 +6,7 @@ import $ from "jquery";
 function ProductRegisterPage() {
   const [bigKind, setBigKind] = useState([]);
   const [smallKind, setSmallKind] = useState([]);
-
+  const [test1, setTest1] = useState("");
   useEffect(() => {
     return async () => {
       const { data } = await axios.post("http://localhost:8080/selectList");
@@ -16,8 +16,10 @@ function ProductRegisterPage() {
 
   const getSmallKinds = async e => {
     const { data } = await axios.post("http://localhost:8080/selectSmallList", null, {params: {productKind: e.target.value}});
+    setTest1(e.target.value);
     console.log(data);
     setSmallKind(data);
+
   }
 
   return (
@@ -32,8 +34,8 @@ function ProductRegisterPage() {
               <tr>
                 <td>제품 분류</td>
                 <td>
-                  <select id={"selectBigKind"} value={'하이'} onChange={getSmallKinds}>
-                    <option value="대분류">----대분류----</option>
+                  <select id={"selectBigKind"}  onChange={getSmallKinds}>
+                    <option value={test1}>----대분류----</option>
                     {bigKind.map((item) => (
                       <option value={item.productGender}>
                         {item.productGender}
