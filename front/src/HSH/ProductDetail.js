@@ -71,7 +71,7 @@ function ProductDetail(props) {
                 <div className={"row mt-5"}>
                     {
                         reviewList.map((item, index)=> {
-                            return <Review key={index} id={item.userId} date={item.reviewRegistrationDate} content={item.reviewContent} helpful={item.reviewHelpful}/>
+                            return <Review key={index} id={item.userId} date={item.reviewRegistrationDate} content={item.reviewContent} helpful={item.reviewHelpful} starPoint={item.reviewStarPoint}/>
                         })
                     }
                 </div>

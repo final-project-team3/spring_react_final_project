@@ -14,14 +14,13 @@ const ReviewText = styled.textarea`
 
 function Review(props) {
     return (
-
         <ul>
             <li>
                 <article>
                     <div className="text-md-start">
                         <div className={"review_info"}>
                             <div className={"reviewer_id"}>{props.id}</div>
-                            <Rating rating={4}/>
+                            <Rating rating={props.starPoint}/>
                             <div className={"seller_id"}>외길물산(주)</div>
                             <div className={"registration_date"}>{props.date}</div>
                         </div>
