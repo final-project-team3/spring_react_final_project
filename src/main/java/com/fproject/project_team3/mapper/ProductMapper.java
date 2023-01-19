@@ -1,11 +1,17 @@
 package com.fproject.project_team3.mapper;
 
+import com.fproject.project_team3.dto.product.ProductKindDto;
 import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
-public class ProductMapper {
+import java.util.List;
 
-    //    HSH
+@Mapper
+public interface ProductMapper {
+  List<ProductKindDto> getProductSelectList();
+
+  List<ProductKindDto> getProductSmallSelectList(String productKind);
+
+  //    HSH
 
     //    HSH
 
