@@ -14,6 +14,7 @@ import SellerMyPage from "./BJH/SellerMyPage";
 import MasterPage from "./BJH/MasterPage";
 import OrderListPage from "./GJY/OrderListPage";
 import Cart from "./BJH/Cart/Cart";
+import ProductRegisterPage from "./GJY/ProductRegisterPage";
 
 const ProjectRouter = () => {
 
@@ -34,6 +35,7 @@ const ProjectRouter = () => {
                     {/*GJY*/}
                     <Route path={'/payment'} element={<PaymentPage/>}/>
                     <Route path={'/orderList'} element={<OrderListPage/>}/>
+                    <Route path={'/productR'} element={<ProductRegisterPage/>}/>
                     {/*GJY*/}
 
                     {/*BJH*/}
