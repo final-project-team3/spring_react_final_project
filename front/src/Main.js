@@ -1,6 +1,6 @@
 import {Link, Outlet} from "react-router-dom";
 
-const Header = () => {
+const Main = () => {
     return (
         <div>
             <div className={"d-flex container"}>
@@ -28,4 +28,4 @@ const Header = () => {
     )
 }
 
-export default Header;
+export default Main;

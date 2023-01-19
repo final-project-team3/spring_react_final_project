@@ -17,6 +17,7 @@ import Cart from "./BJH/Cart/Cart";
 import SearchId from "./BJH/Search/SearchId";
 import SellerSearch from "./BJH/Search/SellerSearch";
 import PwSearch from "./BJH/Search/PwSearch";
+import ProductRegisterPage from "./GJY/ProductRegisterPage";
 
 const ProjectRouter = () => {
 
@@ -37,6 +38,7 @@ const ProjectRouter = () => {
                     {/*GJY*/}
                     <Route path={'/payment'} element={<PaymentPage/>}/>
                     <Route path={'/orderList'} element={<OrderListPage/>}/>
+                    <Route path={"/productR"} element={<ProductRegisterPage/>}/>
                     {/*GJY*/}
 
                     {/*BJH*/}
