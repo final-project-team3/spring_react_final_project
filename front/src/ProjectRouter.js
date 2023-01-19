@@ -42,7 +42,7 @@ const ProjectRouter = () => {
                     {/*GJY*/}
 
                     {/*BJH*/}
-                    <Route path={'newLogin'} element={<NewLogin/>}/>
+                    <Route path={'login'} element={<NewLogin/>}/>
 
                     <Route path={'userMyPage'} element={<UserMyPage/>}/>
                     <Route path={'sellerMyPage'} element={<SellerMyPage/>}/>
