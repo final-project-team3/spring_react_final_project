@@ -19,7 +19,7 @@
     <select id="getProductSmallSelectList" parameterType="String" resultType="com.fproject.project_team3.dto.product.ProductKindDto">
         SELECT product_small_kind
         FROM product_kind
-        order by product_small_kind where product_gender = #{productKind}
+        where product_gender = #{productKind}
     </select>
     <!-- GJY -->
 

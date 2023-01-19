@@ -5,39 +5,20 @@ import $ from "jquery";
 
 function ProductRegisterPage() {
   const [bigKind, setBigKind] = useState([]);
-  const [smallKind, setSmallKind] = useState();
-  let strList = [];
+  const [smallKind, setSmallKind] = useState([]);
+
   useEffect(() => {
     return async () => {
       const { data } = await axios.post("http://localhost:8080/selectList");
       setBigKind(data);
-      // console.log(data);
-      // let str = [];
-      // data.map((item) => {
-      //   if (str !== item.productGender) {
-      //     str = item.productGender;
-      //     strList.push(str);
-      //   }
-      // });
-      // console.log(strList);
-      // setBigKind(strList);
-      // console.log(bigKind);
     };
   }, []);
 
-  useEffect(() => {
-    return async () => {
-      console.log(smallKind);
-      const { data } = await axios.post("http://localhost:8080/selectSmallList", null, {params: {productKind: smallKind}});
-      console.log(data);
-
-    };
-  }, [smallKind]);
-
-  // const setSmallKind = () => {
-  //   let bigKindValue = $("#selectBigKind").val();
-  //
-  // }
+  const getSmallKinds = async e => {
+    const { data } = await axios.post("http://localhost:8080/selectSmallList", null, {params: {productKind: e.target.value}});
+    console.log(data);
+    setSmallKind(data);
+  }
 
   return (
     <div>
@@ -51,12 +32,8 @@ function ProductRegisterPage() {
               <tr>
                 <td>제품 분류</td>
                 <td>
-                  <select id={"selectBigKind"} onChange={() => {
-                    console.log($("#selectBigKind").val());
-                    setSmallKind($("#selectBigKind").val());
-                    console.log(smallKind);
-                  }}>
-                    <option value="null">----대분류----</option>
+                  <select id={"selectBigKind"} value={'하이'} onChange={getSmallKinds}>
+                    <option value="대분류">----대분류----</option>
                     {bigKind.map((item) => (
                       <option value={item.productGender}>
                         {item.productGender}
@@ -65,7 +42,7 @@ function ProductRegisterPage() {
                   </select>
                   <select name="" id="">
                     <option value="null">----하위분류---</option>
-                    <option value="female"></option>
+                    {smallKind.map((item)=> <option value={item.productSmallKind}>{item.productSmallKind}</option>)}
                   </select>
                 </td>
               </tr>

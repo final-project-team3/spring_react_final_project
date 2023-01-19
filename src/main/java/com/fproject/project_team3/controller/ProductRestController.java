@@ -12,8 +12,8 @@ import java.util.List;
 
 @RestController
 public class ProductRestController {
-  @Autowired
-  private ProductService productService;
+    @Autowired
+    private ProductService productService;
 
     //    HSH
 
@@ -24,19 +24,19 @@ public class ProductRestController {
     //    LYS
 
     //    GJY
-  @PostMapping("/selectList")
-public List<ProductKindDto> productSelectList() throws Exception {
-    List<ProductKindDto> productSelectList = productService.getProductSelectList();
-    return productSelectList;
-  }
+    @PostMapping("/selectList")
+    public List<ProductKindDto> productSelectList() throws Exception {
+        List<ProductKindDto> productSelectList = productService.getProductSelectList();
+        return productSelectList;
+    }
 
-  @PostMapping("/selectSmallList")
-  public List<ProductKindDto> selectSmallList(@RequestParam("productKind") String productKind) throws Exception {
-    System.out.println(productKind);
-    List<ProductKindDto> productSelectList = productService.getProductSmallSelectList(productKind);
-    System.out.println(productSelectList);
-    return productSelectList;
-  }
+    @PostMapping("/selectSmallList")
+    public List<ProductKindDto> selectSmallList(@RequestParam("productKind") String productKind) throws Exception {
+        System.out.println(productKind);
+        List<ProductKindDto> productSelectList = productService.getProductSmallSelectList(productKind);
+        System.out.println(productSelectList);
+        return productSelectList;
+    }
     //    GJY
 
     //    BJH
