@@ -14,6 +14,9 @@ import SellerMyPage from "./BJH/SellerMyPage";
 import MasterPage from "./BJH/MasterPage";
 import OrderListPage from "./GJY/OrderListPage";
 import Cart from "./BJH/Cart/Cart";
+import SearchId from "./BJH/Search/SearchId";
+import SellerSearch from "./BJH/Search/SellerSearch";
+import PwSearch from "./BJH/Search/PwSearch";
 
 const ProjectRouter = () => {
 
@@ -37,12 +40,19 @@ const ProjectRouter = () => {
                     {/*GJY*/}
 
                     {/*BJH*/}
-                    <Route path={'newlogin'} element={<NewLogin/>}/>
-                    <Route path={'usermypage'} element={<UserMyPage/>}/>
-                    <Route path={'sellermypage'} element={<SellerMyPage/>}/>
-                    <Route path={'masterpage'} element={<MasterPage/>}/>
+                    <Route path={'newLogin'} element={<NewLogin/>}/>
+
+                    <Route path={'userMyPage'} element={<UserMyPage/>}/>
+                    <Route path={'sellerMyPage'} element={<SellerMyPage/>}/>
+                    <Route path={'masterPage'} element={<MasterPage/>}/>
+
                     <Route path={'loginPage'} element={<LoginPage/>}/>
+
                     <Route path={'cart'} element={<Cart/>}/>
+
+                    <Route path={'searchId'} element={<SearchId/>}/>
+                    <Route path={'sellerSearch'} element={<SellerSearch/>}/>
+                    <Route path={'pwSearch'} element={<PwSearch/>}/>
                     {/*BJH*/}
                 </Route>
             </Routes>

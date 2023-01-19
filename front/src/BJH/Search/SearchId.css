@@ -1,0 +1,113 @@
+*{
+    box-sizing: border-box;
+    -webkit-text-size-adjust: none;
+    max-width: 100%;
+}
+
+.logBox {
+    padding: 20px 40px;
+    width: 100%;
+    background: #fff;
+    position: relative;
+}
+
+.logBox .logLogo {
+    padding: 110px 0 50px;
+    text-align: center;
+}
+
+.logBox .logLogo p {
+    font-size: 0.9rem;
+    color: #888;
+    padding: 12px 0 0;
+}
+
+a.link-text:link {
+    color: #66f;
+}
+
+a.link-text {
+    text-decoration: none;
+}
+
+.tabbtn {
+    clear: both;
+    height: 42px;
+    background: #fff;
+}
+
+.khw {
+    margin-bottom: 10px !important;
+}
+
+.tabbtn ul {
+    height: 42px;
+}
+
+ul {
+    list-style: none;
+}
+
+.tabbtn li {
+    display: block;
+    float: left;
+    height: 42px;
+    text-align: center;
+    padding-top: 13px;
+    font-size: 0.9rem;
+    color: #aaa;
+    width: 50%;
+}
+
+.ctrTabLock {
+    width: 50%;
+}
+
+.logForm {
+    padding: 40px 20px;
+}
+
+.logBox .logInput {
+    width: 100%;
+    border: 1px solid #dbdbdb;
+    color: #596cd3;
+    margin: 5px auto;
+    padding: 10px 18px;
+    font-size: 18px !important;
+    height: 45px;
+    border-radius: 50px;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 6%);
+    outline: 0;
+}
+
+.norBtn {
+    margin: 0px 2% 0px 0px;
+    width: 49%;
+    display: inline-block;
+    background-color: rgb(255, 255, 255);
+    color: #333 !important;
+    border: 1px solid rgb(221, 221, 221);
+    text-align: center;
+    height: 48px;
+    line-height: 48px;
+    text-decoration: none;
+    font-size: 1.0rem !important;
+    border-radius: 50px;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 6%);
+}
+
+.logBtn {
+    width: 49%;
+    margin: 0;
+    display: inline-block;
+    background: #596cd3;
+    height: 48px;
+    line-height: 48px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.0rem !important;
+    font-weight: bold;
+    border: 0px;
+    border-radius: 50px;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 6%);
+}
