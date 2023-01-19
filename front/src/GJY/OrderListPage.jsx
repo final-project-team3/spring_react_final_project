@@ -25,8 +25,7 @@ function OrderListPage(props) {
               <th>주문일자</th>
               <th>아이디</th>
               <th>제품정보</th>
-              <th>주문금액</th>
-              <th>주문수량</th>
+              <th>주문금액(수량)</th>
               <th>주문상태</th>
             </tr>
           </thead>
@@ -37,8 +36,7 @@ function OrderListPage(props) {
                   <td>{item.userOrderDate}</td>
                   <td>{item.userId}</td>
                   <td>{item.productName}</td>
-                  <td>{item.productNum}</td>
-                  <td>{item.productOrderQuantity}</td>
+                  <td>{item.productPrice} ({item.productOrderQuantity}개)</td>
                   <td>{item.userOrderState}</td>
                 </tr>
               );

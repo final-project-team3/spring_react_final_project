@@ -12,4 +12,6 @@ public class UserOrderListProductInfoDto {
     String userOrderState;
     String orderNum;
     String productName;
+    int productPrice;
+    String productSellerId;
 }
