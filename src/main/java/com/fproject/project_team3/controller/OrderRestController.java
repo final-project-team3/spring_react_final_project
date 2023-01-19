@@ -17,9 +17,7 @@ public class OrderRestController {
   // 주문 내역 조회(테이블)
   @PostMapping("/order")
   public List<UserOrderListProductInfoDto> order(@RequestParam("id") String id) throws Exception {
-//    System.out.println(id);
     List<UserOrderListProductInfoDto> userOrderList = orderService.getOrderList(id);
-    System.out.println(userOrderList);
     return userOrderList;
   }
   // GJY

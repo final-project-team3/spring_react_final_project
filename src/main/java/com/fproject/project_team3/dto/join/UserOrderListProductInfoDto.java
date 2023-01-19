@@ -14,4 +14,5 @@ public class UserOrderListProductInfoDto {
     String productName;
     int productPrice;
     String productSellerId;
+    String productImg;
 }
