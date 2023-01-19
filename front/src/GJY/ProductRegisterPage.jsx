@@ -19,8 +19,11 @@ function ProductRegisterPage() {
     setTest1(e.target.value);
     console.log(data);
     setSmallKind(data);
-
   }
+
+  const btnKindData = async () => {
+
+  };
 
   return (
     <div>
@@ -34,7 +37,7 @@ function ProductRegisterPage() {
               <tr>
                 <td>제품 분류</td>
                 <td>
-                  <select id={"selectBigKind"}  onChange={getSmallKinds}>
+                  <select id={"selectBigKind"} name={"selectBigKind"} onChange={getSmallKinds}>
                     <option value={test1}>----대분류----</option>
                     {bigKind.map((item) => (
                       <option value={item.productGender}>
@@ -42,10 +45,11 @@ function ProductRegisterPage() {
                       </option>
                     ))}
                   </select>
-                  <select name="" id="">
+                  <select name="selectSmallKind" id="selectSmallKind">
                     <option value="null">----하위분류---</option>
                     {smallKind.map((item)=> <option value={item.productSmallKind}>{item.productSmallKind}</option>)}
                   </select>
+                  <button type={"button"} onClick={btnKindData}>데이터 확인</button>
                 </td>
               </tr>
               <tr>
