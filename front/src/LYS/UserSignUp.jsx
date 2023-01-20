@@ -1,12 +1,92 @@
 import axios from "axios";
 import React, {useState, useEffect} from "react";
+import {useNavigate} from 'react-router-dom';
 import styled from "styled-components";
-import DaumPostcode from 'react-daum-postcode';
 import Popup from "./Popup";
+import jquery from 'jquery';
 import $ from 'jquery';
-import {useSearchParams} from "react-router-dom";
 
 function UserSignUp() {
+    const navigate = useNavigate();
+    const toMain = () => {
+        navigate(`/`);
+    };
+
+    const form = document.getElementById('form');
+    const username = document.getElementById('username');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const password2 = document.getElementById('password2');
+
+    // Show input error message
+    const showError = (input, message) => {
+        const formControl = input.parentElement;
+        formControl.className = 'form-control error';
+        const small = formControl.querySelector('small');
+        small.innerText = message;
+    }
+
+    // Show success outline
+    const showSuccess = (input) => {
+        const formControl = input.parentElement;
+        formControl.className = 'form-control success';
+    }
+
+// Check email is valid
+    const isValidEmail = (email) => {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (re.test(email.value)) {
+            showSuccess(email)
+        } else {
+            showError(email, 'Email is not valid');
+        }
+    }
+
+// Get field name
+    const getFieldName = (input) => {
+        return input.id.charAt(0).toUpperCase() + input.id.slice(1);
+    }
+
+// Check required fields
+    const checkRequired = (inputArr) => {
+        inputArr.forEach(input => {
+            if (input.value.trim() === '') {
+                showError(input, `${getFieldName(input)} is required`);
+            } else {
+                showSuccess(input);
+            }
+        })
+    }
+
+// Check input length
+    const checkLength = (input, min, max) => {
+        if (input.value.length < min) {
+            showError(input, `${getFieldName(input)} must be at least ${min} characters`)
+        } else if (input.value.length > max) {
+            showError(input, `${getFieldName(input)} must be at less than ${max} characters`)
+        }
+    }
+
+// Check passwords match
+    const checkPasswordsMatch = (input1, input2) => {
+        if (input1.value !== input2.value) {
+            showError(input2, 'Password do not match');
+        }
+    }
+
+// Event listeners
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        checkRequired([username, email, password, password2]);
+        checkLength(username, 8, 15);
+        checkLength(password, 6, 25);
+        isValidEmail(email);
+        checkPasswordsMatch(password, password2);
+
+    });
+
+
     let confirmNum = '';
     /**
      * 이메일 인증 보내는 함수
@@ -32,23 +112,27 @@ function UserSignUp() {
                         <SignupStep className="wrap">
                             <Title>환영합니다. 가입 정보를 입력해주세요</Title>
                         </SignupStep>
-                        <form action={'/signUpUser'} method={'post'}>
+                        <form action={'/signUpUser'} method={'post'} id={form} className={form}>
                             <FormBlock>
                                 <FormBlockHead>
                                     <AsteriskRed>*</AsteriskRed> 이메일
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input style={{width: 400}} type="email" id={'email'} name={'userId'}
+                                        <Input style={{width: 400}} type="email" id={email} name={'userId'}
                                                placeholder="이메일을 입력해주세요."/>
-                                        <button className={"btn btn-primary ms-1"} type={'button'} style={{width: 90}}>
+                                        <button className={"btn btn-primary ms-1"} type={'button'}
+                                                style={{width: 90}}>
                                             <p className={"p-0 m-0"} onClick={sendEmail}>인증코드전송</p></button>
+                                        <HiddenMessage>위의 공백란을 입력해주세요</HiddenMessage>
                                     </InputTextSizeW>
                                     <InputTextSizeW id={'emailCheck'} hidden={true}>
                                         <Input id={'confirmNum'} style={{width: 400}} type="text"
                                                placeholder="인증번호를 입력해주세요"></Input>
-                                        <button className={"btn btn-primary ms-1"} type={'button'} onClick={confirmNumCheck} style={{width: 90}}>
+                                        <button className={"btn btn-primary ms-1"} type={'button'}
+                                                style={{width: 90}}>
                                             <p className={"p-0 m-0"}>인증하기</p></button>
+                                        <HiddenMessage>인증번호를 입력해주세요</HiddenMessage>
                                     </InputTextSizeW>
                                 </FormBlockBody>
                             </FormBlock>
@@ -58,13 +142,15 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input type={'password'} name={"userPass"}
+                                        <Input id={password} type={'password'} name={"userPass"}
                                                placeholder="비밀번호 (영문+숫자+특수문자 8자 이상)"/>
+                                        <HiddenMessage>위의 공백란을 입력해주세요</HiddenMessage>
                                     </InputTextSizeW>
                                 </FormBlockBody>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input type={'password'} placeholder="비밀번호 확인"/>
+                                        <Input id={password2} type={'password'} placeholder="비밀번호 확인"/>
+                                        <HiddenMessage>위의 공백란을 입력해주세요</HiddenMessage>
                                     </InputTextSizeW>
                                 </FormBlockBody>
                             </FormBlock>
@@ -75,7 +161,9 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeWTypeL>
-                                        <Input type="text" name={"userName"} placeholder="이름을 입력해 주세요"/>
+                                        <Input id={username} type="text" name={"userName"}
+                                               placeholder="이름을 입력해 주세요"/>
+                                        <HiddenMessage>위 공백란을 입력해주세요</HiddenMessage>
                                     </InputTextSizeWTypeL>
                                 </FormBlockBody>
                             </FormBlock>
@@ -89,23 +177,27 @@ function UserSignUp() {
                                         <Input type="hidden" required/>
                                         <Input type="tel" name={"userTel"} placeholder="ex) 010-1234-5678"
                                                data-auth="cell_phone"/>
+                                        <HiddenMessage>위 공백란을 입력해주세요</HiddenMessage>
                                     </InputTextSizeWTypeL>
                                 </FormBlockBody>
                             </FormBlock>
 
                             <FormBlock>
                                 <FormBlockHead>
-                                    <AsteriskRed>*</AsteriskRed> 주민등록번호
+                                    <AsteriskRed>*</AsteriskRed> 생년월일 / 성별
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input name={"userBirth"} style={{width: 241}} maxLength={6} className={"col-6"}
+                                        <Input name={"userBirth"} style={{width: 241}} maxLength={6}
+                                               className={"col-6"}
                                                placeholder="* * * * * *"/>
                                         &nbsp;-&nbsp;
-                                        <Input name={"userGender"} style={{width: 50}} maxLength={1} className={"col-6"}
+                                        <Input name={"userGender"} style={{width: 50}} maxLength={1}
+                                               className={"col-6"}
                                                placeholder="*"/>
                                         &nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*
                                     </InputTextSizeW>
+                                    <HiddenMessage>위 공백란을 입력해주세요</HiddenMessage>
                                 </FormBlockBody>
                             </FormBlock>
 
@@ -118,13 +210,12 @@ function UserSignUp() {
                                     <Input name={"userAddrNum"} className={'my-1'} id={"sigunguCode"}
                                            placeholder={'우편번호'} readOnly={true}/>
                                     <Input name={"userAddrJibun"} className={'my-1'} id={"jibunAddress"}
-                                           placeholder={'지번 주소'}
-                                           readOnly={true}/>
+                                           placeholder={'지번 주소'} readOnly={true}/>
                                     <Input name={"userAddrRoad"} className={'my-1'} id={"roadAddress"}
-                                           placeholder={'도로명 주소'}
-                                           readOnly={true}/>
+                                           placeholder={'도로명 주소'} readOnly={true}/>
                                     <Input name={"userAddrDetail"} className={'my-1'} id={"addressDetail"}
                                            placeholder={'상세주소를 입력해주세요.'}/>
+                                    <HiddenMessage>주소란을 모두 정확히 입력해주세요</HiddenMessage>
                                 </FormBlockBody>
                             </FormBlock>
 
@@ -151,26 +242,34 @@ function UserSignUp() {
                                         </TermsItem>
                                     </TermsBody>
                                 </Terms>
-
                                 <Terms1Error/>
                                 <TermsError/>
                             </FormBlockCheckAllWrap>
-
                             <FormBlockSubmit>
                                 <FormBlockBody>
-                                    <BtnLogin type="submit">회원가입하기</BtnLogin>
+                                    <BtnLogin type="submit" id={"btn-signUp"}>회원가입하기</BtnLogin>
                                 </FormBlockBody>
                             </FormBlockSubmit>
                         </form>
+                        <FormBlockSubmit>
+                            <FormBlockBody>
+                                <BtnBack id={"btn-back"} type="submit" onClick={toMain}>메인페이지로 이동</BtnBack>
+                            </FormBlockBody>
+                        </FormBlockSubmit>
                     </LoginSection>
                 </LoginWrap>
             </ReauthPhone>
         </WrapLogin>
-    )
-        ;
+    );
 }
 
 //
+const HiddenMessage = styled.span`
+    color: #dc3545;
+    font-size: smaller;
+    display: none;
+`
+
 const AuthBtn = styled.button`
   display: inline-block;
   vertical-align: middle;
@@ -209,6 +308,22 @@ const BtnLogin = styled.button`
   color: #fff;
   background: #f1c333;
   border: 1px solid #f1c333;
+  width: 100%;
+  height: 48px;
+  line-height: 48px;
+  font-size: 16px;
+`;
+
+const BtnBack = styled.button`
+  border-radius: 2px;
+  text-align: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  background: #808080;
+  border: 1px solid #808080;
   width: 100%;
   height: 48px;
   line-height: 48px;
