@@ -5,7 +5,7 @@ import ProductList from "./HSH/ProductList";
 import PaymentPage from "./GJY/PaymentPage";
 import UserSignUp from "./LYS/UserSignUp";
 import SellerSignUp from "./LYS/SellerSignUp";
-import Main from "./Main";
+import Header from "./HSH/Header";
 import LoginPage from "./BJH/LoginPage";
 import TestLoginPage from "./BJH/TestLoginPage";
 import NewLogin from "./BJH/NewLogin";
@@ -18,14 +18,19 @@ import SearchId from "./BJH/Search/SearchId";
 import SellerSearch from "./BJH/Search/SellerSearch";
 import PwSearch from "./BJH/Search/PwSearch";
 import ProductRegisterPage from "./GJY/ProductRegisterPage";
+import Main from "./HSH/Main";
+import IdSearch from "./BJH/Search/IdSearch";
+import SearchMain from "./BJH/Search/SearchMain";
+import SellerLogin from "./BJH/SellerLogin";
 
 const ProjectRouter = () => {
 
     return (
         <BrowserRouter>
             <Routes>
-                <Route path={'/'} element={<Main/>}>
+                <Route path={'/'} element={<Header/>}>
                     {/*HSH*/}
+                    <Route index element={<Main/>}/>
                     <Route path={'productDetail'} element={<ProductDetail/>}/>
                     <Route path={'productList'} element={<ProductList/>}/>
                     {/*HSH*/}
@@ -43,18 +48,15 @@ const ProjectRouter = () => {
 
                     {/*BJH*/}
                     <Route path={'login'} element={<NewLogin/>}/>
+                    <Route path={'sellerLogin'} element={<SellerLogin/>}/>
 
                     <Route path={'userMyPage'} element={<UserMyPage/>}/>
                     <Route path={'sellerMyPage'} element={<SellerMyPage/>}/>
                     <Route path={'masterPage'} element={<MasterPage/>}/>
 
-                    <Route path={'loginPage'} element={<LoginPage/>}/>
-
                     <Route path={'cart'} element={<Cart/>}/>
 
-                    <Route path={'searchId'} element={<SearchId/>}/>
-                    <Route path={'sellerSearch'} element={<SellerSearch/>}/>
-                    <Route path={'pwSearch'} element={<PwSearch/>}/>
+                    <Route path={'searchMain'} element={<SearchMain/>}/>
                     {/*BJH*/}
                 </Route>
             </Routes>

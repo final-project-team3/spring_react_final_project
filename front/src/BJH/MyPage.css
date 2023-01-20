@@ -58,7 +58,7 @@ div{
     height: 90px;
     margin-bottom: 10px;
 }
-/* 장바구니 , 상품후기 , 포인트 */
+/* 장바구니 , 리뷰작성 , 포인트 */
 .summaryContainer .item{
     flex-grow: 1
 }
