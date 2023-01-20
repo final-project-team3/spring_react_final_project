@@ -1,8 +1,15 @@
 package com.fproject.project_team3.service.product;
 
-public interface ProductService {
+import com.fproject.project_team3.dto.product.ProductKindDto;
 
-    //    HSH
+import java.util.List;
+
+public interface ProductService {
+  List<ProductKindDto> getProductSelectList() throws Exception;
+
+  List<ProductKindDto> getProductSmallSelectList(String productKind) throws Exception;
+
+  //    HSH
 
     //    HSH
 
