@@ -32,9 +32,9 @@ public class ProductRestController {
 
     @PostMapping("/selectSmallList")
     public List<ProductKindDto> selectSmallList(@RequestParam("productKind") String productKind) throws Exception {
-        System.out.println(productKind);
+//        System.out.println(productKind);
         List<ProductKindDto> productSelectList = productService.getProductSmallSelectList(productKind);
-        System.out.println(productSelectList);
+//        System.out.println(productSelectList);
         return productSelectList;
     }
     //    GJY
