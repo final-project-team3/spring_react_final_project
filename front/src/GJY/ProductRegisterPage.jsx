@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import data from "bootstrap/js/src/dom/data";
 import $ from "jquery";
-import FileUploadTest from "./FileUploadTest";
+import FileUploadComponent from "./FileUploadComponent";
 
 function ProductRegisterPage() {
     const [bigKind, setBigKind] = useState([]);
@@ -27,7 +27,7 @@ function ProductRegisterPage() {
 
     return (
         <div>
-            <FileUploadTest/>
+
             <div className={"container"}>
                 <div className={"row"}>
                     <h1 className={"mt-4 text-center"}>제품 신규 등록</h1>
@@ -82,10 +82,7 @@ function ProductRegisterPage() {
                         <tr className={"border"} >
                             <td className={"border text-center"} style={{height: 60}}>상품 이미지 등록</td>
                             <td>
-                                {/* 파일 첨부*/}
-                                <div className="form-group col-6 ms-3">
-                                    <input className="form-control" type="file" id={"productImg"} name={"productImg"} accept='image/*' style={{height: 35}}/>
-                                </div>
+                                <FileUploadComponent/>
                             </td>
                         </tr>
                         </tbody>

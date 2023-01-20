@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function FileUploadTest() {
+function FileUploadComponent() {
   // 파일 base 64 : 미리보기 구현을 위해 이미지 데이터를 받을 state
   const [imgBase64, setImgBase64] = useState([]);
   // 파일 그 자체를 받는 state
@@ -39,20 +39,21 @@ function FileUploadTest() {
   };
 
   return (
-    <div>
+    <div className="form-group col-6 ms-3">
       {imgBase64.map((item) => {
         return (
           <img
-            className={"d-block"}
+            className={"float-start"}
             src={item}
             alt={"First slide"}
-            style={{ width: "100", height: "100" }}
+            style={{ width: "200px", height: "200px" }}
           />
         );
       })}
       <input
+        className="form-control"
         type="file"
-        id={"file"}
+        id={"productImg"} name={"productImg"}
         accept={"image/*"}
         onChange={handleChangeFile}
         multiple={"multiple"}
@@ -61,4 +62,4 @@ function FileUploadTest() {
   );
 }
 
-export default FileUploadTest;
+export default FileUploadComponent;
