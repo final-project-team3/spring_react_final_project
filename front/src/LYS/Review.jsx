@@ -21,7 +21,7 @@ function Review(props) {
                         <div className={"review_info"}>
                             <div className={"reviewer_id"}>{props.id}</div>
                             <Rating rating={props.starPoint}/>
-                            <div className={"seller_id"}>외길물산(주)</div>
+                            <div className={"seller_id"}>{props.sellerId}외길물산(주)</div>
                             <div className={"registration_date"}>{props.date}</div>
                         </div>
                     </div>

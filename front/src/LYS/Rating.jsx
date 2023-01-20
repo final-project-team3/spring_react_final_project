@@ -44,7 +44,7 @@ function Rating() {
                         <FaStar
                             key={idx}
                             size="20"
-                            // onClick={() => handleStarClick(el)}
+                            onClick={() => handleStarClick(el)}
                             className={clicked() && 'yellowStar'}
                         />
                     );

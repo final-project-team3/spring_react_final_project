@@ -6,85 +6,107 @@ import Popup from "./Popup";
 import jquery from 'jquery';
 import $ from 'jquery';
 
+
 function UserSignUp() {
     const navigate = useNavigate();
     const toMain = () => {
         navigate(`/`);
     };
 
-    const form = document.getElementById('form');
-    const username = document.getElementById('username');
-    const email = document.getElementById('email');
-    const password = document.getElementById('password');
-    const password2 = document.getElementById('password2');
+    // 유효성 검사 true false 리스트
+    var checkList = [false, false, false, false, false, false, false, false, false, false, false];
 
-    // Show input error message
-    const showError = (input, message) => {
-        const formControl = input.parentElement;
-        formControl.className = 'form-control error';
-        const small = formControl.querySelector('small');
-        small.innerText = message;
-    }
-
-    // Show success outline
-    const showSuccess = (input) => {
-        const formControl = input.parentElement;
-        formControl.className = 'form-control success';
-    }
-
-// Check email is valid
-    const isValidEmail = (email) => {
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (re.test(email.value)) {
-            showSuccess(email)
-        } else {
-            showError(email, 'Email is not valid');
-        }
-    }
-
-// Get field name
-    const getFieldName = (input) => {
-        return input.id.charAt(0).toUpperCase() + input.id.slice(1);
-    }
-
-// Check required fields
-    const checkRequired = (inputArr) => {
-        inputArr.forEach(input => {
-            if (input.value.trim() === '') {
-                showError(input, `${getFieldName(input)} is required`);
-            } else {
-                showSuccess(input);
-            }
-        })
-    }
-
-// Check input length
-    const checkLength = (input, min, max) => {
-        if (input.value.length < min) {
-            showError(input, `${getFieldName(input)} must be at least ${min} characters`)
-        } else if (input.value.length > max) {
-            showError(input, `${getFieldName(input)} must be at less than ${max} characters`)
-        }
-    }
-
-// Check passwords match
-    const checkPasswordsMatch = (input1, input2) => {
-        if (input1.value !== input2.value) {
-            showError(input2, 'Password do not match');
-        }
-    }
-
-// Event listeners
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-
-        checkRequired([username, email, password, password2]);
-        checkLength(username, 8, 15);
-        checkLength(password, 6, 25);
-        isValidEmail(email);
-        checkPasswordsMatch(password, password2);
-
+    // 전화번호 '-'방지
+    $(function () {
+        $("#userTel").on("blur keyup", function () {
+            $(this).val($(this).val().replace(/[^0-9]/g, ""));
+        });
     });
+
+    // 비밀번호 체크
+    function checkPw() {
+        var pw = $("#userPass").val();
+        var num = pw.search(/[0-9]/g);
+        var eng = pw.search(/[a-z]/ig);
+        var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+        if (pw == '') { // 빈값일때
+            checkList[1] = false;
+            $('.checkPw').css("display", "inline-block");
+            $('.pwd_not').css("display", "none");
+            $('.pwd_ok').css("display", "none");
+            $('.pwd_space').css("display", "none");
+            $('#userPw').focus();
+        } else if (pw.length < 8 || pw.length > 16 || (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0)) { // 8 ~ 16자리이고, 영문, 숫자, 특수문자 조합
+            checkList[1] = false;
+            $('.checkPw').css("display", "none");
+            $('.pwd_not').css("display", "inline-block");
+            $('.pwd_ok').css("display", "none");
+            $('.pwd_space').css("display", "none");
+            $('#userPw').focus();
+        } else if (pw.search(/\s/) != -1) { // 공백이 있을때
+            checkList[1] = false;
+            $('.checkPw').css("display", "none");
+            $('.pwd_space').css("display", "inline-block");
+            $('.pwd_ok').css("display", "none");
+            $('.pwd_not').css("display", "none");
+            $('#userPw').focus();
+        } else { // 사용 가능한 비밀번호
+            checkList[1] = true;
+            $('.checkPw').css("display", "none");
+            $('.pwd_ok').css("display", "inline-block");
+            $('.pwd_space').css("display", "none");
+            $('.pwd_not').css("display", "none");
+        }
+    }
+
+// 비밀번호의 두 값 체크
+    function checkDoublePw() {
+        var pw1 = $('#userPass').val();
+        var pw2 = $('#userPass2').val();
+
+
+        if (pw2 != '') { // pw2가 비었을때는 실행을 막기 위해 사용(pw1이 바꼈을때 바로 반영하기 위함.)
+            if (pw1 == pw2) { // 비밀번호가 같은 경우
+                checkList[2] = true;
+                $('.checkPw2').css("display", "none");
+                $('.pwd2_ok').css("display", "inline-block");
+                $('.pwd2_not').css("display", "none");
+
+            } else { // 비밀번호가 다를 경우
+                checkList[2] = false;
+                $('.checkPw2').css("display", "none");
+                $('.pwd2_not').css("display", "inline-block");
+                $('.pwd2_ok').css("display", "none");
+                $('#userPw2').focus();
+            }
+        }
+    }
+
+// 비밀번호 확인이 비어있을때
+    function checkPw2() {
+        var pw2 = $('#userPass2').val();
+
+        if (pw2 == '') { // 값이 비어있을 때
+            checkList[2] = false;
+            $('.checkPw2').css("display", "inline-block");
+            $('.pwd2_ok').css("display", "none");
+            $('.pwd2_not').css("display", "none");
+        }
+    }
+
+// 이름 체크 (비어있는지만 확인)
+    function checkName() { // 간단한 체크
+        var name = $('#userName').val();
+        if (name == '') {
+            checkList[3] = false;
+            $('.checkName').css("display", "inline-block");
+        } else {
+            checkList[3] = true;
+            $('.checkName').css("display", "none");
+        }
+    }
+
+
 
 
     let confirmNum = '';
@@ -112,16 +134,16 @@ function UserSignUp() {
                         <SignupStep className="wrap">
                             <Title>환영합니다. 가입 정보를 입력해주세요</Title>
                         </SignupStep>
-                        <form action={'/signUpUser'} method={'post'} id={form} className={form}>
+                        <form action={'/signUpUser'} method={'post'}>
                             <FormBlock>
                                 <FormBlockHead>
                                     <AsteriskRed>*</AsteriskRed> 이메일
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input style={{width: 400}} type="email" id={email} name={'userId'}
+                                        <Input style={{width: 400}} type="email"  name={'userId'} id={'userId'}
                                                placeholder="이메일을 입력해주세요."/>
-                                        <button className={"btn btn-primary ms-1"} type={'button'}
+                                        <button className={"btn btn-primary ms-1"} type={'button'} disabled={true} id={sendCode}
                                                 style={{width: 90}}>
                                             <p className={"p-0 m-0"} onClick={sendEmail}>인증코드전송</p></button>
                                         <HiddenMessage>위의 공백란을 입력해주세요</HiddenMessage>
@@ -142,15 +164,26 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input id={password} type={'password'} name={"userPass"}
+                                        <Input type={'password'} name={"userPass"} id={"userPass"} onClick={checkPw} onChange={() => {
+                                            checkPw();
+                                            checkDoublePw();
+                                        }}
                                                placeholder="비밀번호 (영문+숫자+특수문자 8자 이상)"/>
-                                        <HiddenMessage>위의 공백란을 입력해주세요</HiddenMessage>
+                                        <HiddenMessage style={okStyle} className="pwd_ok ok">사용 가능한 비밀번호입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="pwd_not no">8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="pwd_space no">비밀번호는 공백 없이 입력해주세요.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="checkPw no">필수 항목입니다.</HiddenMessage>
                                     </InputTextSizeW>
                                 </FormBlockBody>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input id={password2} type={'password'} placeholder="비밀번호 확인"/>
-                                        <HiddenMessage>위의 공백란을 입력해주세요</HiddenMessage>
+                                        <Input type={'password'} placeholder="비밀번호 확인" id={"userPass2"} onClick={checkPw2} onChange={() => {
+                                            checkPw2();
+                                            checkDoublePw();
+                                        }}/>
+                                        <HiddenMessage style={okStyle} className="pwd2_ok ok">두 비밀번호가 일치합니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="pwd2_not no">두 비밀번호가 다릅니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="checkPw2 no">필수 항목입니다.</HiddenMessage>
                                     </InputTextSizeW>
                                 </FormBlockBody>
                             </FormBlock>
@@ -161,9 +194,9 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeWTypeL>
-                                        <Input id={username} type="text" name={"userName"}
+                                        <Input type="text" name={"userName"} id={"userName"} onChange={checkName} onClick={checkName}
                                                placeholder="이름을 입력해 주세요"/>
-                                        <HiddenMessage>위 공백란을 입력해주세요</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="checkName no">필수 항목입니다.</HiddenMessage>
                                     </InputTextSizeWTypeL>
                                 </FormBlockBody>
                             </FormBlock>
@@ -175,7 +208,7 @@ function UserSignUp() {
                                 <FormBlockBody>
                                     <InputTextSizeWTypeL>
                                         <Input type="hidden" required/>
-                                        <Input type="tel" name={"userTel"} placeholder="ex) 010-1234-5678"
+                                        <Input type="tel" name={"userTel"} placeholder="'-'를 제외한 번호를 입력해주세요" id={"userTel"}
                                                data-auth="cell_phone"/>
                                         <HiddenMessage>위 공백란을 입력해주세요</HiddenMessage>
                                     </InputTextSizeWTypeL>
@@ -188,11 +221,11 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input name={"userBirth"} style={{width: 241}} maxLength={6}
+                                        <Input name={"userBirth"} style={{width: 241}} maxLength={6} id={"userBirth"}
                                                className={"col-6"}
                                                placeholder="* * * * * *"/>
                                         &nbsp;-&nbsp;
-                                        <Input name={"userGender"} style={{width: 50}} maxLength={1}
+                                        <Input name={"userGender"} style={{width: 50}} maxLength={1} id={"userGender"}
                                                className={"col-6"}
                                                placeholder="*"/>
                                         &nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*
@@ -263,9 +296,14 @@ function UserSignUp() {
     );
 }
 
-//
+const okStyle = {
+    color: "#009000"
+}
+const noStyle = {
+    color: "#ff0000"
+}
+
 const HiddenMessage = styled.span`
-    color: #dc3545;
     font-size: smaller;
     display: none;
 `
