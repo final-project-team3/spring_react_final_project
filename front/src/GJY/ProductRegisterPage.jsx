@@ -56,12 +56,12 @@ function ProductRegisterPage() {
                         <tr className={"border"}>
                             <td className={"border text-center"} style={{height: 60}}>상품명</td>
                             <td>
-                                <div className={"mx-auto"}>
+                                <div className={"col-6"}>
                                     <input
-                                        type="text"
-                                        className={"col-6 ms-3"}
-                                        placeholder={"상품명을 입력하세요."}
-                                        style={{height: 35}}
+                                      type="text"
+                                      className={"col-6 ms-3"}
+                                      placeholder={"상품명을 입력하세요."}
+                                      style={{height: 35}}
                                     />
                                 </div>
                             </td>
