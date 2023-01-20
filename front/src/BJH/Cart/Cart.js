@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import {useLocation} from "react-router-dom";
-// import Main from "../../components/Nav/Main";
+// import Header from "../../components/Nav/Header";
 // import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 
@@ -15,7 +15,7 @@ function Cart() {
 
     return (
         <>
-            {/*<Main />*/}
+            {/*<Header />*/}
             <DimmedBackground/>
             <ContentDiv>
                 <CartPage>
