@@ -5,7 +5,7 @@ import ProductList from "./HSH/ProductList";
 import PaymentPage from "./GJY/PaymentPage";
 import UserSignUp from "./LYS/UserSignUp";
 import SellerSignUp from "./LYS/SellerSignUp";
-import Main from "./Main";
+import Header from "./HSH/Header";
 import LoginPage from "./BJH/LoginPage";
 import TestLoginPage from "./BJH/TestLoginPage";
 import NewLogin from "./BJH/NewLogin";
@@ -18,14 +18,16 @@ import SearchId from "./BJH/Search/SearchId";
 import SellerSearch from "./BJH/Search/SellerSearch";
 import PwSearch from "./BJH/Search/PwSearch";
 import ProductRegisterPage from "./GJY/ProductRegisterPage";
+import Main from "./HSH/Main";
 
 const ProjectRouter = () => {
 
     return (
         <BrowserRouter>
             <Routes>
-                <Route path={'/'} element={<Main/>}>
+                <Route path={'/'} element={<Header/>}>
                     {/*HSH*/}
+                    <Route index element={<Main/>}/>
                     <Route path={'productDetail'} element={<ProductDetail/>}/>
                     <Route path={'productList'} element={<ProductList/>}/>
                     {/*HSH*/}

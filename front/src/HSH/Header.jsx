@@ -2,15 +2,17 @@ import {Link, Outlet} from "react-router-dom";
 import {useState} from "react";
 import styled from "styled-components";
 
-const Main = () => {
+const Header = () => {
     const[isClick, setIsClick] = useState("Img/down.png");
 
     const Modatl = styled.div`
     
     `
     return (
-        <div>
-            <nav className="navbar navbar-expand navbar-dark">
+        <div style={{
+            paddingTop:200
+        }}>
+            <nav className="navbar navbar-expand navbar-dark fixed-top">
                 <div className={'container'}>
                     <div>
                         <Link onClick={() => {
@@ -50,10 +52,13 @@ const Main = () => {
                         </ul>
                     </div>
                 </div>
+                <div>
+                    <p>asd</p>
+                </div>
             </nav>
             <Outlet/>
         </div>
     )
 }
 
-export default Main;
+export default Header;
