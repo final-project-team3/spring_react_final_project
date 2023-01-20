@@ -60,7 +60,7 @@ function NewLogin() {
 
                     </LoginHeadText>
                     <BorderAndText>
-                        <Link to={"/newLogin"}><span>일반회원 로그인</span></Link>
+                        <Link to={"/login"}><span>일반회원 로그인</span></Link>
                     </BorderAndText>
 
                     <EmailLoginContainer>
@@ -109,10 +109,10 @@ function NewLogin() {
                     >
                         로그인
                     </CommonButton>
-                    <Link to={"/usersignup"}><CommonButtons type="button">
+                    <Link to={"/userSignup"}><CommonButtons type="button">
                         회원가입
                     </CommonButtons></Link>
-                    <Link to={"/sellersignup"}><CommonButtons2 type="button">
+                    <Link to={"/sellerSignup"}><CommonButtons2 type="button">
                         사업자 회원가입
                     </CommonButtons2></Link>
                 </LoginContainer>

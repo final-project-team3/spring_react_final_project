@@ -1,0 +1,296 @@
+* {
+    box-sizing: inherit;
+}
+
+html {
+    line-height: 1.5;
+    font-size: 14px;
+    font-family: "Open Sans", "Noto Sans KR", sans-serif;
+    font-weight: normal;
+    color: #666;
+    letter-spacing: -.03em;
+}
+
+.container {
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.login-wrap {
+    width: 468px;
+    margin: 0 auto;
+    padding: 50px 0 0;
+}
+
+.login-wrap h2 {
+    margin-bottom: 52px;
+    font-size: 28px;
+    text-align: center;
+    color: #333;
+    font-weight: 400;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+legend {
+    font-size: 0;
+    border: 0;
+    padding: 0;
+}
+
+.login-wrap .tablist {
+    margin-bottom: 30px;
+}
+
+ul {
+    padding-left: 0 !important;
+    margin: 0;
+    list-style-type: none;
+}
+
+.tablist li + li::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #c2c2c2;
+}
+
+.login-wrap .tablist.col2 li {
+    width: 50%;
+}
+
+.login-wrap .tablist li {
+    position: relative;
+    float: left;
+    width: 33.3333%;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+.login-wrap .tablist a {
+    position: relative;
+    display: block;
+    padding-top: 14px;
+    padding-bottom: 13px;
+    font-size: 16px;
+    text-align: center;
+    color: #666;
+    border-bottom: 1px solid #000;
+    background-color: #f2f2f3;
+}
+
+a {
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.aria-hidden {
+    display: inline-block;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: -99999px;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    color: transparent;
+}
+
+h3 {
+    font-weight: 500;
+    margin: 0;
+}
+
+.find-id-pwd label {
+    margin-bottom: 15px;
+    color: #000;
+    font-size: 16px;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.find-id-pwd .input {
+    height: 40px;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 9px 19px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    height: 40px;
+    color: #333;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+input {
+    line-height: normal;
+    color: inherit;
+    font: inherit;
+    margin: 0;
+}
+
+.login-wrap label {
+    padding-top: 24px;
+    font-weight: 600;
+}
+
+input[type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.radio {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    background: none;
+}
+
+.radio + span {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.radio:checked + span {
+    color: #333;
+}
+
+.radio:checked + span::after {
+    background-position: -32px 0;
+}
+
+.radio + span::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 1px;
+    z-index: 0;
+    height: 16px;
+    width: 16px;
+    background: url("../Search/bg_input.png") no-repeat 0 0;
+}
+
+.find-id-pwd .input {
+    height: 40px;
+}
+
+.input-type-mail .input {
+    float: left;
+}
+
+input[type=text] {
+    padding: 9px 19px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+}
+
+.find-id-pwd .input-type-mail .input {
+    width: 145px;
+}
+
+.input-type-mail .hyp {
+    float: left;
+    width: 26px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+}
+
+
+.input-type-mail select {
+    float: left;
+    margin-left: 6px;
+}
+
+.find-id-pwd .input-type-mail .inp-select {
+    width: 146px;
+}
+
+.inp-select {
+    height: 40px;
+    padding: 9px 40px 8px 20px;
+    border: 1px solid #ddd;
+    appearance: none;
+    background: url("../Search/bg_select.png") no-repeat 100% 50% #fff;
+    font-size: 14px;
+    color: #333;
+}
+
+option {
+    font-weight: normal;
+    display: block;
+    white-space: nowrap;
+    min-height: 1.2em;
+    padding: 0px 2px 1px;
+}
+
+button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    -webkit-appearance: button;
+    cursor: pointer;
+    text-transform: none;
+    overflow: visible;
+    font: inherit;
+}
+
+.login-wrap button[type=submit] {
+    position: relative;
+    width: 100%;
+    margin-top: 30px;
+    padding-top: 25px;
+    padding-bottom: 24px;
+    background-color: #7f7059;
+    font-size: 14px;
+    color: #fff;
+}
+
+.login-wrap button[type=submit]:hover {
+    background-color: #684c38;
+}
+
+.login-wrap button[type=submit]::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 40px;
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    transform-origin: 100% 0;
+    transform: rotate(45deg);
+}
+
+.input-type-phone {
+    position: relative;
+    padding-left: 106px;
+}
+
+.input-type-phone select {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+}
