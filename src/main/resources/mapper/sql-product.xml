@@ -21,6 +21,12 @@
         FROM product_kind
         where product_gender = #{productKind}
     </select>
+
+    <select id="getSelectTestData" parameterType="int" resultType="com.fproject.project_team3.dto.gwak.GwakTestTblDto">
+        SELECT img
+        FROM gwak_test_tbl
+        where idx = #{idx}
+    </select>
     <!-- GJY -->
 
     <!-- BJH -->

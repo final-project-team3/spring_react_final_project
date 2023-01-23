@@ -22,6 +22,7 @@ import Main from "./HSH/Main";
 import IdSearch from "./BJH/Search/IdSearch";
 import SearchMain from "./BJH/Search/SearchMain";
 import SellerLogin from "./BJH/SellerLogin";
+import Test from "./GJY/Test";
 
 const ProjectRouter = () => {
 
@@ -44,6 +45,8 @@ const ProjectRouter = () => {
                     <Route path={'/payment'} element={<PaymentPage/>}/>
                     <Route path={'/orderList'} element={<OrderListPage/>}/>
                     <Route path={"/productR"} element={<ProductRegisterPage/>}/>
+                    <Route path={"/test"} element={<Test/>}/>
+
                     {/*GJY*/}
 
                     {/*BJH*/}

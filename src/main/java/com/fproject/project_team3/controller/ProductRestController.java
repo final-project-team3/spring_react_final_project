@@ -1,9 +1,12 @@
 package com.fproject.project_team3.controller;
 
+import com.fproject.project_team3.dto.gwak.GwakTestTblDto;
 import com.fproject.project_team3.dto.join.UserOrderListProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,6 +44,14 @@ public class ProductRestController {
         List<ProductKindDto> productSelectList = productService.getProductSmallSelectList(productKind);
 //        System.out.println(productSelectList);
         return productSelectList;
+    }
+
+    @PostMapping("/testData")
+    public List<GwakTestTblDto> selectTestData(@RequestParam("idx") int idx) throws Exception {
+        List<GwakTestTblDto> testList = productService.getSelectTestData(idx);
+        System.out.println(idx);
+        System.out.println(testList);
+        return testList;
     }
 
     // 파일 업로드
