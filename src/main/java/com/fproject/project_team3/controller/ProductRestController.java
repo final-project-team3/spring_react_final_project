@@ -46,13 +46,13 @@ public class ProductRestController {
         return productSelectList;
     }
 
-    @PostMapping("/testData")
-    public List<GwakTestTblDto> selectTestData(@RequestParam("idx") int idx) throws Exception {
-        List<GwakTestTblDto> testList = productService.getSelectTestData(idx);
-        System.out.println(idx);
-        System.out.println(testList);
-        return testList;
-    }
+//    @PostMapping("/testData")
+//    public List<GwakTestTblDto> selectTestData(@RequestParam("idx") int idx) throws Exception {
+//        List<GwakTestTblDto> testList = productService.getSelectTestData(idx);
+//        System.out.println(idx);
+//        System.out.println(testList);
+//        return testList;
+//    }
 
     // 파일 업로드
 
@@ -97,6 +97,15 @@ public class ProductRestController {
         paramMap.put("tag", tag);
         resultMap.put("JavaData", paramMap);
         return resultMap;
+    }
+
+    // 파일 업로드(imgCode)
+    @RequestMapping(value="/productImgUpload", method= RequestMethod.POST)
+    public List<GwakTestTblDto> selectTestData(@RequestParam("img") byte img) throws Exception {
+        List<GwakTestTblDto> testList = productService.getSelectTestData(img);
+        System.out.println(img);
+        System.out.println(testList);
+        return testList;
     }
 
     //    GJY
