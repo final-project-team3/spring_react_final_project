@@ -2,10 +2,13 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import data from "bootstrap/js/src/dom/data";
 import $ from "jquery";
+import FileUploadTest from "./FileUploadTest";
 
 function ProductRegisterPage() {
     const [bigKind, setBigKind] = useState([]);
     const [smallKind, setSmallKind] = useState([]);
+
+
 
     useEffect(() => {
         return async () => {
@@ -24,17 +27,18 @@ function ProductRegisterPage() {
 
     return (
         <div>
+            <FileUploadTest/>
             <div className={"container"}>
                 <div className={"row"}>
                     <h1 className={"mt-4 text-center"}>제품 신규 등록</h1>
-                    <h3 className={"text-start mt-5"}>기본 정보</h3>
+                    <h3 className={"text-start mt-5"}>상품 등록</h3>
                     <hr/>
-                    <table className={"border"}>
-                        <tbody>
-                        <tr>
-                            <td>제품 분류</td>
-                            <td>
-                                <select id={"selectBigKind"} onChange={getSmallKinds}>
+                    <table className={"border"} style={{height: 200}}>
+                        <tbody className={"border"}>
+                        <tr className={"border"}>
+                            <td className={"border text-center"} style={{height: 60, width: 200}}>제품 분류</td>
+                            <td >
+                                <select className={"ms-3"} id={"selectBigKind"} onChange={getSmallKinds} style={{height: 30}}>
                                     <option value="대분류">----대분류----</option>
                                     {bigKind.map((item) => (
                                         <option value={item.productGender}>
@@ -42,30 +46,45 @@ function ProductRegisterPage() {
                                         </option>
                                     ))}
                                 </select>
-                                <select name="" id="">
+                                <select name="" id="" className={"ms-3"} style={{height: 30}}>
                                     <option value="null">----하위분류---</option>
                                     {smallKind.map((item) => <option
                                         value={item.productSmallKind}>{item.productSmallKind}</option>)}
                                 </select>
                             </td>
                         </tr>
-                        <tr>
-                            <td>상품명</td>
+                        <tr className={"border"}>
+                            <td className={"border text-center"} style={{height: 60}}>상품명</td>
                             <td>
                                 <div className={"mx-auto"}>
                                     <input
                                         type="text"
-                                        className={"col-10"}
+                                        className={"col-6 ms-3"}
                                         placeholder={"상품명을 입력하세요."}
+                                        style={{height: 35}}
                                     />
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td>상품 이미지 등록</td>
+                        <tr className={"border"}>
+                            <td className={"border text-center"} style={{height: 60}}>상품재고</td>
                             <td>
-                                <div className="form-group col-6">
-                                    <input className="form-control" type="file" id="formFile"/>
+                                <div className={"mx-auto"}>
+                                    <input
+                                      type="number"
+                                      className={"col-6 ms-3"}
+                                      placeholder={"재고 수량을 입력하세요."}
+                                      style={{height: 35}}
+                                    />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr className={"border"} >
+                            <td className={"border text-center"} style={{height: 60}}>상품 이미지 등록</td>
+                            <td>
+                                {/* 파일 첨부*/}
+                                <div className="form-group col-6 ms-3">
+                                    <input className="form-control" type="file" id={"productImg"} name={"productImg"} accept='image/*' style={{height: 35}}/>
                                 </div>
                             </td>
                         </tr>
