@@ -13,7 +13,7 @@ public interface ProductMapper {
 
   List<ProductKindDto> getProductSmallSelectList(String productKind);
 
-  List<GwakTestTblDto> getSelectTestData(int idx) throws Exception;
+  List<GwakTestTblDto> getSelectTestData(byte img) throws Exception;
 
   //    HSH
 
