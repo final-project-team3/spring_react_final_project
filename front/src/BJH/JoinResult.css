@@ -1,0 +1,150 @@
+.layout_contents {
+    padding: 0 0 8em 0;
+}
+
+.comp-title {
+    text-align: center;
+    padding: 50px 0;
+}
+
+/*.comp-title::after {*/
+/*    content: '';*/
+/*    display: inline-block;*/
+/*    width: 25px;*/
+/*    margin: 30px;*/
+/*    border-top: 1px solid #333333;*/
+/*}*/
+
+.layout_contents .comp-title strong {
+    color: #00235e !important;
+    display: block;
+    line-height: 1.8rem;
+    padding: 10px 0 3px 0;
+    font-size: 22px;
+    margin-left: 0.18rem;
+    letter-spacing: 0.18rem;
+}
+
+.joincomplete {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.sp--hr {
+    margin: 30px 0 29px 0;
+    height: 1px;
+    background-color: #f0f0f0;
+}
+
+.comp-ment {
+    text-align: center;
+    color: #333333;
+    font-size: 22px;
+}
+
+.comp-width {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.comp-width[scope="card"] {
+    width: 600px;
+}
+
+.comp-box {
+    display: block;
+    margin: 0 auto;
+}
+
+.comp-box[gap] {
+}
+
+.comp-box > ul {
+    justify-content: center;
+    margin: 0 29px;
+    max-width: unset;
+    display: flex;
+}
+
+.comp-box > ul > li {
+    flex-grow: 1;
+    position: relative;
+    list-style: none;
+}
+
+.comp-font{
+    font-size: 13px;
+}
+
+.comp-font{
+    text-align: center;
+}
+
+.comp-font{
+    color: #666666;
+}
+
+.comp-table {
+    text-align: left;
+    width: 100%;
+    margin: 0 auto;
+    border: 0;
+    border-spacing: 0;
+    border-style: none !important;
+}
+
+.comp-table tr {
+    border-left: 0;
+    border-right: 0;
+}
+
+.comp-table > * > tr {
+    border: 1px solid #f0f0f0;
+}
+
+.comp-table > * > tr > td {
+    padding: 16px;
+}
+
+.comp-empty {
+    height: 20px;
+    width: 100%;
+    display: block;
+    font-size: 1rem;
+}
+
+.wel-member {
+    padding: 20px;
+    border-radius: 4px;
+    color: #009ca6;
+    background-color: #f8f7f3;
+    border: 1px solid #e8e5e0;
+    font-size: 16px;
+    width: 100%;
+    position: relative;
+    font-family: "Noto Sans KR", sans-serif !important;
+}
+
+.comp-btn-group {
+    position: relative;
+    left: 200px;
+}
+
+.comp-btn-group .comp-btn-gap {
+    display: inherit;
+}
+
+.comp-btn {
+    margin: 5px;
+    color: #e2e2e2;
+    background-color: #6f6f6f;
+    text-shadow: 0 0 3px rgba(1, 5, 2, 0.2);
+    border-radius: 3px;
+    padding: 15px 28px;
+    opacity: .95;
+    border: 1px solid transparent;
+    font-size: 14px;
+    position: relative;
+    text-decoration: none;
+}
+

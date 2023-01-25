@@ -23,6 +23,8 @@ import IdSearch from "./BJH/Search/IdSearch";
 import SearchMain from "./BJH/Search/SearchMain";
 import SellerLogin from "./BJH/SellerLogin";
 import Test from "./GJY/Test";
+import UserJoinResult from "./BJH/UserJoinResult";
+import SellerJoinResult from "./BJH/SellerJoinResult";
 
 const ProjectRouter = () => {
 
@@ -60,6 +62,9 @@ const ProjectRouter = () => {
                     <Route path={'cart'} element={<Cart/>}/>
 
                     <Route path={'searchMain'} element={<SearchMain/>}/>
+
+                    <Route path={'UserJoinResult'} element={<UserJoinResult/>}/>
+                    <Route path={'SellerJoinResult'} element={<SellerJoinResult/>}/>
                     {/*BJH*/}
                 </Route>
             </Routes>

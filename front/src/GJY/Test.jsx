@@ -22,6 +22,7 @@ function Test(props) {
     const BtnTest = console.log('하이');
 
 
+
   return (
     <div>
       <h1 className={'test-style'}>테스트페이지</h1>
@@ -30,7 +31,7 @@ function Test(props) {
             className={"float-start"}
             alt={"First slide"}
           />
-      <button onClick={BtnTest} className={"btn btn-primary"}>이미지 데이터 가져오기</button>
+      <button className={"btn btn-primary"}>이미지 데이터 가져오기</button>
     </div>
   );
 }
