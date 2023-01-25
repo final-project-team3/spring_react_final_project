@@ -4,23 +4,30 @@ import styled from 'styled-components';
 
 const ARRAY = [0, 1, 2, 3, 4];
 
-function Rating(props) {
-    const [starPoint, setStarPoint] = useState([false, false, false, false, false]);
+function Rating() {
+    const [clicked, setClicked] = useState([false, false, false, false, false]);
 
     const handleStarClick = index => {
-        let clickStates = [...starPoint];
-        for (let i = 0; i < props.rating+1; i++) {
+        let clickStates = [...clicked];
+        for (let i = 0; i < 5; i++) {
             clickStates[i] = i <= index ? true : false;
         }
-        setStarPoint(clickStates);
+        setClicked(clickStates);
+        console.log(clickStates)
+        console.log(clicked)
     };
 
+    // useEffect(() => {
+    //     sendReview();
+    // }, [clicked]); //컨디마 컨디업
     useEffect(() => {
         sendReview();
-    }, [starPoint]); //컨디마 컨디업
+        setClicked([true,true,true,false,false])
+    }, []); //컨디마 컨디업
 
     const sendReview = () => {
-        let score = starPoint.filter(Boolean).length;
+        let score = clicked.filter(Boolean).length;
+
     };
 
     return (
@@ -32,7 +39,7 @@ function Rating(props) {
                             key={idx}
                             size="20"
                             onClick={() => handleStarClick(el)}
-                            className={starPoint[el] && 'yellowStar'}
+                            className={clicked[el] && 'yellowStar'}
                         />
                     );
                 })}

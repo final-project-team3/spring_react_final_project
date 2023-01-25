@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import axios from "axios";
-import {
-    Link, Switch, Route, BrowserRouter
-} from 'react-router-dom';
+import jquery from 'jquery';
+import $ from 'jquery';
 import Rating from "./Rating";
 
 const ReviewText = styled.textarea`
@@ -12,16 +10,17 @@ const ReviewText = styled.textarea`
     resize: none;
 `;
 
+
+
 function Review(props) {
     return (
-
         <ul>
             <li>
                 <article>
                     <div className="text-md-start">
                         <div className={"review_info"}>
                             <div className={"reviewer_id"}>{props.id}</div>
-                            <Rating rating={4}/>
+                            <Rating rating={props.starPoint}/>
                             <div className={"seller_id"}>외길물산(주)</div>
                             <div className={"registration_date"}>{props.date}</div>
                         </div>

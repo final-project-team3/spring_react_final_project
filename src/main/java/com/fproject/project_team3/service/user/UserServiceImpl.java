@@ -13,6 +13,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void insertUser(UserInfoDto userInfoDto) {userMapper.insertUser(userInfoDto);}
 
+    @Override
+    public String emailCheck(String userId) {
+        return userMapper.emailCheck(userId);
+    }
+
+    @Override
+    public String telCheck(String userTel) {
+        return userMapper.telCheck(userTel);
+    }
+
     //    HSH
 
     //    HSH
