@@ -19,6 +19,7 @@ function Test(props) {
   //     };
   //   }, [testData]);
   // }
+    const BtnTest = console.log('하이');
 
 
   return (
