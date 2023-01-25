@@ -193,6 +193,125 @@ function UserSignUp() {
     }
     ;
 
+    $(function () { // 주민 번호 숫자만 입력 가능하게
+        $("#userBirth").on("blur keyup", function () {
+            $(this).val($(this).val().replace(/[^0-9]/g, ""));
+        });
+    });
+
+    $(function () { // 주민 번호 숫자만 입력 가능하게
+        $("#userGender").on("blur keyup", function () {
+            $(this).val($(this).val().replace(/[^0-9]/g, ""));
+        });
+    });
+
+    // 생년월일, 성별 빈칸이나 6자리 체크
+    function checkBirthGender() {
+        let bir = $('#userBirth').val();
+        let gen = $('#userGender').val();
+
+        if (bir == '' || gen == '') { //빈값
+            $('.checkBG').css('display', 'inline-block');
+            checkList[6] = false;
+        } else {
+            $('.checkBG').css('display', 'none');
+            checkList[6] = true;
+        }
+
+        if (bir.length != 6) { //6자리가 아니라면 6자리 입력하라 표시
+            $('.checkBirth').css('display', 'inline-block');
+            checkList[6] = false;
+        } else {
+            $('.checkBirth').css('display', 'none');
+            checkList[6] = true;
+        }
+    }
+
+    const monthList = [
+        {month: "01", firstDay: 1, lastDay: 31},
+        {month: "02", firstDay: 1, lastDay: 29},
+        {month: "03", firstDay: 1, lastDay: 31},
+        {month: "04", firstDay: 1, lastDay: 30},
+        {month: "05", firstDay: 1, lastDay: 31},
+        {month: "06", firstDay: 1, lastDay: 30},
+        {month: "07", firstDay: 1, lastDay: 31},
+        {month: "08", firstDay: 1, lastDay: 31},
+        {month: "09", firstDay: 1, lastDay: 30},
+        {month: "10", firstDay: 1, lastDay: 31},
+        {month: "11", firstDay: 1, lastDay: 30},
+        {month: "12", firstDay: 1, lastDay: 31},
+    ]
+
+    function checkGender() {
+        let bir = $("#userBirth").val();
+        let gen = $("#userGender").val();
+        let birFirst = parseInt(bir.charAt(0));
+
+
+        if (bir.length == 6) {
+            bir = $("#userBirth").val();
+            let birthCheck = false;
+
+            let birth2 = bir.charAt(2);
+            let birth3 = bir.charAt(3);
+            let monthBirth = birth2 + birth3;
+            console.log(monthBirth);
+            monthList.map((months) => {
+                if (months.month == monthBirth) {
+                    let birthDay = bir.charAt(4) + bir.charAt(5);
+                    birthDay = parseInt(birthDay);
+                    for (let i = months.firstDay; i <= months.lastDay; i++) {
+                        if (i == birthDay) {
+                            birthCheck = true;
+                            if (birFirst === 0 || birFirst === 1 || birFirst === 2) {
+                                if (gen != 3 && gen != 4) {
+                                    console.log(birFirst);
+                                    $('.checkOld').css('display', 'none');
+                                    $('.checkYoung').css('display', 'inline-block');
+                                    checkList[6] = false;
+                                } else {
+                                    $('.checkYoung').css('display', 'none');
+                                    checkList[6] = true;
+                                }
+
+                            } else {
+                                if (gen != 1 && gen != 2) {
+                                    $('.checkYoung').css('display', 'none');
+                                    console.log(birFirst);
+                                    $('.checkOld').css('display', 'inline-block');
+                                    checkList[6] = false;
+                                } else {
+                                    $('.checkOld').css('display', 'none');
+                                    checkList[6] = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+            if (birthCheck == false) {
+            //    span
+            }
+        }
+    }
+
+
+    // 주소 체크
+    function checkAddress() {
+        var addr1 = $('#sigunguCode').val();
+        var addr2 = $('#jibunAddress').val();
+        var addr3 = $('#roadAddress').val();
+
+        if (addr1 == '' || addr2 == '' || addr3 == '') {
+            $('.checkAddr').css('display', 'inline-block');
+            checkList[7] = false;
+        } else {
+            $('.checkAddr').css('display', 'none');
+            checkList[7] = true;
+        }
+
+    }
+
 
     let confirmNum = '';
     /**
@@ -334,18 +453,42 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeW>
+                                        {/* 생일 */}
                                         <Input name={"userBirth"} style={{width: 241}} maxLength={6}
+                                               onClick={() => {
+                                                   checkBirthGender();
+                                                   checkGender();
+                                               }} onChange={() => {
+                                            checkBirthGender();
+                                            checkGender();
+                                        }}
                                                id={"userBirth"}
                                                className={"col-6"}
                                                placeholder="* * * * * *"/>
                                         &nbsp;-&nbsp;
+                                        {/* 성별 */}
                                         <Input name={"userGender"} style={{width: 50}} maxLength={1}
+                                               onChange={() => {
+                                                   checkBirthGender();
+                                                   checkGender();
+                                               }} onClick={() => {
+                                            checkBirthGender();
+                                            checkGender();
+                                        }}
                                                id={"userGender"}
                                                className={"col-6"}
                                                placeholder="*"/>
                                         &nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*
                                     </InputTextSizeW>
-                                    <HiddenMessage>위 공백란을 입력해주세요</HiddenMessage>
+                                    <HiddenMessage style={noStyle} className="checkBG no">필수 항목입니다.</HiddenMessage>
+                                    <br/>
+                                    <HiddenMessage style={noStyle} className="checkBirth no">생년월일 6자리를 정확히
+                                        입력해주세요</HiddenMessage>
+                                    <HiddenMessage style={noStyle} className="checkGender no">올바른 주민번호 뒷자리(첫번째 수)가
+                                        아닙니다.</HiddenMessage>
+                                    <HiddenMessage style={noStyle} className="checkOld">1 또는 2만 입력 가능합니다</HiddenMessage>
+                                    <HiddenMessage style={noStyle} className="checkYoung">3 또는 4만 입력
+                                        가능합니다</HiddenMessage>
                                 </FormBlockBody>
                             </FormBlock>
 
@@ -354,16 +497,16 @@ function UserSignUp() {
                                     <AsteriskRed>*</AsteriskRed> 주소
                                 </FormBlockHead>
                                 <FormBlockBody>
-                                    <Popup/>
-                                    <Input name={"userAddrNum"} className={'my-1'} id={"sigunguCode"}
+                                    <Popup checkFunc={checkAddress}/>
+                                    <Input name={"userAddrNum"} className={'my-1'} id={"sigunguCode"} disabled
                                            placeholder={'우편번호'} readOnly={true}/>
-                                    <Input name={"userAddrJibun"} className={'my-1'} id={"jibunAddress"}
+                                    <Input name={"userAddrJibun"} className={'my-1'} id={"jibunAddress"} disabled
                                            placeholder={'지번 주소'} readOnly={true}/>
-                                    <Input name={"userAddrRoad"} className={'my-1'} id={"roadAddress"}
+                                    <Input name={"userAddrRoad"} className={'my-1'} id={"roadAddress"} disabled
                                            placeholder={'도로명 주소'} readOnly={true}/>
                                     <Input name={"userAddrDetail"} className={'my-1'} id={"addressDetail"}
                                            placeholder={'상세주소를 입력해주세요.'}/>
-                                    <HiddenMessage>주소란을 모두 정확히 입력해주세요</HiddenMessage>
+                                    <HiddenMessage style={noStyle} className="checkAddr no">필수 항목입니다.</HiddenMessage>
                                 </FormBlockBody>
                             </FormBlock>
 
@@ -555,39 +698,6 @@ const TermsLabel = styled.label`
   display: block;
   font-size: 14px;
 `;
-
-// const BpCheckAll = styled.input`
-//   -webkit-appearance: none;
-//   background: transparent;
-//   display: inline-block;
-//   position: relative;
-//   height: 18px;
-//   width: 18px;
-//   vertical-align: middle;
-//   -webkit-box-sizing: border-box;
-//   box-sizing: border-box;
-//   border: 0;
-//   margin: 0;
-
-//   &:before {
-//     font-size: 16px;
-//     font-style: normal;
-//     content: "✓";
-//     border: 1px solid #f1c333	;
-//     background: #f1c333	;
-//     color: #fff;
-//     cursor: pointer;
-//     display: inline-block;
-//     line-height: 16px;
-//     width: 16px;
-//     height: 16px;
-//     position: absolute;
-//     top: 0px;
-//     left: 0px;
-//     border-radius: 2px;
-//     text-align: center;
-//   }
-// `;
 
 const InputCheckBox = styled.div`
   float: left;
