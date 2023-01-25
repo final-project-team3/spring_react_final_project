@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 
 function Test(props) {
+
   const [testData, setTestData] = useState([]);
 
   const BtnTest = () => {
@@ -19,8 +20,6 @@ function Test(props) {
       };
     }, [testData]);
   }
-
-
   return (
     <div>
       <h1 className={'test-style'}>테스트페이지</h1>
@@ -29,7 +28,7 @@ function Test(props) {
             className={"float-start"}
             alt={"First slide"}
           />
-      <button onClick={BtnTest} className={"btn btn-primary"}>이미지 데이터 가져오기</button>
+      <button className={"btn btn-primary"}>이미지 데이터 가져오기</button>
     </div>
   );
 }

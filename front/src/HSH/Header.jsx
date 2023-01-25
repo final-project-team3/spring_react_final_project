@@ -1,16 +1,49 @@
 import {Link, Outlet} from "react-router-dom";
-import {useState} from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 
 const Header = () => {
-    const[isClick, setIsClick] = useState("Img/down.png");
+    const [isClick, setIsClick] = useState(false);
+    const [rankClick, setRankClick] = useState(true);
 
-    const Modatl = styled.div`
-    
-    `
+    const monthList = [
+        {month: "01", firstDay: 1, lastDay: 31},
+        {month: "02", firstDay: 1, lastDay: 28},
+        {month: "03", firstDay: 1, lastDay: 28},
+        {month: "04", firstDay: 1, lastDay: 28},
+        {month: "05", firstDay: 1, lastDay: 28},
+        {month: "06", firstDay: 1, lastDay: 31},
+        {month: "07", firstDay: 1, lastDay: 28},
+        {month: "08", firstDay: 1, lastDay: 28},
+        {month: "09", firstDay: 1, lastDay: 28},
+        {month: "10", firstDay: 1, lastDay: 28},
+        {month: "11", firstDay: 1, lastDay: 28},
+        {month: "12", firstDay: 1, lastDay: 28},
+    ]
+
+    let birth = "000629";
+    let birth2 = birth.charAt(2);
+    let birth3 = birth.charAt(3);
+    let monthBirth = birth2 + birth3;
+
+    monthList.map((months)=> {
+        if (months.month == monthBirth) {
+            let birthDay = birth.charAt(4) + birth.charAt(5);
+            birthDay = parseInt(birthDay);
+            for (let i = months.firstDay; i <= months.lastDay; i++) {
+                if (i == birthDay) {
+                    alert('확인되었습니다.');
+                    return;
+                }
+            }
+            alert('다시 확인해주세요.');
+        }
+    })
+
+
     return (
         <div style={{
-            paddingTop:200
+            paddingTop: 200
         }}>
             <nav className="navbar navbar-expand navbar-dark fixed-top">
                 <div className={'container'}>
@@ -33,9 +66,66 @@ const Header = () => {
                                     </button>
                                 </div>
                             </li>
-                            <li className={'nav-item'}>
-                                <Link onClick={()=> isClick == "Img/down.png" ? setIsClick("Img/up.png") : setIsClick("Img/down.png")}><img width={30} src={isClick}/></Link>
-                            </li>
+                            <div className={'nav-item dropdown'}>
+                                <Link id={'headerDropDown'}
+                                      onClick={() => isClick == false ? setIsClick(true) : setIsClick(false)}
+                                      className={"nav-link dropdown-toggle"} data-bs-toggle={'dropdown'}
+                                      aria-expanded={'false'}><img
+                                    width={30} src={isClick == false ? "Img/down.png" : "Img/up.png"}/></Link>
+                                <div style={{
+                                    padding: 15,
+                                }} className={'dropdown-menu'} aria-labelledby={'headerDropDown'}>
+                                    <div><h3 className={'text-center'}>실시간 쇼핑 검색어</h3></div>
+                                    <ul className={'mx-auto text-center row justify-content-around d-flex'}>
+                                        <li onClick={() => setRankClick(true)} style={{
+                                            backgroundColor: rankClick == true ? "white" : "lightgray"
+                                        }} className={'col-6 border border-dark'}><h5>1 ~ 10위</h5></li>
+
+                                        <li style={{
+                                            backgroundColor: rankClick == false ? "white" : "lightgray"
+                                        }} className={'col-6 border border-dark'}><Link
+                                            onClick={() => setRankClick(false)} style={{
+                                            textDecoration: "none"
+                                        }}><h5>11 ~ 20위</h5></Link></li>
+                                    </ul>
+                                    <li><Link className={'dropdown-item'} to={'#'}>테스트</Link></li>
+                                    <li><Link className={'dropdown-item'} to={'#'}>테스트</Link></li>
+                                    <li><Link className={'dropdown-item'} to={'#'}>테스트</Link></li>
+                                    <li><Link className={'dropdown-item'} to={'#'}>테스트</Link></li>
+                                    <ul className="nav nav-tabs" id="myTab" role="tablist">
+                                        <li className="nav-item" role="presentation">
+                                            <button className="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#home" type="button" role="tab" aria-controls="home"
+                                                    aria-selected="true">Home
+                                            </button>
+                                        </li>
+                                        <li className="nav-item" role="presentation">
+                                            <button className="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#profile" type="button" role="tab"
+                                                    aria-controls="profile" aria-selected="false">Profile
+                                            </button>
+                                        </li>
+                                        <li className="nav-item" role="presentation">
+                                            <button className="nav-link" id="contact-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#contact" type="button" role="tab"
+                                                    aria-controls="contact" aria-selected="false">Contact
+                                            </button>
+                                        </li>
+                                    </ul>
+                                    <div className="tab-content" id="myTabContent">
+                                        <div className="tab-pane fade show active" id="home" role="tabpanel"
+                                             aria-labelledby="home-tab">...
+                                        </div>
+                                        <div className="tab-pane fade" id="profile" role="tabpanel"
+                                             aria-labelledby="profile-tab">...
+                                        </div>
+                                        <div className="tab-pane fade" id="contact" role="tabpanel"
+                                             aria-labelledby="contact-tab">...
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                             <li className={'nav-item'}>
                                 <Link to={'/login'}><img className={'ms-2'} src={"Img/login.png"}/></Link>
                             </li>
@@ -51,9 +141,6 @@ const Header = () => {
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div>
-                    <p>asd</p>
                 </div>
             </nav>
             <Outlet/>

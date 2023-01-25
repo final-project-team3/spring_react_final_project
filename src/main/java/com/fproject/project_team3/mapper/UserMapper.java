@@ -13,6 +13,10 @@ public interface UserMapper {
     //    LYS
 //    유저 회원가입
     void insertUser(UserInfoDto userInfoDto);
+
+    String emailCheck(String userId);
+
+    String telCheck(String userTel);
     //    LYS
 
     //    GJY

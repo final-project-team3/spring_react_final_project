@@ -97,7 +97,7 @@ function NewLogin() {
                                 </InputCheckbox>
                                 <label>이메일 저장하기</label>
                             </div>
-                            <Link to={"/"}>이메일 / 비밀번호 찾기</Link>
+                            <Link to={"/SearchMain"}>이메일 / 비밀번호 찾기</Link>
                         </EmailLoginOption>
                     </EmailLoginContainer>
                     <CommonButton

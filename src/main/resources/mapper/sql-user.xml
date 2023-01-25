@@ -10,8 +10,20 @@
         INSERT INTO user_info(user_id, user_pass, user_name, user_tel, user_birth, user_gender, user_addr_num,
                               user_addr_jibun, user_addr_road, user_addr_detail)
         VALUES (#{userId}, #{userPass}, #{userName}, #{userTel}, #{userBirth}, #{userGender}, #{userAddrNum},
-            #{userAddrJibun}, #{userAddrRoad}, #{userAddrDetail})
+                #{userAddrJibun}, #{userAddrRoad}, #{userAddrDetail})
     </insert>
+
+    <select id="emailCheck" parameterType="String" resultType="String">
+        SELECT user_id
+        FROM user_info
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="telCheck" parameterType="String" resultType="String">
+        SELECT user_tel
+        FROM user_info
+        WHERE user_tel = #{userTel}
+    </select>
 
     <!-- LYS -->
 

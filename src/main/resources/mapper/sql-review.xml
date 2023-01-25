@@ -10,6 +10,7 @@
         SELECT *
         FROM review
         WHERE product_num = #{productNum}
+        ORDER BY review_num DESC
     </select>
 
     <!-- LYS -->
