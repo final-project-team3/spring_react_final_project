@@ -35,17 +35,11 @@ function Rating() {
             <Stars>
                 {ARRAY.map((el, idx) => {
                     return (
-                        // <FaStar
-                        //     key={idx}
-                        //     size="20"
-                        //     onClick={() => handleStarClick(el)}
-                        //     className={clicked[el] && 'yellowStar'}
-                        // />
                         <FaStar
                             key={idx}
                             size="20"
                             onClick={() => handleStarClick(el)}
-                            className={clicked() && 'yellowStar'}
+                            className={clicked[el] && 'yellowStar'}
                         />
                     );
                 })}
