@@ -14,6 +14,24 @@
     <!-- HSH -->
 
     <!-- LYS -->
+    <select id="emailCheck" parameterType="String" resultType="String">
+        SELECT seller_id
+        FROM seller_info
+        WHERE seller_id = #{sellerId}
+    </select>
+
+    <select id="telCheck" parameterType="String" resultType="String">
+        SELECT seller_tel
+        FROM seller_info
+        WHERE seller_tel = #{sellerTel}
+    </select>
+
+    <select id="businessNumCheck" parameterType="String" resultType="String">
+        SELECT seller_business_num
+        FROM seller_info
+        WHERE seller_business_num = #{sellerBusinessNum}
+    </select>
+
 
     <!-- LYS -->
 
