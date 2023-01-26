@@ -487,8 +487,7 @@ function UserSignUp() {
                                     <HiddenMessage style={noStyle} className="checkGender no">올바른 주민번호 뒷자리(첫번째 수)가
                                         아닙니다.</HiddenMessage>
                                     <HiddenMessage style={noStyle} className="checkOld">1 또는 2만 입력 가능합니다</HiddenMessage>
-                                    <HiddenMessage style={noStyle} className="checkYoung">3 또는 4만 입력
-                                        가능합니다</HiddenMessage>
+                                    <HiddenMessage style={noStyle} className="checkYoung">3 또는 4만 입력 가능합니다</HiddenMessage>
                                 </FormBlockBody>
                             </FormBlock>
 
