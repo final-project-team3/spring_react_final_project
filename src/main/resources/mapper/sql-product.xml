@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fproject.project_team3.mapper.ProductMapper">
+
   <!-- HSH -->
 
   <!-- HSH -->
@@ -29,12 +30,21 @@
   <!--        where idx = #{idx}-->
   <!--    </select>-->
 
-  <insert id="getSelectTestData" parameterType="byte">
+  <insert id="getSelectTestData" parameterType="String">
     insert
     gwak_test_tbl
     (img)
     value (#{img});
   </insert>
+
+
+  <!--  신규상품 정보 등록 -->
+  <insert id="insertProductData" parameterType="com.fproject.project_team3.dto.product.ProductInfoDto">
+    INSERT INTO product_info(product_num, product_kind_num, product_name, product_price, product_seller_id, product_registration_date, product_img, product_content, review_star_point, product_delivery_day)
+    VALUES (null, 0, #{productName}, "10000", "testSeller01", DATE_FORMAT(now(), '%Y-%m-%d'), "testImg", "testContent", "3", "2");
+  </insert>
+
+
   <!-- GJY -->
 
   <!-- BJH -->

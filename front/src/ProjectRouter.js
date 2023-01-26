@@ -25,6 +25,7 @@ import SellerLogin from "./BJH/SellerLogin";
 import Test from "./GJY/Test";
 import UserJoinResult from "./BJH/UserJoinResult";
 import SellerJoinResult from "./BJH/SellerJoinResult";
+import FileUpload from "./GJY/FileUpload";
 
 const ProjectRouter = () => {
 
@@ -48,6 +49,7 @@ const ProjectRouter = () => {
                     <Route path={'/orderList'} element={<OrderListPage/>}/>
                     <Route path={"/productR"} element={<ProductRegisterPage/>}/>
                     <Route path={"/test"} element={<Test/>}/>
+                    <Route path={"/fu"} element={<FileUpload/>}/>
 
                     {/*GJY*/}
 

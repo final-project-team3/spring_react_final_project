@@ -8,9 +8,9 @@ const Header = () => {
 
     return (
         <div style={{
-            paddingTop: 200
+            paddingTop: 200,
         }}>
-            <nav className="navbar navbar-expand navbar-dark fixed-top">
+            <nav className="bg-white navbar navbar-expand navbar-dark fixed-top">
                 <div className={'container'}>
                     <div>
                         <Link onClick={() => {
