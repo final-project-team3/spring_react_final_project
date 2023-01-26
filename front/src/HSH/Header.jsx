@@ -6,41 +6,6 @@ const Header = () => {
     const [isClick, setIsClick] = useState(false);
     const [rankClick, setRankClick] = useState(true);
 
-    const monthList = [
-        {month: "01", firstDay: 1, lastDay: 31},
-        {month: "02", firstDay: 1, lastDay: 28},
-        {month: "03", firstDay: 1, lastDay: 28},
-        {month: "04", firstDay: 1, lastDay: 28},
-        {month: "05", firstDay: 1, lastDay: 28},
-        {month: "06", firstDay: 1, lastDay: 31},
-        {month: "07", firstDay: 1, lastDay: 28},
-        {month: "08", firstDay: 1, lastDay: 28},
-        {month: "09", firstDay: 1, lastDay: 28},
-        {month: "10", firstDay: 1, lastDay: 28},
-        {month: "11", firstDay: 1, lastDay: 28},
-        {month: "12", firstDay: 1, lastDay: 28},
-    ]
-
-    let birth = "000629";
-    let birth2 = birth.charAt(2);
-    let birth3 = birth.charAt(3);
-    let monthBirth = birth2 + birth3;
-
-    monthList.map((months)=> {
-        if (months.month == monthBirth) {
-            let birthDay = birth.charAt(4) + birth.charAt(5);
-            birthDay = parseInt(birthDay);
-            for (let i = months.firstDay; i <= months.lastDay; i++) {
-                if (i == birthDay) {
-                    alert('확인되었습니다.');
-                    return;
-                }
-            }
-            alert('다시 확인해주세요.');
-        }
-    })
-
-
     return (
         <div style={{
             paddingTop: 200

@@ -24,8 +24,8 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
-  public List<GwakTestTblDto> getSelectTestData(int idx) throws Exception {
-    return productMapper.getSelectTestData(idx);
+  public List<GwakTestTblDto> getSelectTestData(byte img) throws Exception {
+    return productMapper.getSelectTestData(img);
   }
 
 

@@ -11,7 +11,7 @@ public interface ProductService {
 
   List<ProductKindDto> getProductSmallSelectList(String productKind) throws Exception;
 
-  List<GwakTestTblDto> getSelectTestData(int idx) throws Exception;
+  List<GwakTestTblDto> getSelectTestData(byte img) throws Exception;
 
   //    HSH
 

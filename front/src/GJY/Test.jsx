@@ -2,27 +2,24 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 
 function Test(props) {
-  // const [testData, setTestData] = useState([]);
-  //
-  // const BtnTest = () => {
-  //   useEffect(() => {
-  //     return async () => {
-  //       const {data} = await axios.post("http://localhost:8080/testData", null, {params: {idx: 1},});
-  //       setTestData(data);
-  //       let url = URL.createObjectURL(data);
-  //       let img = document.getElementById('image');
-  //       img.src = url;
-  //       console.log("-----------------------testData------------------------");
-  //       console.log(testData);
-  //       console.log("-----------------------data------------------------");
-  //       console.log(data);
-  //     };
-  //   }, [testData]);
-  // }
-    const BtnTest = console.log('하이');
 
+  const [testData, setTestData] = useState([]);
 
-
+  const BtnTest = () => {
+    useEffect(() => {
+      return async () => {
+        const {data} = await axios.post("http://localhost:8080/testData", null, {params: {idx: 1},});
+        setTestData(data);
+        let url = URL.createObjectURL(data);
+        let img = document.getElementById('image');
+        img.src = url;
+        console.log("-----------------------testData------------------------");
+        console.log(testData);
+        console.log("-----------------------data------------------------");
+        console.log(data);
+      };
+    }, [testData]);
+  }
   return (
     <div>
       <h1 className={'test-style'}>테스트페이지</h1>
