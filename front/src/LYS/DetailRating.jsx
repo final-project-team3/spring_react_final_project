@@ -4,25 +4,17 @@ import styled from 'styled-components';
 
 const ARRAY = [0, 1, 2, 3, 4];
 
-function Rating() {
+function DetailRating(props) {
     const [clicked, setClicked] = useState([false, false, false, false, false]);
-
-    const handleStarClick = index => {
-        let clickStates = [...clicked];
-        for (let i = 0; i < 5; i++) {
-            clickStates[i] = i <= index ? true : false;
-        }
-        setClicked(clickStates);
-        console.log(clickStates)
-        console.log(clicked)
-    };
-
-    // useEffect(() => {
-    //     sendReview();
-    // }, [clicked]); //컨디마 컨디업
+    
     useEffect(() => {
+        let starList = [];
         sendReview();
-        setClicked([true,true,true,false,false])
+        for (let i = 0; i < props.rating; i++) {
+            starList.push(true);
+        }
+
+        setClicked([starList[0],starList[1],starList[2],starList[3],starList[4]]);
     }, []); //컨디마 컨디업
 
     const sendReview = () => {
@@ -38,7 +30,6 @@ function Rating() {
                         <FaStar
                             key={idx}
                             size="20"
-                            onClick={() => handleStarClick(el)}
                             className={clicked[el] && 'yellowStar'}
                         />
                     );
@@ -48,7 +39,7 @@ function Rating() {
     );
 }
 
-export default Rating;
+export default DetailRating;
 
 const Wrap = styled.div`
   display: flex;
@@ -63,14 +54,6 @@ const Stars = styled.div`
   & svg {
     color: gray;
     cursor: pointer;
-  }
-
-  :hover svg {
-    color: #fcc419;
-  }
-
-  & svg:hover ~ svg {
-    color: gray;
   }
 
   .yellowStar {
