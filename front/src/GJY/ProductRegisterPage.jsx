@@ -3,6 +3,8 @@ import axios from "axios";
 import data from "bootstrap/js/src/dom/data";
 import $ from "jquery";
 import FileUploadComponent from "./FileUploadComponent";
+import Swal from "sweetalert2";
+import { MultiSelect } from "react-multi-select-component";
 
 function ProductRegisterPage() {
   const [bigKind, setBigKind] = useState([]);
@@ -10,6 +12,14 @@ function ProductRegisterPage() {
   const [productName, setProductName] = useState("");
   const [productNameFlag, setProductNameFlag] = useState(false);
   const [productNameCheckFlag, setProductNameCheckFlag] = useState(false);
+
+  // 옵션 선택
+  const options = [
+    { label: "Grapes 🍇", value: "grapes" },
+    { label: "Mango 🥭", value: "mango" },
+    { label: "Strawberry 🍓", value: "strawberry", disabled: true },
+  ];
+
 
   useEffect(() => {
     return async () => {
@@ -40,12 +50,23 @@ function ProductRegisterPage() {
       params: {productName: productName, productSellerId: productSellerId},
     });
     if (data == 0) {
-      alert("사용이 가능한 제품명입니다.");
+
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: '사용 가능한 제품명입니다.',
+        showConfirmButton: false,
+        timer: 1500
+      });
       console.log(`data 값 : ${data}`);
       setProductNameFlag(false);
       console.log(`productNameFlag : ${productNameFlag}`);
     } else {
-      alert("기존에 등록하신 제품명과 동일합니다. 수정 후 중복확인 해주세요.");
+      Swal.fire({
+        icon: 'error',
+        title: '동일한 제품명이 존재합니다.',
+      })
+      // alert("기존에 등록하신 제품명과 동일합니다. 수정 후 중복확인 해주세요.");
       console.log(`data 값 : ${data}`);
       setProductNameFlag(true);
       console.log(`productNameFlag : ${productNameFlag}`);
@@ -228,6 +249,15 @@ function ProductRegisterPage() {
                       style={{ height: 35 }}
                     />
                   </div>
+                </td>
+              </tr>
+              <tr className={"border"}>
+                <td className={"border text-center"} style={{ height: 60 }}>
+                  옵션등록
+                </td>
+                <td>
+
+
                 </td>
               </tr>
               <tr className={"border"}>
