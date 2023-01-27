@@ -1,47 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fproject.project_team3.mapper.ProductMapper">
-  <!-- HSH -->
+    <!-- HSH -->
+    <select id="getKind" resultType="com.fproject.project_team3.dto.product.ProductKindDto">
+        SELECT distinct product_gender
+        FROM product_kind
+        order by product_gender
+    </select>
 
-  <!-- HSH -->
+    <select id="getSmallKind" resultType="com.fproject.project_team3.dto.product.ProductKindDto">
+        SELECT product_small_kind
+        FROM product_kind
+        WHERE product_gender = #{productBigKind}
+    </select>
+    <!-- HSH -->
 
-  <!-- LYS -->
+    <!-- LYS -->
 
-  <!-- LYS -->
+    <!-- LYS -->
 
-  <!-- GJY -->
-  <select id="getProductSelectList" resultType="com.fproject.project_team3.dto.product.ProductKindDto">
-    SELECT distinct product_gender
-    FROM product_kind
-    order by product_gender
-  </select>
+    <!-- GJY -->
+    <select id="getProductSelectList" resultType="com.fproject.project_team3.dto.product.ProductKindDto">
+        SELECT distinct product_gender
+        FROM product_kind
+        order by product_gender
+    </select>
 
-  <select id="getProductSmallSelectList" parameterType="String"
-          resultType="com.fproject.project_team3.dto.product.ProductKindDto">
-    SELECT product_small_kind
-    FROM product_kind
-    where product_gender = #{productKind}
-  </select>
+    <select id="getProductSmallSelectList" parameterType="String"
+            resultType="com.fproject.project_team3.dto.product.ProductKindDto">
+        SELECT product_small_kind
+        FROM product_kind
+        where product_gender = #{productKind}
+    </select>
 
-  <!--    <select id="getSelectTestData" parameterType="int" resultType="com.fproject.project_team3.dto.gwak.GwakTestTblDto">-->
-  <!--        SELECT img-->
-  <!--        FROM gwak_test_tbl-->
-  <!--        where idx = #{idx}-->
-  <!--    </select>-->
+    <!--    <select id="getSelectTestData" parameterType="int" resultType="com.fproject.project_team3.dto.gwak.GwakTestTblDto">-->
+    <!--        SELECT img-->
+    <!--        FROM gwak_test_tbl-->
+    <!--        where idx = #{idx}-->
+    <!--    </select>-->
 
-  <insert id="getSelectTestData" parameterType="byte">
-    insert
-    gwak_test_tbl
+    <insert id="getSelectTestData" parameterType="byte">
+        insert
+        gwak_test_tbl
     (img)
-    value (#{img});
-  </insert>
-  <!-- GJY -->
+    value (
+        #{img}
+        );
+    </insert>
+    <!-- GJY -->
 
-  <!-- BJH -->
+    <!-- BJH -->
 
-  <!-- BJH -->
+    <!-- BJH -->
 
-  <!-- LSH -->
+    <!-- LSH -->
 
-  <!-- LSH -->
+    <!-- LSH -->
 </mapper>

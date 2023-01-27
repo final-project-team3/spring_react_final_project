@@ -24,7 +24,15 @@ public class ProductRestController {
     private ProductService productService;
 
     //    HSH
+    @PostMapping("/getKind")
+    public List<ProductKindDto> getKind() {
+        return productService.getKind();
+    }
 
+    @PostMapping("/getSmallKind")
+    public List<ProductKindDto> getSmallKind(@RequestParam("bigKind") String productBigKind) {
+        return productService.getSmallKind(productBigKind);
+    }
     //    HSH
 
     //    LYS

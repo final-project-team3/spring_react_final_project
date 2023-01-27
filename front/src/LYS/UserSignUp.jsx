@@ -14,7 +14,10 @@ function UserSignUp() {
     };
 
     // 유효성 검사 true false 리스트
-    var checkList = [false, false, false, false, false, false, false, false, false, false, false];
+    let checkList = [];
+    for(let i = 1; i <= 9; i++) {
+        checkList.push(false);
+    }
 
     // 전화번호 '-'방지
     $(function () {
@@ -150,12 +153,14 @@ function UserSignUp() {
     //이메일 유효성
     async function checkMail() {
         var mail = $('#userId').val();
+        console.log(mail);
         var regExp = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         let {data} = await axios.post("http://localhost:8080/emailCheck", null, {
             params: {
                 email: mail
             }
         });
+        console.log(data);
 
         if (mail == '') { // 값이 비어있을때
             checkList[5] = false;
@@ -190,8 +195,7 @@ function UserSignUp() {
             $('.mail_already').css("display", "none");
             $('.mail_not').css("display", "none");
         }
-    }
-    ;
+    };
 
     $(function () { // 주민 번호 숫자만 입력 가능하게
         $("#userBirth").on("blur keyup", function () {
@@ -290,7 +294,7 @@ function UserSignUp() {
                 }
             })
             if (birthCheck == false) {
-            //    span
+                //    span
             }
         }
     }
@@ -319,7 +323,7 @@ function UserSignUp() {
      * */
     const sendEmail = async () => {
         $("#emailCheck").attr('hidden', false);
-        const {data} = await axios.post('http://localhost:8080/emailConfirm', null, {params: {email: $("#email").val()}});
+        const {data} = await axios.post('http://localhost:8080/emailConfirm', null, {params: {email: $("#userId").val()}});
         confirmNum = data;
         console.log(confirmNum);
     }
@@ -365,7 +369,7 @@ function UserSignUp() {
                                         <Input id={'confirmNum'} style={{width: 400}} type="text"
                                                placeholder="인증번호를 입력해주세요"></Input>
                                         <button className={"btn btn-primary ms-1"} type={'button'}
-                                                style={{width: 90}}>
+                                                style={{width: 90}} onClick={confirmNumCheck}>
                                             <p className={"p-0 m-0"}>인증하기</p></button>
                                         <HiddenMessage>인증번호를 입력해주세요</HiddenMessage>
                                     </InputTextSizeW>

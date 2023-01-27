@@ -4,7 +4,6 @@ import com.fproject.project_team3.dto.gwak.GwakTestTblDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 
 import java.util.List;
-import java.util.Map;
 
 public interface ProductService {
   List<ProductKindDto> getProductSelectList() throws Exception;
@@ -13,7 +12,11 @@ public interface ProductService {
 
   List<GwakTestTblDto> getSelectTestData(byte img) throws Exception;
 
-  //    HSH
+  List<ProductKindDto> getKind();
+
+  List<ProductKindDto> getSmallKind(String productBigKind);
+
+    //    HSH
 
     //    HSH
 

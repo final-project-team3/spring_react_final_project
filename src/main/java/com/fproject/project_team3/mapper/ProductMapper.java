@@ -9,13 +9,17 @@ import java.util.Map;
 
 @Mapper
 public interface ProductMapper {
-  List<ProductKindDto> getProductSelectList();
+    List<ProductKindDto> getProductSelectList();
 
-  List<ProductKindDto> getProductSmallSelectList(String productKind);
+    List<ProductKindDto> getProductSmallSelectList(String productKind);
 
-  List<GwakTestTblDto> getSelectTestData(byte img) throws Exception;
+    List<GwakTestTblDto> getSelectTestData(byte img) throws Exception;
 
-  //    HSH
+    List<ProductKindDto> getKind();
+
+    List<ProductKindDto> getSmallKind(String productBigKind);
+
+    //    HSH
 
     //    HSH
 

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -26,6 +25,16 @@ public class ProductServiceImpl implements ProductService {
   @Override
   public List<GwakTestTblDto> getSelectTestData(byte img) throws Exception {
     return productMapper.getSelectTestData(img);
+  }
+
+  @Override
+  public List<ProductKindDto> getKind() {
+    return productMapper.getKind();
+  }
+
+  @Override
+  public List<ProductKindDto> getSmallKind(String productBigKind) {
+    return productMapper.getSmallKind(productBigKind);
   }
 
 
