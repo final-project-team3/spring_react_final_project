@@ -89,7 +89,7 @@ const Header = () => {
 
     return (
         <div style={{
-            paddingTop: 200
+            paddingTop: 200,
         }}>
             <nav className="bg-white navbar navbar-expand navbar-dark fixed-top">
                 <div className={'container'}>

@@ -10,12 +10,6 @@ import java.util.Map;
 
 @Mapper
 public interface ProductMapper {
-    List<ProductKindDto> getProductSelectList();
-
-    List<ProductKindDto> getProductSmallSelectList(String productKind);
-
-    List<GwakTestTblDto> getSelectTestData(byte img) throws Exception;
-
     List<ProductKindDto> getKind();
 
     List<ProductKindDto> getSmallKind(String productBigKind);
@@ -31,7 +25,14 @@ public interface ProductMapper {
     //    LYS
 
     //    GJY
+    List<ProductKindDto> getProductSelectList();
+    List<ProductKindDto> getProductSmallSelectList(String productKind);
+    List<GwakTestTblDto> getSelectTestData(byte img) throws Exception;
 
+    // 상품 등록 → DB 저장
+    void insertProductData(String productName, int productKindNum, int productQty, String productSellerId, int productPrice) throws Exception;
+
+    int checkProductName(String productName, String productSellerId);
     //    GJY
 
     //    BJH
