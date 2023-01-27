@@ -33,6 +33,7 @@ function ProductRegisterPage() {
     const selectBigKind = $("#selectBigKind").val();
     const selectSmallKind = $("#selectSmallKind").val();
     // const productQty = $("#productQty").val();
+    const productSellerId = $("productSellerId").val();
     let kindNum;
 
     if (selectBigKind === "남자" && selectSmallKind === "외투") {
@@ -58,6 +59,7 @@ function ProductRegisterPage() {
         productName: productName,
         kindNum: kindNum,
         // productQty: productQty
+        productSellerId: productSellerId
       }
     })
 
@@ -76,6 +78,8 @@ function ProductRegisterPage() {
           <h1 className={"mt-4 text-center"}>제품 신규 등록</h1>
           <h3 className={"text-start mt-5"}>상품 등록</h3>
           <hr />
+          <label htmlFor="productSellerId" className={"label-control"}>판매자명</label>
+          <input type="text" id={"productSellerId"} className={"form-control mb-5"} placeholder={"판매자명을 입력하세요 (나중에 로그인기능구현 → 자동입력 될 부분)"}/>
           <table className={"border"} style={{ height: 200 }}>
             <tbody className={"border"}>
               <tr className={"border"}>
