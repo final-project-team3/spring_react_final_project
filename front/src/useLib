@@ -7,4 +7,10 @@ npm install jquery
 // 별점 (lys)
 npm install react-icons --save
 
-
+// 기본 설치
+npm install
+npm install jquery
+npm install prop-types
+npm install react-bootstrap bootstrap
+npm install axios
+npm install --save-dev --save-exact prettier

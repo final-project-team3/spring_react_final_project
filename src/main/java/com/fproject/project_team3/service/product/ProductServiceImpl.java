@@ -1,4 +1,5 @@
 package com.fproject.project_team3.service.product;
+
 import com.fproject.project_team3.dto.gwak.GwakTestTblDto;
 import com.fproject.project_team3.dto.gwak.TFileDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
@@ -15,20 +16,7 @@ public class ProductServiceImpl implements ProductService {
 
   @Autowired
   private ProductMapper productMapper;
-  @Override
-  public List<ProductKindDto> getProductSelectList() throws Exception {
-    return productMapper.getProductSelectList();
-  }
 
-  @Override
-  public List<ProductKindDto> getProductSmallSelectList(String productKind) throws Exception {
-    return productMapper.getProductSmallSelectList(productKind);
-  }
-
-  @Override
-  public void insertProductData(String productName, String selectBigKind, String selectSmallKind) throws Exception {
-    productMapper.insertProductData(productName, selectBigKind, selectSmallKind);
-  }
 
   @Override
   public List<ProductKindDto> getKind() {
@@ -40,40 +28,46 @@ public class ProductServiceImpl implements ProductService {
     return productMapper.getSmallKind(productBigKind);
   }
 
-
-//  @Override
-//  public void insertProduct(ProductInfoDto productInfoDto) {
-//
-//  }
-
-//  @Override
-//  public TFileDto selectBoardFileInfo(int idx, int boardIdx) throws Exception {
-//    return null;
-//  }
-
-//  @Override
-//  public void getSelectTestData(String img) throws Exception {
-//    productMapper.getSelectTestData(img);
-//  }
-
+  //    HSH
 
   //    HSH
 
-    //    HSH
+  //    LYS
 
-    //    LYS
+  //    LYS
 
-    //    LYS
+  //    GJY
 
-    //    GJY
+  @Override
+  public List<ProductKindDto> getProductSelectList() throws Exception {
+    return productMapper.getProductSelectList();
+  }
 
-    //    GJY
+  @Override
+  public List<ProductKindDto> getProductSmallSelectList(String productKind) throws Exception {
+    return productMapper.getProductSmallSelectList(productKind);
+  }
 
-    //    BJH
+  // 상품 등록 → DB 저장
+  @Override
+  public void insertProductData(String productName, int productKindNum, int productQty, String productSellerId, int productPrice) throws Exception {
+    productMapper.insertProductData(productName, productKindNum, productQty, productSellerId, productPrice);
+  }
 
-    //    BJH
+  // 제품 중복 확인
+  @Override
+  public int checkProductName(String productName, String productSellerId) throws Exception {
+    return productMapper.checkProductName(productName, productSellerId);
+  }
 
-    //    LSH
 
-    //    LSH
+  //    GJY
+
+  //    BJH
+
+  //    BJH
+
+  //    LSH
+
+  //    LSH
 }

@@ -9,11 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface ProductService {
-  List<ProductKindDto> getProductSelectList() throws Exception;
-
-  List<ProductKindDto> getProductSmallSelectList(String productKind) throws Exception;
-
-  void insertProductData(String productName, String selectBigKind, String selectSmallKind) throws Exception;
 
 
 //  void insertProduct(ProductInfoDto productInfoDto);
@@ -26,23 +21,31 @@ public interface ProductService {
 
   List<ProductKindDto> getSmallKind(String productBigKind);
 
-    //    HSH
+  //    HSH
 
-    //    HSH
+  //    HSH
 
-    //    LYS
+  //    LYS
 
-    //    LYS
+  //    LYS
 
-    //    GJY
+  //    GJY
+  List<ProductKindDto> getProductSelectList() throws Exception;
 
-    //    GJY
+  List<ProductKindDto> getProductSmallSelectList(String productKind) throws Exception;
 
-    //    BJH
+  // 상품 등록 → DB 저장
+  void insertProductData(String productName, int productKindNum, int productQty, String productSellerId, int productPrice) throws Exception;
 
-    //    BJH
+  // 제품 중복 확인
+  int checkProductName(String productName, String productSellerId) throws Exception;
+  //    GJY
 
-    //    LSH
+  //    BJH
 
-    //    LSH
+  //    BJH
+
+  //    LSH
+
+  //    LSH
 }
