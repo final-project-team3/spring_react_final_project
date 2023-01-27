@@ -11,7 +11,7 @@ const Kind = (props) => {
     if (props.smallKind != null) {
         smallKindList = [props.smallKind];
         smallKindList = smallKindList[0];
-        console.log([smallKindList][0]);``
+        console.log([smallKindList][0]);
     }
     return (
         <div>
