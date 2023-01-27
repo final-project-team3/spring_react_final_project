@@ -1,0 +1,188 @@
+.b-footer {
+    padding: 30px 0 0 0;
+    border-top: 1px solid #f3f3f3;
+    background-color: #fbfbfb;
+}
+
+.footer-in-b {
+    width: auto;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+.footer-box {
+    display: block;
+    margin: 0 auto;
+}
+
+.sp--hr {
+    margin: 20px 0 19px 0;
+    height: 1px;
+    background-color: #f0f0f0;
+    z-index: 1;
+    padding: 0;
+    border: 0;
+    width: 100%;
+    display: block;
+    position: relative;
+    overflow: initial;
+    background-position: left center;
+    background-repeat: repeat-x;
+    opacity: 0.7;
+}
+
+.footer-ul {
+    flex-wrap: wrap;
+    position: relative;
+    flex-direction: row;
+    margin: 0 -20px;
+    max-width: unset;
+    display: flex;
+}
+
+.footer-ul > li[flex="1"] {
+    /*flex-grow: 1;*/
+    flex-shrink: 1;
+    /*flex-basis: 0;*/
+    padding: 0 20px;
+}
+
+.footer-li1 {
+    padding-top: 12px;
+}
+
+.footer-li1[scope="sub"] {
+    padding-top: 12px;
+}
+
+.footer-li1 {
+    padding: 0 0 60px 0;
+}
+
+.footer-subtitle {
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.footer-empty {
+    height: 5px;
+    width: 100%;
+    display: block;
+    font-size: 1rem;
+}
+
+.footer-phone {
+    font-size: 26px;
+    font-weight: bold;
+    padding: 0 0 14px 0;
+}
+
+.other-phone {
+    font-size: 13px;
+    color: #999;
+    line-height: 1.77;
+}
+
+.footer-kakao .kakao {
+    text-decoration: none;
+}
+
+.footer-kakao img {
+    max-height: 40px;
+}
+
+.bank {
+    color: #999;
+    font-size: 13px;
+    line-height: 1.62;
+    padding: 2px 0 0 0;
+}
+
+.bankInfo {
+    display: table;
+    width: 100%;
+    position: relative;
+    counter-reset: bullet;
+}
+
+.bankInfo-list {
+    display: table-row;
+}
+
+.bankInfo-list span{
+    content: attr(head);
+    display: table-cell;
+    font-size: 1em;
+    padding: 0 1rem 0 0;
+    top: auto;
+    width: 1px;
+    white-space: nowrap;
+    flex: none;
+    margin-right: 8px;
+    border-radius: 4px;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    color: #aaa;
+}
+
+.store {
+    display: block;
+    margin: 0 auto;
+}
+
+.icon-link img {
+    width: 60px;
+    height: auto;
+}
+
+.icon-link .hyup {
+    text-decoration: none;
+    flex-direction: column;
+}
+
+.icon-link ul {
+    display: flex;
+}
+
+.icon-link ul > li {
+    padding: 0 10px;
+}
+
+.footer-ul > li {
+    padding: 0 20px;
+}
+
+.refund {
+    font-size: 14px;
+}
+
+.juso .juso1 {
+    text-decoration: none;
+    color: #666666;
+}
+
+.description {
+    color: #999;
+    font-size: 15px;
+    line-height: 1.77;
+}
+
+.ft-font {
+    color: #333333 !important;
+    font-weight: 700 !important;
+}
+
+.ft-font .l-icon {
+    padding: 0 5px;
+    top: -1px;
+}
+
+.ft-font2 {
+    padding: 30px 7px 4px 0;
+}
+
+.email {
+    text-decoration: none;
+}

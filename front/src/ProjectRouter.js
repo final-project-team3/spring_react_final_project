@@ -25,6 +25,7 @@ import SellerLogin from "./BJH/SellerLogin";
 import Test from "./GJY/Test";
 import UserJoinResult from "./BJH/UserJoinResult";
 import SellerJoinResult from "./BJH/SellerJoinResult";
+import Footer from "./BJH/Footer";
 
 const ProjectRouter = () => {
 
@@ -65,6 +66,8 @@ const ProjectRouter = () => {
 
                     <Route path={'UserJoinResult'} element={<UserJoinResult/>}/>
                     <Route path={'SellerJoinResult'} element={<SellerJoinResult/>}/>
+
+                    <Route path={'/footer'} element={<Footer/>}/>
                     {/*BJH*/}
                 </Route>
             </Routes>
