@@ -10,6 +10,8 @@ npm install react-icons --save
 npm install sweetalert2
 // multiSelector
 npm i react-multi-select-component
+// ReactSelector
+npm i --save react-select
 
 // 기본 설치
 npm install

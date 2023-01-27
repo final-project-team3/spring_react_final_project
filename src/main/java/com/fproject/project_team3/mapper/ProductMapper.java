@@ -32,7 +32,7 @@ public interface ProductMapper {
     // 상품 등록 → DB 저장
     void insertProductData(String productName, int productKindNum, int productQty, String productSellerId, int productPrice) throws Exception;
 
-    int checkProductName(String productName, String productSellerId);
+    int checkProductName(String productName, String productSellerId) throws Exception;
     //    GJY
 
     //    BJH
