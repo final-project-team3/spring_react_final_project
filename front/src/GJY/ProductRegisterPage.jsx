@@ -3,6 +3,8 @@ import axios from "axios";
 import data from "bootstrap/js/src/dom/data";
 import $ from "jquery";
 import FileUploadComponent from "./FileUploadComponent";
+import Swal from "sweetalert2";
+import Select from "react-select";
 
 function ProductRegisterPage() {
   const [bigKind, setBigKind] = useState([]);
@@ -10,6 +12,28 @@ function ProductRegisterPage() {
   const [productName, setProductName] = useState("");
   const [productNameFlag, setProductNameFlag] = useState(false);
   const [productNameCheckFlag, setProductNameCheckFlag] = useState(false);
+  const [sizeToggle, setSizeToggle] = useState(false);
+  const [colorToggle, setColorToggle] = useState(false);
+  const [checkedSizeList, setCheckedSizeList] = useState([]);
+  const [checkedColorList, setCheckedColorList] = useState([]);
+
+  // 체크박스 데이터
+  const SIZE_LIST = [
+    { id: 0, data: "XS" },
+    { id: 1, data: "S" },
+    { id: 2, data: "M" },
+    { id: 3, data: "L" },
+    { id: 4, data: "XL" },
+  ];
+
+  // 색상 체크박스 데이터
+  const COLOR_LIST = [
+    { id: 0, data: "블랙" },
+    { id: 1, data: "화이트" },
+    { id: 2, data: "블루" },
+    { id: 3, data: "핑크" },
+    { id: 4, data: "옐로우" },
+  ];
 
   useEffect(() => {
     return async () => {
@@ -36,21 +60,35 @@ function ProductRegisterPage() {
     const productSellerId = $("#productSellerId").val(); // 판매자 ID
     setProductNameCheckFlag(true);
     // alert(productName);
-    const {data} = await axios.post("http://localhost:8080/productNameCheck", null, {
-      params: {productName: productName, productSellerId: productSellerId},
-    });
+    const { data } = await axios.post(
+      "http://localhost:8080/productNameCheck",
+      null,
+      {
+        params: { productName: productName, productSellerId: productSellerId },
+      }
+    );
     if (data == 0) {
-      alert("사용이 가능한 제품명입니다.");
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "사용 가능한 제품명입니다.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       console.log(`data 값 : ${data}`);
       setProductNameFlag(false);
       console.log(`productNameFlag : ${productNameFlag}`);
     } else {
-      alert("기존에 등록하신 제품명과 동일합니다. 수정 후 중복확인 해주세요.");
+      Swal.fire({
+        icon: "error",
+        title: "동일한 제품명이 존재합니다.",
+      });
+      // alert("기존에 등록하신 제품명과 동일합니다. 수정 후 중복확인 해주세요.");
       console.log(`data 값 : ${data}`);
       setProductNameFlag(true);
       console.log(`productNameFlag : ${productNameFlag}`);
     }
-  }
+  };
 
   // 제품등록
   const productData = async (e) => {
@@ -58,8 +96,7 @@ function ProductRegisterPage() {
       alert("제품명 중복확인을 해주세요.");
     } else if (productNameFlag === true) {
       alert("제품명이 중복됩니다. 제품명 수정 후 다시 등록해주세요.");
-    }
-    else {
+    } else {
       const productName = $("#productName").val(); // 제품명
       const selectBigKind = $("#selectBigKind").val(); // 대분류
       const selectSmallKind = $("#selectSmallKind").val(); // 소분류
@@ -97,12 +134,52 @@ function ProductRegisterPage() {
         },
       });
 
-      console.log(`selectBigKind : ${selectBigKind}`);
-      console.log(`selectSmallKind : ${selectSmallKind}`);
-      console.log(`productName : ${productName}`);
-      console.log(`productQty : ${productQty}`);
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "상품 등록이 완료되었습니다!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
+
+  const sizeToggleHandler = () => {
+    if (!sizeToggle) {
+      setSizeToggle(true);
+    } else {
+      setSizeToggle(false);
+    }
+  };
+
+  const colorToggleHandler = () => {
+    if (!colorToggle) {
+      setColorToggle(true);
+    } else {
+      setColorToggle(false);
+    }
+  }
+
+  // Size 체크박스 값 배열로 받기
+  const onCheckedSizeElement = (checked, item) => {
+    if (checked) {
+      setCheckedSizeList([...checkedSizeList, item]);
+      console.log(`checkedSizeList : ${checkedSizeList}`);
+    } else if (!checked) {
+      setCheckedSizeList(checkedSizeList.filter(el => el !== item));
+    }
+  };
+
+  // Color 체크박스 값 배열로 받기
+  const onCheckedColorElement = (checked, item) => {
+    if (checked) {
+      setCheckedColorList([...checkedColorList, item]);
+      console.log(`checkedColorList : ${checkedColorList}`);
+    } else if (!checked) {
+      setCheckedColorList(checkedSizeList.filter(el => el !== item));
+    }
+  };
+
 
   return (
     <div>
@@ -163,6 +240,7 @@ function ProductRegisterPage() {
                       <option
                         value={item.productSmallKind}
                         key={item.product_kind_num}
+                        typeof={"checkbox"}
                       >
                         {item.productSmallKind}
                       </option>
@@ -227,6 +305,90 @@ function ProductRegisterPage() {
                       placeholder={"상품 재고수량을 입력하세요."}
                       style={{ height: 35 }}
                     />
+                  </div>
+                </td>
+              </tr>
+              <tr className={"border"}>
+                <td className={"border text-center"} style={{ height: 60 }}>
+                  옵션등록
+                </td>
+                <td>
+                  <fieldset className="form-group">
+                    <div className="form-check form-switch">
+                      <input
+                        className="form-check-input ms-3"
+                        type="checkbox"
+                        id="flexSwitchCheckDefault"
+                        onClick={sizeToggleHandler}
+                      />
+                      <label
+                        className="form-check-label ms-3"
+                        htmlFor="flexSwitchCheckDefault"
+                      >
+                        사이즈 옵션 추가
+                      </label>
+                    </div>
+                    {sizeToggle ? (
+                      <div className={"row mt-3 ms-3"}>
+                        {SIZE_LIST.map((item, index) => (
+                          <div className={"d-flex col-1"}>
+                            <input
+                              id={"selectOpt"}
+                              className={"form-control col-3 mt-1"}
+                              type={"checkbox"}
+                              key={item.id}
+                              value={item.data}
+                              onChange={e => {
+                                onCheckedSizeElement(e.target.checked, e.target.value)
+                              }}
+                            />
+                            <label htmlFor={"selectOpt"} className={"col-3 mb-3"}>
+                              {item.data}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    ) : null}
+                    {/* -------------------- 색상 옵션 추가 -------------------- */}
+                    <div className="form-check form-switch">
+                      <input
+                        className="form-check-input ms-3"
+                        type="checkbox"
+                        id="flexSwitchCheckDefault"
+                        onClick={colorToggleHandler}
+                      />
+                      <label
+                        className="form-check-label ms-3"
+                        htmlFor="flexSwitchCheckDefault"
+                      >
+                        색상 옵션 추가
+                      </label>
+                    </div>
+                    {colorToggle ? (
+                      <div className={"row mt-3 ms-3"}>
+                        {COLOR_LIST.map((item, index) => (
+                          <div className={"d-flex col-1"}>
+                            <input
+                              id={"selectOpt"}
+                              className={"form-control col-3 mt-1"}
+                              type={"checkbox"}
+                              key={item.id}
+                              value={item.data}
+                              onChange={e => {
+                                onCheckedColorElement(e.target.checked, e.target.value)
+                              }}
+                            />
+                            <label htmlFor={"selectOpt"} className={"col-7 mb-3 text"}>
+                              {item.data}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    ) : null}
+                  </fieldset>
+
+                  <div className={"row"}>
+                    <div className={"col-4"}></div>
                   </div>
                 </td>
               </tr>

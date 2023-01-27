@@ -6,6 +6,12 @@ npm install styled-components
 npm install jquery
 // 별점 (lys)
 npm install react-icons --save
+// SweetAlert2
+npm install sweetalert2
+// multiSelector
+npm i react-multi-select-component
+// ReactSelector
+npm i --save react-select
 
 // 기본 설치
 npm install
