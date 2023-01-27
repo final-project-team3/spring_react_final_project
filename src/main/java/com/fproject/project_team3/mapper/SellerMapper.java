@@ -10,6 +10,12 @@ public interface SellerMapper {
     //    HSH
 //     사업자 회원가입
     void insertSeller(SellerInfoDto sellerInfoDto);
+
+    String emailCheck(String sellerId);
+
+    String telCheck(String sellerTel);
+
+    String businessNumCheck(String businessNum);
     //    HSH
 
     //    LYS

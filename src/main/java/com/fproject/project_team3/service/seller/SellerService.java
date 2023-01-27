@@ -10,6 +10,11 @@ public interface SellerService {
     //    HSH
 
     //    LYS
+    String emailCheck(String sellerId);
+
+    String telCheck(String sellerTel);
+
+    String businessNumCheck(String businessNum);
 
     //    LYS
 

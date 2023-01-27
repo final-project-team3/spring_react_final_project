@@ -4,23 +4,416 @@ import styled from "styled-components";
 import DaumPostcode from 'react-daum-postcode';
 import Popup from "./Popup";
 import $ from "jquery";
+import {useNavigate} from "react-router-dom";
 
-function UserSignUp() {
+function SellerSignUp() {
+    //메인페이지 이동
+    const navigate = useNavigate();
+    const toMain = () => {
+        navigate(`/`);
+    };
+
+    // 유효성 검사 true false 리스트
+    let checkList = [];
+    for (let i = 1; i <= 11; i++) {
+        checkList.push(false);
+    }
+
+    // 전화번호 '-'방지
+    $(function () {
+        $("#sellerTel").on("blur keyup", function () {
+            $(this).val($(this).val().replace(/[^0-9]/g, ""));
+        });
+    });
+
+    // 사업자번호 '-'방지
+    $(function () {
+        $("#businessNum").on("blur keyup", function () {
+            $(this).val($(this).val().replace(/[^0-9]/g, ""));
+        });
+    });
+
+    // 비밀번호 체크
+    function checkPw() {
+        var pw = $("#sellerPass").val();
+        var num = pw.search(/[0-9]/g);
+        var eng = pw.search(/[a-z]/ig);
+        var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+        if (pw == '') { // 빈값일때
+            checkList[0] = false;
+            $('.checkPw').css("display", "inline-block");
+            $('.pwd_not').css("display", "none");
+            $('.pwd_ok').css("display", "none");
+            $('.pwd_space').css("display", "none");
+            $('#userPw').focus();
+        } else if (pw.length < 8 || pw.length > 16 || (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0)) { // 8 ~ 16자리이고, 영문, 숫자, 특수문자 조합
+            checkList[0] = false;
+            $('.checkPw').css("display", "none");
+            $('.pwd_not').css("display", "inline-block");
+            $('.pwd_ok').css("display", "none");
+            $('.pwd_space').css("display", "none");
+            $('#userPw').focus();
+        } else if (pw.search(/\s/) != -1) { // 공백이 있을때
+            checkList[0] = false;
+            $('.checkPw').css("display", "none");
+            $('.pwd_space').css("display", "inline-block");
+            $('.pwd_ok').css("display", "none");
+            $('.pwd_not').css("display", "none");
+            $('#userPw').focus();
+        } else { // 사용 가능한 비밀번호
+            checkList[0] = true;
+            $('.checkPw').css("display", "none");
+            $('.pwd_ok').css("display", "inline-block");
+            $('.pwd_space').css("display", "none");
+            $('.pwd_not').css("display", "none");
+        }
+    }
+
+// 비밀번호의 두 값 체크
+    function checkDoublePw() {
+        var pw1 = $('#sellerPass').val();
+        var pw2 = $('#sellerPass2').val();
+
+
+        if (pw2 != '') { // pw2가 비었을때는 실행을 막기 위해 사용(pw1이 바꼈을때 바로 반영하기 위함.)
+            if (pw1 == pw2) { // 비밀번호가 같은 경우
+                checkList[1] = true;
+                $('.checkPw2').css("display", "none");
+                $('.pwd2_ok').css("display", "inline-block");
+                $('.pwd2_not').css("display", "none");
+
+            } else { // 비밀번호가 다를 경우
+                checkList[1] = false;
+                $('.checkPw2').css("display", "none");
+                $('.pwd2_not').css("display", "inline-block");
+                $('.pwd2_ok').css("display", "none");
+                $('#userPw2').focus();
+            }
+        }
+    }
+
+// 비밀번호 확인이 비어있을때
+    function checkPw2() {
+        var pw2 = $('#sellerPass2').val();
+
+        if (pw2 == '') { // 값이 비어있을 때
+            checkList[1] = false;
+            $('.checkPw2').css("display", "inline-block");
+            $('.pwd2_ok').css("display", "none");
+            $('.pwd2_not').css("display", "none");
+        }
+    }
+
+// 이름 체크 (비어있는지만 확인)
+    function checkName() { // 간단한 체크
+        var name = $('#sellerName').val();
+        if (name == '') {
+            checkList[2] = false;
+            $('.checkName').css("display", "inline-block");
+        } else {
+            checkList[2] = true;
+            $('.checkName').css("display", "none");
+        }
+    }
+
+    // 전화번호 유효성
+    async function checkTel() {
+        var ph = $('#sellerTel').val(); // ph 저장
+        var regExp = /^(010)[0-9]{3,4}[0-9]{4}$/;
+        let {data} = await axios.post("http://localhost:8080/telCheck2", null, {
+            params: {
+                telData: ph
+            }
+        });
+        console.log(data);
+
+        if (ph == '') { // 값이 비어있을때
+            checkList[3] = false;
+            $('.checkPh').css("display", "inline-block");
+            $('.ph_not').css("display", "none");
+            $('.ph_already').css("display", "none");
+            $('.ph_ok').css("display", "none");
+            $('#userPh').focus();
+        } else if (!regExp.test(ph)) { // 유효성 체크
+            checkList[3] = false;
+            $('.checkPh').css("display", "none");
+            $('.ph_not').css("display", "inline-block");
+            $('.ph_already').css("display", "none");
+            $('.ph_ok').css("display", "none");
+            $('#userPh').focus();
+        } else if (data != "") { // cnt가 1일 경우 -> 이미 존재하는 전화번호
+            checkList[3] = false;
+            $('.checkPh').css("display", "none");
+            $('.ph_already').css("display", "inline-block");
+            $('.ph_ok').css("display", "none");
+            $('.ph_not').css("display", "none");
+            $('#userPh').focus();
+        } else if (data == "") { //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 전화번호
+            checkList[3] = true;
+            $('.checkPh').css("display", "none");
+            $('.ph_ok').css("display", "inline-block");
+            $('.ph_already').css("display", "none");
+            $('.ph_not').css("display", "none");
+        }
+    };
+
+    //이메일 유효성
+    async function checkMail() {
+        var mail = $('#sellerId').val();
+        var regExp = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+        let {data} = await axios.post("http://localhost:8080/emailCheck2", null, {
+            params: {
+                email: mail
+            }
+        });
+
+        if (mail == '') { // 값이 비어있을때
+            checkList[4] = false;
+            $("#btn-send").attr("disabled", true);
+            $('.checkMail').css("display", "inline-block");
+            $('.mail_not').css("display", "none");
+            $('.mail_already').css("display", "none");
+            $('.mail_ok').css("display", "none");
+            $('#userMail').focus();
+        } else if (regExp.test(mail) == false) { // 유효성 체크
+            checkList[4] = false;
+            $("#btn-send").attr("disabled", true);
+            $('.checkMail').css("display", "none");
+            $('.mail_not').css("display", "inline-block");
+            $('.mail_already').css("display", "none");
+            $('.mail_ok').css("display", "none");
+            $('#userMail').focus();
+        } else if (data != "") { // data에 값이 있으면 = 중복일때
+            checkList[4] = false;
+            $("#btn-send").attr("disabled", true);
+            $('.checkMail').css("display", "none");
+            $('.mail_already').css("display", "inline-block");
+            $('.mail_ok').css("display", "none");
+            $('.mail_not').css("display", "none");
+            $('#userMail').focus();
+        } else if (data == "") { // data가 비어있으면 = 중복이 아닐때
+            checkList[4] = true;
+            $("#btn-send").attr("disabled", false);
+            $('.checkMail').css("display", "none");
+            $('.mail_ok').css("display", "inline-block");
+            $('.mail_already').css("display", "none");
+            $('.mail_not').css("display", "none");
+        }
+    }
+    ;
+
+    $(function () { // 주민 번호 숫자만 입력 가능하게
+        $("#sellerBirth").on("blur keyup", function () {
+            $(this).val($(this).val().replace(/[^0-9]/g, ""));
+        });
+    });
+
+    $(function () { // 주민 번호 숫자만 입력 가능하게
+        $("#sellerGender").on("blur keyup", function () {
+            $(this).val($(this).val().replace(/[^0-9]/g, ""));
+        });
+    });
+
+    // 생년월일, 성별 빈칸이나 6자리 체크
+    function checkBirthGender() {
+        let bir = $('#sellerBirth').val();
+        let gen = $('#sellerGender').val();
+
+        if (bir == '' || gen == '') { //빈값
+            $('.checkBG').css('display', 'inline-block');
+            checkList[5] = false;
+        } else {
+            $('.checkBG').css('display', 'none');
+            checkList[5] = true;
+        }
+
+        if (bir.length != 6) { //6자리가 아니라면 6자리 입력하라 표시
+            $('.checkBirth').css('display', 'inline-block');
+            checkList[5] = false;
+        } else {
+            $('.checkBirth').css('display', 'none');
+            checkList[5] = true;
+        }
+    }
+
+    const monthList = [
+        {month: "01", firstDay: 1, lastDay: 31},
+        {month: "02", firstDay: 1, lastDay: 29},
+        {month: "03", firstDay: 1, lastDay: 31},
+        {month: "04", firstDay: 1, lastDay: 30},
+        {month: "05", firstDay: 1, lastDay: 31},
+        {month: "06", firstDay: 1, lastDay: 30},
+        {month: "07", firstDay: 1, lastDay: 31},
+        {month: "08", firstDay: 1, lastDay: 31},
+        {month: "09", firstDay: 1, lastDay: 30},
+        {month: "10", firstDay: 1, lastDay: 31},
+        {month: "11", firstDay: 1, lastDay: 30},
+        {month: "12", firstDay: 1, lastDay: 31},
+    ]
+
+    function checkGender() {
+        let bir = $("#sellerBirth").val();
+        let gen = $("#sellerGender").val();
+        let birFirst = parseInt(bir.charAt(0));
+
+
+        if (bir.length == 6) {
+            bir = $("#sellerBirth").val();
+            let birthCheck = false;
+
+            let birth2 = bir.charAt(2);
+            let birth3 = bir.charAt(3);
+            let monthBirth = birth2 + birth3;
+            console.log(monthBirth);
+            monthList.map((months) => {
+                if (months.month == monthBirth) {
+                    let birthDay = bir.charAt(4) + bir.charAt(5);
+                    birthDay = parseInt(birthDay);
+                    for (let i = months.firstDay; i <= months.lastDay; i++) {
+                        if (i == birthDay) {
+                            birthCheck = true;
+                            if (birFirst === 0 || birFirst === 1 || birFirst === 2) {
+                                if (gen != 3 && gen != 4) {
+                                    console.log(birFirst);
+                                    $('.checkOld').css('display', 'none');
+                                    $('.checkYoung').css('display', 'inline-block');
+                                    checkList[6] = false;
+                                } else {
+                                    $('.checkYoung').css('display', 'none');
+                                    checkList[6] = true;
+                                }
+
+                            } else {
+                                if (gen != 1 && gen != 2) {
+                                    $('.checkYoung').css('display', 'none');
+                                    console.log(birFirst);
+                                    $('.checkOld').css('display', 'inline-block');
+                                    checkList[6] = false;
+                                } else {
+                                    $('.checkOld').css('display', 'none');
+                                    checkList[6] = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+            if (birthCheck == false) {
+                $('.checkBirth').css('display', 'inline-block');
+                checkList[6] = false;
+            }
+        }
+    }
+
+
+    // 주소 체크
+    function checkAddress() {
+        var addr1 = $('#sigunguCode').val();
+        var addr2 = $('#jibunAddress').val();
+        var addr3 = $('#roadAddress').val();
+
+        if (addr1 == '' || addr2 == '' || addr3 == '') {
+            $('.checkAddr').css('display', 'inline-block');
+            checkList[7] = false;
+        } else {
+            $('.checkAddr').css('display', 'none');
+            checkList[7] = true;
+        }
+
+    }
+
+
     let confirmNum = '';
     /**
      * 이메일 인증 보내는 함수
      * */
     const sendEmail = async () => {
         $("#emailCheck").attr('hidden', false);
-        const {data} = await axios.post('http://localhost:8080/emailConfirm', null, {params: {email: $("#email").val()}});
+        const {data} = await axios.post('http://localhost:8080/emailConfirm', null, {params: {email: $("#sellerId").val()}});
         confirmNum = data;
         console.log(confirmNum);
     }
     /**
      * 인증번호 체크하는 함수
      * */
-    const confirmNumCheck = () => $("#confirmNum").val() == confirmNum ? alert("인증되었습니다.") : alert("인증번호가 일치하지 않습니다.");
+    const confirmNumCheck = () => {
+        if ($("#confirmNum").val() == confirmNum) {
+            alert('인증되었습니다.');
+            checkList[8] = true;
+        } else {
+            alert("인증번호를 다시 확인해주세요");
+            checkList[8] = false;
+        }
+    };
 
+    //사업자명
+    function businessNameCheck() {
+        var bName = $('#businessName').val();
+
+        if (bName == '') {
+            $('.business_name_blank').css('display', 'inline-block');
+            $('.business_name_ok').css('display', 'none');
+            checkList[9] = false;
+        } else {
+            $('.business_name_blank').css('display', 'none');
+            $('.business_name_ok').css('display', 'inline-block');
+            checkList[9] = true;
+        }
+    }
+
+
+    //사업자 등록번호 business_num_ok business_num_blank business_num_exist business_num_not10
+    async function businessNumCheck() {
+        var bNum = $('#businessNum').val();
+        let {data} = await axios.post("http://localhost:8080/businessNumCheck", null, {
+            params: {
+                businessNumData: bNum
+            }
+        });
+        console.log(data);
+
+        if (bNum == '') { //빈값
+            $('.business_num_blank').css('display', 'inline-block');
+            $('.business_num_ok').css('display', 'none');
+            $('.business_num_exist').css('display', 'none');
+            $('.business_num_not10').css('display', 'none');
+            checkList[10] = false;
+        } else if (bNum.length != 10) { //10자리가 아닐 때
+            $('.business_num_not10').css('display', 'inline-block');
+            $('.business_num_ok').css('display', 'none');
+            $('.business_num_blank').css('display', 'none');
+            $('.business_num_exist').css('display', 'none');
+            checkList[10] = false;
+        } else if (data != "") { //DB에 저장된 것들 중 중복
+            $('.business_num_blank').css('display', 'none');
+            $('.business_num_ok').css('display', 'none');
+            $('.business_num_exist').css('display', 'inline-block');
+            $('.business_num_not10').css('display', 'none');
+            checkList[10] = false;
+        } else { //10자리 && 중복아닌 값 충족!!!!
+            $('.business_num_blank').css('display', 'none');
+            $('.business_num_exist').css('display', 'none');
+            $('.business_num_not10').css('display', 'none');
+            $('.business_num_ok').css('display', 'inline-block');
+            checkList[10] = true;
+            return bNum;
+        }
+    }
+
+    //마지막으로 모든 배열 true확인
+    const checkAll = () => {
+        const AllChecked = (val) => val == true;
+
+        if (checkList.every(AllChecked)) {
+            alert("회원 가입을 축하합니다");
+            $("#btn-signUp").attr("type", "submit");
+            $("#btn-signUp").onclick();
+            console.log(checkList);
+        } else {
+            alert("공백란이나 잘못된 입력을 확인해 주세요");
+            console.log(checkList);
+        }
+    };
 
     return (
         <WrapLogin>
@@ -39,15 +432,29 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input style={{width: 400}} type="email" id={'email'} name={'sellerId'}
-                                               placeholder="이메일을 입력해주세요."/>
-                                        <button className={"btn btn-primary ms-1"} type={'button'} style={{width: 90}}><p
-                                            className={"p-0 m-0"} onClick={sendEmail}>인증코드전송</p></button>
+                                        <Input style={{width: 400}} type="email" id={'sellerId'} name={'sellerId'}
+                                               onClick={checkMail} onChange={checkMail} placeholder="이메일을 입력해주세요."/>
+                                        <button id={'btn-send'} className={"btn btn-primary ms-1"} type={'button'}
+                                                disabled={true}
+                                                style={{width: 90}}>
+                                            <p className={"p-0 m-0"} onClick={sendEmail}>인증코드전송</p></button>
+                                        <HiddenMessage style={okStyle} className="mail_ok ok">사용 가능한
+                                            이메일입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="mail_already no">이미 사용중인
+                                            이메일입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="mail_not no">잘못된
+                                            이메일입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="checkMail no">필수
+                                            항목입니다.</HiddenMessage>
                                     </InputTextSizeW>
                                     <InputTextSizeW id={'emailCheck'} hidden={true}>
-                                        <Input id={'confirmNum'} style={{width: 400}} type="text" placeholder="인증번호를 입력해주세요"></Input>
-                                        <button className={"btn btn-primary ms-1"} type={'button'} style={{width: 90}} onClick={confirmNumCheck}><p
-                                            className={"p-0 m-0"}>인증하기</p></button>
+                                        <Input id={'confirmNum'} style={{width: 400}} type="text"
+                                               placeholder="인증번호를 입력해주세요"></Input>
+                                        <button className={"btn btn-primary ms-1"} type={'button'}
+                                                onClick={confirmNumCheck}
+                                                style={{width: 90}}>
+                                            <p className={"p-0 m-0"}>인증하기</p></button>
+                                        <HiddenMessage>인증번호를 입력해주세요</HiddenMessage>
                                     </InputTextSizeW>
                                 </FormBlockBody>
                             </FormBlock>
@@ -57,13 +464,35 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input type={'password'} name={"sellerPass"}
+                                        <Input type={'password'} name={"sellerPass"} id={"sellerPass"} onClick={checkPw}
+                                               onChange={() => {
+                                                   checkPw();
+                                                   checkDoublePw();
+                                               }}
                                                placeholder="비밀번호 (영문+숫자+특수문자 8자 이상)"/>
+                                        <HiddenMessage style={okStyle} className="pwd_ok ok">사용 가능한
+                                            비밀번호입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="pwd_not no">8~16자 영문 대 소문자, 숫자,
+                                            특수문자를 사용하세요.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="pwd_space no">비밀번호는 공백 없이
+                                            입력해주세요.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="checkPw no">필수
+                                            항목입니다.</HiddenMessage>
                                     </InputTextSizeW>
                                 </FormBlockBody>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input type={'password'} placeholder="비밀번호 확인"/>
+                                        <Input type={'password'} placeholder="비밀번호 확인" id={"sellerPass2"}
+                                               onClick={checkPw2} onChange={() => {
+                                            checkPw2();
+                                            checkDoublePw();
+                                        }}/>
+                                        <HiddenMessage style={okStyle} className="pwd2_ok ok">두 비밀번호가
+                                            일치합니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="pwd2_not no">두 비밀번호가
+                                            다릅니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="checkPw2 no">필수
+                                            항목입니다.</HiddenMessage>
                                     </InputTextSizeW>
                                 </FormBlockBody>
                             </FormBlock>
@@ -74,7 +503,11 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeWTypeL>
-                                        <Input type="text" name={"sellerName"} placeholder="이름을 입력해 주세요"/>
+                                        <Input type="text" name={"sellerName"} id={"sellerName"} onChange={checkName}
+                                               onClick={checkName}
+                                               placeholder="이름을 입력해 주세요"/>
+                                        <HiddenMessage style={noStyle} className="checkName no">필수
+                                            항목입니다.</HiddenMessage>
                                     </InputTextSizeWTypeL>
                                 </FormBlockBody>
                             </FormBlock>
@@ -86,26 +519,62 @@ function UserSignUp() {
                                 <FormBlockBody>
                                     <InputTextSizeWTypeL>
                                         <Input type="hidden" required/>
-                                        <Input type="tel" name={"sellerTel"} placeholder="ex) 010-1234-5678"
+                                        <Input type="tel" name={"sellerTel"} placeholder="'-'를 제외한 번호를 입력해주세요"
+                                               onClick={checkTel} onChange={checkTel}
+                                               id={"sellerTel"}
                                                data-auth="cell_phone"/>
+                                        <HiddenMessage style={okStyle} className="ph_ok ok">사용 가능한
+                                            전화번호입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="ph_already no">이미 사용중인
+                                            전화번호입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="ph_not no">잘못된
+                                            전화번호입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="checkPh no">필수 항목입니다.</HiddenMessage>
                                     </InputTextSizeWTypeL>
                                 </FormBlockBody>
                             </FormBlock>
 
                             <FormBlock>
                                 <FormBlockHead>
-                                    <AsteriskRed>*</AsteriskRed> 주민등록번호
+                                    <AsteriskRed>*</AsteriskRed> 생년월일 / 성별
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeW>
+                                        {/* 생일 */}
                                         <Input name={"sellerBirth"} style={{width: 241}} maxLength={6}
+                                               onClick={() => {
+                                                   checkBirthGender();
+                                                   checkGender();
+                                               }} onChange={() => {
+                                            checkBirthGender();
+                                            checkGender();
+                                        }}
+                                               id={"sellerBirth"}
                                                className={"col-6"}
                                                placeholder="* * * * * *"/>
                                         &nbsp;-&nbsp;
+                                        {/* 성별 */}
                                         <Input name={"sellerGender"} style={{width: 50}} maxLength={1}
-                                               className={"col-6"} placeholder="*"/>
+                                               onChange={() => {
+                                                   checkBirthGender();
+                                                   checkGender();
+                                               }} onClick={() => {
+                                            checkBirthGender();
+                                            checkGender();
+                                        }}
+                                               id={"sellerGender"}
+                                               className={"col-6"}
+                                               placeholder="*"/>
                                         &nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*
                                     </InputTextSizeW>
+                                    <HiddenMessage style={noStyle} className="checkBG no">필수 항목입니다.</HiddenMessage>
+                                    <br/>
+                                    <HiddenMessage style={noStyle} className="checkBirth no">생년월일 6자리를 정확히
+                                        입력해주세요</HiddenMessage>
+                                    <HiddenMessage style={noStyle} className="checkOld">1 또는 2만 입력 가능합니다</HiddenMessage>
+                                    <HiddenMessage style={noStyle} className="checkYoung">3 또는 4만 입력
+                                        가능합니다</HiddenMessage>
+                                    <HiddenMessage style={noStyle} className="checkBirth">올바른 입력이 아닙니다</HiddenMessage>
                                 </FormBlockBody>
                             </FormBlock>
 
@@ -115,7 +584,15 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeWTypeL>
-                                        <Input name={"sellerBusinessName"} type="text" placeholder="사업자명을 입력해주세요"/>
+                                        <Input onClick={businessNameCheck} onChange={businessNameCheck}
+                                               name={"sellerBusinessName"} id={"businessName"} type="text"
+                                               placeholder="사업자명을 입력해주세요"/>
+                                        <HiddenMessage style={okStyle} className="business_name_ok ok">사용가능한 사업자명
+                                            입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="business_name_blank no">필수
+                                            항목입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="business_name_exist no">이미 등록된 사업자
+                                            이름입니다.</HiddenMessage>
                                     </InputTextSizeWTypeL>
                                 </FormBlockBody>
                             </FormBlock>
@@ -126,7 +603,17 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeWTypeL>
-                                        <Input name={"sellerBusinessNum"} type="text" placeholder="ex) ???-??-?????"/>
+                                        <Input onClick={businessNumCheck} onChange={businessNumCheck}
+                                               name={"sellerBusinessNum"} id={"businessNum"} type="text" maxLength={10}
+                                               placeholder="사업자 등록번호 10자리를 '-'없이 입력해주세요"/>
+                                        <HiddenMessage style={okStyle} className="business_num_ok ok">사용가능한 사업자 등록번호
+                                            입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="business_num_blank no">필수
+                                            항목입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="business_num_exist no">이미 등록된 사업자
+                                            번호입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className={"business_num_not10 no"}>사업자 등록번호
+                                            10자리를 '-'없이 입력해주세요.</HiddenMessage>
                                     </InputTextSizeWTypeL>
                                 </FormBlockBody>
                             </FormBlock>
@@ -136,17 +623,16 @@ function UserSignUp() {
                                     <AsteriskRed>*</AsteriskRed> 주소
                                 </FormBlockHead>
                                 <FormBlockBody>
-                                    <Popup/>
+                                    <Popup checkFunc={checkAddress}/>
                                     <Input name={"sellerAddrNum"} className={'my-1'} id={"sigunguCode"}
                                            placeholder={'우편번호'} readOnly={true}/>
                                     <Input name={"sellerAddrJibun"} className={'my-1'} id={"jibunAddress"}
-                                           placeholder={'지번 주소'}
-                                           readOnly={true}/>
+                                           placeholder={'지번 주소'} readOnly={true}/>
                                     <Input name={"sellerAddrRoad"} className={'my-1'} id={"roadAddress"}
-                                           placeholder={'도로명 주소'}
-                                           readOnly={true}/>
+                                           placeholder={'도로명 주소'} readOnly={true}/>
                                     <Input name={"sellerAddrDetail"} className={'my-1'} id={"addressDetail"}
                                            placeholder={'상세주소를 입력해주세요.'}/>
+                                    <HiddenMessage style={noStyle} className="checkAddr no">필수 항목입니다.</HiddenMessage>
                                 </FormBlockBody>
                             </FormBlock>
 
@@ -173,17 +659,21 @@ function UserSignUp() {
                                         </TermsItem>
                                     </TermsBody>
                                 </Terms>
-
                                 <Terms1Error/>
                                 <TermsError/>
                             </FormBlockCheckAllWrap>
 
                             <FormBlockSubmit>
                                 <FormBlockBody>
-                                    <BtnLogin type="submit">회원가입하기</BtnLogin>
+                                    <BtnLogin onClick={checkAll} type="button" id={"btn-signUp"}>회원가입하기</BtnLogin>
                                 </FormBlockBody>
                             </FormBlockSubmit>
                         </form>
+                        <FormBlockSubmit>
+                            <FormBlockBody>
+                                <BtnBack id={"btn-back"} type={"button"} onClick={toMain}>메인페이지로 이동</BtnBack>
+                            </FormBlockBody>
+                        </FormBlockSubmit>
                     </LoginSection>
                 </LoginWrap>
             </ReauthPhone>
@@ -192,7 +682,18 @@ function UserSignUp() {
         ;
 }
 
-//
+const okStyle = {
+    color: "#009000"
+}
+const noStyle = {
+    color: "#ff0000"
+}
+
+const HiddenMessage = styled.span`
+    font-size: smaller;
+    display: none;
+`
+
 const AuthBtn = styled.button`
   display: inline-block;
   vertical-align: middle;
@@ -231,6 +732,22 @@ const BtnLogin = styled.button`
   color: #fff;
   background: #f1c333;
   border: 1px solid #f1c333;
+  width: 100%;
+  height: 48px;
+  line-height: 48px;
+  font-size: 16px;
+`;
+
+const BtnBack = styled.button`
+  border-radius: 2px;
+  text-align: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  background: #808080;
+  border: 1px solid #808080;
   width: 100%;
   height: 48px;
   line-height: 48px;
@@ -309,39 +826,6 @@ const TermsLabel = styled.label`
   display: block;
   font-size: 14px;
 `;
-
-// const BpCheckAll = styled.input`
-//   -webkit-appearance: none;
-//   background: transparent;
-//   display: inline-block;
-//   position: relative;
-//   height: 18px;
-//   width: 18px;
-//   vertical-align: middle;
-//   -webkit-box-sizing: border-box;
-//   box-sizing: border-box;
-//   border: 0;
-//   margin: 0;
-
-//   &:before {
-//     font-size: 16px;
-//     font-style: normal;
-//     content: "✓";
-//     border: 1px solid #f1c333	;
-//     background: #f1c333	;
-//     color: #fff;
-//     cursor: pointer;
-//     display: inline-block;
-//     line-height: 16px;
-//     width: 16px;
-//     height: 16px;
-//     position: absolute;
-//     top: 0px;
-//     left: 0px;
-//     border-radius: 2px;
-//     text-align: center;
-//   }
-// `;
 
 const InputCheckBox = styled.div`
   float: left;
@@ -564,4 +1048,4 @@ const WrapLogin = styled.div`
   background: #fff;
 `;
 
-export default UserSignUp;
+export default SellerSignUp;

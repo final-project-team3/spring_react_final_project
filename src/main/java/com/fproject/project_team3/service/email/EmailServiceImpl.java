@@ -17,9 +17,7 @@ public class EmailServiceImpl implements EmailService {
     @Autowired
     JavaMailSender emailSender;
 
-
     String ePw;
-
 
     private MimeMessage createMessage(String to)throws Exception{
 

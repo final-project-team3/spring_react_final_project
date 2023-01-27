@@ -11,7 +11,9 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public void insertUser(UserInfoDto userInfoDto) {userMapper.insertUser(userInfoDto);}
+    public void insertUser(UserInfoDto userInfoDto) {
+        userMapper.insertUser(userInfoDto);
+    }
 
     @Override
     public String emailCheck(String userId) {
