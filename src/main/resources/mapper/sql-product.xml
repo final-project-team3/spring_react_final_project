@@ -13,6 +13,14 @@
         FROM product_kind
         WHERE product_gender = #{productBigKind}
     </select>
+
+    <select id="getSearchProductList" parameterType="String"
+            resultType="com.fproject.project_team3.dto.product.ProductInfoDto">
+        SELECT *
+        FROM product_info
+        WHERE product_name LIKE CONCAT('%',#{searchContent},'%')
+    </select>
+
     <!-- HSH -->
 
     <!-- LYS -->

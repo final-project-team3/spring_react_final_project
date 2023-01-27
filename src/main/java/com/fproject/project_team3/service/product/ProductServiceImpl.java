@@ -1,5 +1,6 @@
 package com.fproject.project_team3.service.product;
 import com.fproject.project_team3.dto.gwak.GwakTestTblDto;
+import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,11 @@ public class ProductServiceImpl implements ProductService {
   @Override
   public List<ProductKindDto> getSmallKind(String productBigKind) {
     return productMapper.getSmallKind(productBigKind);
+  }
+
+  @Override
+  public List<ProductInfoDto> getSearchProductList(String searchContent) {
+    return productMapper.getSearchProductList(searchContent);
   }
 
 

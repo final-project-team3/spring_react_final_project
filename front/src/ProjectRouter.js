@@ -25,6 +25,7 @@ import SellerLogin from "./BJH/SellerLogin";
 import Test from "./GJY/Test";
 import UserJoinResult from "./BJH/UserJoinResult";
 import SellerJoinResult from "./BJH/SellerJoinResult";
+import Search from "./HSH/Search";
 
 const ProjectRouter = () => {
 
@@ -36,6 +37,7 @@ const ProjectRouter = () => {
                     <Route index element={<Main/>}/>
                     <Route path={'productDetail'} element={<ProductDetail/>}/>
                     <Route path={'productList'} element={<ProductList/>}/>
+                    <Route path={'search'} element={<Search/>}/>
                     {/*HSH*/}
 
                     {/*LYS*/}

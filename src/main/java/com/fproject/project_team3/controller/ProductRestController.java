@@ -2,6 +2,7 @@ package com.fproject.project_team3.controller;
 
 import com.fproject.project_team3.dto.gwak.GwakTestTblDto;
 import com.fproject.project_team3.dto.join.UserOrderListProductInfoDto;
+import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,12 @@ public class ProductRestController {
     @PostMapping("/getSmallKind")
     public List<ProductKindDto> getSmallKind(@RequestParam("bigKind") String productBigKind) {
         return productService.getSmallKind(productBigKind);
+    }
+
+//    검색
+    @PostMapping("/getSearchProductList")
+    public List<ProductInfoDto> getSearchProductList(@RequestParam("searchContent") String searchContent) {
+        return productService.getSearchProductList(searchContent);
     }
     //    HSH
 

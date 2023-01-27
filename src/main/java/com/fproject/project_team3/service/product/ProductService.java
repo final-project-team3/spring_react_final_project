@@ -1,6 +1,7 @@
 package com.fproject.project_team3.service.product;
 
 import com.fproject.project_team3.dto.gwak.GwakTestTblDto;
+import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public interface ProductService {
   List<ProductKindDto> getKind();
 
   List<ProductKindDto> getSmallKind(String productBigKind);
+
+    List<ProductInfoDto> getSearchProductList(String searchContent);
 
     //    HSH
 
