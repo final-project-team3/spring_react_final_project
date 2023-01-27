@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const ARRAY = [0, 1, 2, 3, 4];
 
-function Rating() {
+function DetailRating() {
     const [clicked, setClicked] = useState([false, false, false, false, false]);
 
     const handleStarClick = index => {
@@ -48,7 +48,7 @@ function Rating() {
     );
 }
 
-export default Rating;
+export default DetailRating;
 
 const Wrap = styled.div`
   display: flex;

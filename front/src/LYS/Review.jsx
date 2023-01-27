@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import jquery from 'jquery';
 import $ from 'jquery';
-import Rating from "./Rating";
+import DetailRating from "./DetailRating";
 
 const ReviewText = styled.textarea`
     width: 50%;
@@ -20,7 +20,7 @@ function Review(props) {
                     <div className="text-md-start">
                         <div className={"review_info"}>
                             <div className={"reviewer_id"}>{props.id}</div>
-                            <Rating rating={props.starPoint}/>
+                            <DetailRating rating={props.starPoint}/>
                             <div className={"seller_id"}>외길물산(주)</div>
                             <div className={"registration_date"}>{props.date}</div>
                         </div>
