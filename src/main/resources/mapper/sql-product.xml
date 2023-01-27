@@ -1,57 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fproject.project_team3.mapper.ProductMapper">
+    <!-- HSH -->
+    <select id="getKind" resultType="com.fproject.project_team3.dto.product.ProductKindDto">
+        SELECT distinct product_gender
+        FROM product_kind
+        order by product_gender
+    </select>
 
-  <!-- HSH -->
+    <select id="getSmallKind" resultType="com.fproject.project_team3.dto.product.ProductKindDto">
+        SELECT product_small_kind
+        FROM product_kind
+        WHERE product_gender = #{productBigKind}
+    </select>
+    <!-- HSH -->
 
-  <!-- HSH -->
+    <!-- LYS -->
 
-  <!-- LYS -->
+    <!-- LYS -->
 
-  <!-- LYS -->
+    <!-- GJY -->
+    <select id="getProductSelectList" resultType="com.fproject.project_team3.dto.product.ProductKindDto">
+        SELECT distinct product_gender
+        FROM product_kind
+        order by product_gender
+    </select>
 
-  <!-- GJY -->
-  <select id="getProductSelectList" resultType="com.fproject.project_team3.dto.product.ProductKindDto">
-    SELECT distinct product_gender
-    FROM product_kind
-    order by product_gender
-  </select>
+    <select id="getProductSmallSelectList" parameterType="String"
+            resultType="com.fproject.project_team3.dto.product.ProductKindDto">
+        SELECT product_small_kind
+        FROM product_kind
+        where product_gender = #{productKind}
+    </select>
 
-  <select id="getProductSmallSelectList" parameterType="String"
-          resultType="com.fproject.project_team3.dto.product.ProductKindDto">
-    SELECT product_small_kind
-    FROM product_kind
-    where product_gender = #{productKind}
-  </select>
+    <!--    <select id="getSelectTestData" parameterType="int" resultType="com.fproject.project_team3.dto.gwak.GwakTestTblDto">-->
+    <!--        SELECT img-->
+    <!--        FROM gwak_test_tbl-->
+    <!--        where idx = #{idx}-->
+    <!--    </select>-->
 
-  <!--    <select id="getSelectTestData" parameterType="int" resultType="com.fproject.project_team3.dto.gwak.GwakTestTblDto">-->
-  <!--        SELECT img-->
-  <!--        FROM gwak_test_tbl-->
-  <!--        where idx = #{idx}-->
-  <!--    </select>-->
-
-  <insert id="getSelectTestData" parameterType="String">
-    insert
-    gwak_test_tbl
+    <insert id="getSelectTestData" parameterType="byte">
+        insert
+        gwak_test_tbl
     (img)
-    value (#{img});
-  </insert>
+    value (
+        #{img}
+        );
+    </insert>
+    <!-- GJY -->
 
+    <!-- BJH -->
 
-  <!--  신규상품 정보 등록 -->
-  <insert id="insertProductData" parameterType="com.fproject.project_team3.dto.product.ProductInfoDto">
-    INSERT INTO product_info(product_num, product_kind_num, product_name, product_price, product_seller_id, product_registration_date, product_img, product_content, review_star_point, product_delivery_day)
-    VALUES (null, 0, #{productName}, "10000", "testSeller01", DATE_FORMAT(now(), '%Y-%m-%d'), "testImg", "testContent", "3", "2");
-  </insert>
+    <!-- BJH -->
 
+    <!-- LSH -->
 
-  <!-- GJY -->
-
-  <!-- BJH -->
-
-  <!-- BJH -->
-
-  <!-- LSH -->
-
-  <!-- LSH -->
+    <!-- LSH -->
 </mapper>

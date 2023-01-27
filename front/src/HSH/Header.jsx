@@ -1,10 +1,65 @@
 import {Link, Outlet} from "react-router-dom";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
+import {hover} from "@testing-library/user-event/dist/hover";
+import axios from "axios";
+
+
+const Kind = (props) => {
+    let smallKindList = [];
+
+    if (props.smallKind != null) {
+        smallKindList = [props.smallKind];
+        smallKindList = smallKindList[0];
+        console.log([smallKindList][0]);
+    }
+    return (
+        <div>
+            <Link className={'dropdown-toggle'} id={`dropdown${props.index}`} data-bs-toggle="dropdown" style={{
+                textDecoration: "none"
+            }}><h2>{props.bigKind}</h2></Link>
+            <ul className={'dropdown-menu'} aria-labelledby={`dropdown${props.index}`}>
+                {[smallKindList][0].map((item) => <li className={'dropdown-item'}>{item.productSmallKind}</li>
+                )}
+            </ul>
+        </div>
+    )
+}
 
 const Header = () => {
+
     const [isClick, setIsClick] = useState(false);
     const [rankClick, setRankClick] = useState(true);
+    // 큰 카테고리, 남자/여자
+    const [bigKind, setBigKind] = useState([]);
+    // 작은 카테고리,
+    const [smallKind, setSmallKind] = useState([]);
+    let smallList = [];
+
+
+    useEffect(() => {
+        axios.post("http://localhost:8080/getKind")
+            .then((req) => {
+                const {data} = req;
+                setBigKind(data);
+
+                data.map((item, index, dataList) => {
+                    axios.post("http://localhost:8080/getSmallKind", null, {
+                        params: {bigKind: item.productGender}
+                    })
+                        .then((req2) => {
+                            const data2 = req2.data;
+                            smallList.push(data2);
+
+                            if (smallList.length == dataList.length) {
+                                setSmallKind(smallList);
+                            }
+                        })
+                })
+
+            })
+    }, []);
+
 
     return (
         <div style={{
@@ -60,7 +115,8 @@ const Header = () => {
                                     <ul className="nav nav-tabs" id="myTab" role="tablist">
                                         <li className="nav-item" role="presentation">
                                             <button className="nav-link active" id="home-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#home" type="button" role="tab" aria-controls="home"
+                                                    data-bs-target="#home" type="button" role="tab"
+                                                    aria-controls="home"
                                                     aria-selected="true">Home
                                             </button>
                                         </li>
@@ -108,6 +164,22 @@ const Header = () => {
                     </div>
                 </div>
             </nav>
+
+            {/* 카테고리 영역 */}
+            <div className={'container'}>
+                <ul className={'d-flex justify-content-around'}>
+                    <li></li>
+                    {
+                        bigKind.map((kinds, index, bigKindList) => {
+                            return (
+                                <Kind key={index} smallKind={smallKind[index]} index={index}
+                                      bigKind={kinds.productGender}/>
+                            )
+                        })
+                    }
+                    <li></li>
+                </ul>
+            </div>
             <Outlet/>
         </div>
     )

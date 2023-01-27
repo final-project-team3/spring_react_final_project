@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -29,6 +28,16 @@ public class ProductServiceImpl implements ProductService {
   @Override
   public void insertProductData(String productName, String selectBigKind, String selectSmallKind) throws Exception {
     productMapper.insertProductData(productName, selectBigKind, selectSmallKind);
+  }
+
+  @Override
+  public List<ProductKindDto> getKind() {
+    return productMapper.getKind();
+  }
+
+  @Override
+  public List<ProductKindDto> getSmallKind(String productBigKind) {
+    return productMapper.getSmallKind(productBigKind);
   }
 
 

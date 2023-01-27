@@ -3,23 +3,23 @@ package com.fproject.project_team3.mapper;
 import com.fproject.project_team3.dto.gwak.GwakTestTblDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
 
 @Mapper
 public interface ProductMapper {
-  List<ProductKindDto> getProductSelectList();
+    List<ProductKindDto> getProductSelectList();
 
-  List<ProductKindDto> getProductSmallSelectList(String productKind);
+    List<ProductKindDto> getProductSmallSelectList(String productKind);
 
-  void insertProductData(String productName, String selectBigKind, String selectSmallKind) throws Exception;
+    List<GwakTestTblDto> getSelectTestData(byte img) throws Exception;
 
+    List<ProductKindDto> getKind();
 
-//  void getSelectTestData(String img) throws Exception;
+    List<ProductKindDto> getSmallKind(String productBigKind);
 
-  //    HSH
+    //    HSH
 
     //    HSH
 

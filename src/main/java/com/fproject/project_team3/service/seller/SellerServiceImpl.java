@@ -16,6 +16,17 @@ public class SellerServiceImpl implements SellerService {
         sellerMapper.insertSeller(sellerInfoDto);
     }
 
+    @Override
+    public String emailCheck(String sellerId) { return sellerMapper.emailCheck(sellerId); }
+
+    @Override
+    public String telCheck(String sellerTel) {
+        return sellerMapper.telCheck(sellerTel);
+    }
+
+    @Override
+    public String businessNumCheck(String businessNum) { return sellerMapper.businessNumCheck(businessNum); }
+
     //    HSH
 
     //    HSH

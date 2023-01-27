@@ -17,9 +17,11 @@ public class EmailServiceImpl implements EmailService {
     @Autowired
     JavaMailSender emailSender;
 
-    public static final String ePw = createKey();
+    String ePw;
 
     private MimeMessage createMessage(String to)throws Exception{
+
+        ePw = createKey();
 //        System.out.println("보내는 대상 : "+ to);
 //        System.out.println("인증 번호 : "+ePw);
         MimeMessage  message = emailSender.createMimeMessage();
@@ -47,7 +49,7 @@ public class EmailServiceImpl implements EmailService {
         return message;
     }
 
-    public static String createKey() {
+    public String createKey() {
         StringBuffer key = new StringBuffer();
         Random rnd = new Random();
 

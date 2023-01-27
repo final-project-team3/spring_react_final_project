@@ -7,7 +7,6 @@ import com.fproject.project_team3.dto.product.ProductKindDto;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Map;
 
 public interface ProductService {
   List<ProductKindDto> getProductSelectList() throws Exception;
@@ -23,7 +22,11 @@ public interface ProductService {
 
 //  void getSelectTestData(String img) throws Exception;
 
-  //    HSH
+  List<ProductKindDto> getKind();
+
+  List<ProductKindDto> getSmallKind(String productBigKind);
+
+    //    HSH
 
     //    HSH
 
