@@ -540,6 +540,7 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <Popup checkFunc={checkAddress}/>
+                                    <HiddenMessage style={noStyle} className="checkAddr no">필수 항목입니다.</HiddenMessage>
                                     <Input name={"userAddrNum"} className={'my-1'} id={"sigunguCode"}
                                            placeholder={'우편번호'} readOnly={true}/>
                                     <Input name={"userAddrJibun"} className={'my-1'} id={"jibunAddress"}
@@ -548,7 +549,6 @@ function UserSignUp() {
                                            placeholder={'도로명 주소'} readOnly={true}/>
                                     <Input name={"userAddrDetail"} className={'my-1'} id={"addressDetail"}
                                            placeholder={'상세주소를 입력해주세요.'}/>
-                                    <HiddenMessage style={noStyle} className="checkAddr no">필수 항목입니다.</HiddenMessage>
                                 </FormBlockBody>
                             </FormBlock>
 

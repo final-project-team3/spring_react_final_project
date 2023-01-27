@@ -11,7 +11,6 @@ const ReviewText = styled.textarea`
 `;
 
 
-
 function Review(props) {
     return (
         <ul>
