@@ -396,6 +396,7 @@ function SellerSignUp() {
             $('.business_num_not10').css('display', 'none');
             $('.business_num_ok').css('display', 'inline-block');
             checkList[10] = true;
+            return bNum;
         }
     }
 
@@ -584,7 +585,7 @@ function SellerSignUp() {
                                 <FormBlockBody>
                                     <InputTextSizeWTypeL>
                                         <Input onClick={businessNameCheck} onChange={businessNameCheck}
-                                               name={"businessName"} id={"businessName"} type="text"
+                                               name={"sellerBusinessName"} id={"businessName"} type="text"
                                                placeholder="사업자명을 입력해주세요"/>
                                         <HiddenMessage style={okStyle} className="business_name_ok ok">사용가능한 사업자명
                                             입니다.</HiddenMessage>
@@ -603,7 +604,7 @@ function SellerSignUp() {
                                 <FormBlockBody>
                                     <InputTextSizeWTypeL>
                                         <Input onClick={businessNumCheck} onChange={businessNumCheck}
-                                               name={"businessNum"} id={"businessNum"} type="text" maxLength={10}
+                                               name={"sellerBusinessNum"} id={"businessNum"} type="text" maxLength={10}
                                                placeholder="사업자 등록번호 10자리를 '-'없이 입력해주세요"/>
                                         <HiddenMessage style={okStyle} className="business_num_ok ok">사용가능한 사업자 등록번호
                                             입니다.</HiddenMessage>

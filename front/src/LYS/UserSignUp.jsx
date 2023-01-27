@@ -338,17 +338,35 @@ function UserSignUp() {
         }
     };
 
-    //마지막으로 모든배열 true확인
+    //마지막으로 모든배열 true확인 userId confirmNum userPass userPass2 userName userTel userBirth userGender sigunguCode jibunAddress roadAddress
     const checkAll = () => {
+        let signUp = $('#btn-signUp');
+        // 확인
+        let checkVal = [$('#userId').val(), $("#userPass").val(), $("#userPass2").val(), $("#userName").val(), $("#userTel").val(), $("#userBirth").val(), $("#sigunguCode").val()]
+        // 출력(span)
+        let checkSpan = [$('.checkMail'),$('.checkPw'),$('.checkPw2'),$('.checkName'),$('.checkPh'),$('.checkBG'),$('.checkAddr')]
+
+        let true_cnt = 0;
+
+        for (let i = 0; i < 7; i++) {
+            if (checkList[i] == false && checkVal[i] == '') {
+                checkSpan[i].css('display', 'inline-block')
+            } else if (checkList[i] == true) {
+                true_cnt++
+            }
+        }
+
         const AllChecked = (val) => val == true;
 
-        if (checkList.every(AllChecked)) {
+        if (checkList.every(AllChecked) && true_cnt == 7) {
             alert("회원 가입을 축하합니다");
             $("#btn-signUp").attr("type", "submit");
             $("#btn-signUp").onclick();
+            console.log(true_cnt);
             console.log(checkList);
         } else {
-            alert("공백란이나 잘못된 입력을 확인해 주세요");
+            // alert("공백란이나 잘못된 입력을 확인해 주세요");
+            console.log(true_cnt);
             console.log(checkList);
         }
     };
