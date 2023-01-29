@@ -118,24 +118,6 @@ function ProductRegisterPage() {
     optionTyped();
   }, [optionTotal])
 
-  // // 체크박스 데이터
-  // const SIZE_LIST = [
-  //   {id: 0, data: "XS"},
-  //   {id: 1, data: "S"},
-  //   {id: 2, data: "M"},
-  //   {id: 3, data: "L"},
-  //   {id: 4, data: "XL"},
-  // ];
-  //
-  // // 색상 체크박스 데이터
-  // const COLOR_LIST = [
-  //   {id: 0, data: "블랙"},
-  //   {id: 1, data: "화이트"},
-  //   {id: 2, data: "블루"},
-  //   {id: 3, data: "핑크"},
-  //   {id: 4, data: "옐로우"},
-  // ];
-
 
   // 대분류, 소분류
   useEffect(() => {

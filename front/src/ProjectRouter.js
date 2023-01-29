@@ -28,6 +28,11 @@ import SellerJoinResult from "./BJH/SellerJoinResult";
 import Search from "./HSH/Search";
 import FileUpload from "./GJY/FileUpload";
 import Footer from "./BJH/Footer";
+import ProductRegisterPage2 from "./GJY/ProductRegisterPage2";
+import OptionTable from "./GJY/OptionTable";
+import InputSample from "./GJY/InputSample";
+import OptionList from "./GJY/OptionList";
+import GwakApp from "./GJY/GwakApp";
 
 const ProjectRouter = () => {
 
@@ -51,8 +56,13 @@ const ProjectRouter = () => {
                     <Route path={'/payment'} element={<PaymentPage/>}/>
                     <Route path={'/orderList'} element={<OrderListPage/>}/>
                     <Route path={"/productR"} element={<ProductRegisterPage/>}/>
+                    <Route path={"/productR2"} element={<ProductRegisterPage2/>}/>
+                    <Route path={"/OptionTable"} element={<OptionTable/>}/>
                     <Route path={"/test"} element={<Test/>}/>
                     <Route path={"/fu"} element={<FileUpload/>}/>
+                    <Route path={"/InputSample"} element={<InputSample/>}/>
+                    <Route path={"/OptionList"} element={<OptionList/>}/>
+                    <Route path={"/GwakApp"} element={<GwakApp/>}/>
 
                     {/*GJY*/}
 
