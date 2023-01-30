@@ -119,7 +119,7 @@
 .content {
     float: left;
     position: relative;
-    width: 980px;
+    width: 980px !important;
     padding: 40px 40px 120px;
 }
 
