@@ -5,6 +5,7 @@ import $ from "jquery";
 import FileUploadComponent from "./FileUploadComponent";
 import Swal from "sweetalert2";
 import Select from "react-select";
+import user from "../BJH/User";
 
 function ProductRegisterPage() {
   const [bigKind, setBigKind] = useState([]);
@@ -12,8 +13,6 @@ function ProductRegisterPage() {
   const [productName, setProductName] = useState("");
   const [productNameFlag, setProductNameFlag] = useState(false);
   const [productNameCheckFlag, setProductNameCheckFlag] = useState(false);
-  const [sizeToggle, setSizeToggle] = useState(false);
-  const [colorToggle, setColorToggle] = useState(false);
   const [checkedSizeList, setCheckedSizeList] = useState([]);
   const [checkedColorList, setCheckedColorList] = useState([]);
 
@@ -22,22 +21,89 @@ function ProductRegisterPage() {
   const [optionTotal, setOptionTotal] = useState(1);
   const [optionInputList, setOptionInputList] = useState([]);
 
-  // /**
-  //  * 옵션명 개수 가져와서 그만큼 옵션명 설정할 수 있게 하기 위한 함수
-  //  * */
-  // const optionTyped = () => {
-  //     let optionTotal = $("#option-total").val();
-  //     let returnDiv = [];
-  //     for (let i = 0; i < optionTotal; i++) {
-  //         returnDiv.push(<div className={'row'}>
-  //                 <div className={'d-flex'}>
-  //                     <input className={'col-3'} placeholder={'예시 : 컬러'}/>
-  //                     <input className={'col-6'} placeholder={'예시 : 빨강,노랑 (,로 구분)'}/>
-  //                 </div>
-  //             </div>)
-  //         return returnDiv;
-  //     }
+  // 리스트 데이터
+  const [mainOptionList, setMainOptionList] = useState([]); // mainOptionList
+  const [detailOptionList, setDetailOptionList] = useState([]); // detailOptionList
+
+  const [optionName, setOptionName] = useState([]);
+  const [optionValue, setOptionValue] = useState([]);
+  const [optionRows, setOptionRows] = useState([]);
+
+  // 리스트 초기화
+
+  // const OptionReg = () => {
+  //   // optionTotal 이 2 라면 -> 전체 2번 반복
+  //   for (let i = 0; i < optionTotal; i++) {
+
+  //   // 메인옵션 값 리스트로 넣음 : optionTotal 2 -> 메인옵션 2개 -> 2번반복
+  //   for (let j = 0; j < optionTotal; j++) {
+  //     const mainResult =  setMainOptionList(mainOptionList.concat($(`#option${i}`).val()));
+  //     console.log(`mainResult : ${mainResult}`);
+  //     // setMainOptionList($(`#option${i}`).val());
+  //     setMainOptionList([...mainOptionList, mainResult]);
+  //
+  //     console.log(`mainOptionList : ${mainOptionList}`);
+  //   // alert($(`#option${i}`).val());
+  //   }
+  //   // 옵션2 텍스트 (ex: 빨강, 노랑)
+  //   const option2List = $(`#option${i}-${i}`).val();
+  //   // console.log(option2List);
+  //
+  //   // 옵션2 배열로 변환 (ex: ['빨강','노랑']
+  //   const option2ListResult = option2List.split(",");
+  //   // console.log(option2ListResult);
+  //
+  //   console.log(`option2ListResult[i] : ${option2ListResult[i]}`);
+  //
+  //   const productList = [{
+  //     id: i,
+  //     productOption1: mainOptionList[i],
+  //     productOption2: option2ListResult[i],
+  //   }];
+  //
+  //   for (let k = 0; k < option2ListResult.length; k++) {
+  //     setMainOptionList([...mainOptionList, productList]);
+  //   }
+  //   // setOptionList1([productList]);
+  //   // console.log(`optionList1 : ${optionList1}`);
+  //   // console.log(optionList1);
   // }
+  //   console.log(mainOptionList);
+  // // console.log(optionList1);
+  // }
+
+  const OptionReg = () => {
+    let optionNameList = [];
+    let optionValueList = [];
+
+    for (let i = 0; i < optionTotal; i++) {
+      optionNameList.push($(`#option${i}`).val());
+      optionValueList.push($(`#option${i}-${i}`).val().split(","));
+    }
+
+    setOptionName(optionNameList);
+    setOptionValue(optionValueList);
+
+    let List = [];
+
+    console.log(optionName);
+    console.log(optionValue);
+
+    let count = 1;
+    for (let i = 0; i < optionTotal; i++) {
+      count *= optionValue[i].length;
+    }
+    console.log(count);
+
+    // 옵션 토탈의 크기만큼 돎
+
+      // for (let i = 0; i < optionTotal; i++) {
+      //   for (let j = 0; j < optionValue[j].length; k++) {
+      //     console.log(optionValue[j][k]);
+      //   }
+      // }
+
+  }
 
   /**
    * 옵션명 개수 가져와서 그만큼 옵션명 설정할 수 있게 하기 위한 함수
@@ -49,75 +115,126 @@ function ProductRegisterPage() {
     for (let i = 0; i < optionCount; i++) {
       switch (i) {
         case 0:
-          returnDiv.push(<div className={'row my-2'}>
-            <div className={'col-3 mb-2'}>옵션명</div>
-            <div className={'col-6 mb-2'}>옵션값</div>
-            <div className={'col-3'}></div>
-            <div className={'col-3'}>
-              <input type={'text'} className={'col-3'} placeholder={'예시 : 컬러'}/>
+          returnDiv.push(
+            <div className={"row my-2"}>
+              <div className={"col-3 mb-2"}>옵션명</div>
+              <div className={"col-6 mb-2"}>옵션값</div>
+              <div className={"col-3"}></div>
+              <div className={"col-3"}>
+                <input
+                  type={"text"}
+                  id={`option${i}`}
+                  className={"col-3"}
+                  placeholder={"예시 : 컬러"}
+                />
+              </div>
+              <div className={"col-6"}>
+                <input
+                  type={"text"}
+                  id={`option${i}-${i}`}
+                  className={"col-6"}
+                  placeholder={"예시 : 빨강,노랑 (,로 구분)"}
+                />
+              </div>
+              <div className={"col-2"}>
+                <button
+                  hidden={optionTotal >= 2 ? true : false}
+                  className={"btn btn-outline-primary"}
+                  onClick={() => {
+                    setOptionTotal(2);
+                  }}
+                >
+                  +
+                </button>
+              </div>
             </div>
-            <div className={'col-6'}>
-              <input type={'text'} className={'col-6'} placeholder={'예시 : 빨강,노랑 (,로 구분)'}/>
-            </div>
-            <div className={'col-2'}>
-              <button hidden={optionTotal >= 2 ? true : false} className={'btn btn-outline-primary'}
-                      onClick={() => {
-                        setOptionTotal(2);
-                      }}>+
-              </button>
-            </div>
-          </div>)
+          );
           break;
         case 1:
-          returnDiv.push(<div className={'row my-2'}>
-            <div className={'col-3'}>
-              <input type={'text'} className={'col-3'} placeholder={'예시 : 컬러'}/>
+          returnDiv.push(
+            <div className={"row my-2"}>
+              <div className={"col-3"}>
+                <input
+                  type={"text"}
+                  id={`option${i}`}
+                  className={"col-3"}
+                  placeholder={"예시 : 컬러"}
+                />
+              </div>
+              <div className={"col-6"}>
+                <input
+                  type={"text"}
+                  id={`option${i}-${i}`}
+                  className={"col-6"}
+                  placeholder={"예시 : 빨강,노랑 (,로 구분)"}
+                />
+              </div>
+              <div className={"col-1"}>
+                <button
+                  hidden={optionTotal == 3 ? true : false}
+                  className={"btn btn-outline-primary"}
+                  onClick={() => {
+                    setOptionTotal(1);
+                  }}
+                >
+                  -
+                </button>
+              </div>
+              <div className={"col-1"}>
+                <button
+                  hidden={optionTotal == 3 ? true : false}
+                  className={"btn btn-outline-primary"}
+                  onClick={() => {
+                    setOptionTotal(3);
+                  }}
+                >
+                  +
+                </button>
+              </div>
             </div>
-            <div className={'col-6'}>
-              <input type={'text'} className={'col-6'} placeholder={'예시 : 빨강,노랑 (,로 구분)'}/>
-            </div>
-            <div className={'col-1'}>
-              <button hidden={optionTotal == 3 ? true : false} className={'btn btn-outline-primary'}
-                      onClick={() => {
-                        setOptionTotal(1);
-                      }}>-
-              </button>
-            </div>
-            <div className={'col-1'}>
-              <button hidden={optionTotal == 3 ? true : false} className={'btn btn-outline-primary'}
-                      onClick={() => {
-                        setOptionTotal(3);
-                      }}>+
-              </button>
-            </div>
-          </div>)
+          );
           break;
         case 2:
-          returnDiv.push(<div className={'row my-2'}>
-            <div className={'col-3'}>
-              <input type={'text'} className={'col-3'} placeholder={'예시 : 컬러'}/>
+          returnDiv.push(
+            <div className={"row my-2"}>
+              <div className={"col-3"}>
+                <input
+                  type={"text"}
+                  id={`option${i}`}
+                  className={"col-3"}
+                  placeholder={"예시 : 컬러"}
+                />
+              </div>
+              <div className={"col-6"}>
+                <input
+                  type={"text"}
+                  id={`option${i}-${i}`}
+                  className={"col-6"}
+                  placeholder={"예시 : 빨강,노랑 (,로 구분)"}
+                />
+              </div>
+              <div className={"col-1"}>
+                <button
+                  className={"btn btn-outline-primary"}
+                  onClick={() => {
+                    setOptionTotal(2);
+                  }}
+                >
+                  -
+                </button>
+              </div>
             </div>
-            <div className={'col-6'}>
-              <input type={'text'} className={'col-6'} placeholder={'예시 : 빨강,노랑 (,로 구분)'}/>
-            </div>
-            <div className={'col-1'}>
-              <button className={'btn btn-outline-primary'} onClick={() => {
-                setOptionTotal(2);
-              }}>-
-              </button>
-            </div>
-          </div>)
+          );
       }
-      $("#option-total").val(optionTotal).prop('selected', true);
+      $("#option-total").val(optionTotal).prop("selected", true);
       setOptionInputList(returnDiv);
     }
-  }
+  };
 
   // 이걸 해야 처음에 옵션명 입력하는 인풋태그가 1개 들어감
   useEffect(() => {
     optionTyped();
-  }, [optionTotal])
-
+  }, [optionTotal]);
 
   // 대분류, 소분류
   useEffect(() => {
@@ -228,29 +345,13 @@ function ProductRegisterPage() {
     }
   };
 
-  // const sizeToggleHandler = () => {
-  //   if (!sizeToggle) {
-  //     setSizeToggle(true);
-  //   } else {
-  //     setSizeToggle(false);
-  //   }
-  // };
-  //
-  // const colorToggleHandler = () => {
-  //   if (!colorToggle) {
-  //     setColorToggle(true);
-  //   } else {
-  //     setColorToggle(false);
-  //   }
-  // }
-
   // Size 체크박스 값 배열로 받기 --- 사용 X
   const onCheckedSizeElement = (checked, item) => {
     if (checked) {
       setCheckedSizeList([...checkedSizeList, item]);
       console.log(`checkedSizeList : ${checkedSizeList}`);
     } else if (!checked) {
-      setCheckedSizeList(checkedSizeList.filter(el => el !== item));
+      setCheckedSizeList(checkedSizeList.filter((el) => el !== item));
     }
   };
 
@@ -260,7 +361,7 @@ function ProductRegisterPage() {
       setCheckedColorList([...checkedColorList, item]);
       console.log(`checkedColorList : ${checkedColorList}`);
     } else if (!checked) {
-      setCheckedColorList(checkedSizeList.filter(el => el !== item));
+      setCheckedColorList(checkedSizeList.filter((el) => el !== item));
     }
   };
 
@@ -403,7 +504,7 @@ function ProductRegisterPage() {
               <td>
                 <fieldset className="form-group">
                   {/* 옵션 설정 함*/}
-                  <div className={'d-flex'}>
+                  <div className={"d-flex"}>
                     <div className="form-check form-switch">
                       <input
                         className="radio ms-3 mb-3"
@@ -415,9 +516,7 @@ function ProductRegisterPage() {
                         }}
                         checked={optionChecked == true ? true : false}
                       />
-                      <label
-                        className="form-check-label ms-4"
-                      >
+                      <label className="form-check-label ms-4">
                         옵션 설정함
                       </label>
                     </div>
@@ -434,9 +533,7 @@ function ProductRegisterPage() {
                         }}
                         checked={optionChecked == false ? true : false}
                       />
-                      <label
-                        className="form-check-label ms-4"
-                      >
+                      <label className="form-check-label ms-4">
                         옵션 설정안함
                       </label>
                     </div>
@@ -449,28 +546,34 @@ function ProductRegisterPage() {
             </tr>
             {/* 끝 */}
 
-
             {/* 옵션 추가시 시작 */}
 
             {/* 옵션 개수 */}
-            <tr className={"border"} hidden={optionChecked == true ? false : true}>
+            <tr
+              className={"border"}
+              hidden={optionChecked == true ? false : true}
+            >
               <td className={"border text-center"} style={{height: 60}}>
                 옵션명 개수
               </td>
               <td>
                 <fieldset className="form-group">
-                  <div className={'ms-3'}>
+                  <div className={"ms-3"}>
                     {/* 옵션 개수 설정*/}
-                    <div className={'mt-3 d-flex row'}>
-                      <div className={'col-2'}>
-                        <select className={'form-select mb-3'} id={"option-total"}
-                                onClick={() => {
-                                  setOptionTotal($("#option-total").val());
-                                  optionTyped();
-                                }} onChange={() => {
-                          setOptionTotal($("#option-total").val());
-                          optionTyped();
-                        }}>
+                    <div className={"mt-3 d-flex row"}>
+                      <div className={"col-2"}>
+                        <select
+                          className={"form-select mb-3"}
+                          id={"option-total"}
+                          onClick={() => {
+                            setOptionTotal($("#option-total").val());
+                            optionTyped();
+                          }}
+                          onChange={() => {
+                            setOptionTotal($("#option-total").val());
+                            optionTyped();
+                          }}
+                        >
                           <option value={1}>1개</option>
                           <option value={2}>2개</option>
                           <option value={3}>3개</option>
@@ -487,18 +590,26 @@ function ProductRegisterPage() {
             </tr>
 
             {/* 옵션 입력 */}
-            <tr className={"border"} hidden={optionChecked == true ? false : true}>
+            <tr
+              className={"border"}
+              hidden={optionChecked == true ? false : true}
+            >
               <td className={"border text-center"} style={{height: 60}}>
                 옵션입력
               </td>
               <td>
                 <fieldset className="form-group">
-                  <div className={'ms-3'}>
+                  <div className={"ms-3"}>
                     {/* 옵션명 개수에 따라서 인풋태그 증가*/}
                     {optionInputList.map((item) => {
                       return item;
                     })}
-                    <button className={'btn btn-outline-primary mb-2'}>옵션 목록으로 적용</button>
+                    <button
+                      className={"btn btn-outline-primary mb-2"}
+                      onClick={OptionReg}
+                    >
+                      옵션 목록으로 적용
+                    </button>
                   </div>
                 </fieldset>
 
@@ -509,47 +620,52 @@ function ProductRegisterPage() {
             </tr>
 
             {/* 옵션 목록 */}
-            <tr className={"border"} hidden={optionChecked == true ? false : true}>
+            <tr
+              className={"border"}
+              hidden={optionChecked == true ? false : true}
+            >
               <td className={"border text-center"} style={{height: 60}}>
                 옵션 목록
               </td>
               <td>
                 <div>
-                  <div className={'ms-3 me-3'}>
-                    <table style={{
-                      textAlign: "center"
-                    }} className={'table table-bordered'}>
+                  <div className={"ms-3 me-3"}>
+                    <table
+                      style={{
+                        textAlign: "center",
+                      }}
+                      className={"table table-bordered"}
+                    >
                       <thead>
-                      <tr className={'row'}>
-                        <th className={'col-1'}>
-                          <input type={'checkbox'}/>
+                      <tr className={"row"}>
+                        <th className={"col-1"}>
+                          <input type={"checkbox"}/>
                         </th>
-                        <th rowSpan={2} className={'col-3'}>
-                          <div>
-                            <p>ㄴㄴ</p>
-                          </div>
-                          <div className={'border-top border-dark d-flex justify-content-center'}>
-                            <p className={'col'}>ㄴㄴ</p>
-                            <p className={'col'}>ㄴㄴ</p>
-                            <p className={'col'}>ㄴㄴ</p>
+                        <th rowSpan={2} className={"col-3"}>
+                          <div
+                            className={
+                              "border-dark d-flex justify-content-center"
+                            }
+                          >
+                            <p className={"col"}>ㄴㄴ</p>
                           </div>
                         </th>
-                        <th className={'col'}>옵션가</th>
-                        <th className={'col'}>재고수량</th>
-                        <th className={'col'}>판매상태</th>
-                        <th className={'col'}>삭제</th>
+                        <th className={"col"}>옵션가</th>
+                        <th className={"col"}>재고수량</th>
+                        <th className={"col"}>판매상태</th>
+                        <th className={"col"}>삭제</th>
                       </tr>
                       </thead>
                       <tbody>
-                      <tr className={'row'}>
-                        <td className={'col-1'}>
-                          <input type={'checkbox'} className={'mb-3'}/>
+                      <tr className={"row"}>
+                        <td className={"col-1"}>
+                          <input type={"checkbox"} className={"mb-3"}/>
                         </td>
-                        <td className={'col-3'}>테스트</td>
-                        <td className={'col'}>테스트</td>
-                        <td className={'col'}>테스트</td>
-                        <td className={'col'}>테스트</td>
-                        <td className={'col'}>테스트</td>
+                        <td className={"col-3"}>테스트</td>
+                        <td className={"col"}>테스트</td>
+                        <td className={"col"}>테스트</td>
+                        <td className={"col"}>테스트</td>
+                        <td className={"col"}>테스트</td>
                       </tr>
                       </tbody>
                     </table>
@@ -562,7 +678,6 @@ function ProductRegisterPage() {
               </td>
             </tr>
             {/* 옵션 추가시 끝 */}
-
 
             <tr className={"border"}>
               <td className={"border text-center"} style={{height: 60}}>

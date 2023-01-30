@@ -6,6 +6,7 @@ import user from "../BJH/User";
 import axios from "axios";
 
 function GwakApp() {
+  const [iData, setIData] = useState(0);
   const [inputs, setInputs] = useState({
     productOption1: "",
     productOption2: "",
@@ -31,12 +32,13 @@ function GwakApp() {
     //   alert("옵션을 입력하세요.");
     // } else {
       // 배열에 항목을 추가 : 불변성을 해치지 않아야함 -> push, splice, sort 금지. spread 연산자 또는 concat 사용
+    for (let i = 0; i < inputs.length ; i++) {
       const user = {
         id: nextId.current,
         productOption1: productOption1,
         productOption2: productOption2,
       };
-
+    }
       setUsers([...users, user]); // spread 연산자 사용
       // setUsers(users.concat(user));  // concat 사용
 

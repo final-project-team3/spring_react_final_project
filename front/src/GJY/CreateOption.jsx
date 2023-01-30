@@ -1,12 +1,14 @@
 import React from "react";
 
 function CreateOption({ productOption1, productOption2, onChange, onCreate }) {
+
   return (
     <div className={"container"}>
       <div className={"row col-3"}>
         <input
           className={"col-2"}
           type="text"
+          id={"productOption1"}
           name={"productOption1"}
           placeholder={"productOption1"}
           onChange={onChange}
@@ -15,6 +17,7 @@ function CreateOption({ productOption1, productOption2, onChange, onCreate }) {
         <input
           className={"col-2"}
           type="text"
+          id={"productOption2"}
           name={"productOption2"}
           placeholder={"productOption2"}
           onChange={onChange}
