@@ -12281,13 +12281,15 @@ table td, table th {
     overflow: hidden;
     border-spacing: 0;
     border-collapse: separate;
-    background-color: #333;
+    /* 수정 */
+    /*background-color: #333;*/
     border-radius: 5px 25px 5px 25px/25px 5px 25px 5px
 }
 
-.table-bordered td, .table-bordered th {
-    border-radius: 5px 5px 25px 4px/5px 4px 3px 5px
-}
+/* 수정 */
+/*.table-bordered td, .table-bordered th {*/
+/*    border-radius: 5px 5px 25px 4px/5px 4px 3px 5px*/
+/*}*/
 
 .table-bordered .table-success td, .table-bordered .table-success th, .table-bordered .table-success:hover td, .table-bordered .table-success:hover th {
     color: #fff;
