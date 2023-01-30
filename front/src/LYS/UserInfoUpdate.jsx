@@ -220,10 +220,10 @@ function UserInfoUpdate() {
         let true_cnt = 0;
 
         for (let i = 0; i < checkVal.length; i++) {
-            if (checkList[i] == true) {
-                true_cnt++
-            } else if (checkList[i] == false || checkVal[i] == '') {
+            if (checkList[i] == false || checkVal[i] == '') {
                 checkSpan[i].css('display', 'inline-block')
+            } else if (checkList[i] == true) {
+                true_cnt++
             }
         }
 
@@ -272,7 +272,7 @@ function UserInfoUpdate() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input type={'string'} name={"userPass"} id={"userPass"} onClick={()=> {
+                                        <Input type={'string'} name={"userPass"} id={"userPass"} onClick={() => {
                                             checkPw();
                                             checkDoublePw();
                                             checkList[1] = false;
