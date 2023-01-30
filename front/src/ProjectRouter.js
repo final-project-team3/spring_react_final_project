@@ -25,14 +25,11 @@ import SellerLogin from "./BJH/SellerLogin";
 import Test from "./GJY/Test";
 import UserJoinResult from "./BJH/UserJoinResult";
 import SellerJoinResult from "./BJH/SellerJoinResult";
-<<<<<<< HEAD
 import UserInfoUpdate from "./LYS/UserInfoUpdate";
 import SellerInfoUpdate from "./LYS/SellerInfoUpdate";
-=======
 import Search from "./HSH/Search";
 import FileUpload from "./GJY/FileUpload";
 import Footer from "./BJH/Footer";
->>>>>>> master
 
 const ProjectRouter = () => {
 
