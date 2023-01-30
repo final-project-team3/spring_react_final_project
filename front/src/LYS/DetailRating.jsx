@@ -53,7 +53,6 @@ const Stars = styled.div`
 
   & svg {
     color: gray;
-    cursor: pointer;
   }
 
   .yellowStar {

@@ -25,6 +25,8 @@ import SellerLogin from "./BJH/SellerLogin";
 import Test from "./GJY/Test";
 import UserJoinResult from "./BJH/UserJoinResult";
 import SellerJoinResult from "./BJH/SellerJoinResult";
+import UserInfoUpdate from "./LYS/UserInfoUpdate";
+import SellerInfoUpdate from "./LYS/SellerInfoUpdate";
 
 const ProjectRouter = () => {
 
@@ -41,6 +43,8 @@ const ProjectRouter = () => {
                     {/*LYS*/}
                     <Route path="/userSignUp" element={<UserSignUp/>}/>
                     <Route path="/sellerSignUp" element={<SellerSignUp/>}/>
+                    <Route path="/userInfoUpdate" element={<UserInfoUpdate/>}/>
+                    <Route path="/sellerInfoUpdate" element={<SellerInfoUpdate/>}/>
                     {/*LYS*/}
 
                     {/*GJY*/}

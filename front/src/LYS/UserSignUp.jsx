@@ -344,7 +344,7 @@ function UserSignUp() {
         // 확인
         let checkVal = [$('#userId').val(), $("#userPass").val(), $("#userPass2").val(), $("#userName").val(), $("#userTel").val(), $("#userBirth").val(), $("#sigunguCode").val()]
         // 출력(span)
-        let checkSpan = [$('.checkMail'),$('.checkPw'),$('.checkPw2'),$('.checkName'),$('.checkPh'),$('.checkBG'),$('.checkAddr')]
+        let checkSpan = [$('.checkMail'), $('.checkPw'), $('.checkPw2'), $('.checkName'), $('.checkPh'), $('.checkBG'), $('.checkAddr')]
 
         let true_cnt = 0;
 
@@ -478,7 +478,8 @@ function UserSignUp() {
                                         <Input type="tel" name={"userTel"} placeholder="'-'를 제외한 번호를 입력해주세요"
                                                onClick={checkTel} onChange={checkTel}
                                                id={"userTel"}
-                                               data-auth="cell_phone"/>
+                                               data-auth="cell_phone"
+                                               maxLength={11}/>
                                         <HiddenMessage style={okStyle} className="ph_ok ok">사용 가능한
                                             전화번호입니다.</HiddenMessage>
                                         <HiddenMessage style={noStyle} className="ph_already no">이미 사용중인

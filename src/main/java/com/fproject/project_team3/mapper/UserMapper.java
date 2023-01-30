@@ -17,6 +17,11 @@ public interface UserMapper {
     String emailCheck(String userId);
 
     String telCheck(String userTel);
+
+    UserInfoDto getUserInfo(String userId);
+
+    void updateUser(UserInfoDto userInfoDto);
+
     //    LYS
 
     //    GJY

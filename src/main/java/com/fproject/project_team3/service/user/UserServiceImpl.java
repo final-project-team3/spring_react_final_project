@@ -25,6 +25,17 @@ public class UserServiceImpl implements UserService {
         return userMapper.telCheck(userTel);
     }
 
+    @Override
+    public UserInfoDto getUserInfo(String userId) {
+        return userMapper.getUserInfo(userId);
+    }
+
+    @Override
+    public void updateUser(UserInfoDto userInfoDto) {
+        userMapper.updateUser(userInfoDto);
+    }
+
+
     //    HSH
 
     //    HSH
