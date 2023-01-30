@@ -35,6 +35,7 @@ import OptionTable from "./GJY/OptionTable";
 import InputSample from "./GJY/InputSample";
 import OptionList from "./GJY/OptionList";
 import GwakApp from "./GJY/GwakApp";
+import LikeUserList from "./BJH/UserList/LikeUserList";
 
 const ProjectRouter = () => {
 
@@ -86,6 +87,8 @@ const ProjectRouter = () => {
                     <Route path={'SellerJoinResult'} element={<SellerJoinResult/>}/>
 
                     <Route path={'/footer'} element={<Footer/>}/>
+
+                    <Route path={'/likeUserList'} element={<LikeUserList/>}/>
                     {/*BJH*/}
                 </Route>
             </Routes>
