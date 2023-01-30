@@ -27,7 +27,7 @@ const Popup = (props) => {
             <div id='popupDom'>
                 {isPopupOpen && (
                     <PopupDom>
-                        <PopupPostCode checkFunc={props.checkFunc} onClose={closePostCode} />
+                        <PopupPostCode addrChangeFunc={props.addrChangeFunc} checkFunc={props.checkFunc} onClose={closePostCode} />
                     </PopupDom>
                 )}
             </div>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @RestController
 public class SellerRestController {
@@ -26,6 +27,18 @@ public class SellerRestController {
     //    HSH
 
     //    LYS
+    @PostMapping("/getSellerInfo")
+    public Object getUserInfo(@RequestParam("sellerId") String sellerId){
+        System.out.println(sellerId);
+        System.out.println(sellerService.getSellerInfo(sellerId));
+        return sellerService.getSellerInfo(sellerId);
+    }
+
+    @PostMapping("/sellerInfoUpdate")
+    public void sellerInfoUpdate(SellerInfoDto sellerInfoDto, HttpServletResponse httpServletResponse) throws IOException{
+        sellerService.sellerInfoUpdate(sellerInfoDto);
+        httpServletResponse.sendRedirect("http://localhost:3000/");
+    }
     @PostMapping("/emailCheck2")
     public Object emailCheck(@RequestParam("email") String sellerId){
         String Id = sellerService.emailCheck(sellerId);

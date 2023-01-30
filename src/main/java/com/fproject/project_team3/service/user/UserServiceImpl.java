@@ -31,10 +31,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(UserInfoDto userInfoDto) {
-        userMapper.updateUser(userInfoDto);
+    public void userInfoUpdate(UserInfoDto userInfoDto) {
+        userMapper.userInfoUpdate(userInfoDto);
     }
-
 
     //    HSH
 
