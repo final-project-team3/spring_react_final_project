@@ -66,14 +66,31 @@ function SellerInfoUpdate() {
         }
     }, [])
 
+    // 주소 체크
+    function checkAddress() {
+        var addr1 = $('#sigunguCode').val();
+        var addr2 = $('#jibunAddress').val();
+        var addr3 = $('#roadAddress').val();
+
+        if (addr1 == '' || addr2 == '' || addr3 == '') {
+            checkList[3] = false;
+            $('.checkAddr').css('display', 'inline-block');
+        } else {
+            checkList[3] = true;
+            $('.checkAddr').css('display', 'none');
+        }
+    }
+
     //  변경할 비밀번호 체크
     function checkPw() {
+        console.log("11")
         var pw = $("#sellerPass").val();
         var num = pw.search(/[0-9]/g);
         var eng = pw.search(/[a-z]/ig);
         var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
         if (pw == '') { // 빈값일때
             checkList[0] = false;
+            console.log(checkList[0]);
             $('.checkPw').css("display", "inline-block");
             $('.pwd_not').css("display", "none");
             $('.pwd_ok').css("display", "none");
@@ -104,6 +121,7 @@ function SellerInfoUpdate() {
 
 // 비밀번호의 두 값 체크
     function checkDoublePw() {
+        console.log("22")
         var pw1 = $('#sellerPass').val();
         var pw2 = $('#sellerPass2').val();
 
@@ -205,14 +223,18 @@ function SellerInfoUpdate() {
         console.log(checkList);
         let update = $('#btn-update');
         // 확인
-        let checkVal = [$("#sellerPass").val(), $("#sellerPass2").val(), $("#sellerTel").val(), $("#sigunguCode").val()]
+        let checkVal = [$("#sellerPass").val(), $("#sellerPass2").val(), $("#sellerTel").val(), $("#sigunguCode").val()];
         // 출력(span)
-        let checkSpan = [$('.checkPw'), $('.checkPw2'), $('.checkPh'), $('.checkAddr')]
+        let checkSpan = [$('.checkPw'), $('.checkPw2'), $('.checkPh'), $('.checkAddr')];
 
         let true_cnt = 0;
 
         for (let i = 0; i < checkVal.length; i++) {
-            if (checkList[i] == false || checkVal[i] == '') {
+            if (i == 1) {
+                if (checkList[i] == true) {
+                    true_cnt++;
+                }
+            } else if (checkList[i] == false || checkVal[i] == '') {
                 checkSpan[i].css('display', 'inline-block')
             } else if (checkList[i] == true) {
                 true_cnt++
@@ -276,7 +298,6 @@ function SellerInfoUpdate() {
                                                    checkDoublePw();
                                                    checkList[1] = false;
                                                    console.log(checkList[1]);
-                                                   console.log(checkList);
                                                }}
                                                placeholder="변경할 비밀번호 (영문+숫자+특수문자 8자 이상)"/>
                                         <HiddenMessage style={okStyle} className="pwd_ok ok">사용 가능한

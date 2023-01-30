@@ -27,6 +27,7 @@ function ProductRegisterPage() {
 
     const [optionName, setOptionName] = useState([]);
     const [optionValue, setOptionValue] = useState([]);
+    const [optionList, setOptionList] = useState([]);
 
     const OptionReg = () => {
         let optionNameList = [];
@@ -57,37 +58,22 @@ function ProductRegisterPage() {
 
         let index = 0;
         let arr1 = new Array();
-        for (let i = 0; i < optionValue[0].length; i++) {
+        let valueList = [];
+        for (let i = 0; i < optionValueList[0].length; i++) {
             console.log(optionValue[i]);
-            for (let j = 0; j < optionValue[1].length; j++) {
-                console.log(`${optionValue[0][i]} , ${optionValue[1][j]}`);
-                // console.log("---ij----")
-                // console.log(optionValue[1][j]);
+            for (let j = 0; j < optionValueList[1].length; j++) {
 
+                console.log(`${optionValueList[0][i]}` + `, ${optionValueList[1][j]}`);
+                let valueObj = {value1: `${optionValueList[0][i]}`, value2: `${optionValueList[1][j]}`};
+                valueList.push(valueObj);
 
-                arr1[index++] = {color: optionValue[0][i], option: optionValue[1][j]}
-
-                // const 객체 = {컬러: {optionValue[0][i], 옵션:  ${optionValue[1][j]}}
+                arr1[index++] = {color: optionValueList[0][i], option: optionValueList[1][j]}
             }
 
         }
-        console.log(arr1[0].color);
-        console.log(arr1[0].option);
+        setOptionList(valueList);
 
-        console.log(arr1[1].color);
-        console.log(arr1[1].option);
-
-        console.log(arr1[2].color);
-        console.log(arr1[2].option);
-
-        console.log(arr1[3].color);
-        console.log(arr1[3].option);
-
-        console.log(arr1[4].color);
-        console.log(arr1[4].option);
-
-        console.log(arr1[5].color);
-        console.log(arr1[5].option);
+        console.log(valueList);
     }
 
     /**
@@ -626,13 +612,15 @@ function ProductRegisterPage() {
                                                 <th className={"col-1"}>
                                                     <input type={"checkbox"}/>
                                                 </th>
-                                                <th rowSpan={2} className={"col-3"}>
+                                                <th rowSpan={2} className={'col-3'}>
+                                                    <div>
+                                                        <p>옵션명</p>
+                                                    </div>
                                                     <div
-                                                        className={
-                                                            "border-dark d-flex justify-content-center"
-                                                        }
-                                                    >
-                                                        <p className={"col"}>ㄴㄴ</p>
+                                                        className={'border-top border-dark d-flex justify-content-center'}>
+                                                        {optionName.map((item, index) => {
+                                                            return <p className={'col'}>{item}</p>
+                                                        })}
                                                     </div>
                                                 </th>
                                                 <th className={"col"}>옵션가</th>
@@ -642,16 +630,29 @@ function ProductRegisterPage() {
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr className={"row"}>
-                                                <td className={"col-1"}>
-                                                    <input type={"checkbox"} className={"mb-3"}/>
-                                                </td>
-                                                <td className={"col-3"}>테스트</td>
-                                                <td className={"col"}>테스트</td>
-                                                <td className={"col"}>테스트</td>
-                                                <td className={"col"}>테스트</td>
-                                                <td className={"col"}>테스트</td>
-                                            </tr>
+
+                                            {optionList.map((item, index) => {
+                                                return (
+                                                    <tr key={index} className={"row"}>
+                                                        <td className={"col-1"}>
+                                                            <input type={"checkbox"} className={"mb-3"}/>
+                                                        </td>
+                                                        <td id={`optionValue${index}`} className={"col-3"}>{`${item.value1},  ${item.value2}`}</td>
+                                                        <td className={"col"}>테스트</td>
+                                                        <td className={"col"}>테스트</td>
+                                                        <td className={"col"}>테스트</td>
+                                                        <td className={"col"}>테스트</td>
+                                                    </tr>
+                                                )
+                                            })}
+                                            {/*<td className={"col-1"}>*/}
+                                            {/*    <input type={"checkbox"} className={"mb-3"}/>*/}
+                                            {/*</td>*/}
+                                            {/*<td className={"col-3"}>테스트</td>*/}
+                                            {/*<td className={"col"}>테스트</td>*/}
+                                            {/*<td className={"col"}>테스트</td>*/}
+                                            {/*<td className={"col"}>테스트</td>*/}
+                                            {/*<td className={"col"}>테스트</td>*/}
                                             </tbody>
                                         </table>
                                     </div>
