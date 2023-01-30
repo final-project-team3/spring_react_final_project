@@ -36,6 +36,8 @@ import GwakApp from "./GJY/GwakApp";
 import LikeUserList from "./BJH/UserList/LikeUserList";
 import UserInfoUpdate from "./LYS/UserInfoUpdate";
 import SellerInfoUpdate from "./LYS/SellerInfoUpdate";
+import OrderUserList from "./BJH/UserList/OrderUserList";
+import PayUserList from "./BJH/UserList/PayUserList";
 
 const ProjectRouter = () => {
 
@@ -89,6 +91,8 @@ const ProjectRouter = () => {
                     <Route path={'/footer'} element={<Footer/>}/>
 
                     <Route path={'/likeUserList'} element={<LikeUserList/>}/>
+                    <Route path={'/orderUserList'} element={<OrderUserList/>}/>
+                    <Route path={'/payUserList'} element={<PayUserList/>}/>
                     {/*BJH*/}
                 </Route>
             </Routes>
