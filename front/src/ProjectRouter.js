@@ -28,6 +28,7 @@ import SellerJoinResult from "./BJH/SellerJoinResult";
 import Search from "./HSH/Search";
 import FileUpload from "./GJY/FileUpload";
 import Footer from "./BJH/Footer";
+import LikeUserList from "./BJH/UserList/LikeUserList";
 
 const ProjectRouter = () => {
 
@@ -72,6 +73,8 @@ const ProjectRouter = () => {
                     <Route path={'SellerJoinResult'} element={<SellerJoinResult/>}/>
 
                     <Route path={'/footer'} element={<Footer/>}/>
+
+                    <Route path={'/likeUserList'} element={<LikeUserList/>}/>
                     {/*BJH*/}
                 </Route>
             </Routes>

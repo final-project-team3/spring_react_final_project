@@ -1,0 +1,352 @@
+.ViewMain {
+    min-width: 990px;
+    padding: 30px 0;
+}
+
+.ViewMain-sub {
+    position: relative;
+    width: 940px;
+    margin: 0 auto;
+    border: 1px solid #e5e5e5;
+    background: #fff;
+}
+
+.blind {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+}
+
+.l-sidebar {
+    float: left;
+    width: 220px;
+}
+
+.profile {
+    position: relative;
+    margin: -1px 0 0 -1px;
+    padding-top: 27px;
+    background: #bbbfc3;
+    z-index: 20;
+}
+
+.profile-set {
+    width: 94px;
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.profile-name {
+    margin-top: 16px;
+    padding-bottom: 35px;
+    text-align: center;
+    color: #fff;
+}
+
+.profile-subName {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    word-wrap: normal;
+    word-break: break-all;
+}
+
+.secretId {
+    display: block;
+    margin-top: 5px;
+    color: #fff;
+    font-style: normal;
+}
+
+.page {
+    position: relative;
+    margin-top: 20px;
+}
+
+.pageClass {
+    display: inline-block;
+    padding: 0 16px 0 17px;
+    background-color: #5e6876;
+    font-size: 11px;
+    line-height: 26px;
+    color: #fff;
+    vertical-align: top;
+    text-decoration: none;
+}
+
+.lookUp {
+    padding: 11px 0 17px;
+    border-bottom: 1px solid #ebebeb;
+    background: #f7f8f8;
+    list-style: none;
+}
+
+.lookUp li {
+    position: relative;
+    color: #52595d;
+    padding-left: 18px;
+    margin: 6px 21px 0 0;
+    font-size: 13px;
+    line-height: 17px;
+}
+
+.listCheck {
+    display: inline-block;
+    overflow: hidden;
+    width: 2px;
+    height: 2px;
+    margin: 7px 5px 0 0;
+    background: #a1a4a6;
+    vertical-align: top;
+}
+
+.listCheck2 {
+    position: absolute;
+    right: 0;
+    top: -2px;
+    color: #35383b;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 17px;
+    text-decoration: none;
+}
+
+.content {
+    float: left;
+    position: relative;
+    width: 980px;
+    padding: 40px 40px 120px;
+}
+
+.likeUser {
+    position: relative;
+    margin-top: -3px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.usersList {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    vertical-align: top;
+}
+
+.listLittle {
+    display: inline-block;
+    margin: 4px 0 0 7px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #ababab;
+    vertical-align: top;
+}
+
+.customers {
+    position: relative;
+    padding: 11px 9px;
+    border: 1px solid #e8e8e8;
+    background-color: #f6f7f9;
+}
+
+.cus-list {
+    overflow: hidden;
+}
+
+.cus-group {
+    white-space: nowrap;
+    padding: 1px;
+    list-style: none;
+    will-change: transform;
+    transform: translateX(0px);
+}
+
+.cus-radio1 {
+    display: inline-block;
+    padding: 0 4px;
+    vertical-align: top;
+}
+
+.userRole {
+    background-color: #c2c2c2;
+    border-color: rgba(0,0,0,.05);
+    font-weight: bold;
+    color: #fff;
+}
+
+.userAll {
+    position: relative;
+    padding: 0 2px;
+}
+
+.userAll-sub {
+    overflow: hidden;
+}
+
+.userAll-ul {
+    position: relative;
+    z-index: 10;
+    white-space: nowrap;
+    will-change: transform;
+    transform: translateX(0px);
+    list-style: none;
+}
+
+.userState {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.userState-title {
+    display: block;
+    padding: 0 12px;
+    text-decoration: none;
+}
+
+.customerRole {
+    font-weight: bold;
+    color: #17a2b8;
+    display: block;
+    padding: 0 2px;
+    height: 46px;
+    line-height: 46px;
+    border-bottom: 2px solid transparent;
+    font-size: 13px;
+}
+
+.userAll:after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-bottom: 1px solid #e8e8e8;
+    content: "";
+}
+
+.management {
+    overflow: hidden;
+    line-height: 30px;
+    padding: 16px 0 11px;
+}
+
+.management button:hover {
+    background-color: #c2c2c2;
+}
+
+.manageSetting {
+    float: right;
+    padding: 0 12px 0 11px;
+    border-radius: 15px;
+    border: 1px solid #567cec;
+    font-weight: bold;
+    letter-spacing: -0.04px;
+    color: #567cec;
+    line-height: 28px;
+}
+
+.likeUserList {
+    padding: 202px 0 214px;
+    border-bottom: 1px solid #e8e8e8;
+    line-height: 22px;
+    text-align: center;
+}
+
+.likeUserList strong {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.likeUserList strong em {
+    color: #17a2b8;
+    font-style: normal;
+}
+
+.likeGuide {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #666;
+}
+
+.select {
+    float: left;
+}
+
+.zzim-list {
+    list-style: none;
+}
+
+.zzim-user {
+    display: table;
+    position: relative;
+    padding: 12px 0;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.setting {
+    display: table-cell;
+    width: 26px;
+    padding-left: 14px;
+    vertical-align: top;
+}
+
+.view-list {
+    display: table-cell;
+    width: 120px;
+}
+
+.zzim-content {
+    display: table-cell;
+    padding: 0 45px 0 18px;
+    vertical-align: middle;
+}
+
+.content-title {
+    margin-bottom: 11px;
+    color: #555;
+}
+
+.c-content {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 19px;
+    white-space: nowrap;
+    margin-bottom: 3px;
+    font-size: 14px;
+    color: #666;
+    text-decoration: none;
+}
+
+.c-name {
+    font-size: 11px;
+    line-height: 19px;
+}
+
+.nameDetail {
+    margin-right: 5px;
+    font-size: 14px;
+    line-height: 16px;
+    color: #ababab;
+}
+
+.n-strong {
+    margin-left: 10px;
+    color: black;
+    font-size: 14px;
+    font-family: Tahoma, sans-serif;
+    vertical-align: top;
+    text-decoration: none;
+}
+
+.c-number {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+}
