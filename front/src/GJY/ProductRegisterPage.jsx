@@ -544,7 +544,7 @@ function ProductRegisterPage() {
                         </th>
                         <th rowSpan={2} className={'col-3'}>
                           <div>
-                            <p>ㄴㄴ</p>
+                            <p>옵션명</p>
                           </div>
                           <div className={'border-top border-dark d-flex justify-content-center'}>
                             <p className={'col'}>ㄴㄴ</p>
