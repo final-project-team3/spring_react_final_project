@@ -7,8 +7,10 @@
 
     <!-- LYS -->
     <insert id="insertUser" parameterType="com.fproject.project_team3.dto.user.UserInfoDto">
-        INSERT INTO user_info(user_id, user_pass, user_name, user_tel, user_birth, user_gender, user_addr_num, user_addr_jibun, user_addr_road, user_addr_detail)
-        VALUES (#{userId}, #{userPass}, #{userName}, #{userTel}, #{userBirth}, #{userGender}, #{userAddrNum}, #{userAddrJibun}, #{userAddrRoad}, #{userAddrDetail})
+        INSERT INTO user_info(user_id, user_pass, user_name, user_tel, user_birth, user_gender, user_addr_num,
+                              user_addr_jibun, user_addr_road, user_addr_detail)
+        VALUES (#{userId}, #{userPass}, #{userName}, #{userTel}, #{userBirth}, #{userGender}, #{userAddrNum},
+                #{userAddrJibun}, #{userAddrRoad}, #{userAddrDetail})
     </insert>
 
     <select id="emailCheck" parameterType="String" resultType="String">
@@ -22,6 +24,23 @@
         FROM user_info
         WHERE user_tel = #{userTel}
     </select>
+
+    <select id="getUserInfo" parameterType="String" resultType="com.fproject.project_team3.dto.user.UserInfoDto">
+        SELECT *
+        FROM user_info
+        WHERE user_id = #{userId}
+    </select>
+
+    <update id="userInfoUpdate" parameterType="com.fproject.project_team3.dto.user.UserInfoDto">
+        UPDATE user_info
+        SET user_pass        = #{userPass},
+            user_tel         = #{userTel},
+            user_addr_num    = #{userAddrNum},
+            user_addr_jibun  = #{userAddrJibun},
+            user_addr_road   = #{userAddrRoad},
+            user_addr_detail = #{userAddrDetail}
+        WHERE user_id = #{userId}
+    </update>
 
     <!-- LYS -->
 

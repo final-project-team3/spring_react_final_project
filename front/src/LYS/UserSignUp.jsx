@@ -344,7 +344,7 @@ function UserSignUp() {
         // 확인
         let checkVal = [$('#userId').val(), $("#userPass").val(), $("#userPass2").val(), $("#userName").val(), $("#userTel").val(), $("#userBirth").val(), $("#sigunguCode").val()]
         // 출력(span)
-        let checkSpan = [$('.checkMail'),$('.checkPw'),$('.checkPw2'),$('.checkName'),$('.checkPh'),$('.checkBG'),$('.checkAddr')]
+        let checkSpan = [$('.checkMail'), $('.checkPw'), $('.checkPw2'), $('.checkName'), $('.checkPh'), $('.checkBG'), $('.checkAddr')]
 
         let true_cnt = 0;
 
@@ -478,7 +478,8 @@ function UserSignUp() {
                                         <Input type="tel" name={"userTel"} placeholder="'-'를 제외한 번호를 입력해주세요"
                                                onClick={checkTel} onChange={checkTel}
                                                id={"userTel"}
-                                               data-auth="cell_phone"/>
+                                               data-auth="cell_phone"
+                                               maxLength={11}/>
                                         <HiddenMessage style={okStyle} className="ph_ok ok">사용 가능한
                                             전화번호입니다.</HiddenMessage>
                                         <HiddenMessage style={noStyle} className="ph_already no">이미 사용중인
@@ -540,6 +541,7 @@ function UserSignUp() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <Popup checkFunc={checkAddress}/>
+                                    <HiddenMessage style={noStyle} className="checkAddr no">필수 항목입니다.</HiddenMessage>
                                     <Input name={"userAddrNum"} className={'my-1'} id={"sigunguCode"}
                                            placeholder={'우편번호'} readOnly={true}/>
                                     <Input name={"userAddrJibun"} className={'my-1'} id={"jibunAddress"}
@@ -548,7 +550,6 @@ function UserSignUp() {
                                            placeholder={'도로명 주소'} readOnly={true}/>
                                     <Input name={"userAddrDetail"} className={'my-1'} id={"addressDetail"}
                                            placeholder={'상세주소를 입력해주세요.'}/>
-                                    <HiddenMessage style={noStyle} className="checkAddr no">필수 항목입니다.</HiddenMessage>
                                 </FormBlockBody>
                             </FormBlock>
 

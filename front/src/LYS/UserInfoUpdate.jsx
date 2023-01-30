@@ -1,0 +1,527 @@
+import React, {useCallback, useEffect, useState} from "react";
+import Popup from "./Popup";
+import styled from "styled-components";
+import $ from "jquery";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import data from "bootstrap/js/src/dom/data";
+import user from "../BJH/User";
+
+function UserInfoUpdate() {
+    //
+
+
+    //[React] input 엘리먼트에 value 속성만 지정했을때 값이 입력불가한 현상 해결방법
+    const [userAddrDetail, setUserAddrDetail] = useState('');
+    const [userTel, setUserTel] = useState('');
+
+    const onChangeUserAddrDetail = useCallback(e => {
+        setUserAddrDetail(e.target.value);
+    }, []);
+
+    const onChangeUserTel = useCallback(e => {
+        setUserTel(e.target.value);
+    }, []);
+
+    //메인으로
+    const navigate = useNavigate();
+    const toMain = () => {
+        navigate(`/`);
+    };
+
+    // 유저 정보
+    const [userInfo, setUserInfo] = useState();
+
+    useEffect(() => {
+        return async () => {
+            const {data} = await axios.post("http://localhost:8080/getUserInfo", null, {
+                params: {userId: "dbstjd608@gmail.com"}
+            })
+            console.log(data);
+            setUserInfo(data);
+            setUserAddrDetail(data.userAddrDetail);
+            setUserTel(data.userTel);
+        }
+    }, [])
+
+
+    //  변경할 비밀번호 체크
+    function checkPw() {
+        var pw = $("#userPass").val();
+        var num = pw.search(/[0-9]/g);
+        var eng = pw.search(/[a-z]/ig);
+        var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+        if (pw == '') { // 빈값일때
+            $('.checkPw').css("display", "inline-block");
+            $('.pwd_not').css("display", "none");
+            $('.pwd_ok').css("display", "none");
+            $('.pwd_space').css("display", "none");
+            $('#userPw').focus();
+        } else if (pw.length < 8 || pw.length > 16 || (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0)) { // 8 ~ 16자리이고, 영문, 숫자, 특수문자 조합
+            $('.checkPw').css("display", "none");
+            $('.pwd_not').css("display", "inline-block");
+            $('.pwd_ok').css("display", "none");
+            $('.pwd_space').css("display", "none");
+            $('#userPw').focus();
+        } else if (pw.search(/\s/) != -1) { // 공백이 있을때
+            $('.checkPw').css("display", "none");
+            $('.pwd_space').css("display", "inline-block");
+            $('.pwd_ok').css("display", "none");
+            $('.pwd_not').css("display", "none");
+            $('#userPw').focus();
+        } else { // 사용 가능한 비밀번호
+            $('.checkPw').css("display", "none");
+            $('.pwd_ok').css("display", "inline-block");
+            $('.pwd_space').css("display", "none");
+            $('.pwd_not').css("display", "none");
+        }
+    }
+
+// 비밀번호의 두 값 체크
+    function checkDoublePw() {
+        var pw1 = $('#userPass').val();
+        var pw2 = $('#userPass2').val();
+
+
+        if (pw2 != '') { // pw2가 비었을때는 실행을 막기 위해 사용(pw1이 바꼈을때 바로 반영하기 위함.)
+            if (pw1 == pw2) { // 비밀번호가 같은 경우
+                $('.checkPw2').css("display", "none");
+                $('.pwd2_ok').css("display", "inline-block");
+                $('.pwd2_not').css("display", "none");
+
+            } else { // 비밀번호가 다를 경우
+                $('.checkPw2').css("display", "none");
+                $('.pwd2_not').css("display", "inline-block");
+                $('.pwd2_ok').css("display", "none");
+                $('#userPw2').focus();
+            }
+        }
+    }
+
+// 비밀번호 확인이 비어있을때
+    function checkPw2() {
+        var pw2 = $('#userPass2').val();
+
+        if (pw2 == '') { // 값이 비어있을 때
+            $('.checkPw2').css("display", "inline-block");
+            $('.pwd2_ok').css("display", "none");
+            $('.pwd2_not').css("display", "none");
+        }
+    }
+
+    // 전화번호 '-'방지
+    $(function () {
+        $("#userTel").on("blur keyup", function () {
+            $(this).val($(this).val().replace(/[^0-9]/g, ""));
+        });
+    });
+
+
+    // 전화번호 유효성
+    async function checkTel() {
+        var ph = $('#userTel').val(); // ph 저장
+        var regExp = /^(010)[0-9]{3,4}[0-9]{4}$/;
+        let {data} = await axios.post("http://localhost:8080/telCheck", null, {
+            params: {
+                telData: ph
+            }
+        });
+        console.log(data);
+
+        if (ph == '') { // 값이 비어있을때
+            $('.checkPh').css("display", "inline-block");
+            $('.ph_not').css("display", "none");
+            $('.ph_already').css("display", "none");
+            $('.ph_ok').css("display", "none");
+            $('#userPh').focus();
+        } else if (!regExp.test(ph)) { // 유효성 체크
+            $('.checkPh').css("display", "none");
+            $('.ph_not').css("display", "inline-block");
+            $('.ph_already').css("display", "none");
+            $('.ph_ok').css("display", "none");
+            $('#userPh').focus();
+        } else if (data != "") { // cnt가 1일 경우 -> 이미 존재하는 전화번호
+            $('.checkPh').css("display", "none");
+            $('.ph_already').css("display", "inline-block");
+            $('.ph_ok').css("display", "none");
+            $('.ph_not').css("display", "none");
+            $('#userPh').focus();
+        } else if (data == "") { //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 전화번호
+            $('.checkPh').css("display", "none");
+            $('.ph_ok').css("display", "inline-block");
+            $('.ph_already').css("display", "none");
+            $('.ph_not').css("display", "none");
+        }
+    };
+
+    // 주소 체크
+    function checkAddress() {
+        var addr1 = $('#sigunguCode').val();
+        var addr2 = $('#jibunAddress').val();
+        var addr3 = $('#roadAddress').val();
+
+        if (addr1 == '' || addr2 == '' || addr3 == '') {
+            $('.checkAddr').css('display', 'inline-block');
+        } else {
+            $('.checkAddr').css('display', 'none');
+        }
+
+    }
+
+    return (
+        <WrapLogin>
+            <HeadBannerGroup/>
+            <ReauthPhone>
+                <LoginWrap>
+                    <LoginSection>
+                        <LoginTitle>회원정보수정 (일반회원용)</LoginTitle>
+                        <SignupStep className="wrap">
+                            <Title>환영합니다. 개인 정보를 수정해주세요</Title>
+                        </SignupStep>
+                        <form action={'/userInfoUpdate'} method={'post'}>
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 이메일
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeW>
+                                        <Input type="email" name={'userId'} id={'userId'}
+                                               value={userInfo?.userId ? userInfo.userId : null} disabled={true}
+                                               style={{backgroundColor: "#c8c8c8"}}/>
+                                    </InputTextSizeW>
+                                </FormBlockBody>
+                            </FormBlock>
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 비밀번호
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeW>
+                                        <Input type={'password'} name={"userPass"} id={"userPass"} onClick={checkPw}
+                                               onChange={() => {
+                                                   checkPw();
+                                                   checkDoublePw();
+                                               }}
+                                               placeholder="변경할 비밀번호 (영문+숫자+특수문자 8자 이상)"/>
+                                        <HiddenMessage style={okStyle} className="pwd_ok ok">사용 가능한
+                                            비밀번호입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="pwd_not no">8~16자 영문 대 소문자, 숫자,
+                                            특수문자를 사용하세요.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="pwd_space no">비밀번호는 공백 없이
+                                            입력해주세요.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="checkPw no">필수
+                                            항목입니다.</HiddenMessage>
+                                    </InputTextSizeW>
+                                </FormBlockBody>
+                                <FormBlockBody>
+                                    <InputTextSizeW>
+                                        <Input type={'password'} placeholder="변경할 비밀번호 확인" id={"userPass2"}
+                                               onClick={checkPw2} onChange={() => {
+                                            checkPw2();
+                                            checkDoublePw();
+                                        }}/>
+                                        <HiddenMessage style={okStyle} className="pwd2_ok ok">두 비밀번호가
+                                            일치합니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="pwd2_not no">두 비밀번호가
+                                            다릅니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="checkPw2 no">필수
+                                            항목입니다.</HiddenMessage>
+                                    </InputTextSizeW>
+                                </FormBlockBody>
+                            </FormBlock>
+
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 이름
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeWTypeL>
+                                        <Input type="text" name={"userName"} id={"userName"} disabled={true}
+                                               style={{backgroundColor: "#c8c8c8"}}
+                                               value={userInfo?.userName ? userInfo.userName : null}/>
+                                    </InputTextSizeWTypeL>
+                                </FormBlockBody>
+                            </FormBlock>
+
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 전화번호
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeWTypeL>
+                                        <Input type="hidden" required/>
+                                        <Input type="tel" name={"userTel"}
+                                               // value={userTel} onChange 함수에 2개가 안들어가서 placeholder로 밸류 넣음
+                                               placeholder={userTel}
+                                               onClick={checkTel} onChange={checkTel}
+                                               id={"userTel"}
+                                               data-auth="cell_phone"
+                                               maxLength={11}/>
+                                        <HiddenMessage style={okStyle} className="ph_ok ok">사용 가능한
+                                            전화번호입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="ph_already no">이미 사용중인
+                                            전화번호입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="ph_not no">잘못된
+                                            전화번호입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="checkPh no">필수 항목입니다.</HiddenMessage>
+                                    </InputTextSizeWTypeL>
+                                </FormBlockBody>
+                            </FormBlock>
+
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 생년월일 / 성별
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeW>
+                                        {/* 생일 */}
+                                        <Input name={"userBirth"} style={{width: 241, backgroundColor: "#c8c8c8"}}
+                                               maxLength={6} id={"userBirth"} disabled={true}
+                                               value={userInfo?.userBirth ? userInfo.userBirth : null}
+                                               className={"col-6"}/>
+                                        &nbsp;-&nbsp;
+                                        {/* 성별 */}
+                                        <Input name={"userGender"} style={{width: 50, backgroundColor: "#c8c8c8"}}
+                                               maxLength={1} id={"userGender"} disabled={true}
+                                               value={userInfo?.userGender ? userInfo.userGender : null}
+                                               className={"col-6"}/>
+                                        &nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*
+                                    </InputTextSizeW>
+                                </FormBlockBody>
+                            </FormBlock>
+
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 주소
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <Popup checkFunc={checkAddress}/>
+                                    <Input name={"userAddrNum"} className={'my-1'} id={"sigunguCode"}
+                                           value={userInfo?.userAddrNum ? userInfo.userAddrNum : null}
+                                           readOnly={true}/>
+                                    <Input name={"userAddrJibun"} className={'my-1'} id={"jibunAddress"}
+                                           value={userInfo?.userAddrJibun ? userInfo.userAddrJibun : null}
+                                           readOnly={true}/>
+                                    <Input name={"userAddrRoad"} className={'my-1'} id={"roadAddress"}
+                                           value={userInfo?.userAddrRoad ? userInfo.userAddrRoad : null}
+                                           readOnly={true}/>
+                                    <Input name={"userAddrDetail"} className={'my-1'} id={"addressDetail"}
+                                           onChange={onChangeUserAddrDetail}
+                                           value={userAddrDetail}
+                                    />
+                                </FormBlockBody>
+                            </FormBlock>
+
+                            <FormBlockSubmit>
+                                <FormBlockBody>
+                                    <BtnLogin type="submit" id={"btn-signUp"}>수정 완료</BtnLogin>
+                                </FormBlockBody>
+                            </FormBlockSubmit>
+                        </form>
+                        <FormBlockSubmit>
+                            <FormBlockBody>
+                                <BtnBack id={"btn-back"} type={"button"} onClick={toMain}>메인페이지로 이동</BtnBack>
+                            </FormBlockBody>
+                        </FormBlockSubmit>
+                    </LoginSection>
+                </LoginWrap>
+            </ReauthPhone>
+        </WrapLogin>
+    );
+}
+
+const okStyle = {
+    color: "#009000"
+}
+const noStyle = {
+    color: "#ff0000"
+}
+
+const HiddenMessage = styled.span`
+    font-size: smaller;
+    display: none;
+`
+const BtnLogin = styled.button`
+  border-radius: 2px;
+  text-align: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  background: #f1c333;
+  border: 1px solid #f1c333;
+  width: 100%;
+  height: 48px;
+  line-height: 48px;
+  font-size: 16px;
+`;
+
+const BtnBack = styled.button`
+  border-radius: 2px;
+  text-align: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  background: #808080;
+  border: 1px solid #808080;
+  width: 100%;
+  height: 48px;
+  line-height: 48px;
+  font-size: 16px;
+`;
+
+const FormBlockSubmit = styled.div`
+  text-align: left;
+  margin: 20px 0 0;
+`;
+
+const Input = styled.input`
+  font-size: 14px;
+  height: 48px;
+  background: #fff;
+  line-height: 16px;
+  border: 1px solid #acacac;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2px 8px;
+  border-radius: 2px;
+  appearance: none;
+`;
+
+const InputTextSizeWTypeL = styled.div`
+  box-sizing: border-box;
+  vertical-align: middle;
+  height: 48px;
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  text-align: left;
+`;
+
+const InputTextSizeW = styled.div`
+  &.formError {
+    cursor: default !important;
+  }
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  text-align: left;
+  vertical-align: middle;
+  box-sizing: border-box;
+`;
+
+const FormBlockBody = styled.div`
+  text-align: left;
+`;
+
+const AsteriskRed = styled.em`
+  color: #ff4b50;
+  font-size: 18px;
+  display: inline-block;
+`;
+
+const FormBlockHead = styled.label`
+  font-size: 14px;
+`;
+
+const FormBlock = styled.div`
+  text-align: left;
+  margin: 20px 0 0;
+`;
+const Title = styled.h3``;
+const IsActive = styled.li``;
+
+const SignupStep = styled.div`
+  text-align: center;
+  margin: 45px 0 20px;
+
+  ${Title} {
+    font-size: 18px;
+    font-weight: normal;
+  }
+
+  &.wrap {
+    text-align: center;
+    margin: 45px 0 20px;
+
+    ${IsActive} {
+      color: #fff;
+      border-color: #f1c333;
+      background: #f1c333;
+    }
+
+    ul {
+      display: inline-block;
+      position: relative;
+      border-top: 1px solid #aaa;
+    }
+
+    li {
+      position: relative;
+      top: -15px;
+      z-index: 10;
+      background: #fff;
+      color: #999;
+      border: 1px solid #999;
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+      font-size: 14px;
+      -webkit-border-radius: 20px;
+      border-radius: 20px;
+    }
+
+    li + li {
+      margin-left: 50px;
+    }
+  }
+`;
+
+const LoginTitle = styled.h2`
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+  position: relative;
+  top: -10px;
+  background: #fff;
+  display: inline-block;
+  padding: 0 10px;
+`;
+
+const LoginSection = styled.section`
+  text-align: center;
+  margin-top: 50px;
+  border-top: 1px solid #333;
+  padding-bottom: 100px;
+`;
+
+const LoginWrap = styled.div`
+  padding: 1px 0 50px;
+  min-height: 100%;
+  background: #fff;
+`;
+
+const ReauthPhone = styled.form`
+  width: 500px;
+  display: block;
+  margin: 0 auto;
+`;
+
+const HeadBannerGroup = styled.div`
+  position: relative;
+  width: 100%;
+  height: auto;
+`;
+
+const WrapLogin = styled.div`
+  padding: 1px 0 50px;
+  min-height: 100%;
+  background: #fff;
+`;
+
+
+export default UserInfoUpdate;
