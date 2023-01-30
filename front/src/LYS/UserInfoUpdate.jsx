@@ -8,19 +8,40 @@ import data from "bootstrap/js/src/dom/data";
 import user from "../BJH/User";
 
 function UserInfoUpdate() {
-    //
-
+    // 유효성 검사 true false 리스트 회원가입과 다르게 true를 4개 준 다음에 유효성 다 통과하면 업데이트
+    let checkList = [];
+    for (let i = 1; i <= 4; i++) {
+        checkList.push(true);
+    }
 
     //[React] input 엘리먼트에 value 속성만 지정했을때 값이 입력불가한 현상 해결방법
-    const [userAddrDetail, setUserAddrDetail] = useState('');
+    const [userPass, setUserPass] = useState('');
+    const [userPass2, setUserPass2] = useState('');
     const [userTel, setUserTel] = useState('');
+    const [userAddrNum, setUserAddrNum] = useState('');
+    const [userAddrJibun, setUserAddrJibun] = useState('');
+    const [userAddrRoad, setUserAddrRoad] = useState('');
+    const [userAddrDetail, setUserAddrDetail] = useState('');
+    const addrChangeList = {
+        setAddrNum: setUserAddrNum,
+        setAddrRoad: setUserAddrRoad,
+        setAddrJibun: setUserAddrJibun
+    };
 
-    const onChangeUserAddrDetail = useCallback(e => {
-        setUserAddrDetail(e.target.value);
+    const onChangeUserPass = useCallback(e => {
+        setUserPass(e.target.value);
+    }, []);
+
+    const onChangeUserPass2 = useCallback(e => {
+        setUserPass2(e.target.value);
     }, []);
 
     const onChangeUserTel = useCallback(e => {
         setUserTel(e.target.value);
+    }, []);
+
+    const onChangeUserAddrDetail = useCallback(e => {
+        setUserAddrDetail(e.target.value);
     }, []);
 
     //메인으로
@@ -39,37 +60,48 @@ function UserInfoUpdate() {
             })
             console.log(data);
             setUserInfo(data);
-            setUserAddrDetail(data.userAddrDetail);
+            setUserPass(data.userPass);
+            setUserPass2(data.userPass2);
             setUserTel(data.userTel);
+            setUserAddrNum(data.userAddrNum);
+            setUserAddrJibun(data.userAddrJibun);
+            setUserAddrRoad(data.userAddrRoad);
+            setUserAddrDetail(data.userAddrDetail);
         }
     }, [])
 
 
     //  변경할 비밀번호 체크
     function checkPw() {
+        console.log("11")
         var pw = $("#userPass").val();
         var num = pw.search(/[0-9]/g);
         var eng = pw.search(/[a-z]/ig);
         var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
         if (pw == '') { // 빈값일때
+            checkList[0] = false;
+            console.log(checkList[0]);
             $('.checkPw').css("display", "inline-block");
             $('.pwd_not').css("display", "none");
             $('.pwd_ok').css("display", "none");
             $('.pwd_space').css("display", "none");
             $('#userPw').focus();
         } else if (pw.length < 8 || pw.length > 16 || (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0)) { // 8 ~ 16자리이고, 영문, 숫자, 특수문자 조합
+            checkList[0] = false;
             $('.checkPw').css("display", "none");
             $('.pwd_not').css("display", "inline-block");
             $('.pwd_ok').css("display", "none");
             $('.pwd_space').css("display", "none");
             $('#userPw').focus();
         } else if (pw.search(/\s/) != -1) { // 공백이 있을때
+            checkList[0] = false;
             $('.checkPw').css("display", "none");
             $('.pwd_space').css("display", "inline-block");
             $('.pwd_ok').css("display", "none");
             $('.pwd_not').css("display", "none");
             $('#userPw').focus();
         } else { // 사용 가능한 비밀번호
+            checkList[0] = true;
             $('.checkPw').css("display", "none");
             $('.pwd_ok').css("display", "inline-block");
             $('.pwd_space').css("display", "none");
@@ -79,17 +111,20 @@ function UserInfoUpdate() {
 
 // 비밀번호의 두 값 체크
     function checkDoublePw() {
+        console.log("22")
         var pw1 = $('#userPass').val();
         var pw2 = $('#userPass2').val();
 
 
         if (pw2 != '') { // pw2가 비었을때는 실행을 막기 위해 사용(pw1이 바꼈을때 바로 반영하기 위함.)
             if (pw1 == pw2) { // 비밀번호가 같은 경우
+                checkList[0] = true;
                 $('.checkPw2').css("display", "none");
                 $('.pwd2_ok').css("display", "inline-block");
                 $('.pwd2_not').css("display", "none");
 
             } else { // 비밀번호가 다를 경우
+                checkList[0] = false;
                 $('.checkPw2').css("display", "none");
                 $('.pwd2_not').css("display", "inline-block");
                 $('.pwd2_ok').css("display", "none");
@@ -103,6 +138,7 @@ function UserInfoUpdate() {
         var pw2 = $('#userPass2').val();
 
         if (pw2 == '') { // 값이 비어있을 때
+            checkList[1] = false;
             $('.checkPw2').css("display", "inline-block");
             $('.pwd2_ok').css("display", "none");
             $('.pwd2_not').css("display", "none");
@@ -129,24 +165,28 @@ function UserInfoUpdate() {
         console.log(data);
 
         if (ph == '') { // 값이 비어있을때
+            checkList[2] = false;
             $('.checkPh').css("display", "inline-block");
             $('.ph_not').css("display", "none");
             $('.ph_already').css("display", "none");
             $('.ph_ok').css("display", "none");
             $('#userPh').focus();
         } else if (!regExp.test(ph)) { // 유효성 체크
+            checkList[2] = false;
             $('.checkPh').css("display", "none");
             $('.ph_not').css("display", "inline-block");
             $('.ph_already').css("display", "none");
             $('.ph_ok').css("display", "none");
             $('#userPh').focus();
         } else if (data != "") { // cnt가 1일 경우 -> 이미 존재하는 전화번호
+            checkList[2] = false;
             $('.checkPh').css("display", "none");
             $('.ph_already').css("display", "inline-block");
             $('.ph_ok').css("display", "none");
             $('.ph_not').css("display", "none");
             $('#userPh').focus();
         } else if (data == "") { //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 전화번호
+            checkList[2] = true;
             $('.checkPh').css("display", "none");
             $('.ph_ok').css("display", "inline-block");
             $('.ph_already').css("display", "none");
@@ -161,12 +201,47 @@ function UserInfoUpdate() {
         var addr3 = $('#roadAddress').val();
 
         if (addr1 == '' || addr2 == '' || addr3 == '') {
+            checkList[3] = false;
             $('.checkAddr').css('display', 'inline-block');
         } else {
+            checkList[3] = true;
             $('.checkAddr').css('display', 'none');
         }
-
     }
+
+    const checkAll = () => {
+        console.log(checkList);
+        let update = $('#btn-update');
+        // 확인
+        let checkVal = [$("#userPass").val(), $("#userPass2").val(), $("#userTel").val(), $("#sigunguCode").val()]
+        // 출력(span)
+        let checkSpan = [$('.checkPw'), $('.checkPw2'), $('.checkPh'), $('.checkAddr')]
+
+        let true_cnt = 0;
+
+        for (let i = 0; i < checkVal.length; i++) {
+            if (checkList[i] == true) {
+                true_cnt++
+            } else if (checkList[i] == false || checkVal[i] == '') {
+                checkSpan[i].css('display', 'inline-block')
+            }
+        }
+
+        const AllChecked = (val) => val == true;
+
+        if (checkList.every(AllChecked) && true_cnt == checkVal.length) {
+            alert("회원정보 수정이 완료 되었습니다.");
+            $("#btn-update").attr("type", "submit");
+            $("#btn-update").onclick();
+            console.log(true_cnt);
+            console.log(checkList);
+        } else {
+            alert("잘못된 입력을 확인해 주세요");
+            console.log(true_cnt);
+            console.log(checkList);
+        }
+    };
+
 
     return (
         <WrapLogin>
@@ -186,7 +261,7 @@ function UserInfoUpdate() {
                                 <FormBlockBody>
                                     <InputTextSizeW>
                                         <Input type="email" name={'userId'} id={'userId'}
-                                               value={userInfo?.userId ? userInfo.userId : null} disabled={true}
+                                               value={userInfo?.userId ? userInfo.userId : null} readOnly={true}
                                                style={{backgroundColor: "#c8c8c8"}}/>
                                     </InputTextSizeW>
                                 </FormBlockBody>
@@ -197,10 +272,18 @@ function UserInfoUpdate() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input type={'password'} name={"userPass"} id={"userPass"} onClick={checkPw}
-                                               onChange={() => {
+                                        <Input type={'string'} name={"userPass"} id={"userPass"} onClick={()=> {
+                                            checkPw();
+                                            checkDoublePw();
+                                            checkList[1] = false;
+                                        }}
+                                               value={userPass}
+                                               onChange={(e) => {
+                                                   onChangeUserPass(e);
                                                    checkPw();
                                                    checkDoublePw();
+                                                   checkList[1] = false;
+                                                   console.log(checkList[1]);
                                                }}
                                                placeholder="변경할 비밀번호 (영문+숫자+특수문자 8자 이상)"/>
                                         <HiddenMessage style={okStyle} className="pwd_ok ok">사용 가능한
@@ -215,11 +298,12 @@ function UserInfoUpdate() {
                                 </FormBlockBody>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input type={'password'} placeholder="변경할 비밀번호 확인" id={"userPass2"}
-                                               onClick={checkPw2} onChange={() => {
-                                            checkPw2();
-                                            checkDoublePw();
-                                        }}/>
+                                        <Input type={'string'} placeholder="변경할 비밀번호 확인" id={"userPass2"}
+                                               onChange={(e) => {
+                                                   onChangeUserPass2(e);
+                                                   checkPw2();
+                                                   checkDoublePw();
+                                               }}/>
                                         <HiddenMessage style={okStyle} className="pwd2_ok ok">두 비밀번호가
                                             일치합니다.</HiddenMessage>
                                         <HiddenMessage style={noStyle} className="pwd2_not no">두 비밀번호가
@@ -236,7 +320,7 @@ function UserInfoUpdate() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeWTypeL>
-                                        <Input type="text" name={"userName"} id={"userName"} disabled={true}
+                                        <Input type="text" name={"userName"} id={"userName"} readOnly={true}
                                                style={{backgroundColor: "#c8c8c8"}}
                                                value={userInfo?.userName ? userInfo.userName : null}/>
                                     </InputTextSizeWTypeL>
@@ -251,9 +335,11 @@ function UserInfoUpdate() {
                                     <InputTextSizeWTypeL>
                                         <Input type="hidden" required/>
                                         <Input type="tel" name={"userTel"}
-                                               // value={userTel} onChange 함수에 2개가 안들어가서 placeholder로 밸류 넣음
-                                               placeholder={userTel}
-                                               onClick={checkTel} onChange={checkTel}
+                                               value={userTel}
+                                               onClick={checkTel} onChange={(e) => {
+                                            onChangeUserTel(e);
+                                            checkTel();
+                                        }}
                                                id={"userTel"}
                                                data-auth="cell_phone"
                                                maxLength={11}/>
@@ -276,13 +362,13 @@ function UserInfoUpdate() {
                                     <InputTextSizeW>
                                         {/* 생일 */}
                                         <Input name={"userBirth"} style={{width: 241, backgroundColor: "#c8c8c8"}}
-                                               maxLength={6} id={"userBirth"} disabled={true}
+                                               maxLength={6} id={"userBirth"} readOnly={true}
                                                value={userInfo?.userBirth ? userInfo.userBirth : null}
                                                className={"col-6"}/>
                                         &nbsp;-&nbsp;
                                         {/* 성별 */}
                                         <Input name={"userGender"} style={{width: 50, backgroundColor: "#c8c8c8"}}
-                                               maxLength={1} id={"userGender"} disabled={true}
+                                               maxLength={1} id={"userGender"} readOnly={true}
                                                value={userInfo?.userGender ? userInfo.userGender : null}
                                                className={"col-6"}/>
                                         &nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*
@@ -295,18 +381,21 @@ function UserInfoUpdate() {
                                     <AsteriskRed>*</AsteriskRed> 주소
                                 </FormBlockHead>
                                 <FormBlockBody>
-                                    <Popup checkFunc={checkAddress}/>
+                                    <Popup addrChangeFunc={addrChangeList} checkFunc={checkAddress}/>
                                     <Input name={"userAddrNum"} className={'my-1'} id={"sigunguCode"}
-                                           value={userInfo?.userAddrNum ? userInfo.userAddrNum : null}
-                                           readOnly={true}/>
+                                           value={userAddrNum}
+                                           readOnly={true}
+                                    />
                                     <Input name={"userAddrJibun"} className={'my-1'} id={"jibunAddress"}
-                                           value={userInfo?.userAddrJibun ? userInfo.userAddrJibun : null}
-                                           readOnly={true}/>
+                                           value={userAddrJibun}
+                                           readOnly={true}
+                                    />
                                     <Input name={"userAddrRoad"} className={'my-1'} id={"roadAddress"}
-                                           value={userInfo?.userAddrRoad ? userInfo.userAddrRoad : null}
-                                           readOnly={true}/>
+                                           value={userAddrRoad}
+                                           readOnly={true}
+                                    />
                                     <Input name={"userAddrDetail"} className={'my-1'} id={"addressDetail"}
-                                           onChange={onChangeUserAddrDetail}
+                                           onChange={(e) => onChangeUserAddrDetail(e)}
                                            value={userAddrDetail}
                                     />
                                 </FormBlockBody>
@@ -314,7 +403,7 @@ function UserInfoUpdate() {
 
                             <FormBlockSubmit>
                                 <FormBlockBody>
-                                    <BtnLogin type="submit" id={"btn-signUp"}>수정 완료</BtnLogin>
+                                    <BtnLogin onClick={checkAll} type="button" id={"btn-update"}>수정 완료</BtnLogin>
                                 </FormBlockBody>
                             </FormBlockSubmit>
                         </form>
@@ -329,6 +418,7 @@ function UserInfoUpdate() {
         </WrapLogin>
     );
 }
+
 
 const okStyle = {
     color: "#009000"
