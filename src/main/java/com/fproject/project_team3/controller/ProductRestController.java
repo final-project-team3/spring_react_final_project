@@ -2,6 +2,7 @@ package com.fproject.project_team3.controller;
 
 import com.fproject.project_team3.dto.gwak.GwakTestTblDto;
 import com.fproject.project_team3.dto.join.UserOrderListProductInfoDto;
+import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,12 @@ public class ProductRestController {
     public List<ProductKindDto> getSmallKind(@RequestParam("bigKind") String productBigKind) {
         return productService.getSmallKind(productBigKind);
     }
+
+    //    검색
+    @PostMapping("/getSearchProductList")
+    public List<ProductInfoDto> getSearchProductList(@RequestParam("searchContent") String searchContent) {
+        return productService.getSearchProductList(searchContent);
+    }
     //    HSH
 
     //    LYS
@@ -54,26 +61,39 @@ public class ProductRestController {
         return productSelectList;
     }
 
-//    @PostMapping("/testData")
-//    public List<GwakTestTblDto> selectTestData(@RequestParam("idx") int idx) throws Exception {
-//        List<GwakTestTblDto> testList = productService.getSelectTestData(idx);
-//        System.out.println(idx);
-//        System.out.println(testList);
-//        return testList;
-//    }
+    // 상품 등록 → DB 저장
+    @PostMapping("/productDataIntoDB")
+    public void insertProductData(@RequestParam("productName") String productName, @RequestParam("productKindNum") int productKindNum, @RequestParam("productQty") int productQty, @RequestParam("productSellerId") String productSellerId, @RequestParam("productPrice") int productPrice) throws Exception {
+        productService.insertProductData(productName, productKindNum, productQty, productSellerId, productPrice);
+        System.out.println(productName);
+        System.out.println(productQty);
+        System.out.println(productKindNum);
+        System.out.println(productSellerId);
+        System.out.println(productPrice);
+//    System.out.println(productQty);
+    }
+
+    // 제품 중복확인
+    @PostMapping("/productNameCheck")
+    public int checkProductName(@RequestParam("productName") String productName, @RequestParam("productSellerId") String productSellerId) throws Exception {
+        System.out.println(productName);
+        System.out.println(productSellerId);
+        int checkCnt = productService.checkProductName(productName, productSellerId);
+        return checkCnt;
+    }
 
     // 파일 업로드
 
-    @RequestMapping(value="/WriteBoard", method= RequestMethod.POST)
-    public  Map<String,Object> WriteBoard (HttpServletRequest request,
-                                           @RequestParam(value="file", required=false) MultipartFile[] files
-        , @RequestParam(value="tag", required=false) String tag
-        , @RequestParam(value="comment", required=false) String comment) throws SQLException {
-        Map<String,Object> resultMap = new HashMap<String,Object>();
-        String FileNames ="";
-        System.out.println("paramMap =>"+files[0]);
-        System.out.println("paramMap =>"+tag);
-        System.out.println("paramMap =>"+comment);
+    @RequestMapping(value = "/WriteBoard", method = RequestMethod.POST)
+    public Map<String, Object> WriteBoard(HttpServletRequest request,
+                                          @RequestParam(value = "file", required = false) MultipartFile[] files
+            , @RequestParam(value = "tag", required = false) String tag
+            , @RequestParam(value = "comment", required = false) String comment) throws SQLException {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        String FileNames = "";
+        System.out.println("paramMap =>" + files[0]);
+        System.out.println("paramMap =>" + tag);
+        System.out.println("paramMap =>" + comment);
         String filepath = "C:/cookingapp/churchfront/public/image/saveFolder/";
         for (MultipartFile mf : files) {
 
@@ -83,11 +103,11 @@ public class ProductRestController {
             System.out.println("originFileName : " + originFileName);
             System.out.println("fileSize : " + fileSize);
 
-            String safeFile =System.currentTimeMillis() + originFileName;
+            String safeFile = System.currentTimeMillis() + originFileName;
 
-            FileNames = FileNames+","+safeFile;
+            FileNames = FileNames + "," + safeFile;
             try {
-                File f1 = new File(filepath+safeFile);
+                File f1 = new File(filepath + safeFile);
                 mf.transferTo(f1);
             } catch (IllegalStateException e) {
                 // TODO Auto-generated catch block
@@ -99,7 +119,7 @@ public class ProductRestController {
         }
         Map<String, Object> paramMap = new HashMap<String, Object>();
         FileNames = FileNames.substring(1);
-        System.out.println("FileNames =>"+ FileNames);
+        System.out.println("FileNames =>" + FileNames);
         paramMap.put("comment", comment);
         paramMap.put("FileNames", FileNames);
         paramMap.put("tag", tag);
@@ -108,21 +128,17 @@ public class ProductRestController {
     }
 
     // 파일 업로드(imgCode)
-    @RequestMapping(value="/productImgUpload", method= RequestMethod.POST)
-    public List<GwakTestTblDto> selectTestData(@RequestParam("img") byte img) throws Exception {
-        List<GwakTestTblDto> testList = productService.getSelectTestData(img);
-        System.out.println(img);
-        System.out.println(testList);
-        return testList;
-    }
+//    @RequestMapping(value="/productImgUpload", method= RequestMethod.POST)
+//    public List<GwakTestTblDto> selectTestData(@RequestParam("img") byte img) throws Exception {
+//        List<GwakTestTblDto> testList = productService.getSelectTestData(img);
+//        System.out.println(img);
+//        System.out.println(testList);
+//        return testList;
+//    }
 
     //    GJY
 
     //    BJH
 
     //    BJH
-
-    //    LSH
-
-    //    LSH
 }

@@ -6,7 +6,7 @@ const ARRAY = [0, 1, 2, 3, 4];
 
 function DetailRating(props) {
     const [clicked, setClicked] = useState([false, false, false, false, false]);
-    
+
     useEffect(() => {
         let starList = [];
         sendReview();

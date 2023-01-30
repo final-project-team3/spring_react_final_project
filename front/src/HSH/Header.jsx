@@ -3,6 +3,9 @@ import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import {hover} from "@testing-library/user-event/dist/hover";
 import axios from "axios";
+import $ from 'jquery';
+
+
 
 
 const Kind = (props) => {
@@ -11,7 +14,7 @@ const Kind = (props) => {
     if (props.smallKind != null) {
         smallKindList = [props.smallKind];
         smallKindList = smallKindList[0];
-        console.log([smallKindList][0]);
+        // console.log([smallKindList][0]);
     }
     return (
         <div>
@@ -19,7 +22,7 @@ const Kind = (props) => {
                 textDecoration: "none"
             }}><h2>{props.bigKind}</h2></Link>
             <ul className={'dropdown-menu'} aria-labelledby={`dropdown${props.index}`}>
-                {[smallKindList][0].map((item) => <li className={'dropdown-item'}>{item.productSmallKind}</li>
+                {[smallKindList][0].map((item, index) => <li key={index} className={'dropdown-item'}>{item.productSmallKind}</li>
                 )}
             </ul>
         </div>
@@ -27,6 +30,8 @@ const Kind = (props) => {
 }
 
 const Header = () => {
+    // 검색 내용
+    const[searchContent, setSearchContent] = useState();
 
     const [isClick, setIsClick] = useState(false);
     const [rankClick, setRankClick] = useState(true);
@@ -35,6 +40,27 @@ const Header = () => {
     // 작은 카테고리,
     const [smallKind, setSmallKind] = useState([]);
     let smallList = [];
+    
+    // 검색 가능
+    const YesSearch = () => {
+        return (
+            <Link to={'/search'} state={{searchContent:searchContent}}><button style={{
+                width: 100
+            }} className={'text-center btn btn-outline-primary'}>검색
+            </button></Link>
+        )
+    }
+    // 검색 불가능
+    const NoSearch = () => {
+        return (
+            <button style={{
+                width: 100
+            }} className={'text-center btn btn-outline-primary'} onClick={()=> {
+                alert('검색어를 입력해주세요');
+            }}>검색
+            </button>
+        )
+    }
 
 
     useEffect(() => {
@@ -63,7 +89,7 @@ const Header = () => {
 
     return (
         <div style={{
-            paddingTop: 200
+            paddingTop: 200,
         }}>
             <nav className="bg-white navbar navbar-expand navbar-dark fixed-top">
                 <div className={'container'}>
@@ -77,13 +103,14 @@ const Header = () => {
                         <ul className={'navbar-nav my-auto'}>
                             <li className={'nav-item'}>
                                 <div className={'d-flex'}>
-                                    <input style={{
+                                    <input id={"searchContent"} onClick={()=> {
+                                        setSearchContent($("#searchContent").val());
+                                    }} onChange={()=> {
+                                        setSearchContent($("#searchContent").val());
+                                    }} style={{
                                         width: 500
                                     }} className={'form-control'} placeholder={'검색'}/>
-                                    <button style={{
-                                        width: 100
-                                    }} className={'text-center btn btn-outline-primary'}>검색
-                                    </button>
+                                    {searchContent != "" && searchContent != null ? <YesSearch/> : <NoSearch/>}
                                 </div>
                             </li>
                             <div className={'nav-item dropdown'}>
@@ -180,6 +207,7 @@ const Header = () => {
                     <li></li>
                 </ul>
             </div>
+            <hr/>
             <Outlet/>
         </div>
     )
