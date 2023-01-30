@@ -16,7 +16,107 @@ function ProductRegisterPage() {
     const [colorToggle, setColorToggle] = useState(false);
     const [checkedSizeList, setCheckedSizeList] = useState([]);
     const [checkedColorList, setCheckedColorList] = useState([]);
-    const [checkedColo]
+
+    // 옵션 설정 여부
+    const [optionChecked, setOptionChecked] = useState(false);
+    const [optionTotal, setOptionTotal] = useState(1);
+    const [optionInputList, setOptionInputList] = useState([]);
+
+    // /**
+    //  * 옵션명 개수 가져와서 그만큼 옵션명 설정할 수 있게 하기 위한 함수
+    //  * */
+    // const optionTyped = () => {
+    //     let optionTotal = $("#option-total").val();
+    //     let returnDiv = [];
+    //     for (let i = 0; i < optionTotal; i++) {
+    //         returnDiv.push(<div className={'row'}>
+    //                 <div className={'d-flex'}>
+    //                     <input className={'col-3'} placeholder={'예시 : 컬러'}/>
+    //                     <input className={'col-6'} placeholder={'예시 : 빨강,노랑 (,로 구분)'}/>
+    //                 </div>
+    //             </div>)
+    //         return returnDiv;
+    //     }
+    // }
+
+    /**
+     * 옵션명 개수 가져와서 그만큼 옵션명 설정할 수 있게 하기 위한 함수
+     * */
+    const optionTyped = () => {
+        let optionCount = optionTotal;
+        let returnDiv = [];
+        console.log(optionTotal);
+        for (let i = 0; i < optionCount; i++) {
+            switch (i) {
+                case 0:
+                    returnDiv.push(<div className={'row my-2'}>
+                        <div className={'col-3 mb-2'}>옵션명</div>
+                        <div className={'col-6 mb-2'}>옵션값</div>
+                        <div className={'col-3'}></div>
+                        <div className={'col-3'}>
+                            <input type={'text'} className={'col-3'} placeholder={'예시 : 컬러'}/>
+                        </div>
+                        <div className={'col-6'}>
+                            <input type={'text'} className={'col-6'} placeholder={'예시 : 빨강,노랑 (,로 구분)'}/>
+                        </div>
+                        <div className={'col-2'}>
+                            <button hidden={optionTotal >= 2 ? true : false} className={'btn btn-outline-primary'}
+                                    onClick={() => {
+                                        setOptionTotal(2);
+                                    }}>+
+                            </button>
+                        </div>
+                    </div>)
+                    break;
+                case 1:
+                    returnDiv.push(<div className={'row my-2'}>
+                        <div className={'col-3'}>
+                            <input type={'text'} className={'col-3'} placeholder={'예시 : 컬러'}/>
+                        </div>
+                        <div className={'col-6'}>
+                            <input type={'text'} className={'col-6'} placeholder={'예시 : 빨강,노랑 (,로 구분)'}/>
+                        </div>
+                        <div className={'col-1'}>
+                            <button hidden={optionTotal == 3 ? true : false} className={'btn btn-outline-primary'}
+                                    onClick={() => {
+                                        setOptionTotal(1);
+                                    }}>-
+                            </button>
+                        </div>
+                        <div className={'col-1'}>
+                            <button hidden={optionTotal == 3 ? true : false} className={'btn btn-outline-primary'}
+                                    onClick={() => {
+                                        setOptionTotal(3);
+                                    }}>+
+                            </button>
+                        </div>
+                    </div>)
+                    break;
+                case 2:
+                    returnDiv.push(<div className={'row my-2'}>
+                        <div className={'col-3'}>
+                            <input type={'text'} className={'col-3'} placeholder={'예시 : 컬러'}/>
+                        </div>
+                        <div className={'col-6'}>
+                            <input type={'text'} className={'col-6'} placeholder={'예시 : 빨강,노랑 (,로 구분)'}/>
+                        </div>
+                        <div className={'col-1'}>
+                            <button className={'btn btn-outline-primary'} onClick={() => {
+                                setOptionTotal(2);
+                            }}>-
+                            </button>
+                        </div>
+                    </div>)
+            }
+            $("#option-total").val(optionTotal).prop('selected', true);
+            setOptionInputList(returnDiv);
+        }
+    }
+
+    // 이걸 해야 처음에 옵션명 입력하는 인풋태그가 1개 들어감
+    useEffect(() => {
+        optionTyped();
+    }, [optionTotal])
 
     // 체크박스 데이터
     const SIZE_LIST = [
@@ -309,91 +409,6 @@ function ProductRegisterPage() {
                                 </div>
                             </td>
                         </tr>
-                        <tr className={"border"}>
-                            {/* 옵션 등록*/}
-                            <td className={"border text-center"} style={{height: 60}}>
-                                옵션등록
-                            </td>
-                            <td>
-                                <fieldset className="form-group">
-                                    <div className="form-check form-switch">
-                                        <input
-                                            className="form-check-input ms-3"
-                                            type="checkbox"
-                                            id="flexSwitchCheckDefault"
-                                            onClick={sizeToggleHandler}
-                                        />
-                                        <label
-                                            className="form-check-label ms-3"
-                                            htmlFor="flexSwitchCheckDefault"
-                                        >
-                                            사이즈 옵션 추가
-                                        </label>
-                                    </div>
-                                    {sizeToggle ? (
-                                        <div className={"row mt-3 ms-3"}>
-                                            {SIZE_LIST.map((item, index) => (
-                                                <div className={"d-flex col-1"}>
-                                                    <input
-                                                        id={"selectOpt"}
-                                                        className={"form-control col-3 mt-1"}
-                                                        type={"checkbox"}
-                                                        key={item.id}
-                                                        value={item.data}
-                                                        onChange={e => {
-                                                            onCheckedSizeElement(e.target.checked, e.target.value)
-                                                        }}
-                                                    />
-                                                    <label htmlFor={"selectOpt"} className={"col-3 mb-3"}>
-                                                        {item.data}
-                                                    </label>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ) : null}
-                                    {/* -------------------- 색상 옵션 추가 -------------------- */}
-                                    <div className="form-check form-switch">
-                                        <input
-                                            className="form-check-input ms-3"
-                                            type="checkbox"
-                                            id="flexSwitchCheckDefault"
-                                            onClick={colorToggleHandler}
-                                        />
-                                        <label
-                                            className="form-check-label ms-3"
-                                            htmlFor="flexSwitchCheckDefault"
-                                        >
-                                            색상 옵션 추가
-                                        </label>
-                                    </div>
-                                    {colorToggle ? (
-                                        <div className={"row mt-3 ms-3"}>
-                                            {COLOR_LIST.map((item, index) => (
-                                                <div className={"d-flex col-1"}>
-                                                    <input
-                                                        id={"selectOpt"}
-                                                        className={"form-control col-3 mt-1"}
-                                                        type={"checkbox"}
-                                                        key={item.id}
-                                                        value={item.data}
-                                                        onChange={e => {
-                                                            onCheckedColorElement(e.target.checked, e.target.value)
-                                                        }}
-                                                    />
-                                                    <label htmlFor={"selectOpt"} className={"col-7 mb-3 text"}>
-                                                        {item.data}
-                                                    </label>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ) : null}
-                                </fieldset>
-
-                                <div className={"row"}>
-                                    <div className={"col-4"}></div>
-                                </div>
-                            </td>
-                        </tr>
 
                         {/*시작 */}
                         <tr className={"border"}>
@@ -411,6 +426,10 @@ function ProductRegisterPage() {
                                                 type="radio"
                                                 name={"option"}
                                                 id={"option-check"}
+                                                onClick={() => {
+                                                    setOptionChecked(true);
+                                                }}
+                                                checked={optionChecked == true ? true : false}
                                             />
                                             <label
                                                 className="form-check-label ms-4"
@@ -426,7 +445,10 @@ function ProductRegisterPage() {
                                                 type="radio"
                                                 name={"option"}
                                                 id={"option-notCheck"}
-                                                checked
+                                                onClick={() => {
+                                                    setOptionChecked(false);
+                                                }}
+                                                checked={optionChecked == false ? true : false}
                                             />
                                             <label
                                                 className="form-check-label ms-4"
@@ -436,13 +458,126 @@ function ProductRegisterPage() {
                                         </div>
                                     </div>
                                 </fieldset>
-
                                 <div className={"row"}>
                                     <div className={"col-4"}></div>
                                 </div>
                             </td>
                         </tr>
                         {/* 끝 */}
+
+
+                        {/* 옵션 추가시 시작 */}
+
+                        {/* 옵션 개수 */}
+                        <tr className={"border"} hidden={optionChecked == true ? false : true}>
+                            <td className={"border text-center"} style={{height: 60}}>
+                                옵션명 개수
+                            </td>
+                            <td>
+                                <fieldset className="form-group">
+                                    <div className={'ms-3'}>
+                                        {/* 옵션 개수 설정*/}
+                                        <div className={'mt-3 d-flex row'}>
+                                            <div className={'col-2'}>
+                                                <select className={'form-select mb-3'} id={"option-total"}
+                                                        onClick={() => {
+                                                            setOptionTotal($("#option-total").val());
+                                                            optionTyped();
+                                                        }} onChange={() => {
+                                                    setOptionTotal($("#option-total").val());
+                                                    optionTyped();
+                                                }}>
+                                                    <option value={1}>1개</option>
+                                                    <option value={2}>2개</option>
+                                                    <option value={3}>3개</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <div className={"row"}>
+                                    <div className={"col-4"}></div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        {/* 옵션 입력 */}
+                        <tr className={"border"} hidden={optionChecked == true ? false : true}>
+                            <td className={"border text-center"} style={{height: 60}}>
+                                옵션입력
+                            </td>
+                            <td>
+                                <fieldset className="form-group">
+                                    <div className={'ms-3'}>
+                                        {/* 옵션명 개수에 따라서 인풋태그 증가*/}
+                                        {optionInputList.map((item) => {
+                                            return item;
+                                        })}
+                                        <button className={'btn btn-outline-primary mb-2'}>옵션 목록으로 적용</button>
+                                    </div>
+                                </fieldset>
+
+                                <div className={"row"}>
+                                    <div className={"col-4"}></div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        {/* 옵션 목록 */}
+                        <tr className={"border"} hidden={optionChecked == true ? false : true}>
+                            <td className={"border text-center"} style={{height: 60}}>
+                                옵션 목록
+                            </td>
+                            <td>
+                                <div>
+                                    <div className={'ms-3 me-3'}>
+                                        <table style={{
+                                            textAlign: "center"
+                                        }} className={'table table-bordered'}>
+                                            <thead>
+                                            <tr className={'row'}>
+                                                <th className={'col-1'}>
+                                                    <input type={'checkbox'}/>
+                                                </th>
+                                                <th rowSpan={2} className={'col-3'}>
+                                                    <div>
+                                                        <p>ㄴㄴ</p>
+                                                    </div>
+                                                    <div className={'border-top border-dark d-flex justify-content-center'}>
+                                                        <p className={'col'}>ㄴㄴ</p>
+                                                        <p className={'col'}>ㄴㄴ</p>
+                                                        <p className={'col'}>ㄴㄴ</p>
+                                                    </div>
+                                                </th>
+                                                <th className={'col'}>옵션가</th>
+                                                <th className={'col'}>재고수량</th>
+                                                <th className={'col'}>판매상태</th>
+                                                <th className={'col'}>삭제</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr className={'row'}>
+                                                <td className={'col-1'}>
+                                                    <input type={'checkbox'} className={'mb-3'}/>
+                                                </td>
+                                                <td className={'col-3'}>테스트</td>
+                                                <td className={'col'}>테스트</td>
+                                                <td className={'col'}>테스트</td>
+                                                <td className={'col'}>테스트</td>
+                                                <td className={'col'}>테스트</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div className={"row"}>
+                                    <div className={"col-4"}></div>
+                                </div>
+                            </td>
+                        </tr>
+                        {/* 옵션 추가시 끝 */}
 
 
                         <tr className={"border"}>
