@@ -93,13 +93,11 @@ function ProductRegisterPage() {
     // [{컬러: 빨강, 사이즈: 큰},{,}]
     // optionTotal = 2;
     let index = 0;
-    let arr1 = new Array();
+    let arr1 = [];
     for (let i = 0; i < optionValue[0].length; i++) {
       console.log(optionValue[i]);
       for (let j = 0; j < optionValue[1].length; j++) {
         console.log(`${optionValue[0][i]} , ${optionValue[1][j]}`);
-        // console.log("---ij----")
-        // console.log(optionValue[1][j]);
 
 
         arr1[index++] = {color: optionValue[0][i], option: optionValue[1][j]}
