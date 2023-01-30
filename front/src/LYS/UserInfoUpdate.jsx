@@ -8,6 +8,9 @@ import data from "bootstrap/js/src/dom/data";
 import user from "../BJH/User";
 
 function UserInfoUpdate() {
+    //
+
+
     //[React] input 엘리먼트에 value 속성만 지정했을때 값이 입력불가한 현상 해결방법
     const [userAddrDetail, setUserAddrDetail] = useState('');
     const [userTel, setUserTel] = useState('');
@@ -248,7 +251,8 @@ function UserInfoUpdate() {
                                     <InputTextSizeWTypeL>
                                         <Input type="hidden" required/>
                                         <Input type="tel" name={"userTel"}
-                                               value={userTel} placeholder={userTel}
+                                               // value={userTel} onChange 함수에 2개가 안들어가서 placeholder로 밸류 넣음
+                                               placeholder={userTel}
                                                onClick={checkTel} onChange={checkTel}
                                                id={"userTel"}
                                                data-auth="cell_phone"
