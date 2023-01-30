@@ -14,7 +14,7 @@ public interface UserService {
 
     UserInfoDto getUserInfo(String userId);
 
-    void updateUser(UserInfoDto userInfoDto);
+    void userInfoUpdate(UserInfoDto userInfoDto);
 
 
     //    HSH

@@ -16,6 +16,10 @@ public interface SellerService {
 
     String businessNumCheck(String businessNum);
 
+    SellerInfoDto getSellerInfo(String sellerId);
+
+    void sellerInfoUpdate(SellerInfoDto sellerInfoDto);
+
     //    LYS
 
     //    GJY

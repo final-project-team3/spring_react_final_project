@@ -1,5 +1,6 @@
 package com.fproject.project_team3.controller;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.fproject.project_team3.dto.gwak.GwakTestTblDto;
 import com.fproject.project_team3.dto.join.UserOrderListProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
@@ -125,6 +126,15 @@ public class ProductRestController {
         paramMap.put("tag", tag);
         resultMap.put("JavaData", paramMap);
         return resultMap;
+    }
+
+    // 옵션데이터
+    @PostMapping("/submitOption")
+    public String submitOption(@RequestParam ("users") String users) throws Exception {
+        System.out.println("----------------------");
+        System.out.println(users);
+        System.out.println("----------------------");
+        return null;
     }
 
     // 파일 업로드(imgCode)

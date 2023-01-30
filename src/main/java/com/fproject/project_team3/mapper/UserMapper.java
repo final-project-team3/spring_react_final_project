@@ -20,7 +20,7 @@ public interface UserMapper {
 
     UserInfoDto getUserInfo(String userId);
 
-    void updateUser(UserInfoDto userInfoDto);
+    void userInfoUpdate(UserInfoDto userInfoDto);
 
     //    LYS
 

@@ -37,9 +37,9 @@ public class UserRestController {
         return userService.getUserInfo(userId);
     }
 
-    @PostMapping("/updateUser")
-    public void updateUser(UserInfoDto userInfoDto, HttpServletResponse httpServletResponse) throws IOException {
-        userService.updateUser(userInfoDto);
+    @PostMapping("/userInfoUpdate")
+    public void userInfoUpdate(UserInfoDto userInfoDto, HttpServletResponse httpServletResponse) throws IOException {
+        userService.userInfoUpdate(userInfoDto);
         httpServletResponse.sendRedirect("http://localhost:3000/");
     }
 
