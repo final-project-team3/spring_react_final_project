@@ -89,20 +89,42 @@ function ProductRegisterPage() {
     console.log(optionName);
     console.log(optionValue);
 
-    let count = 1;
-    for (let i = 0; i < optionTotal; i++) {
-      count *= optionValue[i].length;
-    }
-    console.log(count);
-
     // 옵션 토탈의 크기만큼 돎
+    // [{컬러: 빨강, 사이즈: 큰},{,}]
+    // optionTotal = 2;
+    let index = 0;
+    let arr1 = new Array();
+    for (let i = 0; i < optionValue[0].length; i++) {
+      console.log(optionValue[i]);
+      for (let j = 0; j < optionValue[1].length; j++) {
+        console.log(`${optionValue[0][i]} , ${optionValue[1][j]}`);
+        // console.log("---ij----")
+        // console.log(optionValue[1][j]);
 
-      // for (let i = 0; i < optionTotal; i++) {
-      //   for (let j = 0; j < optionValue[j].length; k++) {
-      //     console.log(optionValue[j][k]);
-      //   }
-      // }
 
+        arr1[index++] = {color: optionValue[0][i], option: optionValue[1][j]}
+
+        // const 객체 = {컬러: {optionValue[0][i], 옵션:  ${optionValue[1][j]}}
+      }
+
+    }
+    console.log(arr1[0].color);
+    console.log(arr1[0].option);
+
+    console.log(arr1[1].color);
+    console.log(arr1[1].option);
+
+    console.log(arr1[2].color);
+    console.log(arr1[2].option);
+
+    console.log(arr1[3].color);
+    console.log(arr1[3].option);
+
+    console.log(arr1[4].color);
+    console.log(arr1[4].option);
+
+    console.log(arr1[5].color);
+    console.log(arr1[5].option);
   }
 
   /**
