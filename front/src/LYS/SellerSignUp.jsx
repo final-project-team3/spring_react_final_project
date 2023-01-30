@@ -522,7 +522,8 @@ function SellerSignUp() {
                                         <Input type="tel" name={"sellerTel"} placeholder="'-'를 제외한 번호를 입력해주세요"
                                                onClick={checkTel} onChange={checkTel}
                                                id={"sellerTel"}
-                                               data-auth="cell_phone"/>
+                                               data-auth="cell_phone"
+                                               maxLength={10}/>
                                         <HiddenMessage style={okStyle} className="ph_ok ok">사용 가능한
                                             전화번호입니다.</HiddenMessage>
                                         <HiddenMessage style={noStyle} className="ph_already no">이미 사용중인
@@ -604,7 +605,7 @@ function SellerSignUp() {
                                 <FormBlockBody>
                                     <InputTextSizeWTypeL>
                                         <Input onClick={businessNumCheck} onChange={businessNumCheck}
-                                               name={"sellerBusinessNum"} id={"businessNum"} type="text" maxLength={10}
+                                               name={"sellerBusinessNum"} id={"businessNum"} type="text" maxLength={11}
                                                placeholder="사업자 등록번호 10자리를 '-'없이 입력해주세요"/>
                                         <HiddenMessage style={okStyle} className="business_num_ok ok">사용가능한 사업자 등록번호
                                             입니다.</HiddenMessage>

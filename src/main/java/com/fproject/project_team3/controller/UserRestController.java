@@ -2,13 +2,17 @@ package com.fproject.project_team3.controller;
 
 import com.fproject.project_team3.dto.user.UserInfoDto;
 import com.fproject.project_team3.service.user.UserService;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 public class UserRestController {
@@ -23,6 +27,19 @@ public class UserRestController {
     public void signUpUser(UserInfoDto userInfoDto, HttpServletResponse httpServletResponse) throws IOException {
         System.out.println(userInfoDto);
         userService.insertUser(userInfoDto);
+        httpServletResponse.sendRedirect("http://localhost:3000/");
+    }
+
+    @PostMapping("/getUserInfo")
+    public Object getUserInfo(@RequestParam("userId") String userId){
+        System.out.println(userId);
+        System.out.println(userService.getUserInfo(userId));
+        return userService.getUserInfo(userId);
+    }
+
+    @PostMapping("/updateUser")
+    public void updateUser(UserInfoDto userInfoDto, HttpServletResponse httpServletResponse) throws IOException {
+        userService.updateUser(userInfoDto);
         httpServletResponse.sendRedirect("http://localhost:3000/");
     }
 
@@ -44,6 +61,7 @@ public class UserRestController {
         }
         return Tel;
     }
+
 
     //    LYS
 
