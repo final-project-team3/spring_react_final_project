@@ -27,9 +27,9 @@ function GwakApp() {
   const nextId = useRef(1);
 
   const onCreate = () => {
-    if (productOption1 == "" || productOption2 == "") {
-      alert("옵션을 입력하세요.");
-    } else {
+    // if (productOption1 == "" || productOption2 == "") {
+    //   alert("옵션을 입력하세요.");
+    // } else {
       // 배열에 항목을 추가 : 불변성을 해치지 않아야함 -> push, splice, sort 금지. spread 연산자 또는 concat 사용
       const user = {
         id: nextId.current,
@@ -46,7 +46,7 @@ function GwakApp() {
       });
 
       nextId.current += 1;
-    }
+    // }
   };
 
   const submitOption = async () => {
@@ -69,9 +69,12 @@ function GwakApp() {
     setUsers(users.filter((user) => user.id !== id));
     // console.log(users.length);
     // console.log(users[1].id);
-    // for(let i = 1; i <= users.length ; i++){
-    //   // const { name, value } = e.target; // 우선 e.target 에서 name 과 value 추출
-    //   users[i].id = i
+    for(let i = 0; i <= users.length ; i++) {
+      // const { name, value } = e.target; // 우선 e.target 에서 name 과 value 추출
+      users[i].id = i+1;
+
+      // console.log(users);
+    }
   };
 
   return (
