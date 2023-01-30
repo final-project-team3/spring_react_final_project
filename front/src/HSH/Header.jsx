@@ -4,6 +4,7 @@ import styled from "styled-components";
 import {hover} from "@testing-library/user-event/dist/hover";
 import axios from "axios";
 import $ from 'jquery';
+import Footer from "../BJH/Footer";
 
 
 
@@ -209,6 +210,7 @@ const Header = () => {
             </div>
             <hr/>
             <Outlet/>
+            <Footer/>
         </div>
     )
 }
