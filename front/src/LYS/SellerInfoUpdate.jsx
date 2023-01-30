@@ -223,17 +223,21 @@ function SellerInfoUpdate() {
         console.log(checkList);
         let update = $('#btn-update');
         // 확인
-        let checkVal = [$("#sellerPass").val(), $("#sellerPass2").val(), $("#sellerTel").val(), $("#sigunguCode").val()]
+        let checkVal = [$("#sellerPass").val(), $("#sellerPass2").val(), $("#sellerTel").val(), $("#sigunguCode").val()];
         // 출력(span)
-        let checkSpan = [$('.checkPw'), $('.checkPw2'), $('.checkPh'), $('.checkAddr')]
+        let checkSpan = [$('.checkPw'), $('.checkPw2'), $('.checkPh'), $('.checkAddr')];
 
         let true_cnt = 0;
 
         for (let i = 0; i < checkVal.length; i++) {
-            if (checkList[i] == true) {
-                true_cnt++
+            if (i == 1) {
+                if (checkList[i] == true) {
+                    true_cnt++;
+                }
             } else if (checkList[i] == false || checkVal[i] == '') {
                 checkSpan[i].css('display', 'inline-block')
+            } else if (checkList[i] == true) {
+                true_cnt++
             }
         }
 
