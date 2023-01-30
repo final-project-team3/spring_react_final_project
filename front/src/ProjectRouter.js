@@ -25,8 +25,6 @@ import SellerLogin from "./BJH/SellerLogin";
 import Test from "./GJY/Test";
 import UserJoinResult from "./BJH/UserJoinResult";
 import SellerJoinResult from "./BJH/SellerJoinResult";
-import UserInfoUpdate from "./LYS/UserInfoUpdate";
-import SellerInfoUpdate from "./LYS/SellerInfoUpdate";
 import Search from "./HSH/Search";
 import FileUpload from "./GJY/FileUpload";
 import Footer from "./BJH/Footer";
@@ -36,6 +34,8 @@ import InputSample from "./GJY/InputSample";
 import OptionList from "./GJY/OptionList";
 import GwakApp from "./GJY/GwakApp";
 import LikeUserList from "./BJH/UserList/LikeUserList";
+import UserInfoUpdate from "./LYS/UserInfoUpdate";
+import SellerInfoUpdate from "./LYS/SellerInfoUpdate";
 
 const ProjectRouter = () => {
 

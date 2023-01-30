@@ -16,6 +16,10 @@ public interface SellerMapper {
     String telCheck(String sellerTel);
 
     String businessNumCheck(String businessNum);
+
+    SellerInfoDto getSellerInfo(String sellerId);
+
+    void sellerInfoUpdate(SellerInfoDto sellerInfoDto);
     //    HSH
 
     //    LYS

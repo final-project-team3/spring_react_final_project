@@ -7,13 +7,30 @@
         INSERT INTO seller_info(seller_name, seller_tel, seller_id, seller_pass, seller_birth, seller_gender,
                                 seller_addr_num, seller_addr_jibun, seller_addr_road, seller_addr_detail,
                                 seller_business_name, seller_business_num)
-        VALUES (#{sellerName}, #{sellerTel}, #{sellerId}, #{sellerPass},#{sellerBirth}, #{sellerGender},
+        VALUES (#{sellerName}, #{sellerTel}, #{sellerId}, #{sellerPass}, #{sellerBirth}, #{sellerGender},
                 #{sellerAddrNum}, #{sellerAddrJibun}, #{sellerAddrRoad}, #{sellerAddrDetail}, #{sellerBusinessName},
                 #{sellerBusinessNum})
     </insert>
     <!-- HSH -->
 
     <!-- LYS -->
+    <select id="getSellerInfo" parameterType="String" resultType="com.fproject.project_team3.dto.seller.SellerInfoDto">
+        SELECT *
+        FROM seller_info
+        WHERE seller_id = #{sellerId}
+    </select>
+
+    <update id="sellerInfoUpdate" parameterType="com.fproject.project_team3.dto.seller.SellerInfoDto">
+        UPDATE seller_info
+        SET seller_pass        = #{sellerPass},
+            seller_tel         = #{sellerTel},
+            seller_addr_num    = #{sellerAddrNum},
+            seller_addr_jibun  = #{sellerAddrJibun},
+            seller_addr_road   = #{sellerAddrRoad},
+            seller_addr_detail = #{sellerAddrDetail}
+        WHERE seller_id = #{sellerId}
+    </update>
+
     <select id="emailCheck" parameterType="String" resultType="String">
         SELECT seller_id
         FROM seller_info
