@@ -21,17 +21,20 @@ function ProductRegisterPage() {
     const [optionTotal, setOptionTotal] = useState(1);
     const [optionInputList, setOptionInputList] = useState([]);
 
-    // 리스트 데이터
-    const [mainOptionList, setMainOptionList] = useState([]); // mainOptionList
-    const [detailOptionList, setDetailOptionList] = useState([]); // detailOptionList
-
+    // 옵션 리스트 데이터
     const [optionName, setOptionName] = useState([]);
     const [optionValue, setOptionValue] = useState([]);
     const [optionList, setOptionList] = useState([]);
 
+    // 체크박스 전체선택 기능
+    const [checkItems, setCheckItems] = useState([]);
+
+
+
     const OptionReg = () => {
         let optionNameList = [];
         let optionValueList = [];
+        let ii = 0;
 
         for (let i = 0; i < optionTotal; i++) {
             optionNameList.push($(`#option${i}`).val());
@@ -41,39 +44,34 @@ function ProductRegisterPage() {
         setOptionName(optionNameList);
         setOptionValue(optionValueList);
 
-        let List = [];
-
         console.log(optionName);
         console.log(optionValue);
 
-        // 옵션 토탈의 크기만큼 돎
-        // [{컬러: 빨강, 사이즈: 큰},{,}]
-        // optionTotal = 2;
-
-        let cntList = [];
-        for (let i = 0; i < optionTotal; i++) {
-            cntList.push(i);
-        }
-        console.log(cntList);
-
         let index = 0;
-        let arr1 = new Array();
+        let arr1 = [];
         let valueList = [];
+
         for (let i = 0; i < optionValueList[0].length; i++) {
-            console.log(optionValue[i]);
             for (let j = 0; j < optionValueList[1].length; j++) {
 
                 console.log(`${optionValueList[0][i]}` + `, ${optionValueList[1][j]}`);
-                let valueObj = {value1: `${optionValueList[0][i]}`, value2: `${optionValueList[1][j]}`};
+                let valueObj = {index: ii, value1: `${optionValueList[0][i]}`, value2: `${optionValueList[1][j]}`};
                 valueList.push(valueObj);
 
-                arr1[index++] = {color: optionValueList[0][i], option: optionValueList[1][j]}
+                arr1[index++] = {index: ii, color: optionValueList[0][i], option: optionValueList[1][j]}
+                ii++;
             }
 
         }
         setOptionList(valueList);
+        // setOptionList(arr1);
 
+        console.log("valueList : ")
         console.log(valueList);
+        console.log("arr1 : ")
+        console.log(arr1);
+        console.log("optionList : ")
+        console.log(optionList);
     }
 
     /**
@@ -336,6 +334,33 @@ function ProductRegisterPage() {
         }
     };
 
+
+    const onRemove = (index) => {
+        // user.id 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듦
+        // = user.id 가 id 인 것을 제거함
+        // setUsers(users.filter((user) => user.id !== id));
+        setOptionList(optionList.filter((optionList) => optionList.index !== index));
+        // console.log(users.length);
+        // console.log(users[1].id);
+    };
+
+    // 사용XXXXXX : td 데이터..?
+    const trGroup = Array.from(document.querySelectorAll('#SupportUpload-tbody tr'));
+    const tblDataTest = trGroup.map(tr => {
+        console.log("??");
+        const a = Array.from(tr.children).map(input => input.textContent);
+        console.log(a);
+    });
+
+    const handleSingleCheck = (checked, index) => {
+        if (checked) {
+            // 단일 선택 시 체크된 아이템을 배열에 추가
+            setCheckItems(prev => [])
+        }
+    }
+
+    //
+
     //-------------------------------------------------- RETURN -------------------------------------------------- //
     //-------------------------------------------------- RETURN -------------------------------------------------- //
     return (
@@ -581,6 +606,7 @@ function ProductRegisterPage() {
                                         >
                                             옵션 목록으로 적용
                                         </button>
+                                        <button className={"btn btn-danger"} onClick={() => tblDataTest}>테이블데이터 확인</button>
                                     </div>
                                 </fieldset>
 
@@ -610,7 +636,7 @@ function ProductRegisterPage() {
                                             <thead>
                                             <tr className={"row"}>
                                                 <th className={"col-1"}>
-                                                    <input type={"checkbox"}/>
+                                                    <input type={"checkbox"} id={"allCheck"}/>
                                                 </th>
                                                 <th rowSpan={2} className={'col-3'}>
                                                     <div>
@@ -631,32 +657,31 @@ function ProductRegisterPage() {
                                             </thead>
                                             <tbody>
 
-                                            {optionList.map((item, index) => {
+                                            {optionList.map((item) => {
                                                 return (
-                                                    <tr key={index} className={"row"}>
+                                                    <tr key={item.index} className={"row"}>
                                                         <td className={"col-1"}>
                                                             <input type={"checkbox"} className={"mb-3"}/>
                                                         </td>
-                                                        <td id={`optionValue${index}`} className={"col-3"}>{`${item.value1},  ${item.value2}`}</td>
-                                                        <td className={"col"}>테스트</td>
-                                                        <td className={"col"}>테스트</td>
-                                                        <td className={"col"}>테스트</td>
-                                                        <td className={"col"}>테스트</td>
+                                                        <td id={`optionValue${item.index}`} className={"col-3"}>{`${item.value1},  ${item.value2}`}</td>
+                                                        <td className={"col"} id={"optionPrice"}><input type="text"/></td>
+                                                        <td className={"col"} id={"stockQty"}><input type="text"/></td>
+                                                        <td className={"col"} id={"sailsStatus"}>
+                                                            <select name={"sailsStatusOption"} id={"sailsStatusOption"}>
+                                                                <option name="00" id="00" value="">---상태선택--</option>
+                                                                <option name="sailOption1" id="sailOption1" value={"sailOption1"}>판매중</option>
+                                                                <option name="sailOption1" id="sailOption2" value={"sailOption2"}>세일</option>
+                                                            </select>
+                                                        </td>
+                                                        <td className={"col"}><button className={"btn btn-primary"} onClick={() => onRemove(item.index)}>삭제</button></td>
                                                     </tr>
                                                 )
                                             })}
-                                            {/*<td className={"col-1"}>*/}
-                                            {/*    <input type={"checkbox"} className={"mb-3"}/>*/}
-                                            {/*</td>*/}
-                                            {/*<td className={"col-3"}>테스트</td>*/}
-                                            {/*<td className={"col"}>테스트</td>*/}
-                                            {/*<td className={"col"}>테스트</td>*/}
-                                            {/*<td className={"col"}>테스트</td>*/}
-                                            {/*<td className={"col"}>테스트</td>*/}
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
+
 
                                 <div className={"row"}>
                                     <div className={"col-4"}></div>
@@ -664,7 +689,6 @@ function ProductRegisterPage() {
                             </td>
                         </tr>
                         {/* 옵션 추가시 끝 */}
-
                         <tr className={"border"}>
                             <td className={"border text-center"} style={{height: 60}}>
                                 상품 이미지 등록
