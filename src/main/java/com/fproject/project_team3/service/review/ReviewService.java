@@ -14,6 +14,11 @@ public interface ReviewService {
     //    LYS
 //     리뷰 리스트 가져옴
     List<ReviewDto> getReview(String productNum);
+
+    List<ReviewDto> getMyReview(String userId);
+
+    void deleteMyReview(ReviewDto reviewDto);
+
     //    LYS
 
     //    GJY

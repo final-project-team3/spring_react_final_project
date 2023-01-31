@@ -8,4 +8,8 @@ import java.util.List;
 @Mapper
 public interface ReviewMapper {
     List<ReviewDto> getReview(String productNum);
+
+    List<ReviewDto> getMyReview(String userId);
+
+    void deleteMyReview(ReviewDto reviewDto);
 }

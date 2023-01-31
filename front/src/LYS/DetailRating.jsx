@@ -44,12 +44,10 @@ export default DetailRating;
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 15px;
 `;
 
 const Stars = styled.div`
   display: flex;
-  padding-top: 5px;
 
   & svg {
     color: gray;
