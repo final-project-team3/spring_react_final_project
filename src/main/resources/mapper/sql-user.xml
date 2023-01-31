@@ -2,7 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fproject.project_team3.mapper.UserMapper">
     <!-- HSH -->
-
+    <select id="userLogin" parameterType="String" resultType="com.fproject.project_team3.dto.user.UserInfoDto">
+        SELECT *
+        FROM user_info
+        WHERE user_id = #{id}
+          AND user_pass = #{pass}
+    </select>
     <!-- HSH -->
 
     <!-- LYS -->

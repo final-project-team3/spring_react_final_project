@@ -20,6 +20,8 @@ public interface SellerMapper {
     SellerInfoDto getSellerInfo(String sellerId);
 
     void sellerInfoUpdate(SellerInfoDto sellerInfoDto);
+
+    Object sellerLogin(String id, String pass);
     //    HSH
 
     //    LYS

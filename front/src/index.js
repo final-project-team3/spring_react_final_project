@@ -6,11 +6,13 @@ import ProjectRouter from "./ProjectRouter";
 import './bootstrap.min.css';
 import {createStore} from "redux";
 import reducer from "./store";
-import {Provider} from "react-redux";
+import {Provider, useSelector} from "react-redux";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const store = createStore(reducer);
+
+
 root.render(
     <React.StrictMode>
         <Provider store={store}>

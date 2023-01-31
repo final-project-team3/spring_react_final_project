@@ -20,6 +20,8 @@ public interface SellerService {
 
     void sellerInfoUpdate(SellerInfoDto sellerInfoDto);
 
+    Object sellerLogin(String id, String pass);
+
     //    LYS
 
     //    GJY

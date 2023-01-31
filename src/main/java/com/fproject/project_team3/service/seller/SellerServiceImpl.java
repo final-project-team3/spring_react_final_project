@@ -37,6 +37,11 @@ public class SellerServiceImpl implements SellerService {
         sellerMapper.sellerInfoUpdate(sellerInfoDto);
     }
 
+    @Override
+    public Object sellerLogin(String id, String pass) {
+        return sellerMapper.sellerLogin(id,pass);
+    }
+
     //    HSH
 
     //    HSH

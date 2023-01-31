@@ -35,6 +35,11 @@ public class UserServiceImpl implements UserService {
         userMapper.userInfoUpdate(userInfoDto);
     }
 
+    @Override
+    public Object userLogin(String id, String pass) {
+        return userMapper.userLogin(id, pass);
+    }
+
     //    HSH
 
     //    HSH
