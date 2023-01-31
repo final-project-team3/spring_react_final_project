@@ -4,12 +4,18 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import ProjectRouter from "./ProjectRouter";
 import './bootstrap.min.css';
+import {createStore} from "redux";
+import reducer from "./store";
+import {Provider} from "react-redux";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const store = createStore(reducer);
 root.render(
     <React.StrictMode>
-        <ProjectRouter/>
+        <Provider store={store}>
+            <ProjectRouter/>
+        </Provider>
     </React.StrictMode>
 );
 
