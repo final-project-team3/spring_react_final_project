@@ -38,6 +38,7 @@ import UserInfoUpdate from "./LYS/UserInfoUpdate";
 import SellerInfoUpdate from "./LYS/SellerInfoUpdate";
 import OrderUserList from "./BJH/UserList/OrderUserList";
 import PayUserList from "./BJH/UserList/PayUserList";
+import MyReviewList from "./LYS/MyReviewList";
 
 const ProjectRouter = () => {
 
@@ -57,6 +58,7 @@ const ProjectRouter = () => {
                     <Route path="/sellerSignUp" element={<SellerSignUp/>}/>
                     <Route path="/userInfoUpdate" element={<UserInfoUpdate/>}/>
                     <Route path="/sellerInfoUpdate" element={<SellerInfoUpdate/>}/>
+                    <Route path="/myReview" element={<MyReviewList/>}/>
                     {/*LYS*/}
 
                     {/*GJY*/}
