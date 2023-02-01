@@ -41,6 +41,7 @@ import PayUserList from "./BJH/UserList/PayUserList";
 import MyReviewList from "./LYS/MyReviewList";
 import {useSelector} from "react-redux";
 import store from "./store";
+import ReviewWrite from "./LYS/ReviewWrite";
 
 const ProjectRouter = (props) => {
 
@@ -64,6 +65,7 @@ const ProjectRouter = (props) => {
                     <Route path="/userInfoUpdate" element={<UserInfoUpdate/>}/>
                     <Route path="/sellerInfoUpdate" element={<SellerInfoUpdate/>}/>
                     <Route path="/myReview" element={<MyReviewList/>}/>
+                    <Route path="/reviewWrite" element={<ReviewWrite/>}/>
                     {/*LYS*/}
 
                     {/*GJY*/}
@@ -89,7 +91,7 @@ const ProjectRouter = (props) => {
                     {/*<Route path={'sellerMyPage'} element={<SellerMyPage/>}/>*/}
                     {/*<Route path={'masterPage'} element={<MasterPage/>}/>*/}
 
-                    {/*<Route path={'userMyPage'} element={<UserMyPage/>}/>*/}
+                    <Route path={'userMyPage'} element={<UserMyPage/>}/>
                     {/*<Route path={'sellerMyPage'} element={<SellerMyPage/>}/>*/}
                     {/*<Route path={'masterPage'} element={<MasterPage/>}/>*/}
 
