@@ -40,7 +40,7 @@ function MyReviewList() {
 
                         return <MyReview key={index} reviewNum={item.reviewNum} id={item.userId} date={item.reviewRegistrationDate}
                                          content={item.reviewContent} productNum={item.productNum}
-                                         helpful={item.reviewHelpful} starPoint={item.reviewStarPoint}/>
+                                         helpful={item.reviewHelpful} starPoint={item.reviewStarPoint} deletedYn={item.reviewDeletedYn}/>
                     })
                 }
             </div>

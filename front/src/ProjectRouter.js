@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ProductDetail from "./HSH/ProductDetail";
 import ProductList from "./HSH/ProductList";
@@ -41,10 +41,13 @@ import PayUserList from "./BJH/UserList/PayUserList";
 import MyReviewList from "./LYS/MyReviewList";
 import {useSelector} from "react-redux";
 import store from "./store";
+import ReviewWrite from "./LYS/ReviewWrite";
 
 const ProjectRouter = (props) => {
 
-    const {role} = useSelector((store)=>store);
+    let role = sessionStorage.getItem("role");
+    let userInfo = sessionStorage.getItem("userInfo");
+    userInfo = JSON.parse(userInfo);
 
     return (
         <BrowserRouter>
@@ -63,6 +66,7 @@ const ProjectRouter = (props) => {
                     <Route path="/userInfoUpdate" element={<UserInfoUpdate/>}/>
                     <Route path="/sellerInfoUpdate" element={<SellerInfoUpdate/>}/>
                     <Route path="/myReview" element={<MyReviewList/>}/>
+                    <Route path="/reviewWrite" element={<ReviewWrite/>}/>
                     {/*LYS*/}
 
                     {/*GJY*/}
@@ -83,12 +87,8 @@ const ProjectRouter = (props) => {
                     <Route path={'login'} element={<NewLogin/>}/>
                     <Route path={'sellerLogin'} element={<SellerLogin/>}/>
 
-                    <Route path={'myPage'} element={role != "USER" ? <UserMyPage/> : <SellerMyPage/>}/>
-                    {/*<Route path={'sellerMyPage'} element={<SellerMyPage/>}/>*/}
-                    {/*<Route path={'masterPage'} element={<MasterPage/>}/>*/}
-
-                    {/*<Route path={'userMyPage'} element={<UserMyPage/>}/>*/}
-                    {/*<Route path={'sellerMyPage'} element={<SellerMyPage/>}/>*/}
+                    <Route path={'myPage'}
+                           element={role == null ? <NewLogin/> : role == "USER" ? <UserMyPage/> : < SellerMyPage/>}/>
                     {/*<Route path={'masterPage'} element={<MasterPage/>}/>*/}
 
                     <Route path={'cart'} element={<Cart/>}/>

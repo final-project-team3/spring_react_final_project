@@ -32,6 +32,11 @@ public class ReviewServiceImpl implements ReviewService {
         reviewMapper.deleteMyReview(reviewDto);
     }
 
+    @Override
+    public void updateMyReview(ReviewDto reviewDto) {
+        reviewMapper.updateMyReview(reviewDto);
+    }
+
 
     //    LYS
 

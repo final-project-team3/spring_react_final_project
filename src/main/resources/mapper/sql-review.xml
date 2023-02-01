@@ -9,14 +9,14 @@
     <select id="getReview" parameterType="String" resultType="com.fproject.project_team3.dto.userAndseller.ReviewDto">
         SELECT *
         FROM review
-        WHERE product_num = #{productNum}
+        WHERE product_num = #{productNum} AND review_deleted_yn = "N"
         ORDER BY review_num DESC
     </select>
 
     <select id="getMyReview" parameterType="String" resultType="com.fproject.project_team3.dto.userAndseller.ReviewDto">
         SELECT *
         FROM review
-        WHERE user_id = #{userId}
+        WHERE user_id = #{userId} AND review_deleted_yn = "N"
         ORDER BY review_num DESC
     </select>
 
@@ -24,6 +24,12 @@
     <update id="deleteMyReview" parameterType="com.fproject.project_team3.dto.userAndseller.ReviewDto">
         UPDATE review
         SET review_deleted_yn = REPLACE(review_deleted_yn ,'N','Y')
+        WHERE review_num = #{reviewNum}
+    </update>
+
+    <update id="updateMyReview" parameterType="com.fproject.project_team3.dto.userAndseller.ReviewDto">
+        UPDATE review
+        SET review_content = #{reviewContent}
         WHERE review_num = #{reviewNum}
     </update>
 

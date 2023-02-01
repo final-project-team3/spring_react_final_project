@@ -12,4 +12,6 @@ public interface ReviewMapper {
     List<ReviewDto> getMyReview(String userId);
 
     void deleteMyReview(ReviewDto reviewDto);
+
+    void updateMyReview(ReviewDto reviewDto);
 }

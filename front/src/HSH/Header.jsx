@@ -117,7 +117,8 @@ const Header = () => {
                                     }} style={{
                                         width: 500
                                     }} className={'form-control'} placeholder={'검색'}/>
-                                    {searchContent != "" && searchContent != null && searchContent != " " ? <YesSearch/> : <NoSearch/>}
+                                    {searchContent != "" && searchContent != null && searchContent != " " ?
+                                        <YesSearch/> : <NoSearch/>}
                                 </div>
                             </li>
                             <div className={'nav-item dropdown'}>
@@ -189,7 +190,7 @@ const Header = () => {
                                                         src={"../Img/shoppingCart.png"}/></Link>
                             </li>
                             <li className={'nav-item'}>
-                                <Link to={'/login'}><img className={'ms-2'} src={"../Img/login.png"}/></Link>
+                                <Link to={'/mypage'}><img className={'ms-2'} width={40} src={"../Img/mypage.png"}/></Link>
                             </li>
                             <li className={'nav-item'}>
                                 <Link to={'/login'}><img className={'ms-2'} src={"../Img/login.png"}/></Link>
