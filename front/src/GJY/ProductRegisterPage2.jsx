@@ -8,7 +8,7 @@ import Select from "react-select";
 import user from "../BJH/User";
 import { element } from "prop-types";
 
-function ProductRegisterPage() {
+function ProductRegisterPage2() {
   let sellerInfo = sessionStorage.getItem("sellerInfo");
   sellerInfo = JSON.parse(sellerInfo);
 
@@ -365,13 +365,15 @@ function ProductRegisterPage() {
   };
 
   const tblData = () => {
+    console.log("====== 테이블 데이터 확인 =====")
+    console.log($("#productSellerBusinessName").val());
     console.log($("#productName").val()); // 상품명
     console.log($("#productPrice").val());  // 상품가격
     console.log($("#optionValue0").text());  // 옵션명(컬러,사이즈)
-    console.log($("#optionValue1").text());  // 옵션명(컬러,사이즈)
-    console.log($("#optionValue2").val());  // 옵션명(컬러,사이즈)
-    console.log(optionList);
-    // var innerText = document.getElementById(elementId).innerText;
+    console.log($("#optionPrice").val());  // 옵션가격
+    console.log($("#stockQty").val());  // 재고수량
+    console.log( $('#sailsStatusOption option:selected').val());  // 선택옵션
+
   }
 
   //
@@ -390,371 +392,373 @@ function ProductRegisterPage() {
           </label>
           <input
             type="text"
-            id={"productSellerId"}
+            id={"productSellerBusinessName"}
             className={"form-control mb-5"}
             placeholder={
               "판매자명을 입력하세요 (나중에 로그인기능구현 → 자동입력 될 부분)"
             }
+            value={sellerInfo.sellerBusinessName}
+            readOnly={true}
           />
           <table className={"border"} style={{ height: 200 }}>
             <tbody className={"border"}>
-              <tr className={"border"}>
-                <td
-                  className={"border text-center"}
-                  style={{ height: 60, width: 200 }}
+            <tr className={"border"}>
+              <td
+                className={"border text-center"}
+                style={{ height: 60, width: 200 }}
+              >
+                제품 분류
+              </td>
+              <td>
+                <select
+                  className={"ms-3"}
+                  id={"selectBigKind"}
+                  onChange={getSmallKinds}
+                  style={{ height: 30 }}
                 >
-                  제품 분류
-                </td>
-                <td>
-                  <select
-                    className={"ms-3"}
-                    id={"selectBigKind"}
-                    onChange={getSmallKinds}
-                    style={{ height: 30 }}
-                  >
-                    <option value="대분류" key={"a"}>
-                      ----대분류----
+                  <option value="대분류" key={"a"}>
+                    ----대분류----
+                  </option>
+                  {bigKind.map((item) => (
+                    <option
+                      value={item.productGender}
+                      key={item.product_kind_num}
+                    >
+                      {item.productGender}
                     </option>
-                    {bigKind.map((item) => (
-                      <option
-                        value={item.productGender}
-                        key={item.product_kind_num}
-                      >
-                        {item.productGender}
-                      </option>
-                    ))}
-                  </select>
-                  <select
-                    name={"selectSmallKind"}
-                    id={"selectSmallKind"}
-                    className={"ms-3"}
-                    style={{ height: 30 }}
-                  >
-                    <option value="하위분류" key={"b"}>
-                      ----하위분류---
+                  ))}
+                </select>
+                <select
+                  name={"selectSmallKind"}
+                  id={"selectSmallKind"}
+                  className={"ms-3"}
+                  style={{ height: 30 }}
+                >
+                  <option value="하위분류" key={"b"}>
+                    ----하위분류---
+                  </option>
+                  {smallKind.map((item, index) => (
+                    <option
+                      value={item.productSmallKind}
+                      key={item.product_kind_num}
+                      typeof={"checkbox"}
+                    >
+                      {item.productSmallKind}
                     </option>
-                    {smallKind.map((item, index) => (
-                      <option
-                        value={item.productSmallKind}
-                        key={item.product_kind_num}
-                        typeof={"checkbox"}
-                      >
-                        {item.productSmallKind}
-                      </option>
-                    ))}
-                  </select>
-                </td>
-              </tr>
-              <tr className={"border"}>
-                <td className={"border text-center"} style={{ height: 60 }}>
-                  상품명
-                </td>
-                <td>
-                  <div className={"col-10"}>
-                    <div className={"row"}>
-                      <div className={"col-7 ms-3"} style={{ width: 565 }}>
-                        <input
-                          id={"productName"}
-                          type="text"
-                          placeholder={"상품명을 입력하세요."}
-                          style={{ height: 35 }}
-                        />
-                      </div>
-                      <div className={"col-3"}>
-                        <button
-                          className={"btn btn-outline-secondary"}
-                          id={"btnProductNameCheck"}
-                          onClick={productNameCheck}
-                        >
-                          중복확인
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr className={"border"}>
-                <td className={"border text-center"} style={{ height: 60 }}>
-                  상품가격
-                </td>
-                <td>
-                  <div className={"col-6"}>
-                    <input
-                      id={"productPrice"}
-                      type="text"
-                      className={"col-6 ms-3"}
-                      placeholder={"상품가격을 입력하세요."}
-                      style={{ height: 35 }}
-                    />
-                  </div>
-                </td>
-              </tr>
-
-              {/*시작 */}
-              <tr className={"border"}>
-                {/* 옵션 등록*/}
-                <td className={"border text-center"} style={{ height: 60 }}>
-                  옵션등록
-                </td>
-                <td>
-                  <fieldset className="form-group">
-                    {/* 옵션 설정 함*/}
-                    <div className={"d-flex"}>
-                      <div className="form-check form-switch">
-                        <input
-                          className="radio ms-3 mb-3"
-                          type="radio"
-                          name={"option"}
-                          id={"option-check"}
-                          onClick={() => {
-                            setOptionChecked(true);
-                          }}
-                          checked={optionChecked == true ? true : false}
-                        />
-                        <label className="form-check-label ms-4">
-                          옵션 설정함
-                        </label>
-                      </div>
-
-                      {/* 옵션 설정 안함 */}
-                      <div className="form-check form-switch">
-                        <input
-                          className="radio ms-3 mb-3"
-                          type="radio"
-                          name={"option"}
-                          id={"option-notCheck"}
-                          onClick={() => {
-                            setOptionChecked(false);
-                          }}
-                          checked={optionChecked == false ? true : false}
-                        />
-                        <label className="form-check-label ms-4">
-                          옵션 설정안함
-                        </label>
-                      </div>
-                    </div>
-                  </fieldset>
+                  ))}
+                </select>
+              </td>
+            </tr>
+            <tr className={"border"}>
+              <td className={"border text-center"} style={{ height: 60 }}>
+                상품명
+              </td>
+              <td>
+                <div className={"col-10"}>
                   <div className={"row"}>
-                    <div className={"col-4"}></div>
-                  </div>
-                </td>
-              </tr>
-              {/* 끝 */}
-
-              {/* 옵션 추가시 시작 */}
-
-              {/* 옵션 개수 */}
-              <tr
-                className={"border"}
-                hidden={optionChecked == true ? false : true}
-              >
-                <td className={"border text-center"} style={{ height: 60 }}>
-                  옵션명 개수
-                </td>
-                <td>
-                  <fieldset className="form-group">
-                    <div className={"ms-3"}>
-                      {/* 옵션 개수 설정*/}
-                      <div className={"mt-3 d-flex row"}>
-                        <div className={"col-2"}>
-                          <select
-                            className={"form-select mb-3"}
-                            id={"option-total"}
-                            onClick={() => {
-                              setOptionTotal($("#option-total").val());
-                              optionTyped();
-                            }}
-                            onChange={() => {
-                              setOptionTotal($("#option-total").val());
-                              optionTyped();
-                            }}
-                          >
-                            <option value={1}>1개</option>
-                            <option value={2}>2개</option>
-                            <option value={3}>3개</option>
-                          </select>
-                        </div>
-                      </div>
+                    <div className={"col-7 ms-3"} style={{ width: 565 }}>
+                      <input
+                        id={"productName"}
+                        type="text"
+                        placeholder={"상품명을 입력하세요."}
+                        style={{ height: 35 }}
+                      />
                     </div>
-                  </fieldset>
-
-                  <div className={"row"}>
-                    <div className={"col-4"}></div>
-                  </div>
-                </td>
-              </tr>
-
-              {/* 옵션 입력 */}
-              <tr
-                className={"border"}
-                hidden={optionChecked == true ? false : true}
-              >
-                <td className={"border text-center"} style={{ height: 60 }}>
-                  옵션입력
-                </td>
-                <td>
-                  <fieldset className="form-group">
-                    <div className={"ms-3"}>
-                      {/* 옵션명 개수에 따라서 인풋태그 증가*/}
-                      {optionInputList.map((item) => {
-                        return item;
-                      })}
+                    <div className={"col-3"}>
                       <button
-                        className={"btn btn-outline-primary mb-2"}
-                        onClick={OptionReg}
+                        className={"btn btn-outline-secondary"}
+                        id={"btnProductNameCheck"}
+                        onClick={productNameCheck}
                       >
-                        옵션 목록으로 적용
+                        중복확인
                       </button>
                     </div>
-                  </fieldset>
-
-                  <div className={"row"}>
-                    <div className={"col-4"}></div>
                   </div>
-                </td>
-              </tr>
+                </div>
+              </td>
+            </tr>
+            <tr className={"border"}>
+              <td className={"border text-center"} style={{ height: 60 }}>
+                상품가격
+              </td>
+              <td>
+                <div className={"col-6"}>
+                  <input
+                    id={"productPrice"}
+                    type="text"
+                    className={"col-6 ms-3"}
+                    placeholder={"상품가격을 입력하세요."}
+                    style={{ height: 35 }}
+                  />
+                </div>
+              </td>
+            </tr>
 
-              {/* 옵션 목록 */}
-              <tr
-                className={"border"}
-                hidden={optionChecked == true ? false : true}
-              >
-                <td className={"border text-center"} style={{ height: 60 }}>
-                  옵션 목록
-                </td>
-                <td>
-                  <div>
-                    <div className={"ms-3 me-3"}>
-                      <table
-                        style={{
-                          textAlign: "center",
+            {/*시작 */}
+            <tr className={"border"}>
+              {/* 옵션 등록*/}
+              <td className={"border text-center"} style={{ height: 60 }}>
+                옵션등록
+              </td>
+              <td>
+                <fieldset className="form-group">
+                  {/* 옵션 설정 함*/}
+                  <div className={"d-flex"}>
+                    <div className="form-check form-switch">
+                      <input
+                        className="radio ms-3 mb-3"
+                        type="radio"
+                        name={"option"}
+                        id={"option-check"}
+                        onClick={() => {
+                          setOptionChecked(true);
                         }}
-                        className={"table table-bordered"}
-                      >
-                        <thead>
-                          <tr className={"row"}>
-                            <th className={"col-1"}>
-                              {/*체크박스 첫번째*/}
-                              <input
-                                type={"checkbox"}
-                                id={"selectAll"}
-                                onChange={(e) =>
-                                  handleAllCheck(e.target.checked)
-                                }
-                              />
-                            </th>
-                            <th rowSpan={2} className={"col-3"}>
-                              <div>
-                                <p>옵션명</p>
-                              </div>
-                              <div
-                                className={
-                                  "border-top border-dark d-flex justify-content-center"
-                                }
-                              >
-                                {optionName.map((item, index) => {
-                                  return <p className={"col"}>{item}</p>;
-                                })}
-                              </div>
-                            </th>
-                            <th className={"col"}>옵션가</th>
-                            <th className={"col"}>재고수량</th>
-                            <th className={"col"}>판매상태</th>
-                            <th className={"col"}>
-                              삭제{" "}
-                              <div>
-                                <button
-                                  className={"btn btn-sm btn-outline-info mt-2"}
-                                  onClick={deleteSelected}
-                                >
-                                  선택삭제
-                                </button>
-                              </div>
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {optionList.map((item) => {
-                            return (
-                              <tr key={item.index} className={"row"}>
-                                <td className={"col-1"}>
-                                  <input
-                                    type={"checkbox"}
-                                    className={"mb-3"}
-                                    onChange={(e) =>
-                                      handleSingleCheck(
-                                        e.target.checked,
-                                        item.index
-                                      )
-                                    }
-                                    checked={checkItems.includes(item.index)}
-                                  />
-                                </td>
-                                <td
-                                  id={`optionValue${item.index}`}
-                                  className={"col-3"}
-                                >{`${item.value1},  ${item.value2}`}</td>
-                                <td className={"col"} id={"optionPrice"}>
-                                  <input type="text" />
-                                </td>
-                                <td className={"col"} id={"stockQty"}>
-                                  <input type="text" />
-                                </td>
-                                <td className={"col"} id={"sailsStatus"}>
-                                  <select
-                                    name={"sailsStatusOption"}
-                                    id={"sailsStatusOption"}
-                                  >
-                                    <option name="00" id="00" value="">
-                                      ---상태선택--
-                                    </option>
-                                    <option
-                                      name="sailOption1"
-                                      id="sailOption1"
-                                      value={"sailOption1"}
-                                    >
-                                      판매중
-                                    </option>
-                                    <option
-                                      name="sailOption1"
-                                      id="sailOption2"
-                                      value={"sailOption2"}
-                                    >
-                                      세일
-                                    </option>
-                                  </select>
-                                </td>
-                                <td className={"col"}>
-                                  <button
-                                    className={"btn btn-primary"}
-                                    onClick={() => onRemove(item.index)}
-                                  >
-                                    삭제
-                                  </button>
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
+                        checked={optionChecked == true ? true : false}
+                      />
+                      <label className="form-check-label ms-4">
+                        옵션 설정함
+                      </label>
+                    </div>
+
+                    {/* 옵션 설정 안함 */}
+                    <div className="form-check form-switch">
+                      <input
+                        className="radio ms-3 mb-3"
+                        type="radio"
+                        name={"option"}
+                        id={"option-notCheck"}
+                        onClick={() => {
+                          setOptionChecked(false);
+                        }}
+                        checked={optionChecked == false ? true : false}
+                      />
+                      <label className="form-check-label ms-4">
+                        옵션 설정안함
+                      </label>
                     </div>
                   </div>
+                </fieldset>
+                <div className={"row"}>
+                  <div className={"col-4"}></div>
+                </div>
+              </td>
+            </tr>
+            {/* 끝 */}
 
-                  <div className={"row"}>
-                    <div className={"col-4"}></div>
+            {/* 옵션 추가시 시작 */}
+
+            {/* 옵션 개수 */}
+            <tr
+              className={"border"}
+              hidden={optionChecked == true ? false : true}
+            >
+              <td className={"border text-center"} style={{ height: 60 }}>
+                옵션명 개수
+              </td>
+              <td>
+                <fieldset className="form-group">
+                  <div className={"ms-3"}>
+                    {/* 옵션 개수 설정*/}
+                    <div className={"mt-3 d-flex row"}>
+                      <div className={"col-2"}>
+                        <select
+                          className={"form-select mb-3"}
+                          id={"option-total"}
+                          onClick={() => {
+                            setOptionTotal($("#option-total").val());
+                            optionTyped();
+                          }}
+                          onChange={() => {
+                            setOptionTotal($("#option-total").val());
+                            optionTyped();
+                          }}
+                        >
+                          <option value={1}>1개</option>
+                          <option value={2}>2개</option>
+                          <option value={3}>3개</option>
+                        </select>
+                      </div>
+                    </div>
                   </div>
-                </td>
-              </tr>
-              {/* 옵션 추가시 끝 */}
-              <tr className={"border"}>
-                <td className={"border text-center"} style={{ height: 60 }}>
-                  상품 이미지 등록
-                </td>
-                <td>
-                  <p className={"ms-2 mt-3"}>파일첨부기능 준비중 . . .</p>
-                  {/*<FileUploadComponent />*/}
-                </td>
-              </tr>
+                </fieldset>
+
+                <div className={"row"}>
+                  <div className={"col-4"}></div>
+                </div>
+              </td>
+            </tr>
+
+            {/* 옵션 입력 */}
+            <tr
+              className={"border"}
+              hidden={optionChecked == true ? false : true}
+            >
+              <td className={"border text-center"} style={{ height: 60 }}>
+                옵션입력
+              </td>
+              <td>
+                <fieldset className="form-group">
+                  <div className={"ms-3"}>
+                    {/* 옵션명 개수에 따라서 인풋태그 증가*/}
+                    {optionInputList.map((item) => {
+                      return item;
+                    })}
+                    <button
+                      className={"btn btn-outline-primary mb-2"}
+                      onClick={OptionReg}
+                    >
+                      옵션 목록으로 적용
+                    </button>
+                  </div>
+                </fieldset>
+
+                <div className={"row"}>
+                  <div className={"col-4"}></div>
+                </div>
+              </td>
+            </tr>
+
+            {/* 옵션 목록 */}
+            <tr
+              className={"border"}
+              hidden={optionChecked == true ? false : true}
+            >
+              <td className={"border text-center"} style={{ height: 60 }}>
+                옵션 목록
+              </td>
+              <td>
+                <div>
+                  <div className={"ms-3 me-3"}>
+                    <table
+                      style={{
+                        textAlign: "center",
+                      }}
+                      className={"table table-bordered"}
+                    >
+                      <thead>
+                      <tr className={"row"}>
+                        <th className={"col-1"}>
+                          {/*체크박스 첫번째*/}
+                          <input
+                            type={"checkbox"}
+                            id={"selectAll"}
+                            onChange={(e) =>
+                              handleAllCheck(e.target.checked)
+                            }
+                          />
+                        </th>
+                        <th rowSpan={2} className={"col-3"}>
+                          <div>
+                            <p>옵션명</p>
+                          </div>
+                          <div
+                            className={
+                              "border-top border-dark d-flex justify-content-center"
+                            }
+                          >
+                            {optionName.map((item, index) => {
+                              return <p className={"col"}>{item}</p>;
+                            })}
+                          </div>
+                        </th>
+                        <th className={"col"}>옵션가</th>
+                        <th className={"col"}>재고수량</th>
+                        <th className={"col"}>판매상태</th>
+                        <th className={"col"}>
+                          삭제{" "}
+                          <div>
+                            <button
+                              className={"btn btn-sm btn-outline-info mt-2"}
+                              onClick={deleteSelected}
+                            >
+                              선택삭제
+                            </button>
+                          </div>
+                        </th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      {optionList.map((item) => {
+                        return (
+                          <tr key={item.index} className={"row"}>
+                            <td className={"col-1"}>
+                              <input
+                                type={"checkbox"}
+                                className={"mb-3"}
+                                onChange={(e) =>
+                                  handleSingleCheck(
+                                    e.target.checked,
+                                    item.index
+                                  )
+                                }
+                                checked={checkItems.includes(item.index)}
+                              />
+                            </td>
+                            <td
+                              id={`optionValue${item.index}`}
+                              className={"col-3"}
+                            >{`${item.value1},  ${item.value2}`}</td>
+                            <td className={"col"} >
+                              <input type="text" id={"optionPrice"}/>
+                            </td>
+                            <td className={"col"} >
+                              <input type="text" id={"stockQty"}/>
+                            </td>
+                            <td className={"col"} id={"sailsStatus"}>
+                              <select
+                                name={"sailsStatusOption"}
+                                id={"sailsStatusOption"}
+                              >
+                                <option name="00" id="00" value="">
+                                  ---상태선택--
+                                </option>
+                                <option
+                                  name="sailOption1"
+                                  id="sailOption1"
+                                  value={"판매중"}
+                                >
+                                  판매중
+                                </option>
+                                <option
+                                  name="sailOption1"
+                                  id="sailOption2"
+                                  value={"세일"}
+                                >
+                                  세일
+                                </option>
+                              </select>
+                            </td>
+                            <td className={"col"}>
+                              <button
+                                className={"btn btn-primary"}
+                                onClick={() => onRemove(item.index)}
+                              >
+                                삭제
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div className={"row"}>
+                  <div className={"col-4"}></div>
+                </div>
+              </td>
+            </tr>
+            {/* 옵션 추가시 끝 */}
+            <tr className={"border"}>
+              <td className={"border text-center"} style={{ height: 60 }}>
+                상품 이미지 등록
+              </td>
+              <td>
+                <p className={"ms-2 mt-3"}>파일첨부기능 준비중 . . .</p>
+                {/*<FileUploadComponent />*/}
+              </td>
+            </tr>
             </tbody>
             <button
               className={"btn btn-danger"}
@@ -781,4 +785,4 @@ function ProductRegisterPage() {
   );
 }
 
-export default ProductRegisterPage;
+export default ProductRegisterPage2;
