@@ -10,7 +10,7 @@ import { element } from "prop-types";
 
 function ProductRegisterPage() {
   let sellerInfo = sessionStorage.getItem("sellerInfo");
-  sellerInfo = JSON.parse(sellerInfo);
+  const sellerInfoConst = JSON.parse(sellerInfo);
 
 
   const [bigKind, setBigKind] = useState([]);
@@ -371,7 +371,8 @@ function ProductRegisterPage() {
     console.log($("#optionValue1").text());  // 옵션명(컬러,사이즈)
     console.log($("#optionValue2").text());  // 옵션명(컬러,사이즈)
     console.log(optionList);
-    // console.log(sellerInfo.sellerId);
+    // console.log(sellerInfoConst);
+    // console.log(sellerInfoConst.sellerId);
 
     // var innerText = document.getElementById(elementId).innerText;
   }
