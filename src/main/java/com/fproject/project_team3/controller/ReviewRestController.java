@@ -24,17 +24,25 @@ public class ReviewRestController {
         List<ReviewDto> reviewList = reviewService.getReview(productNum);
         return reviewList;
     }
+
     @PostMapping("/getMyReview")
     public Object getMyReview(@RequestParam("userId") String userId) {
         List<ReviewDto> reviewList = reviewService.getMyReview(userId);
         return reviewList;
     }
+
     @PostMapping("/deleteMyReview")
-    public void deleteMyReview(ReviewDto reviewDto, HttpServletResponse httpServletResponse)throws IOException{
+    public void deleteMyReview(ReviewDto reviewDto, HttpServletResponse httpServletResponse) throws IOException {
+        System.out.println(reviewDto);
         reviewService.deleteMyReview(reviewDto);
-        httpServletResponse.sendRedirect("http://localhost:3000/");
+        httpServletResponse.sendRedirect("http://localhost:3000/myReview");
     }
 
-
+    @PostMapping("/updateMyReview")
+    public void updateMyReview(ReviewDto reviewDto, HttpServletResponse httpServletResponse) throws IOException {
+        System.out.println(reviewDto);
+        reviewService.updateMyReview(reviewDto);
+        httpServletResponse.sendRedirect("http://localhost:3000/myReview");
+    }
 }
 

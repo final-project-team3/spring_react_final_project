@@ -19,6 +19,8 @@ public interface ReviewService {
 
     void deleteMyReview(ReviewDto reviewDto);
 
+    void updateMyReview(ReviewDto reviewDto);
+
     //    LYS
 
     //    GJY
