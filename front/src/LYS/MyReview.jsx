@@ -1,27 +1,36 @@
 import DetailRating from "./DetailRating";
 import styled from "styled-components";
-import React from "react";
+import React, {useState} from "react";
 import './MyReview.css';
 import $ from "jquery";
 
 function MyReview(props) {
 
-    const deleteBtn = async(props) => {
+    const [btnCheck, setBtnCheck] = useState("");
+
+
+    const reviewDelete = () => {
+        setBtnCheck('/deleteMyReview');
         alert("삭제 되었습니다.");
-        $("#btn-delete").attr("type", "submit");
-        $("#btn-delete").onclick();
+    }
+
+    const reviewUpdate = () => {
+        setBtnCheck('/updateMyReview');
+        alert("삭제 되었습니다.");
     }
 
     return (
-        <div className={'mt-5'}>
-            <div className="reviewContainer" style={{paddingLeft: 30}}>
-                <form action={'/deleteMyReview'} method={'post'} style={{padding: 0, margin: 0}}>
+        <form id={props.key} action={btnCheck} method={'post'} style={{padding: 0, margin: 0}}>
+            <div className={'mt-5'}>
+                <div className="reviewContainer" style={{paddingLeft: 30}}>
+
                     <ul>
                         <li>
                             <article>
                                 <div className="text-md-start">
                                     <div className={"review_info"}>
                                         <div className={"review_num"}>리뷰번호 : {props.reviewNum}</div>
+                                        <input hidden={true} name={'reviewNum'} value={props.reviewNum}/>
                                         <div className={"reviewer_id"}>{props.id}</div>
                                         <DetailRating rating={props.starPoint}/>
                                         <div className={"product_num"}>제품번호 : {props.productNum}</div>
@@ -43,10 +52,11 @@ function MyReview(props) {
                                         <div className={"div1 col-6"}>
                                             <p className={"col-6 my-2"}>총 {props.helpful}명의 회원이 도움이 되었습니다.</p>
                                             <div className={"ui-button col-6 my-2"}>
-                                                <UpdateButton className={"btn btn-primary"} type={"button"}>리뷰
+                                                <UpdateButton onClick={(e) => reviewUpdate(e)}
+                                                              className={"btn btn-primary"} type={"submit"}>리뷰
                                                     수정</UpdateButton>&nbsp;&nbsp;
-                                                <DeleteButton onClick={deleteBtn} className={"btn btn-danger"}
-                                                              type={"button"} id={"btn-delete"}>리뷰
+                                                <DeleteButton onClick={(e) => reviewDelete(e)}
+                                                              className={"btn btn-danger"} type={"submit"}>리뷰
                                                     삭제</DeleteButton>
                                             </div>
                                         </div>
@@ -56,9 +66,10 @@ function MyReview(props) {
                             </article>
                         </li>
                     </ul>
-                </form>
+
+                </div>
             </div>
-        </div>
+        </form>
     );
 }
 

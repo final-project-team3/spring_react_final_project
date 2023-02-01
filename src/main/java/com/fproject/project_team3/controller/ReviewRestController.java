@@ -32,8 +32,9 @@ public class ReviewRestController {
     @PostMapping("/deleteMyReview")
     public void deleteMyReview(ReviewDto reviewDto, HttpServletResponse httpServletResponse)throws IOException{
         reviewService.deleteMyReview(reviewDto);
-        httpServletResponse.sendRedirect("http://localhost:3000/");
+        httpServletResponse.sendRedirect("http://localhost:3000/myReview");
     }
+
 
 
 }
