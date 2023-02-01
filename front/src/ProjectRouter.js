@@ -56,63 +56,63 @@ const ProjectRouter = (props) => {
     console.log(sellerInfo);
 
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path={'/'} element={<Header/>}>
-                    {/*HSH*/}
-                    <Route index element={<Main/>}/>
-                    <Route path={'productDetail'} element={<ProductDetail/>}/>
-                    <Route path={'productList'} element={<ProductList/>}/>
-                    <Route path={'search/:searchContent'} element={<Search/>}/>
-                    {/*HSH*/}
+      <BrowserRouter>
+          <Routes>
+              <Route path={'/'} element={<Header/>}>
+                  {/*HSH*/}
+                  <Route index element={<Main/>}/>
+                  <Route path={'productDetail'} element={<ProductDetail/>}/>
+                  <Route path={'productList'} element={<ProductList/>}/>
+                  <Route path={'search/:searchContent'} element={<Search/>}/>
+                  {/*HSH*/}
 
-                    {/*LYS*/}
-                    <Route path="/userSignUp" element={<UserSignUp/>}/>
-                    <Route path="/sellerSignUp" element={<SellerSignUp/>}/>
-                    <Route path="/userInfoUpdate" element={<UserInfoUpdate/>}/>
-                    <Route path="/sellerInfoUpdate" element={<SellerInfoUpdate/>}/>
-                    <Route path="/myReview" element={<MyReviewList/>}/>
-                    <Route path="/reviewWrite" element={<ReviewWrite/>}/>
-                    {/*LYS*/}
+                  {/*LYS*/}
+                  <Route path="/userSignUp" element={<UserSignUp/>}/>
+                  <Route path="/sellerSignUp" element={<SellerSignUp/>}/>
+                  <Route path="/userInfoUpdate" element={<UserInfoUpdate/>}/>
+                  <Route path="/sellerInfoUpdate" element={<SellerInfoUpdate/>}/>
+                  <Route path="/myReview" element={<MyReviewList/>}/>
+                  <Route path="/reviewWrite" element={<ReviewWrite/>}/>
+                  {/*LYS*/}
 
-                    {/*GJY*/}
-                    <Route path={'/payment'} element={<PaymentPage/>}/>
-                    <Route path={'/orderList'} element={<OrderListPage/>}/>
-                    <Route path={"/productR"} element={<ProductRegisterPage/>}/>
-                    <Route path={"/productR2"} element={<ProductRegisterPage2/>}/>
-                    <Route path={"/OptionTable"} element={<OptionTable/>}/>
-                    <Route path={"/test"} element={<Test/>}/>
-                    <Route path={"/fu"} element={<FileUpload/>}/>
-                    <Route path={"/InputSample"} element={<InputSample/>}/>
-                    <Route path={"/OptionList"} element={<OptionList/>}/>
-                    <Route path={"/GwakApp"} element={<GwakApp/>}/>
+                  {/*GJY*/}
+                  <Route path={'/payment'} element={<PaymentPage/>}/>
+                  <Route path={'/orderList'} element={<OrderListPage/>}/>
+                  <Route path={"/productR"} element={<ProductRegisterPage/>}/>
+                  <Route path={"/productR2"} element={<ProductRegisterPage2/>}/>
+                  <Route path={"/OptionTable"} element={<OptionTable/>}/>
+                  <Route path={"/test"} element={<Test/>}/>
+                  <Route path={"/fu"} element={<FileUpload/>}/>
+                  <Route path={"/InputSample"} element={<InputSample/>}/>
+                  <Route path={"/OptionList"} element={<OptionList/>}/>
+                  <Route path={"/GwakApp"} element={<GwakApp/>}/>
 
-                    {/*GJY*/}
+                  {/*GJY*/}
 
-                    {/*BJH*/}
-                    <Route path={'login'} element={<NewLogin/>}/>
-                    <Route path={'sellerLogin'} element={<SellerLogin/>}/>
+                  {/*BJH*/}
+                  <Route path={'login'} element={<NewLogin/>}/>
+                  <Route path={'sellerLogin'} element={<SellerLogin/>}/>
 
-                    <Route path={'myPage'}
-                           element={role == null ? <NewLogin/> : role == "USER" ? <UserMyPage/> : < SellerMyPage/>}/>
-                    {/*<Route path={'masterPage'} element={<MasterPage/>}/>*/}
+                  <Route path={'myPage'}
+                         element={role == null ? <NewLogin/> : role == "USER" ? <UserMyPage/> : < SellerMyPage/>}/>
+                  {/*<Route path={'masterPage'} element={<MasterPage/>}/>*/}
 
-                    <Route path={'cart'} element={<Cart/>}/>
+                  <Route path={'cart'} element={<Cart/>}/>
 
-                    <Route path={'searchMain'} element={<SearchMain/>}/>
+                  <Route path={'searchMain'} element={<SearchMain/>}/>
 
-                    <Route path={'UserJoinResult'} element={<UserJoinResult/>}/>
-                    <Route path={'SellerJoinResult'} element={<SellerJoinResult/>}/>
+                  <Route path={'UserJoinResult'} element={<UserJoinResult/>}/>
+                  <Route path={'SellerJoinResult'} element={<SellerJoinResult/>}/>
 
-                    <Route path={'/footer'} element={<Footer/>}/>
+                  <Route path={'/footer'} element={<Footer/>}/>
 
-                    <Route path={'/likeUserList'} element={<LikeUserList/>}/>
-                    <Route path={'/orderUserList'} element={<OrderUserList/>}/>
-                    <Route path={'/payUserList'} element={<PayUserList/>}/>
-                    {/*BJH*/}
-                </Route>
-            </Routes>
-        </BrowserRouter>
+                  <Route path={'/likeUserList'} element={<LikeUserList/>}/>
+                  <Route path={'/orderUserList'} element={<OrderUserList/>}/>
+                  <Route path={'/payUserList'} element={<PayUserList/>}/>
+                  {/*BJH*/}
+              </Route>
+          </Routes>
+      </BrowserRouter>
     );
 }
 
