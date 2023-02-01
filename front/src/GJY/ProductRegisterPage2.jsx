@@ -84,114 +84,114 @@ function ProductRegisterPage() {
       switch (i) {
         case 0:
           returnDiv.push(
-            <div className={"row my-2"}>
-              <div className={"col-3 mb-2"}>옵션명</div>
-              <div className={"col-6 mb-2"}>옵션값</div>
-              <div className={"col-3"}></div>
-              <div className={"col-3"}>
-                <input
-                  type={"text"}
-                  id={`option${i}`}
-                  className={"col-3"}
-                  placeholder={"예시 : 컬러"}
-                />
+              <div className={"row my-2"}>
+                <div className={"col-3 mb-2"}>옵션명</div>
+                <div className={"col-6 mb-2"}>옵션값</div>
+                <div className={"col-3"}></div>
+                <div className={"col-3"}>
+                  <input
+                      type={"text"}
+                      id={`option${i}`}
+                      className={"col-3"}
+                      placeholder={"예시 : 컬러"}
+                  />
+                </div>
+                <div className={"col-6"}>
+                  <input
+                      type={"text"}
+                      id={`option${i}-${i}`}
+                      className={"col-6"}
+                      placeholder={"예시 : 빨강,노랑 (,로 구분)"}
+                  />
+                </div>
+                <div className={"col-2"}>
+                  <button
+                      hidden={optionTotal >= 2 ? true : false}
+                      className={"btn btn-outline-primary"}
+                      onClick={() => {
+                        setOptionTotal(2);
+                      }}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
-              <div className={"col-6"}>
-                <input
-                  type={"text"}
-                  id={`option${i}-${i}`}
-                  className={"col-6"}
-                  placeholder={"예시 : 빨강,노랑 (,로 구분)"}
-                />
-              </div>
-              <div className={"col-2"}>
-                <button
-                  hidden={optionTotal >= 2 ? true : false}
-                  className={"btn btn-outline-primary"}
-                  onClick={() => {
-                    setOptionTotal(2);
-                  }}
-                >
-                  +
-                </button>
-              </div>
-            </div>
           );
           break;
         case 1:
           returnDiv.push(
-            <div className={"row my-2"}>
-              <div className={"col-3"}>
-                <input
-                  type={"text"}
-                  id={`option${i}`}
-                  className={"col-3"}
-                  placeholder={"예시 : 컬러"}
-                />
+              <div className={"row my-2"}>
+                <div className={"col-3"}>
+                  <input
+                      type={"text"}
+                      id={`option${i}`}
+                      className={"col-3"}
+                      placeholder={"예시 : 컬러"}
+                  />
+                </div>
+                <div className={"col-6"}>
+                  <input
+                      type={"text"}
+                      id={`option${i}-${i}`}
+                      className={"col-6"}
+                      placeholder={"예시 : 빨강,노랑 (,로 구분)"}
+                  />
+                </div>
+                <div className={"col-1"}>
+                  <button
+                      hidden={optionTotal == 3 ? true : false}
+                      className={"btn btn-outline-primary"}
+                      onClick={() => {
+                        setOptionTotal(1);
+                      }}
+                  >
+                    -
+                  </button>
+                </div>
+                <div className={"col-1"}>
+                  <button
+                      hidden={optionTotal == 3 ? true : false}
+                      className={"btn btn-outline-primary"}
+                      onClick={() => {
+                        setOptionTotal(3);
+                      }}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
-              <div className={"col-6"}>
-                <input
-                  type={"text"}
-                  id={`option${i}-${i}`}
-                  className={"col-6"}
-                  placeholder={"예시 : 빨강,노랑 (,로 구분)"}
-                />
-              </div>
-              <div className={"col-1"}>
-                <button
-                  hidden={optionTotal == 3 ? true : false}
-                  className={"btn btn-outline-primary"}
-                  onClick={() => {
-                    setOptionTotal(1);
-                  }}
-                >
-                  -
-                </button>
-              </div>
-              <div className={"col-1"}>
-                <button
-                  hidden={optionTotal == 3 ? true : false}
-                  className={"btn btn-outline-primary"}
-                  onClick={() => {
-                    setOptionTotal(3);
-                  }}
-                >
-                  +
-                </button>
-              </div>
-            </div>
           );
           break;
         case 2:
           returnDiv.push(
-            <div className={"row my-2"}>
-              <div className={"col-3"}>
-                <input
-                  type={"text"}
-                  id={`option${i}`}
-                  className={"col-3"}
-                  placeholder={"예시 : 컬러"}
-                />
+              <div className={"row my-2"}>
+                <div className={"col-3"}>
+                  <input
+                      type={"text"}
+                      id={`option${i}`}
+                      className={"col-3"}
+                      placeholder={"예시 : 컬러"}
+                  />
+                </div>
+                <div className={"col-6"}>
+                  <input
+                      type={"text"}
+                      id={`option${i}-${i}`}
+                      className={"col-6"}
+                      placeholder={"예시 : 빨강,노랑 (,로 구분)"}
+                  />
+                </div>
+                <div className={"col-1"}>
+                  <button
+                      className={"btn btn-outline-primary"}
+                      onClick={() => {
+                        setOptionTotal(2);
+                      }}
+                  >
+                    -
+                  </button>
+                </div>
               </div>
-              <div className={"col-6"}>
-                <input
-                  type={"text"}
-                  id={`option${i}-${i}`}
-                  className={"col-6"}
-                  placeholder={"예시 : 빨강,노랑 (,로 구분)"}
-                />
-              </div>
-              <div className={"col-1"}>
-                <button
-                  className={"btn btn-outline-primary"}
-                  onClick={() => {
-                    setOptionTotal(2);
-                  }}
-                >
-                  -
-                </button>
-              </div>
-            </div>
           );
       }
       $("#option-total").val(optionTotal).prop("selected", true);
@@ -216,9 +216,9 @@ function ProductRegisterPage() {
     $("#selectBigKind").val(e.target.value).prop("selected", true);
 
     const { data } = await axios.post(
-      "http://localhost:8080/selectSmallList",
-      null,
-      { params: { productKind: e.target.value } }
+        "http://localhost:8080/selectSmallList",
+        null,
+        { params: { productKind: e.target.value } }
     );
     // console.log(data);
     setSmallKind(data);
@@ -230,11 +230,11 @@ function ProductRegisterPage() {
     const productSellerId = $("#productSellerId").val(); // 판매자 ID
     setProductNameCheckFlag(true);
     const { data } = await axios.post(
-      "http://localhost:8080/productNameCheck",
-      null,
-      {
-        params: { productName: productName, productSellerId: productSellerId },
-      }
+        "http://localhost:8080/productNameCheck",
+        null,
+        {
+          params: { productName: productName, productSellerId: productSellerId },
+        }
     );
     if (data == 0) {
       Swal.fire({
@@ -325,7 +325,7 @@ function ProductRegisterPage() {
     // = user.id 가 id 인 것을 제거함
     // setUsers(users.filter((user) => user.id !== id));
     setOptionList(
-      optionList.filter((optionList) => optionList.index !== index)
+        optionList.filter((optionList) => optionList.index !== index)
     );
     // console.log(users.length);
     // console.log(users[1].id);
@@ -358,7 +358,7 @@ function ProductRegisterPage() {
     let filterList = optionList;
     for (let i = 0; i < checkItems.length; i++) {
       filterList = filterList.filter(
-        (filterList) => filterList.index !== checkItems[i]
+          (filterList) => filterList.index !== checkItems[i]
       );
     }
     setOptionList(filterList);
@@ -370,6 +370,7 @@ function ProductRegisterPage() {
     console.log($("#optionValue0").text());  // 옵션명(컬러,사이즈)
     console.log($("#optionValue1").text());  // 옵션명(컬러,사이즈)
     console.log($("#optionValue2").val());  // 옵션명(컬러,사이즈)
+    console.log(sellerInfo.sellerId);
     console.log(optionList);
     // var innerText = document.getElementById(elementId).innerText;
   }
@@ -379,68 +380,68 @@ function ProductRegisterPage() {
   //-------------------------------------------------- RETURN -------------------------------------------------- //
   //-------------------------------------------------- RETURN -------------------------------------------------- //
   return (
-    <div>
-      <div className={"container"}>
-        <div className={"row"}>
-          <h1 className={"mt-4 text-center"}>제품 신규 등록</h1>
-          <h3 className={"text-start mt-5"}>상품 등록</h3>
-          <hr />
-          <label htmlFor="productSellerId" className={"label-control"}>
-            판매자명
-          </label>
-          <input
-            type="text"
-            id={"productSellerId"}
-            className={"form-control mb-5"}
-            placeholder={
-              "판매자명을 입력하세요 (나중에 로그인기능구현 → 자동입력 될 부분)"
-            }
-          />
-          <table className={"border"} style={{ height: 200 }}>
-            <tbody className={"border"}>
+      <div>
+        <div className={"container"}>
+          <div className={"row"}>
+            <h1 className={"mt-4 text-center"}>제품 신규 등록</h1>
+            <h3 className={"text-start mt-5"}>상품 등록</h3>
+            <hr />
+            <label htmlFor="productSellerId" className={"label-control"}>
+              판매자명
+            </label>
+            <input
+                type="text"
+                id={"productSellerId"}
+                className={"form-control mb-5"}
+                placeholder={
+                  "판매자명을 입력하세요 (나중에 로그인기능구현 → 자동입력 될 부분)"
+                }
+            />
+            <table className={"border"} style={{ height: 200 }}>
+              <tbody className={"border"}>
               <tr className={"border"}>
                 <td
-                  className={"border text-center"}
-                  style={{ height: 60, width: 200 }}
+                    className={"border text-center"}
+                    style={{ height: 60, width: 200 }}
                 >
                   제품 분류
                 </td>
                 <td>
                   <select
-                    className={"ms-3"}
-                    id={"selectBigKind"}
-                    onChange={getSmallKinds}
-                    style={{ height: 30 }}
+                      className={"ms-3"}
+                      id={"selectBigKind"}
+                      onChange={getSmallKinds}
+                      style={{ height: 30 }}
                   >
                     <option value="대분류" key={"a"}>
                       ----대분류----
                     </option>
                     {bigKind.map((item) => (
-                      <option
-                        value={item.productGender}
-                        key={item.product_kind_num}
-                      >
-                        {item.productGender}
-                      </option>
+                        <option
+                            value={item.productGender}
+                            key={item.product_kind_num}
+                        >
+                          {item.productGender}
+                        </option>
                     ))}
                   </select>
                   <select
-                    name={"selectSmallKind"}
-                    id={"selectSmallKind"}
-                    className={"ms-3"}
-                    style={{ height: 30 }}
+                      name={"selectSmallKind"}
+                      id={"selectSmallKind"}
+                      className={"ms-3"}
+                      style={{ height: 30 }}
                   >
                     <option value="하위분류" key={"b"}>
                       ----하위분류---
                     </option>
                     {smallKind.map((item, index) => (
-                      <option
-                        value={item.productSmallKind}
-                        key={item.product_kind_num}
-                        typeof={"checkbox"}
-                      >
-                        {item.productSmallKind}
-                      </option>
+                        <option
+                            value={item.productSmallKind}
+                            key={item.product_kind_num}
+                            typeof={"checkbox"}
+                        >
+                          {item.productSmallKind}
+                        </option>
                     ))}
                   </select>
                 </td>
@@ -454,17 +455,17 @@ function ProductRegisterPage() {
                     <div className={"row"}>
                       <div className={"col-7 ms-3"} style={{ width: 565 }}>
                         <input
-                          id={"productName"}
-                          type="text"
-                          placeholder={"상품명을 입력하세요."}
-                          style={{ height: 35 }}
+                            id={"productName"}
+                            type="text"
+                            placeholder={"상품명을 입력하세요."}
+                            style={{ height: 35 }}
                         />
                       </div>
                       <div className={"col-3"}>
                         <button
-                          className={"btn btn-outline-secondary"}
-                          id={"btnProductNameCheck"}
-                          onClick={productNameCheck}
+                            className={"btn btn-outline-secondary"}
+                            id={"btnProductNameCheck"}
+                            onClick={productNameCheck}
                         >
                           중복확인
                         </button>
@@ -480,11 +481,11 @@ function ProductRegisterPage() {
                 <td>
                   <div className={"col-6"}>
                     <input
-                      id={"productPrice"}
-                      type="text"
-                      className={"col-6 ms-3"}
-                      placeholder={"상품가격을 입력하세요."}
-                      style={{ height: 35 }}
+                        id={"productPrice"}
+                        type="text"
+                        className={"col-6 ms-3"}
+                        placeholder={"상품가격을 입력하세요."}
+                        style={{ height: 35 }}
                     />
                   </div>
                 </td>
@@ -502,14 +503,14 @@ function ProductRegisterPage() {
                     <div className={"d-flex"}>
                       <div className="form-check form-switch">
                         <input
-                          className="radio ms-3 mb-3"
-                          type="radio"
-                          name={"option"}
-                          id={"option-check"}
-                          onClick={() => {
-                            setOptionChecked(true);
-                          }}
-                          checked={optionChecked == true ? true : false}
+                            className="radio ms-3 mb-3"
+                            type="radio"
+                            name={"option"}
+                            id={"option-check"}
+                            onClick={() => {
+                              setOptionChecked(true);
+                            }}
+                            checked={optionChecked == true ? true : false}
                         />
                         <label className="form-check-label ms-4">
                           옵션 설정함
@@ -519,14 +520,14 @@ function ProductRegisterPage() {
                       {/* 옵션 설정 안함 */}
                       <div className="form-check form-switch">
                         <input
-                          className="radio ms-3 mb-3"
-                          type="radio"
-                          name={"option"}
-                          id={"option-notCheck"}
-                          onClick={() => {
-                            setOptionChecked(false);
-                          }}
-                          checked={optionChecked == false ? true : false}
+                            className="radio ms-3 mb-3"
+                            type="radio"
+                            name={"option"}
+                            id={"option-notCheck"}
+                            onClick={() => {
+                              setOptionChecked(false);
+                            }}
+                            checked={optionChecked == false ? true : false}
                         />
                         <label className="form-check-label ms-4">
                           옵션 설정안함
@@ -545,8 +546,8 @@ function ProductRegisterPage() {
 
               {/* 옵션 개수 */}
               <tr
-                className={"border"}
-                hidden={optionChecked == true ? false : true}
+                  className={"border"}
+                  hidden={optionChecked == true ? false : true}
               >
                 <td className={"border text-center"} style={{ height: 60 }}>
                   옵션명 개수
@@ -558,16 +559,16 @@ function ProductRegisterPage() {
                       <div className={"mt-3 d-flex row"}>
                         <div className={"col-2"}>
                           <select
-                            className={"form-select mb-3"}
-                            id={"option-total"}
-                            onClick={() => {
-                              setOptionTotal($("#option-total").val());
-                              optionTyped();
-                            }}
-                            onChange={() => {
-                              setOptionTotal($("#option-total").val());
-                              optionTyped();
-                            }}
+                              className={"form-select mb-3"}
+                              id={"option-total"}
+                              onClick={() => {
+                                setOptionTotal($("#option-total").val());
+                                optionTyped();
+                              }}
+                              onChange={() => {
+                                setOptionTotal($("#option-total").val());
+                                optionTyped();
+                              }}
                           >
                             <option value={1}>1개</option>
                             <option value={2}>2개</option>
@@ -586,8 +587,8 @@ function ProductRegisterPage() {
 
               {/* 옵션 입력 */}
               <tr
-                className={"border"}
-                hidden={optionChecked == true ? false : true}
+                  className={"border"}
+                  hidden={optionChecked == true ? false : true}
               >
                 <td className={"border text-center"} style={{ height: 60 }}>
                   옵션입력
@@ -600,8 +601,8 @@ function ProductRegisterPage() {
                         return item;
                       })}
                       <button
-                        className={"btn btn-outline-primary mb-2"}
-                        onClick={OptionReg}
+                          className={"btn btn-outline-primary mb-2"}
+                          onClick={OptionReg}
                       >
                         옵션 목록으로 적용
                       </button>
@@ -616,8 +617,8 @@ function ProductRegisterPage() {
 
               {/* 옵션 목록 */}
               <tr
-                className={"border"}
-                hidden={optionChecked == true ? false : true}
+                  className={"border"}
+                  hidden={optionChecked == true ? false : true}
               >
                 <td className={"border text-center"} style={{ height: 60 }}>
                   옵션 목록
@@ -626,73 +627,73 @@ function ProductRegisterPage() {
                   <div>
                     <div className={"ms-3 me-3"}>
                       <table
-                        style={{
-                          textAlign: "center",
-                        }}
-                        className={"table table-bordered"}
+                          style={{
+                            textAlign: "center",
+                          }}
+                          className={"table table-bordered"}
                       >
                         <thead>
-                          <tr className={"row"}>
-                            <th className={"col-1"}>
-                              {/*체크박스 첫번째*/}
-                              <input
+                        <tr className={"row"}>
+                          <th className={"col-1"}>
+                            {/*체크박스 첫번째*/}
+                            <input
                                 type={"checkbox"}
                                 id={"selectAll"}
                                 onChange={(e) =>
-                                  handleAllCheck(e.target.checked)
+                                    handleAllCheck(e.target.checked)
                                 }
-                              />
-                            </th>
-                            <th rowSpan={2} className={"col-3"}>
-                              <div>
-                                <p>옵션명</p>
-                              </div>
-                              <div
+                            />
+                          </th>
+                          <th rowSpan={2} className={"col-3"}>
+                            <div>
+                              <p>옵션명</p>
+                            </div>
+                            <div
                                 className={
                                   "border-top border-dark d-flex justify-content-center"
                                 }
-                              >
-                                {optionName.map((item, index) => {
-                                  return <p className={"col"}>{item}</p>;
-                                })}
-                              </div>
-                            </th>
-                            <th className={"col"}>옵션가</th>
-                            <th className={"col"}>재고수량</th>
-                            <th className={"col"}>판매상태</th>
-                            <th className={"col"}>
-                              삭제{" "}
-                              <div>
-                                <button
+                            >
+                              {optionName.map((item, index) => {
+                                return <p className={"col"}>{item}</p>;
+                              })}
+                            </div>
+                          </th>
+                          <th className={"col"}>옵션가</th>
+                          <th className={"col"}>재고수량</th>
+                          <th className={"col"}>판매상태</th>
+                          <th className={"col"}>
+                            삭제{" "}
+                            <div>
+                              <button
                                   className={"btn btn-sm btn-outline-info mt-2"}
                                   onClick={deleteSelected}
-                                >
-                                  선택삭제
-                                </button>
-                              </div>
-                            </th>
-                          </tr>
+                              >
+                                선택삭제
+                              </button>
+                            </div>
+                          </th>
+                        </tr>
                         </thead>
                         <tbody>
-                          {optionList.map((item) => {
-                            return (
+                        {optionList.map((item) => {
+                          return (
                               <tr key={item.index} className={"row"}>
                                 <td className={"col-1"}>
                                   <input
-                                    type={"checkbox"}
-                                    className={"mb-3"}
-                                    onChange={(e) =>
-                                      handleSingleCheck(
-                                        e.target.checked,
-                                        item.index
-                                      )
-                                    }
-                                    checked={checkItems.includes(item.index)}
+                                      type={"checkbox"}
+                                      className={"mb-3"}
+                                      onChange={(e) =>
+                                          handleSingleCheck(
+                                              e.target.checked,
+                                              item.index
+                                          )
+                                      }
+                                      checked={checkItems.includes(item.index)}
                                   />
                                 </td>
                                 <td
-                                  id={`optionValue${item.index}`}
-                                  className={"col-3"}
+                                    id={`optionValue${item.index}`}
+                                    className={"col-3"}
                                 >{`${item.value1},  ${item.value2}`}</td>
                                 <td className={"col"} id={"optionPrice"}>
                                   <input type="text" />
@@ -702,23 +703,23 @@ function ProductRegisterPage() {
                                 </td>
                                 <td className={"col"} id={"sailsStatus"}>
                                   <select
-                                    name={"sailsStatusOption"}
-                                    id={"sailsStatusOption"}
+                                      name={"sailsStatusOption"}
+                                      id={"sailsStatusOption"}
                                   >
                                     <option name="00" id="00" value="">
                                       ---상태선택--
                                     </option>
                                     <option
-                                      name="sailOption1"
-                                      id="sailOption1"
-                                      value={"sailOption1"}
+                                        name="sailOption1"
+                                        id="sailOption1"
+                                        value={"sailOption1"}
                                     >
                                       판매중
                                     </option>
                                     <option
-                                      name="sailOption1"
-                                      id="sailOption2"
-                                      value={"sailOption2"}
+                                        name="sailOption1"
+                                        id="sailOption2"
+                                        value={"sailOption2"}
                                     >
                                       세일
                                     </option>
@@ -726,15 +727,15 @@ function ProductRegisterPage() {
                                 </td>
                                 <td className={"col"}>
                                   <button
-                                    className={"btn btn-primary"}
-                                    onClick={() => onRemove(item.index)}
+                                      className={"btn btn-primary"}
+                                      onClick={() => onRemove(item.index)}
                                   >
                                     삭제
                                   </button>
                                 </td>
                               </tr>
-                            );
-                          })}
+                          );
+                        })}
                         </tbody>
                       </table>
                     </div>
@@ -755,29 +756,29 @@ function ProductRegisterPage() {
                   {/*<FileUploadComponent />*/}
                 </td>
               </tr>
-            </tbody>
-            <button
-              className={"btn btn-danger"}
-              onClick={tblData}
-              id={"tblDatabtn"}
-            >
-              테이블데이터 확인
-            </button>
-          </table>
-        </div>
-        <div className={"container mt-5"}>
-          <div className={"row justify-content-center"}>
-            <button
-              className={"btn btn-primary fs-5 col-4"}
-              id={"btnProductR"}
-              onClick={productData}
-            >
-              상품등록
-            </button>
+              </tbody>
+              <button
+                  className={"btn btn-danger"}
+                  onClick={tblData}
+                  id={"tblDatabtn"}
+              >
+                테이블데이터 확인
+              </button>
+            </table>
+          </div>
+          <div className={"container mt-5"}>
+            <div className={"row justify-content-center"}>
+              <button
+                  className={"btn btn-primary fs-5 col-4"}
+                  id={"btnProductR"}
+                  onClick={productData}
+              >
+                상품등록
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
   );
 }
 
