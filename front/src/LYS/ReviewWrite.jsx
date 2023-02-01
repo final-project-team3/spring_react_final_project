@@ -35,9 +35,10 @@ function ReviewWrite() {
 
             <div className={"mt-5"}>
                 <div>
-                    <h5>다음 상품의 리뷰를 작성해 주세요</h5>
+                    <h3 className={"text-start mt-5"}>다음 상품의 리뷰를 작성해 주세요</h3>
+                    <br/>
                     <div>
-                        <img src={productInfo.productImg} alt="" width={100}/>
+                        <img src={productInfo.productImg} alt="" width={150}/>
                     </div>
                     <div>
                         <p>{productInfo.productName}</p>
@@ -59,11 +60,11 @@ function ReviewWrite() {
                                                 만족도
                                             </button>
                                             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><a className="dropdown-item" href="#">1</a></li>
-                                                <li><a className="dropdown-item" href="#">2</a></li>
-                                                <li><a className="dropdown-item" href="#">3</a></li>
-                                                <li><a className="dropdown-item" href="#">4</a></li>
-                                                <li><a className="dropdown-item" href="#">5</a></li>
+                                                <li><a className="dropdown-item">1</a></li>
+                                                <li><a className="dropdown-item">2</a></li>
+                                                <li><a className="dropdown-item">3</a></li>
+                                                <li><a className="dropdown-item">4</a></li>
+                                                <li><a className="dropdown-item">5</a></li>
                                             </ul>
                                         </div>
                                     </div>
