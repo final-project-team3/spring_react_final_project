@@ -365,7 +365,7 @@ function ProductRegisterPage() {
     console.log($("#productPrice").val());  // 상품가격
     console.log($("#optionValue0").text());  // 옵션명(컬러,사이즈)
     console.log($("#optionValue1").text());  // 옵션명(컬러,사이즈)
-    console.log($("#optionValue2").val());  // 옵션명(컬러,사이즈)
+    console.log($("#optionValue2").text());  // 옵션명(컬러,사이즈)
     console.log(optionList);
     // var innerText = document.getElementById(elementId).innerText;
   }
