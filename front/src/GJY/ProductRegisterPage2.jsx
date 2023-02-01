@@ -9,6 +9,10 @@ import user from "../BJH/User";
 import { element } from "prop-types";
 
 function ProductRegisterPage() {
+  let sellerInfo = sessionStorage.getItem("sellerInfo");
+  sellerInfo = JSON.parse(sellerInfo);
+
+
   const [bigKind, setBigKind] = useState([]);
   const [smallKind, setSmallKind] = useState([]);
   const [productName, setProductName] = useState("");

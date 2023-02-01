@@ -49,6 +49,12 @@ const ProjectRouter = (props) => {
     let userInfo = sessionStorage.getItem("userInfo");
     userInfo = JSON.parse(userInfo);
 
+    let sellerInfo = sessionStorage.getItem("sellerInfo");
+    sellerInfo = JSON.parse(sellerInfo);
+
+    console.log(userInfo);
+    console.log(sellerInfo);
+
     return (
         <BrowserRouter>
             <Routes>
