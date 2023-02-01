@@ -45,6 +45,7 @@ import store from "./store";
 const ProjectRouter = (props) => {
 
     const {role} = useSelector((store)=>store);
+    console.log(`aa :  ${role}`);
 
     return (
         <BrowserRouter>
@@ -83,7 +84,8 @@ const ProjectRouter = (props) => {
                     <Route path={'login'} element={<NewLogin/>}/>
                     <Route path={'sellerLogin'} element={<SellerLogin/>}/>
 
-                    <Route path={'myPage'} element={role != "USER" ? <UserMyPage/> : <SellerMyPage/>}/>
+                    {console.log(`dd : ${role}`)}
+                    <Route path={'myPage'} element={role == "USER" ? <UserMyPage/> : <SellerMyPage/>}/>
                     {/*<Route path={'sellerMyPage'} element={<SellerMyPage/>}/>*/}
                     {/*<Route path={'masterPage'} element={<MasterPage/>}/>*/}
 

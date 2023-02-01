@@ -43,7 +43,7 @@ function MyReview(props) {
 
                                 <div className={"text-md-start"}>
                                     <div className={"review_content"}>
-                                        <ReviewText>{props.content}</ReviewText>
+                                        <ReviewText name={'reviewContent'}>{props.content}</ReviewText>
                                     </div>
                                 </div>
 
@@ -52,11 +52,10 @@ function MyReview(props) {
                                         <div className={"div1 col-6"}>
                                             <p className={"col-6 my-2"}>총 {props.helpful}명의 회원이 도움이 되었습니다.</p>
                                             <div className={"ui-button col-6 my-2"}>
-                                                <UpdateButton onClick={(e) => reviewUpdate(e)}
-                                                              className={"btn btn-primary"} type={"submit"}>리뷰
+                                                <UpdateButton onClick={reviewUpdate} className={"btn btn-primary"} type={"submit"}>리뷰
                                                     수정</UpdateButton>&nbsp;&nbsp;
-                                                <DeleteButton onClick={(e) => reviewDelete(e)}
-                                                              className={"btn btn-danger"} type={"submit"}>리뷰
+                                                <DeleteButton onClick={reviewDelete} className={"btn btn-danger"}
+                                                              type={"submit"}>리뷰
                                                     삭제</DeleteButton>
                                             </div>
                                         </div>
@@ -66,7 +65,6 @@ function MyReview(props) {
                             </article>
                         </li>
                     </ul>
-
                 </div>
             </div>
         </form>
