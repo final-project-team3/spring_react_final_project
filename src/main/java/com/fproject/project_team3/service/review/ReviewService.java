@@ -21,6 +21,8 @@ public interface ReviewService {
 
     void updateMyReview(ReviewDto reviewDto);
 
+    void writeMyReview(ReviewDto reviewDto);
+
     //    LYS
 
     //    GJY

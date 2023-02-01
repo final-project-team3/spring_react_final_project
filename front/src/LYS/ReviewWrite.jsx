@@ -1,18 +1,28 @@
 import React, {useEffect, useState} from "react";
-import axios from "axios";
-import Pagination from "../GJY/Pagination";
 import {useLocation} from "react-router-dom";
-import MyReview from "./MyReview";
-import DetailRating from "./DetailRating";
 import styled from "styled-components";
 import './MyReview.css';
-
+import $ from "jquery";
+import axios from "axios";
 
 function ReviewWrite() {
-
     const location = useLocation();
     const productInfo = location.state.productInfo;
-    console.log(productInfo);
+
+    const [reviewContent, setReviewContent] = useState();
+    const [star, setStar] = useState(5);
+
+    const writeReview = () => {
+        var content = $('#reviewContent').val();
+
+        if (content == '') {
+            alert("리뷰란을 입력해주세요");
+            $("#btn-write").attr("type", "button");
+        } else {
+            $("#btn-write").attr("type", "submit");
+            $("#btn-write").onclick();
+        }
+    }
 
     return (
         <div className={"container"}>
@@ -36,7 +46,7 @@ function ReviewWrite() {
             <div className={"mt-5"}>
                 <div>
                     <h3 className={"text-start mt-5"}>다음 상품의 리뷰를 작성해 주세요</h3>
-                    <br/>
+                    <hr/>
                     <div>
                         <img src={productInfo.productImg} alt="" width={150}/>
                     </div>
@@ -46,37 +56,48 @@ function ReviewWrite() {
                 </div>
             </div>
 
-            <form method={'post'} style={{padding: 0, margin: 0}}>
+            <form action={"/writeMyReview"} method={'post'} style={{padding: 0, margin: 0}}>
                 <div className={'mt-5'}>
                     <div className="reviewContainer" style={{paddingLeft: 30}}>
                         <ul>
                             <li>
                                 <article>
-                                    <div className="text-md-start">
-                                        <div className="dropdown">
-                                            <button className="btn btn-secondary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                                    aria-expanded="false">
-                                                만족도
-                                            </button>
-                                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><a className="dropdown-item">1</a></li>
-                                                <li><a className="dropdown-item">2</a></li>
-                                                <li><a className="dropdown-item">3</a></li>
-                                                <li><a className="dropdown-item">4</a></li>
-                                                <li><a className="dropdown-item">5</a></li>
-                                            </ul>
+                                    <div className={"text-md-start"}>
+                                        <div className={"review_starPoint"}>
+                                            <p>만족도를 평가해 주세요</p>
+                                            <label className={"mb-3 text-end"}>
+                                                <select
+                                                    type={"number"}
+                                                    value={star}
+                                                    onChange={({target: {value}}) => setStar(Number(value))}
+                                                >
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </div>
                                     <div className={"text-md-start"}>
                                         <div className={"review_content"}>
-                                            <ReviewText name={'reviewContent'}
-                                                        style={{marginTop: 10, paddingInline: 10}}></ReviewText>
+                                            <input hidden={true} name={'userId'} id={'userId'}
+                                                   value={productInfo.userId}/>
+                                            <input hidden={true} name={'productNum'} id={'productNum'}
+                                                   value={productInfo.productNum}/>
+                                            <input hidden={true} name={'reviewStarPoint'} id={'reviewStarPoint'}
+                                                   value={star}/>
+                                            <ReviewText name={'reviewContent'} id={'reviewContent'}
+                                                        style={{marginTop: 10, paddingInline: 10}}
+                                                        value={reviewContent}>
+                                            </ReviewText>
                                         </div>
                                     </div>
                                     <div className={"text-md-start"}>
                                         <div className={"ui-button col-6 my-2"}>
-                                            <WriteButton className={"btn btn-primary"} type={"submit"}>리뷰
+                                            <WriteButton id={"btn-write"} onClick={writeReview}
+                                                         className={"btn btn-primary"} type="button">리뷰
                                                 등록</WriteButton>
                                         </div>
                                     </div>

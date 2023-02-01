@@ -37,6 +37,11 @@ public class ReviewServiceImpl implements ReviewService {
         reviewMapper.updateMyReview(reviewDto);
     }
 
+    @Override
+    public void writeMyReview(ReviewDto reviewDto) {
+        reviewMapper.writeMyReview(reviewDto);
+    }
+
 
     //    LYS
 

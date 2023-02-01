@@ -370,6 +370,7 @@ function ProductRegisterPage() {
     console.log($("#optionValue0").text());  // 옵션명(컬러,사이즈)
     console.log($("#optionValue1").text());  // 옵션명(컬러,사이즈)
     console.log($("#optionValue2").val());  // 옵션명(컬러,사이즈)
+    console.log(sellerInfo.sellerId);
     console.log(optionList);
     // var innerText = document.getElementById(elementId).innerText;
   }
