@@ -33,8 +33,12 @@ const initState = {
 const reducer = (state = initState, action) => {
     switch (action.type) {
         case"USER_LOGIN" :
+            sessionStorage.setItem("role", action.role);
+            sessionStorage.setItem("userInfo",JSON.stringify(action.userInfo));
             return {userInfo: action.userInfo, role: action.role};
         case"SELLER_LOGIN":
+            sessionStorage.setItem("role", action.role);
+            sessionStorage.setItem("sellerInfo",JSON.stringify(action.sellerInfo));
             return {sellerInfo: action.sellerInfo, role: action.role};
         default:
             return state;
