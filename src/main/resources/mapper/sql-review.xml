@@ -27,6 +27,12 @@
         WHERE review_num = #{reviewNum}
     </update>
 
+    <update id="updateMyReview" parameterType="com.fproject.project_team3.dto.userAndseller.ReviewDto">
+        UPDATE review
+        SET review_content = #{reviewContent}
+        WHERE review_num = #{reviewNum}
+    </update>
+
     <!-- LYS -->
 
     <!-- GJY -->

@@ -4,22 +4,39 @@ import axios from "axios";
 
 
 const Search = () => {
-    const location = useLocation();
     const [searchData, setSearchData] = useState([]);
 
     const {searchContent} = useParams();
-    const [searchContents, setSearchContents] = useState(searchContent);
+
+    const search = async () => {
+        const {data} = await axios.post("http://localhost:8080/getSearchProductList", null, {
+            params: {searchContent: searchContent}
+        });
+        console.log(data);
+        console.log(JSON.stringify(data));
+        console.log(JSON.stringify(searchData));
+        if (JSON.stringify(data) !== JSON.stringify(searchData)) {
+            console.log('테스트');
+            setSearchData(data);
+        };
+    }
 
     useEffect(() => {
-        return async () => {
-            setSearchContents(searchContent);
-            const {data} = await axios.post("http://localhost:8080/getSearchProductList", null, {
-                params: {searchContent: searchContents}
-            });
-            console.log(data);
-            setSearchData(data);
-        }
-    }, [searchContents])
+        search();
+        // console.log('test')
+        // return async () => {
+        //
+        //     const {data} = await axios.post("http://localhost:8080/getSearchProductList", null, {
+        //         params: {searchContent: searchContent}
+        //     });
+        //     console.log(data);
+        //     console.log(JSON.stringify(data));
+        //     console.log(JSON.stringify(searchData));
+        //     if (JSON.stringify(data) !== JSON.stringify(searchData)) {
+        //         setSearchData(data);
+        //     };
+        // }
+    }, [searchData])
 
     return (
         <div>
