@@ -16,6 +16,8 @@ public interface UserService {
 
     void userInfoUpdate(UserInfoDto userInfoDto);
 
+    Object userLogin(String id, String pass);
+
 
     //    HSH
 

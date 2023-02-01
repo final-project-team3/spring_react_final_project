@@ -24,42 +24,49 @@ public class SellerRestController {
         sellerService.insertSeller(sellerInfoDto);
         httpServletResponse.sendRedirect("http://localhost:3000/");
     }
+//    사업자 로그인
+    @PostMapping("sellerLogin")
+    public Object sellerLogin(@RequestParam("id")String id, @RequestParam("pass") String pass) {
+        return sellerService.sellerLogin(id,pass);
+    }
     //    HSH
 
     //    LYS
     @PostMapping("/getSellerInfo")
-    public Object getUserInfo(@RequestParam("sellerId") String sellerId){
+    public Object getUserInfo(@RequestParam("sellerId") String sellerId) {
         System.out.println(sellerId);
         System.out.println(sellerService.getSellerInfo(sellerId));
         return sellerService.getSellerInfo(sellerId);
     }
 
     @PostMapping("/sellerInfoUpdate")
-    public void sellerInfoUpdate(SellerInfoDto sellerInfoDto, HttpServletResponse httpServletResponse) throws IOException{
+    public void sellerInfoUpdate(SellerInfoDto sellerInfoDto, HttpServletResponse httpServletResponse) throws IOException {
         sellerService.sellerInfoUpdate(sellerInfoDto);
         httpServletResponse.sendRedirect("http://localhost:3000/");
     }
+
     @PostMapping("/emailCheck2")
-    public Object emailCheck(@RequestParam("email") String sellerId){
+    public Object emailCheck(@RequestParam("email") String sellerId) {
         String Id = sellerService.emailCheck(sellerId);
-        if(Id == null){
+        if (Id == null) {
             return "";
         }
         return Id;
     }
+
     @PostMapping("/telCheck2")
-    public Object telCheck(@RequestParam("telData") String sellerTel){
+    public Object telCheck(@RequestParam("telData") String sellerTel) {
         String Tel = sellerService.telCheck(sellerTel);
-        if(Tel == null){
+        if (Tel == null) {
             return "";
         }
         return Tel;
     }
 
     @PostMapping("/businessNumCheck")
-    public Object businessNumCheck(@RequestParam("businessNumData") String sellerBusinessNum){
+    public Object businessNumCheck(@RequestParam("businessNumData") String sellerBusinessNum) {
         String BNum = sellerService.businessNumCheck(sellerBusinessNum);
-        if(BNum == null){
+        if (BNum == null) {
             return "";
         }
         return BNum;

@@ -11,6 +11,13 @@
                 #{sellerAddrNum}, #{sellerAddrJibun}, #{sellerAddrRoad}, #{sellerAddrDetail}, #{sellerBusinessName},
                 #{sellerBusinessNum})
     </insert>
+
+    <select id="sellerLogin" parameterType="String" resultType="com.fproject.project_team3.dto.seller.SellerInfoDto">
+        SELECT *
+        FROM seller_info
+        WHERE seller_id = #{id}
+          AND seller_pass = #{pass}
+    </select>
     <!-- HSH -->
 
     <!-- LYS -->

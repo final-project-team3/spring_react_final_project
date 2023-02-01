@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ProductDetail from "./HSH/ProductDetail";
 import ProductList from "./HSH/ProductList";
@@ -36,8 +36,15 @@ import GwakApp from "./GJY/GwakApp";
 import LikeUserList from "./BJH/UserList/LikeUserList";
 import UserInfoUpdate from "./LYS/UserInfoUpdate";
 import SellerInfoUpdate from "./LYS/SellerInfoUpdate";
+import OrderUserList from "./BJH/UserList/OrderUserList";
+import PayUserList from "./BJH/UserList/PayUserList";
+import MyReviewList from "./LYS/MyReviewList";
+import {useSelector} from "react-redux";
+import store from "./store";
 
-const ProjectRouter = () => {
+const ProjectRouter = (props) => {
+
+    const {role} = useSelector((store)=>store);
 
     return (
         <BrowserRouter>
@@ -47,7 +54,7 @@ const ProjectRouter = () => {
                     <Route index element={<Main/>}/>
                     <Route path={'productDetail'} element={<ProductDetail/>}/>
                     <Route path={'productList'} element={<ProductList/>}/>
-                    <Route path={'search'} element={<Search/>}/>
+                    <Route path={'search/:searchContent'} element={<Search/>}/>
                     {/*HSH*/}
 
                     {/*LYS*/}
@@ -55,6 +62,7 @@ const ProjectRouter = () => {
                     <Route path="/sellerSignUp" element={<SellerSignUp/>}/>
                     <Route path="/userInfoUpdate" element={<UserInfoUpdate/>}/>
                     <Route path="/sellerInfoUpdate" element={<SellerInfoUpdate/>}/>
+                    <Route path="/myReview" element={<MyReviewList/>}/>
                     {/*LYS*/}
 
                     {/*GJY*/}
@@ -75,9 +83,13 @@ const ProjectRouter = () => {
                     <Route path={'login'} element={<NewLogin/>}/>
                     <Route path={'sellerLogin'} element={<SellerLogin/>}/>
 
-                    <Route path={'userMyPage'} element={<UserMyPage/>}/>
-                    <Route path={'sellerMyPage'} element={<SellerMyPage/>}/>
-                    <Route path={'masterPage'} element={<MasterPage/>}/>
+                    <Route path={'myPage'} element={role != "USER" ? <UserMyPage/> : <SellerMyPage/>}/>
+                    {/*<Route path={'sellerMyPage'} element={<SellerMyPage/>}/>*/}
+                    {/*<Route path={'masterPage'} element={<MasterPage/>}/>*/}
+
+                    {/*<Route path={'userMyPage'} element={<UserMyPage/>}/>*/}
+                    {/*<Route path={'sellerMyPage'} element={<SellerMyPage/>}/>*/}
+                    {/*<Route path={'masterPage'} element={<MasterPage/>}/>*/}
 
                     <Route path={'cart'} element={<Cart/>}/>
 
@@ -89,6 +101,8 @@ const ProjectRouter = () => {
                     <Route path={'/footer'} element={<Footer/>}/>
 
                     <Route path={'/likeUserList'} element={<LikeUserList/>}/>
+                    <Route path={'/orderUserList'} element={<OrderUserList/>}/>
+                    <Route path={'/payUserList'} element={<PayUserList/>}/>
                     {/*BJH*/}
                 </Route>
             </Routes>

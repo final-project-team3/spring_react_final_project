@@ -11,4 +11,5 @@ public class ReviewDto {
     String reviewRegistrationDate;
     int reviewHelpful;
     int reviewStarPoint;
+    String reviewDeletedYn;
 }

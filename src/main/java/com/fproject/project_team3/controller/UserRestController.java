@@ -19,7 +19,13 @@ public class UserRestController {
     @Autowired
     private UserService userService;
     //    HSH
-
+    @PostMapping("/userLogin")
+    public Object userLogin(@RequestParam("id") String id, @RequestParam("pass") String pass) {
+        System.out.println(id);
+        System.out.println(pass);
+        System.out.println(userService.userLogin(id,pass));
+        return userService.userLogin(id, pass);
+    }
     //    HSH
 
     //    LYS

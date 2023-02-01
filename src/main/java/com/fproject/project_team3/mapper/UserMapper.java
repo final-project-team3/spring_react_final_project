@@ -22,6 +22,8 @@ public interface UserMapper {
 
     void userInfoUpdate(UserInfoDto userInfoDto);
 
+    Object userLogin(String id, String pass);
+
     //    LYS
 
     //    GJY

@@ -5,8 +5,7 @@ import {hover} from "@testing-library/user-event/dist/hover";
 import axios from "axios";
 import $ from 'jquery';
 import Footer from "../BJH/Footer";
-
-
+import {useDispatch, useSelector} from "react-redux";
 
 
 const Kind = (props) => {
@@ -23,7 +22,8 @@ const Kind = (props) => {
                 textDecoration: "none"
             }}><h2>{props.bigKind}</h2></Link>
             <ul className={'dropdown-menu'} aria-labelledby={`dropdown${props.index}`}>
-                {[smallKindList][0].map((item, index) => <li key={index} className={'dropdown-item'}>{item.productSmallKind}</li>
+                {[smallKindList][0].map((item, index) => <li key={index}
+                                                             className={'dropdown-item'}>{item.productSmallKind}</li>
                 )}
             </ul>
         </div>
@@ -31,8 +31,12 @@ const Kind = (props) => {
 }
 
 const Header = () => {
+
+    // 값 가져오는거임 구조분해로 가져옴(테스트용)
+    const {userInfo, sellerInfo, role} = useSelector((store) => store);
+
     // 검색 내용
-    const[searchContent, setSearchContent] = useState();
+    const [searchContent, setSearchContent] = useState();
 
     const [isClick, setIsClick] = useState(false);
     const [rankClick, setRankClick] = useState(true);
@@ -41,14 +45,16 @@ const Header = () => {
     // 작은 카테고리,
     const [smallKind, setSmallKind] = useState([]);
     let smallList = [];
-    
+
     // 검색 가능
     const YesSearch = () => {
         return (
-            <Link to={'/search'} state={{searchContent:searchContent}}><button style={{
-                width: 100
-            }} className={'text-center btn btn-outline-primary'}>검색
-            </button></Link>
+            <Link to={`/search/${searchContent}`}>
+                <button style={{
+                    width: 100
+                }} className={'text-center btn btn-outline-primary'}>검색
+                </button>
+            </Link>
         )
     }
     // 검색 불가능
@@ -56,7 +62,7 @@ const Header = () => {
         return (
             <button style={{
                 width: 100
-            }} className={'text-center btn btn-outline-primary'} onClick={()=> {
+            }} className={'text-center btn btn-outline-primary'} onClick={() => {
                 alert('검색어를 입력해주세요');
             }}>검색
             </button>
@@ -97,21 +103,21 @@ const Header = () => {
                     <div>
                         <Link onClick={() => {
                             alert("하이");
-                        }}><img width={60} src={"Img/menu.png"}/></Link>
+                        }}><img width={60} src={"../Img/menu.png"}/></Link>
                         <Link className={'navbar-brand'} to={"/"}><img width={150} src={'../Img/logo.png'}/></Link>
                     </div>
                     <div className="collapse navbar-collapse" id="collapsibleNavbar">
                         <ul className={'navbar-nav my-auto'}>
                             <li className={'nav-item'}>
                                 <div className={'d-flex'}>
-                                    <input id={"searchContent"} onClick={()=> {
+                                    <input id={"searchContent"} onClick={() => {
                                         setSearchContent($("#searchContent").val());
-                                    }} onChange={()=> {
+                                    }} onChange={() => {
                                         setSearchContent($("#searchContent").val());
                                     }} style={{
                                         width: 500
                                     }} className={'form-control'} placeholder={'검색'}/>
-                                    {searchContent != "" && searchContent != null ? <YesSearch/> : <NoSearch/>}
+                                    {searchContent != "" && searchContent != null && searchContent != " " ? <YesSearch/> : <NoSearch/>}
                                 </div>
                             </li>
                             <div className={'nav-item dropdown'}>
@@ -119,7 +125,7 @@ const Header = () => {
                                       onClick={() => isClick == false ? setIsClick(true) : setIsClick(false)}
                                       className={"nav-link dropdown-toggle"} data-bs-toggle={'dropdown'}
                                       aria-expanded={'false'}><img
-                                    width={30} src={isClick == false ? "Img/down.png" : "Img/up.png"}/></Link>
+                                    width={30} src={isClick == false ? "../Img/down.png" : "../Img/up.png"}/></Link>
                                 <div style={{
                                     padding: 15,
                                 }} className={'dropdown-menu'} aria-labelledby={'headerDropDown'}>
@@ -176,17 +182,17 @@ const Header = () => {
                                 </div>
                             </div>
                             <li className={'nav-item'}>
-                                <Link to={'/login'}><img className={'ms-2'} src={"Img/login.png"}/></Link>
+                                <Link to={'/login'}><img className={'ms-2'} src={"../Img/login.png"}/></Link>
                             </li>
                             <li className={'nav-item'}>
                                 <Link to={'/cart'}><img className={'ms-2 mt-2'} width={40}
-                                                        src={"Img/shoppingCart.png"}/></Link>
+                                                        src={"../Img/shoppingCart.png"}/></Link>
                             </li>
                             <li className={'nav-item'}>
-                                <Link to={'/login'}><img className={'ms-2'} src={"Img/login.png"}/></Link>
+                                <Link to={'/login'}><img className={'ms-2'} src={"../Img/login.png"}/></Link>
                             </li>
                             <li className={'nav-item'}>
-                                <Link to={'/login'}><img className={'ms-2'} src={"Img/login.png"}/></Link>
+                                <Link to={'/login'}><img className={'ms-2'} src={"../Img/login.png"}/></Link>
                             </li>
                         </ul>
                     </div>

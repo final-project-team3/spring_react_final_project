@@ -28,7 +28,7 @@ function Footer(props) {
                                    <div className={"footer-kakao"}>
                                        <Link className={"kakao"}><img style={{
                                            paddingRight: 10
-                                       }} src="Img/Bjh/kakao.png"/>카카오톡 문의</Link>
+                                       }} src="../Img/Bjh/kakao.png"/>카카오톡 문의</Link>
                                    </div>
                                    <p className={"footer-empty"}></p>
                                    <div className={"footer-subtitle"}>
@@ -70,17 +70,17 @@ function Footer(props) {
                                        <div className={"icon-link"}>
                                            <ul>
                                                <li>
-                                                   <Link className={"hyup"}><img src="Img/Bjh/hyup.png"/>
+                                                   <Link className={"hyup"}><img src="../Img/Bjh/hyup.png"/>
                                                        <p>협찬문의</p>
                                                    </Link>
                                                </li>
                                                <li>
-                                                   <Link className={"hyup"}><img src="Img/Bjh/col.png"/>
+                                                   <Link className={"hyup"}><img src="../Img/Bjh/col.png"/>
                                                        <p>콜라보제안</p>
                                                    </Link>
                                                </li>
                                                <li>
-                                                   <Link className={"hyup"}><img src="Img/Bjh/custom.png"/>
+                                                   <Link className={"hyup"}><img src="../Img/Bjh/custom.png"/>
                                                        <p>주문제작 문의</p>
                                                    </Link>
                                                </li>

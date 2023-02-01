@@ -13,6 +13,10 @@ npm i react-multi-select-component
 // ReactSelector
 npm i --save react-select
 
+// 리액트 리덕스
+ npm install redux react-redux
+
+
 // 기본 설치
 npm install
 npm install jquery
