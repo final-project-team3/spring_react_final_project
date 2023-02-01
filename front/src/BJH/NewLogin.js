@@ -29,6 +29,7 @@ function NewLogin() {
         } else {
             alert('로그인 성공');
             dispatch(userLogin(data, "USER"));
+            // 주소가 login이면 홈으로, 주소가 로그인이 필요한 주소면 그 주소로 보냄
             if (location.pathname == "/login") {
                 navi("/");
                 window.location.reload();

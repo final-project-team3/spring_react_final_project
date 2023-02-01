@@ -15,13 +15,15 @@ const Kind = (props) => {
     if (props.smallKind != null) {
         smallKindList = [props.smallKind];
         smallKindList = smallKindList[0];
-        // console.log([smallKindList][0]);
     }
     return (
         <div>
             <Link className={'dropdown-toggle'} id={`dropdown${props.index}`} data-bs-toggle="dropdown" style={{
-                textDecoration: "none"
-            }}><h2>{props.bigKind}</h2></Link>
+                textDecoration: "none",
+                color:'white'
+            }}><h2 style={{
+                color:"black"
+            }}>{props.bigKind}</h2></Link>
             <ul className={'dropdown-menu'} aria-labelledby={`dropdown${props.index}`}>
                 {[smallKindList][0].map((item, index) => <li key={index}
                                                              className={'dropdown-item'}>{item.productSmallKind}</li>
