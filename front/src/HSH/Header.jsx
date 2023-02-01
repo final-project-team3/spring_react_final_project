@@ -1,4 +1,4 @@
-import {Link, Outlet} from "react-router-dom";
+import {Link, Outlet, useLocation, useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import {hover} from "@testing-library/user-event/dist/hover";
@@ -6,6 +6,7 @@ import axios from "axios";
 import $ from 'jquery';
 import Footer from "../BJH/Footer";
 import {useDispatch, useSelector} from "react-redux";
+import {sellerLogout, userLogout} from "../store";
 
 
 const Kind = (props) => {
@@ -31,9 +32,13 @@ const Kind = (props) => {
 }
 
 const Header = () => {
+    // 검색 무한반복을 없애기 위함
+    const navi = useNavigate();
+    const location = useLocation();
+    // 로그아웃 하기 위해서 디스패치 가져옴
+    const dispatch = useDispatch();
 
-    // 값 가져오는거임 구조분해로 가져옴(테스트용)
-    const {userInfo, sellerInfo, role} = useSelector((store) => store);
+    const role = sessionStorage.getItem("role");
 
     // 검색 내용
     const [searchContent, setSearchContent] = useState();
@@ -49,7 +54,13 @@ const Header = () => {
     // 검색 가능
     const YesSearch = () => {
         return (
-            <Link to={`/search/${searchContent}`}>
+            <Link to={`/search/${searchContent}`} onClick={()=> {
+                console.log(location.pathname.includes("/search"))
+                if (location.pathname.includes("/search")) {
+                    navi(`/search/${searchContent}`);
+                    window.location.reload();
+                }
+            }}>
                 <button style={{
                     width: 100
                 }} className={'text-center btn btn-outline-primary'}>검색
@@ -182,15 +193,22 @@ const Header = () => {
 
                                 </div>
                             </div>
-                            <li className={'nav-item'}>
-                                <Link to={'/login'}><img className={'ms-2'} src={"../Img/login.png"}/></Link>
-                            </li>
+                            {role == null ? <Link to={'/login'}><img className={'ms-2'}
+                                                                     src={"../Img/login.png"}/></Link> : role == "USER" ?
+                                <Link onClick={() => dispatch(userLogout())}><img width={40} src={"../Img/logout.png"}
+                                                                                  className={'ms-2'}/></Link> :
+                                <Link onClick={() => dispatch(sellerLogout())}><img width={40} src={"../Img/logout.png"}
+                                                                                    className={'ms-2'}/></Link>}
+                            {/*<li className={'nav-item'}>*/}
+                            {/*    <Link to={'/login'}><img className={'ms-2'} src={"../Img/login.png"}/></Link>*/}
+                            {/*</li>*/}
                             <li className={'nav-item'}>
                                 <Link to={'/cart'}><img className={'ms-2 mt-2'} width={40}
                                                         src={"../Img/shoppingCart.png"}/></Link>
                             </li>
                             <li className={'nav-item'}>
-                                <Link to={'/mypage'}><img className={'ms-2'} width={40} src={"../Img/mypage.png"}/></Link>
+                                <Link to={'/mypage'}><img className={'ms-2'} width={40}
+                                                          src={"../Img/mypage.png"}/></Link>
                             </li>
                             <li className={'nav-item'}>
                                 <Link to={'/login'}><img className={'ms-2'} src={"../Img/login.png"}/></Link>
