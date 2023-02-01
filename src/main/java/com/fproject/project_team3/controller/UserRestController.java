@@ -18,12 +18,10 @@ import java.util.List;
 public class UserRestController {
     @Autowired
     private UserService userService;
+
     //    HSH
     @PostMapping("/userLogin")
     public Object userLogin(@RequestParam("id") String id, @RequestParam("pass") String pass) {
-        System.out.println(id);
-        System.out.println(pass);
-        System.out.println(userService.userLogin(id,pass));
         return userService.userLogin(id, pass);
     }
     //    HSH
@@ -37,7 +35,7 @@ public class UserRestController {
     }
 
     @PostMapping("/getUserInfo")
-    public Object getUserInfo(@RequestParam("userId") String userId){
+    public Object getUserInfo(@RequestParam("userId") String userId) {
         System.out.println(userId);
         System.out.println(userService.getUserInfo(userId));
         return userService.getUserInfo(userId);
@@ -52,17 +50,17 @@ public class UserRestController {
     @PostMapping("/emailCheck")
     public Object emailCheck(@RequestParam("email") String userId) {
         String Id = userService.emailCheck(userId);
-        if(Id == null) {
+        if (Id == null) {
             return "";
         }
         return Id;
     }
 
     @PostMapping("/telCheck")
-    public Object telCheck(@RequestParam("telData") String userTel){
+    public Object telCheck(@RequestParam("telData") String userTel) {
         System.out.println(userTel);
         String Tel = userService.telCheck(userTel);
-        if(Tel == null){
+        if (Tel == null) {
             return "";
         }
         return Tel;

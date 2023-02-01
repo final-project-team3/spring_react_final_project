@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ProductDetail from "./HSH/ProductDetail";
 import ProductList from "./HSH/ProductList";
@@ -44,8 +44,9 @@ import store from "./store";
 
 const ProjectRouter = (props) => {
 
-    const {role} = useSelector((store)=>store);
-    console.log(`aa :  ${role}`);
+    let role = sessionStorage.getItem("role");
+    let userInfo = sessionStorage.getItem("userInfo");
+    userInfo = JSON.parse(userInfo);
 
     return (
         <BrowserRouter>
@@ -84,13 +85,8 @@ const ProjectRouter = (props) => {
                     <Route path={'login'} element={<NewLogin/>}/>
                     <Route path={'sellerLogin'} element={<SellerLogin/>}/>
 
-                    {console.log(`dd : ${role}`)}
-                    <Route path={'myPage'} element={role == "USER" ? <UserMyPage/> : <SellerMyPage/>}/>
-                    {/*<Route path={'sellerMyPage'} element={<SellerMyPage/>}/>*/}
-                    {/*<Route path={'masterPage'} element={<MasterPage/>}/>*/}
-
-                    {/*<Route path={'userMyPage'} element={<UserMyPage/>}/>*/}
-                    {/*<Route path={'sellerMyPage'} element={<SellerMyPage/>}/>*/}
+                    <Route path={'myPage'}
+                           element={role == null ? <NewLogin/> : role == "USER" ? <UserMyPage/> : < SellerMyPage/>}/>
                     {/*<Route path={'masterPage'} element={<MasterPage/>}/>*/}
 
                     <Route path={'cart'} element={<Cart/>}/>

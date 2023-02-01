@@ -35,8 +35,6 @@ const Header = () => {
     // 값 가져오는거임 구조분해로 가져옴(테스트용)
     const {userInfo, sellerInfo, role} = useSelector((store) => store);
 
-    console.log(`header - role : ${role}`);
-
     // 검색 내용
     const [searchContent, setSearchContent] = useState();
 
@@ -100,7 +98,6 @@ const Header = () => {
         <div style={{
             paddingTop: 200,
         }}>
-            <Link to={'/mypage'}>마이페이지</Link>
             <nav className="bg-white navbar navbar-expand navbar-dark fixed-top">
                 <div className={'container'}>
                     <div>
@@ -120,7 +117,8 @@ const Header = () => {
                                     }} style={{
                                         width: 500
                                     }} className={'form-control'} placeholder={'검색'}/>
-                                    {searchContent != "" && searchContent != null && searchContent != " " ? <YesSearch/> : <NoSearch/>}
+                                    {searchContent != "" && searchContent != null && searchContent != " " ?
+                                        <YesSearch/> : <NoSearch/>}
                                 </div>
                             </li>
                             <div className={'nav-item dropdown'}>
@@ -192,7 +190,7 @@ const Header = () => {
                                                         src={"../Img/shoppingCart.png"}/></Link>
                             </li>
                             <li className={'nav-item'}>
-                                <Link to={'/login'}><img className={'ms-2'} src={"../Img/login.png"}/></Link>
+                                <Link to={'/mypage'}><img className={'ms-2'} width={40} src={"../Img/mypage.png"}/></Link>
                             </li>
                             <li className={'nav-item'}>
                                 <Link to={'/login'}><img className={'ms-2'} src={"../Img/login.png"}/></Link>
