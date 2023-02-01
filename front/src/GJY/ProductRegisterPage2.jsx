@@ -9,6 +9,10 @@ import user from "../BJH/User";
 import { element } from "prop-types";
 
 function ProductRegisterPage() {
+  let sellerInfo = sessionStorage.getItem("sellerInfo");
+  sellerInfo = JSON.parse(sellerInfo);
+
+
   const [bigKind, setBigKind] = useState([]);
   const [smallKind, setSmallKind] = useState([]);
   const [productName, setProductName] = useState("");
@@ -367,6 +371,8 @@ function ProductRegisterPage() {
     console.log($("#optionValue1").text());  // 옵션명(컬러,사이즈)
     console.log($("#optionValue2").text());  // 옵션명(컬러,사이즈)
     console.log(optionList);
+    // console.log(sellerInfo.sellerId);
+
     // var innerText = document.getElementById(elementId).innerText;
   }
 
