@@ -38,7 +38,7 @@ const reducer = (state = initState, action) => {
             return {userInfo: action.userInfo, role: action.role};
         case"SELLER_LOGIN":
             sessionStorage.setItem("role", action.role);
-            sessionStorage.setItem("sellerInfo",action.sellerInfo);
+            sessionStorage.setItem("sellerInfo",JSON.stringify(action.sellerInfo));
             return {sellerInfo: action.sellerInfo, role: action.role};
         default:
             return state;
