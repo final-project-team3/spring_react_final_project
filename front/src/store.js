@@ -1,13 +1,13 @@
 import React from 'react';
 
 // 나중에 함수 사용할때 편하게 사용하기 위해서 미리 이렇게 만들어줌
-
 // 유저 로그인
 export const userLogin = (userInfo, role) => ({
     type: "USER_LOGIN",
     userInfo: userInfo,
     role: role
-});
+})
+// 유저 로그아웃
 export const userLogout = () => ({type: "USER_LOGOUT"});
 
 // 셀러 로그인
@@ -16,6 +16,7 @@ export const sellerLogin = (sellerInfo, role) => ({
     sellerInfo: sellerInfo,
     role: role
 });
+// 셀러 로그아웃
 export const sellerLogout = () => ({type: "SELLER_LOGOUT"});
 
 
@@ -34,12 +35,20 @@ const reducer = (state = initState, action) => {
     switch (action.type) {
         case"USER_LOGIN" :
             sessionStorage.setItem("role", action.role);
-            sessionStorage.setItem("userInfo",JSON.stringify(action.userInfo));
+            sessionStorage.setItem("userInfo", JSON.stringify(action.userInfo));
             return {userInfo: action.userInfo, role: action.role};
         case"SELLER_LOGIN":
             sessionStorage.setItem("role", action.role);
-            sessionStorage.setItem("sellerInfo",JSON.stringify(action.sellerInfo));
+            sessionStorage.setItem("sellerInfo", JSON.stringify(action.sellerInfo));
             return {sellerInfo: action.sellerInfo, role: action.role};
+        case"USER_LOGOUT":
+            sessionStorage.removeItem("role");
+            sessionStorage.removeItem("userInfo");
+            window.location.reload();
+        case"SELLER_LOGOUT":
+            sessionStorage.removeItem("role");
+            sessionStorage.removeItem("sellerInfo");
+            window.location.reload();
         default:
             return state;
     }

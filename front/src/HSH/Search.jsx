@@ -1,42 +1,43 @@
 import React, {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import axios from "axios";
+import $ from "jquery";
 
 
 const Search = () => {
     const [searchData, setSearchData] = useState([]);
-
+    const [prevSearchData, setPrevSearchData] = useState([]);
     const {searchContent} = useParams();
+    const location = useLocation();
 
-    const search = async () => {
-        const {data} = await axios.post("http://localhost:8080/getSearchProductList", null, {
-            params: {searchContent: searchContent}
-        });
-        console.log(data);
-        console.log(JSON.stringify(data));
-        console.log(JSON.stringify(searchData));
-        if (JSON.stringify(data) !== JSON.stringify(searchData)) {
-            console.log('테스트');
-            setSearchData(data);
-        };
-    }
+
+    let locationPath = location.pathname;
+
+    $(function () {
+        if (locationPath != locationPath) {
+            window.location.reload();
+        }
+    });
 
     useEffect(() => {
-        search();
-        // console.log('test')
-        // return async () => {
-        //
-        //     const {data} = await axios.post("http://localhost:8080/getSearchProductList", null, {
-        //         params: {searchContent: searchContent}
-        //     });
-        //     console.log(data);
-        //     console.log(JSON.stringify(data));
-        //     console.log(JSON.stringify(searchData));
-        //     if (JSON.stringify(data) !== JSON.stringify(searchData)) {
-        //         setSearchData(data);
-        //     };
-        // }
-    }, [searchData])
+        return async () => {
+
+            const {data} = await axios.post("http://localhost:8080/getSearchProductList", null, {
+                params: {searchContent: searchContent}
+            });
+            console.log(data);
+            console.log("data 문자열로 변환한 값 : "+JSON.stringify(data));
+            console.log("--------------------------------------------------");
+            console.log("searchData 문자열로 변환한 값 : "+JSON.stringify(searchData));
+            setPrevSearchData(data);
+            console.log("prevSearchData 문자열로 변환한 값 : "+JSON.stringify(prevSearchData));
+
+            console.log(JSON.stringify(data) !== JSON.stringify(searchData));
+            if (JSON.stringify(data) !== JSON.stringify(searchData)) {
+                setSearchData(data);
+            };
+        }
+    }, [locationPath])
 
     return (
         <div>
