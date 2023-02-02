@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {sellerLogout, userLogout} from "../store";
 
 
+// 카테고리
 const Kind = (props) => {
     let smallKindList = [];
 

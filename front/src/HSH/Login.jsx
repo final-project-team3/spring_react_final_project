@@ -1,25 +1,25 @@
-import axios from "axios";
-import React, {useState} from "react";
-import styled from "styled-components";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
-import $ from 'jquery';
-import {userLogin} from "../store";
+import {Link, useLocation, useNavigate} from "react-router-dom";
+import $ from "jquery";
+import axios from "axios";
+import {sellerLogin, userLogin} from "../store";
+import styled from "styled-components";
 
-function NewLogin() {
+const Login = () => {
 
     const dispatch = useDispatch();
     const navi = useNavigate();
     const location = useLocation();
-    console.log(location);
 
+    const [loginChange,setLoginChange] = useState("userLogin");
 
 
     const userLoginCheck = async () => {
         const id = $("#id").val();
         const pass = $("#pass").val();
 
-        const {data} = await axios.post("http://localhost:8080/userLogin", null, {
+        const {data} = await axios.post(`http://localhost:8080/${loginChange}`, null, {
             params: {
                 id: id, pass: pass
             }
@@ -28,9 +28,13 @@ function NewLogin() {
             alert('아이디와 비밀번호를 다시 확인해주세요.');
         } else {
             alert('로그인 성공');
-            dispatch(userLogin(data, "USER"));
+            if (loginChange == "userLogin") {
+                dispatch(userLogin(data, "USER"));
+            } else {
+                dispatch(sellerLogin(data, "SELLER"));
+            }
             // 주소가 login이면 홈으로, 주소가 로그인이 필요한 주소면 그 주소로 보냄
-            if (location.pathname == "/login" || location.pathname == "/sellerLogin") {
+            if (location.pathname == "/login") {
                 navi("/");
                 window.location.reload();
             } else {
@@ -57,7 +61,7 @@ function NewLogin() {
 
                     </LoginHeadText>
                     <BorderAndText>
-                        <Link to={"/sellerLogin"}><span>사업자 로그인</span></Link>
+                        <Link onClick={()=> loginChange == "userLogin" ? setLoginChange("sellerLogin") : setLoginChange("userLogin")}><span>{loginChange == "userLogin" ? "사업자 로그인" : "일반회원 로그인"}</span></Link>
                     </BorderAndText>
 
                     <EmailLoginContainer>
@@ -358,4 +362,5 @@ const LoginWrap = styled.div`
   min-height: 100%;
   background: #fff;
 `;
-export default NewLogin;
+
+export default Login;
