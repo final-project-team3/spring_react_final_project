@@ -63,24 +63,17 @@ public class ProductRestController {
     // 상품 등록 → DB 저장
     @PostMapping("/productDataIntoDB")
     public void insertProductData(@RequestBody ArrayList<Object> listObj) throws Exception {
-        System.out.println("==================:: Test1 ::===================");
         List<Object> test1 = listObj;
 
-        System.out.println(listObj);
-
-//        for (Object testO: test1){
-//            System.out.println(testO.getClass());
-//
-//        }
-
-//        List[] arrayTest;
-//        arrayTest = new List[test1.size()];
+        HashMap test2 = new HashMap<>() ;
 
 
-//        for (int i = 0; i < test1.size(); i++) {
-//            arrayTest.add(1);
-//        }
+        for (int i = 0; i < test1.size() ; i++) {
+            test2 = (HashMap) test1.get(i);
 
+            System.out.println(test2.get("productName"));
+
+        }
     }
 
     // 제품 중복확인

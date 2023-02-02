@@ -306,7 +306,6 @@ function ProductRegisterPage2() {
       }
       // alert(kindNum);
       await axios.post("http://localhost:8080/productDataIntoDB", optionList);
-      await axios.post("http://10.100.204.69:8080/productDataIntoDB", optionList);
 
       Swal.fire({
         position: "top-center",
