@@ -14,4 +14,6 @@ public interface ReviewMapper {
     void deleteMyReview(ReviewDto reviewDto);
 
     void updateMyReview(ReviewDto reviewDto);
+
+    void writeMyReview(ReviewDto reviewDto);
 }

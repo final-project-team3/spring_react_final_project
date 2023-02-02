@@ -9,21 +9,23 @@
     <select id="getReview" parameterType="String" resultType="com.fproject.project_team3.dto.userAndseller.ReviewDto">
         SELECT *
         FROM review
-        WHERE product_num = #{productNum} AND review_deleted_yn = "N"
+        WHERE product_num = #{productNum}
+          AND review_deleted_yn = "N"
         ORDER BY review_num DESC
     </select>
 
     <select id="getMyReview" parameterType="String" resultType="com.fproject.project_team3.dto.userAndseller.ReviewDto">
         SELECT *
         FROM review
-        WHERE user_id = #{userId} AND review_deleted_yn = "N"
+        WHERE user_id = #{userId}
+          AND review_deleted_yn = "N"
         ORDER BY review_num DESC
     </select>
 
-<!--    db에서 진짜로 삭제하지 않고 review_deleted_yn 컬럼을 사용 -->
+    <!--    db에서 진짜로 삭제하지 않고 review_deleted_yn 컬럼을 사용 -->
     <update id="deleteMyReview" parameterType="com.fproject.project_team3.dto.userAndseller.ReviewDto">
         UPDATE review
-        SET review_deleted_yn = REPLACE(review_deleted_yn ,'N','Y')
+        SET review_deleted_yn = REPLACE(review_deleted_yn, 'N', 'Y')
         WHERE review_num = #{reviewNum}
     </update>
 
@@ -32,6 +34,11 @@
         SET review_content = #{reviewContent}
         WHERE review_num = #{reviewNum}
     </update>
+
+    <insert id="writeMyReview" parameterType="com.fproject.project_team3.dto.userAndseller.ReviewDto">
+        INSERT INTO review (user_id, product_num, review_content, review_registration_date, review_star_point)
+        VALUES (#{userId}, #{productNum}, #{reviewContent}, NOW(), #{reviewStarPoint})
+    </insert>
 
     <!-- LYS -->
 
