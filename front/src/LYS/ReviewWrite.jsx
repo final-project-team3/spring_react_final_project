@@ -16,11 +16,17 @@ function ReviewWrite() {
         var content = $('#reviewContent').val();
 
         if (content == '') {
-            alert("리뷰란을 입력해주세요");
+            alert("리뷰를 10자 이상 입력해주세요");
             $("#btn-write").attr("type", "button");
         } else {
-            $("#btn-write").attr("type", "submit");
-            $("#btn-write").onclick();
+            if (content.length < 10) {
+                alert("리뷰를 10자 이상 입력해주세요");
+                $("#btn-write").attr("type", "button");
+            } else {
+                alert("리뷰가 등록 되었습니다.");
+                $("#btn-write").attr("type", "submit");
+                $("#btn-write").onclick();
+            }
         }
     }
 
@@ -64,7 +70,7 @@ function ReviewWrite() {
                                 <article>
                                     <div className={"text-md-start"}>
                                         <div className={"review_starPoint"}>
-                                            <p>만족도를 평가해 주세요</p>
+                                            <p style={{marginBottom: 0}}>만족도를 평가해 주세요</p>
                                             <label className={"mb-3 text-end"}>
                                                 <select
                                                     type={"number"}
@@ -88,7 +94,7 @@ function ReviewWrite() {
                                                    value={productInfo.productNum}/>
                                             <input hidden={true} name={'reviewStarPoint'} id={'reviewStarPoint'}
                                                    value={star}/>
-                                            <ReviewText name={'reviewContent'} id={'reviewContent'}
+                                            <ReviewText name={'reviewContent'} id={'reviewContent'} placeholder={"리뷰를 입력해주세요 (10자 이상)"}
                                                         style={{marginTop: 10, paddingInline: 10}}
                                                         value={reviewContent}>
                                             </ReviewText>

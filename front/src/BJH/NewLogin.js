@@ -1,13 +1,17 @@
 import axios from "axios";
 import React, {useState} from "react";
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import $ from 'jquery';
 import {userLogin} from "../store";
 
 function NewLogin() {
+
     const dispatch = useDispatch();
+    const navi = useNavigate();
+    const location = useLocation();
+    console.log(location);
 
 
 
@@ -24,8 +28,15 @@ function NewLogin() {
             alert('아이디와 비밀번호를 다시 확인해주세요.');
         } else {
             alert('로그인 성공');
-            console.log(data);
             dispatch(userLogin(data, "USER"));
+            // 주소가 login이면 홈으로, 주소가 로그인이 필요한 주소면 그 주소로 보냄
+            if (location.pathname == "/login") {
+                navi("/");
+                window.location.reload();
+            } else {
+                window.location.reload();
+            }
+
         }
     }
 
@@ -41,7 +52,7 @@ function NewLogin() {
                     <LoginHeadText>
 
                         <NeedLogin>
-                            로그인이 필요한 서비스 입니다.
+                            {location.pathname != "/login" ? <h3>로그인이 필요한 서비스입니다.</h3> : null}
                         </NeedLogin>
 
                     </LoginHeadText>
