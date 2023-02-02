@@ -8,7 +8,7 @@ import Select from "react-select";
 import user from "../BJH/User";
 import { element } from "prop-types";
 
-function ProductRegisterPage2() {
+function ProductRegisterPage() {
   let sellerInfo = sessionStorage.getItem("sellerInfo");
   sellerInfo = JSON.parse(sellerInfo);
 
@@ -365,15 +365,14 @@ function ProductRegisterPage2() {
   };
 
   const tblData = () => {
-    console.log("====== 테이블 데이터 확인 =====")
-    console.log($("#productSellerBusinessName").val());
     console.log($("#productName").val()); // 상품명
     console.log($("#productPrice").val());  // 상품가격
     console.log($("#optionValue0").text());  // 옵션명(컬러,사이즈)
-    console.log($("#optionPrice").val());  // 옵션가격
-    console.log($("#stockQty").val());  // 재고수량
-    console.log( $('#sailsStatusOption option:selected').val());  // 선택옵션
-
+    console.log($("#optionValue1").text());  // 옵션명(컬러,사이즈)
+    console.log($("#optionValue2").val());  // 옵션명(컬러,사이즈)
+    console.log(sellerInfo.sellerId);
+    console.log(optionList);
+    // var innerText = document.getElementById(elementId).innerText;
   }
 
   //
@@ -392,13 +391,11 @@ function ProductRegisterPage2() {
           </label>
           <input
             type="text"
-            id={"productSellerBusinessName"}
+            id={"productSellerId"}
             className={"form-control mb-5"}
             placeholder={
               "판매자명을 입력하세요 (나중에 로그인기능구현 → 자동입력 될 부분)"
             }
-            value={sellerInfo.sellerBusinessName}
-            readOnly={true}
           />
           <table className={"border"} style={{ height: 200 }}>
             <tbody className={"border"}>
@@ -698,11 +695,11 @@ function ProductRegisterPage2() {
                               id={`optionValue${item.index}`}
                               className={"col-3"}
                             >{`${item.value1},  ${item.value2}`}</td>
-                            <td className={"col"} >
-                              <input type="text" id={"optionPrice"}/>
+                            <td className={"col"} id={"optionPrice"}>
+                              <input type="text" />
                             </td>
-                            <td className={"col"} >
-                              <input type="text" id={"stockQty"}/>
+                            <td className={"col"} id={"stockQty"}>
+                              <input type="text" />
                             </td>
                             <td className={"col"} id={"sailsStatus"}>
                               <select
@@ -715,14 +712,14 @@ function ProductRegisterPage2() {
                                 <option
                                   name="sailOption1"
                                   id="sailOption1"
-                                  value={"판매중"}
+                                  value={"sailOption1"}
                                 >
                                   판매중
                                 </option>
                                 <option
                                   name="sailOption1"
                                   id="sailOption2"
-                                  value={"세일"}
+                                  value={"sailOption2"}
                                 >
                                   세일
                                 </option>
@@ -785,4 +782,4 @@ function ProductRegisterPage2() {
   );
 }
 
-export default ProductRegisterPage2;
+export default ProductRegisterPage;
