@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {sellerLogout, userLogout} from "../store";
 
 
+// 카테고리
 const Kind = (props) => {
     let smallKindList = [];
 
@@ -20,7 +21,7 @@ const Kind = (props) => {
         <div>
             <Link className={'dropdown-toggle'} id={`dropdown${props.index}`} data-bs-toggle="dropdown" style={{
                 textDecoration: "none",
-                color:'white'
+                color:'#ffffff'
             }}><h2 style={{
                 color:"black"
             }}>{props.bigKind}</h2></Link>

@@ -39,6 +39,18 @@
     cursor: inherit;
 }
 
+.pickTabList2 {
+    width: auto;
+    height: 40px;
+    line-height: 38px;
+    padding: 0 25px;
+    border-radius: 20px 20px 20px 20px;
+    margin: 0 8px;
+    text-align: center;
+    background: #c2c2c2;
+    cursor: inherit;
+}
+
 .pickTabList > span {
     color: #fff;
     font-weight: 600;
@@ -76,14 +88,14 @@
     float: left;
 }
 
-.fl .B-Img {
+.fl.B-Img {
     position: relative;
     overflow: hidden;
     border: 0;
     border-radius: 15px;
     flex-shrink: 0;
     width: 500px;
-    height: 491.11px;
+    height: 491px;
 }
 
 .ImgBox {
@@ -107,7 +119,9 @@
     top: 50%;
     margin-top: -38px;
     width: 100%;
+    height: 73px;
     text-align: center;
+    padding-right: 20px;
 }
 
 .pick-title-text h2 {
@@ -122,7 +136,108 @@
 
 .ImgBox img {
     float: left;
-    width: 50%;
+    width: 100%;
     vertical-align: middle;
     border-radius: 15px;
+}
+
+.pickList ul.C-Img {
+    margin-left: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 1350px;
+}
+
+.pickList ul.C-Img li.item {
+    width: 33%;
+
+    display: inline-block;
+    vertical-align: top;
+    flex: 0 1 32%;
+    margin: 0;
+}
+
+.pickList ul.C-Img li.item:first-child {
+    margin-left: 0;
+}
+
+.pickList ul.C-Img li.item:nth-child(-n+4) {
+    margin: 0 0 15px 0;
+    flex: 0 1 24.2%;
+}
+
+.itemBox {
+    position: relative;
+    overflow: hidden;
+    border: 0;
+    border-top-left-radius: 15px;
+}
+
+.pickList ul.C-Img li.item .box {
+    width: 100%;
+    text-align: left;
+    position: relative;
+    margin: 0 auto 40px;
+    font-size: 11px;
+    line-height: 20px;
+}
+
+.pickList ul.C-Img li.item:nth-child(-n+7) .box {
+    margin-bottom: 0;
+}
+
+.prvImg {
+    position: relative;
+}
+
+.prvImg .thumb {
+    max-width: 345px;
+    overflow: hidden;
+    border-radius: 15px;
+    width: 100%;
+    height: auto;
+    border: 1px solid #f1f1f1 !important;
+    box-sizing: border-box;
+}
+
+.prvImg img {
+    vertical-align: middle;
+}
+
+.th-name {
+    max-height: 40px;
+    text-align: left;
+    margin-top: 4px;
+}
+
+.th-name .th-title {
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 268px;
+    letter-spacing: 0.5px;
+    color: #3d3d3d;
+    font-size: 13px !important;
+    display: inline-block;
+    text-decoration: none;
+}
+
+span.sale {
+    color: #eb6100;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.price01 {
+    font-size: 14px;
+    color: #999;
+    padding-right: 10px;
+    text-decoration: line-through;
+}
+
+.price02 {
+    font-size: 15px;
+    font-weight: bold;
+    color: #000;
 }

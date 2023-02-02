@@ -44,5 +44,11 @@ public class ReviewRestController {
         reviewService.updateMyReview(reviewDto);
         httpServletResponse.sendRedirect("http://localhost:3000/myReview");
     }
+
+    @PostMapping("/writeMyReview")
+    public void writeMyReview(ReviewDto reviewDto, HttpServletResponse httpServletResponse)throws IOException{
+        reviewService.writeMyReview(reviewDto);
+        httpServletResponse.sendRedirect("http://localhost:3000/myReview");
+    }
 }
 
