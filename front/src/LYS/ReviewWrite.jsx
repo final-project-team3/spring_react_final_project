@@ -3,6 +3,7 @@ import {useLocation} from "react-router-dom";
 import styled from "styled-components";
 import './MyReview.css';
 import $ from "jquery";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 function ReviewWrite() {
@@ -15,19 +16,27 @@ function ReviewWrite() {
     const writeReview = () => {
         var content = $('#reviewContent').val();
 
-        if (content == '') {
-            alert("리뷰를 10자 이상 입력해주세요");
-            $("#btn-write").attr("type", "button");
+        // if (content == '') {
+        //     alert("리뷰를 10자 이상 입력해주세요");
+        //     $("#btn-write").attr("type", "button");
+        // } else {
+        //     if (content.length < 10) {
+        //         alert("리뷰를 10자 이상 입력해주세요");
+        //         $("#btn-write").attr("type", "button");
+        //     } else {
+        //         alert("리뷰가 등록 되었습니다.");
+        //         $("#btn-write").attr("type", "submit");
+        //         $("#btn-write").onclick();
+        //     }
+        // }
+        if (content !== '') {
+            Swal('success')
+                .then(function (){
+                    location.href="${pageContext.request.contextPath}/myReview";
+                })
         } else {
-            if (content.length < 10) {
-                alert("리뷰를 10자 이상 입력해주세요");
-                $("#btn-write").attr("type", "button");
-            } else {
-                alert("리뷰가 등록 되었습니다.");
-                $("#btn-write").attr("type", "submit");
-                $("#btn-write").onclick();
-            }
-        }
+            Swal('로그인 실패!',"아이디와 비밀번호를 확인해 주세요",'warning');
+        };
     }
 
     return (
