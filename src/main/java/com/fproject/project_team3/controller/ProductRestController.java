@@ -16,9 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 public class ProductRestController {
@@ -64,14 +62,25 @@ public class ProductRestController {
 
     // 상품 등록 → DB 저장
     @PostMapping("/productDataIntoDB")
-    public void insertProductData(@RequestParam("productName") String productName, @RequestParam("productKindNum") int productKindNum, @RequestParam("productQty") int productQty, @RequestParam("productSellerId") String productSellerId, @RequestParam("productPrice") int productPrice) throws Exception {
-        productService.insertProductData(productName, productKindNum, productQty, productSellerId, productPrice);
-        System.out.println(productName);
-        System.out.println(productQty);
-        System.out.println(productKindNum);
-        System.out.println(productSellerId);
-        System.out.println(productPrice);
-//    System.out.println(productQty);
+    public void insertProductData(@RequestBody ArrayList<Object> listObj) throws Exception {
+        System.out.println("==================:: Test1 ::===================");
+        List<Object> test1 = listObj;
+
+        System.out.println(listObj);
+
+//        for (Object testO: test1){
+//            System.out.println(testO.getClass());
+//
+//        }
+
+//        List[] arrayTest;
+//        arrayTest = new List[test1.size()];
+
+
+//        for (int i = 0; i < test1.size(); i++) {
+//            arrayTest.add(1);
+//        }
+
     }
 
     // 제품 중복확인

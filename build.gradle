@@ -32,6 +32,9 @@ dependencies {
     implementation 'commons-io:commons-io:2.11.0'
     // https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
     implementation 'commons-fileupload:commons-fileupload:1.4'
+    // JsonObject 타입 데이터를 Controller 로....
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 }
 
 tasks.named('test') {

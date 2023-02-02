@@ -21,7 +21,7 @@ const Kind = (props) => {
         <div>
             <Link className={'dropdown-toggle'} id={`dropdown${props.index}`} data-bs-toggle="dropdown" style={{
                 textDecoration: "none",
-                color:'white'
+                color:'#ffffff'
             }}><h2 style={{
                 color:"black"
             }}>{props.bigKind}</h2></Link>
