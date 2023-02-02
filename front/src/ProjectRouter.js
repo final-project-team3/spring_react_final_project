@@ -17,7 +17,6 @@ import Cart from "./BJH/Cart/Cart";
 import SearchId from "./BJH/Search/SearchId";
 import SellerSearch from "./BJH/Search/SellerSearch";
 import PwSearch from "./BJH/Search/PwSearch";
-import ProductRegisterPage from "./GJY/ProductRegisterPage";
 import Main from "./HSH/Main";
 import IdSearch from "./BJH/Search/IdSearch";
 import SearchMain from "./BJH/Search/SearchMain";
@@ -78,7 +77,6 @@ const ProjectRouter = (props) => {
                   {/*GJY*/}
                   <Route path={'/payment'} element={<PaymentPage/>}/>
                   <Route path={'/orderList'} element={<OrderListPage/>}/>
-                  <Route path={"/productR"} element={<ProductRegisterPage/>}/>
                   <Route path={"/productR2"} element={<ProductRegisterPage2/>}/>
                   <Route path={"/OptionTable"} element={<OptionTable/>}/>
                   <Route path={"/test"} element={<Test/>}/>
