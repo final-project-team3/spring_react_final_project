@@ -21,7 +21,7 @@ const StyledSlider = styled(Slider)`
        height: 100%
     }    
     .slick-prev {
-        left: 10px;
+        left: 16px;
         z-index: 999;
     }
     .slick-next {
@@ -74,12 +74,69 @@ const Main = () => {
                         );
                     })}
                 </StyledSlider>
-
-                {/* 사이에 다른것 하나 넣기?*/}
-                <div id={"section27"}>
+                <br/>
+                <br/>
+                <div className={"ad-card-wrap"}>
+                    <div className={"ad-card1"}>
+                        <div className={"ad-card-color"}>
+                            <h2 className={"hiddenText"}>광고</h2>
+                            <div className={"f-card"}>
+                                <div className={"card-thumb"}>
+                                    <img src={"./Img/Bjh/han_out.jpg"}/>
+                                </div>
+                                <div className={"card-info"}>
+                                    {/* 광고이미지*/}
+                                    <div className={"card-name"}>
+                                        <strong>광고입니다</strong>
+                                    </div>
+                                    <div className={"card-subname"}>
+                                        <dl className={"subexplain"}>
+                                            <dt>설명</dt>
+                                            <dd>
+                                                <span className={"explain"}>
+                                                    광고설명
+                                                </span>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={"ad-card2"}>
+                        <div className={"ad-card-color"}>
+                            <h2 className={"hiddenText"}>광고</h2>
+                            <div className={"f-card"}>
+                                {/* 광고이미지*/}
+                                <div className={"card-thumb"}>
+                                    <img src={"./Img/Bjh/cchod.jpg"}/>
+                                </div>
+                                <div className={"card-info"}>
+                                    <div className={"card-name"}>
+                                        <strong>광고입니다</strong>
+                                    </div>
+                                    <div className={"card-subname"}>
+                                        <dl className={"subexplain"}>
+                                            <dt>설명</dt>
+                                            <dd>
+                                                <span className={"explain"}>
+                                                    광고설명
+                                                </span>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br/><br/>
                     <div className={"s-pick"}>
                         <h2>Weekly 시옷's Pick</h2>
                     </div>
+                </div>
+                <br/>
+                {/* 사이에 다른것 하나 넣기?*/}
+                <div id={"section27"}>
                     <div className={"pickWrap"}>
                         <div className={"pickContainerWrap"}>
                             <div className={"pickContainer"}>

@@ -5,6 +5,55 @@ import {Link} from "react-router-dom";
 function Footer(props) {
     return(
         <div className={"a-footer container"}>
+            {/* 추가부분*/}
+            <section className={"benefit"}>
+                <ul>
+                    <li className={"benefit-footer"}>
+                        <h3>회원혜택</h3>
+                    </li>
+                    <li className={"benefit-footer"}>
+                        <div>
+                            <span>
+                                <img src={"./Img/Bjh/Footer/coupon.png"}/>
+                            </span>
+                            <p>가입시<br/>
+                                환영쿠폰 10000원
+                            </p>
+                        </div>
+                    </li>
+                    <li className={"benefit-footer"}>
+                        <div>
+                            <span>
+                                <img src={"./Img/Bjh/Footer/delivery.png"}/>
+                            </span>
+                            <p>가입시<br/>
+                                무료 배송
+                            </p>
+                        </div>
+                    </li>
+                    <li className={"benefit-footer"}>
+                        <div>
+                            <span>
+                                <img src={"./Img/Bjh/Footer/discount.png"}/>
+                            </span>
+                            <p>가입시<br/>
+                                첫 구매 10% 할인
+                            </p>
+                        </div>
+                    </li>
+                    <li className={"benefit-footer"}>
+                        <div>
+                            <span>
+                                <img src={"./Img/Bjh/Footer/birthday.png"}/>
+                            </span>
+                            <p>생일기념<br/>
+                                축하쿠폰 5000원
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            {/* 추가부분 완*/}
             <div className={"b-footer"}>
                <div className={"footer-in-b"}>
                    <div className={"footer-box"}>
