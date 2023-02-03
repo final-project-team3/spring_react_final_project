@@ -13,6 +13,7 @@ function ProductRegisterPage2() {
     sellerInfo = JSON.parse(sellerInfo);
 
     // 추가
+    let copyOptionList;
     const [productList, setProductList] = useState();
     const [productKindNum, setProductKindNum] = useState();
     // 추가 끝
@@ -328,30 +329,44 @@ function ProductRegisterPage2() {
                     productDeliveryDay: 2
                 }
             });
-            console.log(optionList);
+
+            for (let i = 0; i < copyOptionList.length; i++) {
+                copyOptionList[i]["productNum"] = data;
+            }
+            setOptionList(copyOptionList);
+                console.log(optionList);
             // 옵션 등록
-            optionList.map((item)=> {
-                console.log(item);
-                console.log(data);
-                axios.post("http://localhost:8080/productOptionInsert", null, {
-                    params: {
-                        productNum: data,
-                        productCouponUseable: "N",
-                        productOption1:item.productOption1,
-                        productOption2:item.productOption2,
-                        productQuantity:300,
-                        // 값 디폴트로 0 줘야함
-                        productOptionPrice:0
-                    }
+            // optionList.map((item)=> {
+            //     console.log(item);
+            //     console.log(data);
+            //     axios.post("http://localhost:8080/productOptionInsert", null, {
+            //         params: {
+            //             productNum: data,
+            //             productCouponUseable: "N",
+            //             productOption1:item.productOption1,
+            //             productOption2:item.productOption2,
+            //             productQuantity:300,
+            //             // 값 디폴트로 0 줘야함
+            //             productOptionPrice:0
+            //         }
+            //     })
+            //         .then(()=> {
+            //             console.log('성공');
+            //         })
+            //         .catch((error)=> {
+            //             console.log('실패');
+            //             console.log(error);
+            //         })
+            // })
+
+            axios.post("http://localhost:8080/productOptionInsert", optionList)
+                .then(() => {
+                    console.log('성공');
                 })
-                    .then(()=> {
-                        console.log('성공');
-                    })
-                    .catch((error)=> {
-                        console.log('실패');
-                        console.log(error);
-                    })
-            })
+                .catch((error) => {
+                    console.log('실패');
+                    console.log(error);
+                })
 
             Swal.fire({
                 position: "top-center",
@@ -419,7 +434,7 @@ function ProductRegisterPage2() {
     const tblData = () => {
         // 고정값 : productName, productPrice
         // 변동값 : optionValue, optionPrice, stockQty, sailsStatusOption
-        let copyOptionList = optionList;
+        copyOptionList = optionList;
 
         setProductName($("#productName").val()); // 제품명
         setProductPrice($("#productPrice").val()); // 제품명

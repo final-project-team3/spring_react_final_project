@@ -11,6 +11,7 @@ const ReviewText = styled.textarea`
 `;
 
 
+
 function Review(props) {
     return (
         <ul>
@@ -25,11 +26,9 @@ function Review(props) {
                         </div>
                     </div>
 
-                    {/*<div className={"review_img"}></div>*/}
-
                     <div className={"text-md-start"}>
                         <div className={"review_content"}>
-                            <ReviewText disabled={true}>{props.content}</ReviewText>
+                            <ReviewText readOnly={true} value={props.content}></ReviewText>
                         </div>
                     </div>
 

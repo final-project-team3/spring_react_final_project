@@ -53,10 +53,14 @@ function UserInfoUpdate() {
     // 유저 정보
     const [userInfo, setUserInfo] = useState();
 
+    let sessionUserInfo = sessionStorage.getItem("userInfo");
+    sessionUserInfo = JSON.parse(sessionUserInfo);
+    console.log(sessionUserInfo);
+
     useEffect(() => {
         return async () => {
             const {data} = await axios.post("http://localhost:8080/getUserInfo", null, {
-                params: {userId: "dbstjd608@gmail.com"}
+                params: {userId: sessionUserInfo.userId}
             })
             console.log(data);
             setUserInfo(data);

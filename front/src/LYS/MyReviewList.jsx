@@ -4,13 +4,23 @@ import styled from "styled-components";
 import axios from "axios";
 import './MyReview.css';
 import MyReview from "./MyReview";
+import Pagination from "../GJY/Pagination";
 
 function MyReviewList() {
 
     const [myReviewList, setMyReviewList] = useState([]);
 
+    // 페이지네이션
+    const [limit, setLimit] = useState(3);
+    const [page, setPage] = useState(1);
+    const offset = (page - 1) * limit;
+
+
+    let userInfo = sessionStorage.getItem("userInfo");
+    userInfo = JSON.parse(userInfo);
+
     useEffect(() => {
-        axios.post('http://localhost:8080/getMyReview', null, {params: {userId: 'test'}})
+        axios.post('http://localhost:8080/getMyReview', null, {params: {userId: userInfo.userId}})
             .then((req) => {
                 const {data} = req;
                 setMyReviewList(data);
@@ -36,14 +46,22 @@ function MyReviewList() {
                     </div>
                 </div>
                 {
-                    myReviewList.map((item, index) => {
+                    myReviewList.slice(offset, offset + limit).map((item, index) => {
 
-                        return <MyReview key={index} reviewNum={item.reviewNum} id={item.userId} date={item.reviewRegistrationDate}
+                        return <MyReview key={index} reviewNum={item.reviewNum} id={item.userId}
+                                         date={item.reviewRegistrationDate}
                                          content={item.reviewContent} productNum={item.productNum}
-                                         helpful={item.reviewHelpful} starPoint={item.reviewStarPoint} deletedYn={item.reviewDeletedYn}/>
+                                         helpful={item.reviewHelpful} starPoint={item.reviewStarPoint}
+                                         deletedYn={item.reviewDeletedYn}/>
                     })
                 }
             </div>
+            <Pagination
+                total={myReviewList.length}
+                limit={limit}
+                page={page}
+                setPage={setPage}
+            />
         </div>
     )
 }

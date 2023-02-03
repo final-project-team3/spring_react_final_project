@@ -35,12 +35,42 @@
         ORDER BY product_num DESC LIMIT 1;
     </select>
 
-    <insert id="productOptionInsert" parameterType="Object">
+    <!--    <insert id="productOptionInsert" parameterType="Object">-->
+    <!--        INSERT INTO product_option(product_num, product_coupon_useable, product_option_1,-->
+    <!--                                   product_option_2, product_quantity, product_option_price)-->
+    <!--        VALUES (#{productNum}, #{productCouponUseable}, #{productOption1}, #{productOption2},-->
+    <!--                #{productQuantity}, #{productOptionPrice})-->
+    <!--    </insert>-->
+
+    <insert id="productOptionInsert" parameterType="com.fproject.project_team3.dto.product.ProductOptionDto">
         INSERT INTO product_option(product_num, product_coupon_useable, product_option_1,
-                                   product_option_2, product_quantity, product_option_price)
-        VALUES (#{productNum}, #{productCouponUseable}, #{productOption1}, #{productOption2},
-                #{productQuantity}, #{productOptionPrice})
+        product_option_2, product_quantity, product_option_price)
+        VALUES
+        <foreach item="item" collection="list" separator=",">
+            (#{item.productNum}, #{item.productCouponUseable}, #{item.productOption1}, #{item.productOption2},
+            #{item.productQuantity}, #{item.productOptionPrice})
+        </foreach>
     </insert>
+
+    <select id="getProductList" resultType="com.fproject.project_team3.dto.product.ProductInfoDto">
+        SELECT *
+        FROM product_info
+        ORDER BY product_num DESC;
+    </select>
+
+    <select id="getProductInfoFromDetail" parameterType="Object"
+            resultType="com.fproject.project_team3.dto.product.ProductInfoDto">
+        SELECT *
+        FROM product_info
+        WHERE product_num = #{productNum};
+    </select>
+
+    <select id="getProductOptionList" parameterType="Object"
+            resultType="com.fproject.project_team3.dto.product.ProductOptionDto">
+        SELECT *
+        FROM product_option
+        WHERE product_num = #{productNum};
+    </select>
 
     <!-- HSH -->
 
@@ -94,6 +124,7 @@
         where product_seller_id = #{productSellerId}
           AND product_name = #{productName}
     </select>
+
 
     <!-- GJY -->
 

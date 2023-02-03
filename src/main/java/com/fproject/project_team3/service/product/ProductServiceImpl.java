@@ -2,6 +2,7 @@ package com.fproject.project_team3.service.product;
 
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
+import com.fproject.project_team3.dto.product.ProductOptionDto;
 import com.fproject.project_team3.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,9 +37,29 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.getProductInfoLatest();
     }
 
+//    @Override
+//    public void productOptionInsert(int productNum, String productCouponUseable, String productOption1, String productOption2, String productQuantity, String productOptionPrice) {
+//        productMapper.productOptionInsert(productNum, productCouponUseable, productOption1, productOption2, productQuantity, productOptionPrice);
+//    }
+
     @Override
-    public void productOptionInsert(int productNum, String productCouponUseable, String productOption1, String productOption2, String productQuantity, String productOptionPrice) {
-        productMapper.productOptionInsert(productNum, productCouponUseable, productOption1, productOption2, productQuantity, productOptionPrice);
+    public void productOptionInsert(List<ProductOptionDto> productOptionDto) {
+        productMapper.productOptionInsert(productOptionDto);
+    }
+
+    @Override
+    public List<ProductInfoDto> getProductList() {
+        return productMapper.getProductList();
+    }
+
+    @Override
+    public ProductInfoDto getProductInfoFromDetail(int productNum) {
+        return productMapper.getProductInfoFromDetail(productNum);
+    }
+
+    @Override
+    public List<ProductOptionDto> getProductOptionList(int productNum) {
+        return productMapper.getProductOptionList(productNum);
     }
 
     //    HSH

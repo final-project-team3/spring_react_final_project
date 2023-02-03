@@ -41,7 +41,7 @@ function MyReview(props) {
 
                                 <div className={"text-md-start"}>
                                     <div className={"review_content"}>
-                                        <ReviewText name={'reviewContent'}>{props.content}</ReviewText>
+                                        <ReviewText name={'reviewContent'} value={props.content}></ReviewText>
                                     </div>
                                 </div>
 

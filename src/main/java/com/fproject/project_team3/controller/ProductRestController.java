@@ -5,6 +5,7 @@ import com.fproject.project_team3.dto.gwak.GwakTestTblDto;
 import com.fproject.project_team3.dto.join.UserOrderListProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
+import com.fproject.project_team3.dto.product.ProductOptionDto;
 import com.fproject.project_team3.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -43,12 +44,36 @@ public class ProductRestController {
     //    제품 정보 넣기
     @PostMapping("/productInfoInsert")
     public String productInfoInsert(@RequestParam("productSellerId") String productSellerId, @RequestParam("productKindNum") String productKindNum, @RequestParam("productName") String productName, @RequestParam("productPrice") String productPrice, @RequestParam("productContent") String productContent, @RequestParam("productImg") String productImg, @RequestParam("productStarPoint") String productStarPoint, @RequestParam("productDeliveryDay") String productDeliveryDay) {
-        return productService.productInfoInsert(productSellerId, productKindNum, productName, productPrice,productPrice, productContent, productImg, productStarPoint, productDeliveryDay);
+        return productService.productInfoInsert(productSellerId, productKindNum, productName, productPrice, productPrice, productContent, productImg, productStarPoint, productDeliveryDay);
     }
-//    옵션 정보 넣기
+
+    //    옵션 정보 넣기
+//    @PostMapping("/productOptionInsert")
+//    public void productOptionInsert(@RequestParam("productNum") int productNum, @RequestParam("productCouponUseable") String productCouponUseable, @RequestParam("productOption1") String productOption1, @RequestParam("productOption2") String productOption2, @RequestParam("productQuantity") String productQuantity, @RequestParam("productOptionPrice") String productOptionPrice) {
+//        productService.productOptionInsert(productNum, productCouponUseable, productOption1, productOption2, productQuantity, productOptionPrice);
+//    }
+
     @PostMapping("/productOptionInsert")
-    public void productOptionInsert(@RequestParam("productNum") int productNum, @RequestParam("productCouponUseable") String productCouponUseable, @RequestParam("productOption1") String productOption1, @RequestParam("productOption2") String productOption2,@RequestParam("productQuantity") String productQuantity, @RequestParam("productOptionPrice") String productOptionPrice) {
-        productService.productOptionInsert(productNum, productCouponUseable, productOption1, productOption2, productQuantity, productOptionPrice);
+    public void productOptionInsert(@RequestBody List<ProductOptionDto> productOptionDto) {
+        System.out.println(productOptionDto);
+        productService.productOptionInsert(productOptionDto);
+    }
+
+    //    제품들 가져오기
+    @GetMapping("/getProductList")
+    public List<ProductInfoDto> getProductList() {
+        return productService.getProductList();
+    }
+
+    //    제품 번호를 기준으로 한 제품정보 가져오기
+    @GetMapping("/getProductInfoFromDetail")
+    public Object getProductInfoFromDetail(@RequestParam("productNum") int productNum) {
+        Map<String, Object> productInfoOption = new HashMap<>();
+        List<ProductOptionDto> productOptionList = (List<ProductOptionDto>) productService.getProductOptionList(productNum);
+
+        productInfoOption.put("productInfo", productService.getProductInfoFromDetail(productNum));
+        productInfoOption.put("productOption", productOptionList);
+        return productInfoOption;
     }
 
     //    HSH

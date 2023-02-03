@@ -8,7 +8,7 @@ public class ProductInfoDto {
   private String productSellerId;
   private int productKindNum;
   private String productName;
-  private int productPrice;
+  private String productPrice;
   private String productContent;
   private String productImg;
   private String productRegistrationDate;
