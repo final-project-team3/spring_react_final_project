@@ -3,12 +3,14 @@ import '../App.css';
 import Review from "../LYS/Review";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import Pagination from "../GJY/Pagination";
+import $ from 'jquery';
 
 function ProductDetail(props) {
     const {productNum} = useParams();
     console.log(productNum);
+    const [optionValue, setOptionValue] = useState();
 
     // 페이지네이션
     const [limit, setLimit] = useState(3);
@@ -60,11 +62,16 @@ function ProductDetail(props) {
                             <h2>{productInfo?.productSellerId}</h2>
                         </div>
                     </div>
-                    <select className={'my-2 form-select'}>
-                        <option className={'option'}>옵션</option>
+                    <select onClick={(e)=> {
+                        setOptionValue($(e.target).val());
+                    }} onChange={(e)=> {
+                        setOptionValue($(e.target).val());
+                    }} id={"selectOption"} className={'my-2 form-select'}>
+                        <option className={'option'} value={'옵션'}>옵션</option>
                         {productOption.map((option) => {
                             return (
-                                <option>{option.productOption1 + option.productOption2}</option>
+                                <option
+                                    value={option.productOption1 + option.productOption2}>{option.productOption1 + option.productOption2}</option>
                             )
                         })}
                     </select>
@@ -80,7 +87,11 @@ function ProductDetail(props) {
                     <div className={'col-7'}>
                         <div className={'d-flex justify-content-between'}>
                             <button className={'btn btn-warning'}>장바구니</button>
-                            <button className={'btn btn-primary'}>바로구매</button>
+                            <Link className={'btn btn-primary'} to={'/payment'} state={{
+                                productName: productInfo?.productName,
+                                productOption: optionValue,
+                                //    수량 넣어야함
+                            }}>바로구매</Link>
                             <button className={'btn btn-danger'}>찜</button>
                         </div>
                     </div>

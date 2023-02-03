@@ -14,7 +14,7 @@ function Footer(props) {
                     <li className={"benefit-footer"}>
                         <div>
                             <span>
-                                <img src={"./Img/Bjh/Footer/coupon.png"}/>
+                                <img src={"../Img/Bjh/Footer/coupon.png"}/>
                             </span>
                             <p>가입시<br/>
                                 환영쿠폰 10000원
@@ -24,7 +24,7 @@ function Footer(props) {
                     <li className={"benefit-footer"}>
                         <div>
                             <span>
-                                <img src={"./Img/Bjh/Footer/delivery.png"}/>
+                                <img src={"../Img/Bjh/Footer/delivery.png"}/>
                             </span>
                             <p>가입시<br/>
                                 무료 배송
@@ -34,7 +34,7 @@ function Footer(props) {
                     <li className={"benefit-footer"}>
                         <div>
                             <span>
-                                <img src={"./Img/Bjh/Footer/discount.png"}/>
+                                <img src={"../Img/Bjh/Footer/discount.png"}/>
                             </span>
                             <p>가입시<br/>
                                 첫 구매 10% 할인
@@ -44,7 +44,7 @@ function Footer(props) {
                     <li className={"benefit-footer"}>
                         <div>
                             <span>
-                                <img src={"./Img/Bjh/Footer/birthday.png"}/>
+                                <img src={"../Img/Bjh/Footer/birthday.png"}/>
                             </span>
                             <p>생일기념<br/>
                                 축하쿠폰 5000원
