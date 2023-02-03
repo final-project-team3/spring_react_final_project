@@ -19,7 +19,7 @@ npm i --save react-select
  npm install --save redux-persist
 
 // firebase 추가
-npm install firebase
+npm install firebase@9.16.0
 
 // ??????
 npm install react-slick --save
