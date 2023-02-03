@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {useLocation} from "react-router-dom";
 import styled from "styled-components";
 import './MyReview.css';
 import $ from "jquery";
-import Swal from "sweetalert2";
-import axios from "axios";
+import swal from 'sweetalert';
 
 function ReviewWrite() {
     const location = useLocation();
@@ -16,27 +15,28 @@ function ReviewWrite() {
     const writeReview = () => {
         var content = $('#reviewContent').val();
 
-        // if (content == '') {
-        //     alert("리뷰를 10자 이상 입력해주세요");
-        //     $("#btn-write").attr("type", "button");
-        // } else {
-        //     if (content.length < 10) {
-        //         alert("리뷰를 10자 이상 입력해주세요");
-        //         $("#btn-write").attr("type", "button");
-        //     } else {
-        //         alert("리뷰가 등록 되었습니다.");
-        //         $("#btn-write").attr("type", "submit");
-        //         $("#btn-write").onclick();
-        //     }
-        // }
-        if (content !== '') {
-            Swal('success')
-                .then(function (){
-                    location.href="${pageContext.request.contextPath}/myReview";
-                })
+        if (content == '') {
+            // alert("리뷰를 10자 이상 입력해주세요");
+            swal("리뷰를 10자 이상 입력해주세요");
+            $("#btn-write").attr("type", "button");
         } else {
-            Swal('로그인 실패!',"아이디와 비밀번호를 확인해 주세요",'warning');
-        };
+            if (content.length < 10) {
+                // alert("리뷰를 10자 이상 입력해주세요");
+                swal("리뷰를 10자 이상 입력해주세요");
+                $("#btn-write").attr("type", "button");
+            } else {
+                alert("리뷰가 등록 되었습니다.");
+                $("#btn-write").attr("type", "submit");
+                $("#btn-write").onclick();
+
+                // swal('리뷰 등록 완료', productInfo.productName + "에 대한 리뷰가 등록되었습니다.")
+                //     .then(function () {
+                //         location.href = "${pageContext.request.contextPath}/myReview";
+                //     })
+                // $("#btn-write").attr("type", "submit");
+                // $("#btn-write").onclick();
+            }
+        }
     }
 
     return (
@@ -103,7 +103,8 @@ function ReviewWrite() {
                                                    value={productInfo.productNum}/>
                                             <input hidden={true} name={'reviewStarPoint'} id={'reviewStarPoint'}
                                                    value={star}/>
-                                            <ReviewText name={'reviewContent'} id={'reviewContent'} placeholder={"리뷰를 입력해주세요 (10자 이상)"}
+                                            <ReviewText name={'reviewContent'} id={'reviewContent'}
+                                                        placeholder={"리뷰를 입력해주세요 (10자 이상)"}
                                                         style={{marginTop: 10, paddingInline: 10}}
                                                         value={reviewContent}>
                                             </ReviewText>
