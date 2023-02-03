@@ -57,10 +57,11 @@ const RatingText = styled.div`
   font-weight: 400;
 `;
 
-const Stars = styled.div`
+const Stars = styled.span`
+  width: 150px;
   display: flex;
   padding-top: 5px;
-
+  
   & svg {
     color: gray;
     cursor: pointer;
