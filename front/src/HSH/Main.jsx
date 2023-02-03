@@ -7,11 +7,26 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
+{/*BJH 시작*/}
 // BJH 캐러셀
-
 const StyledSlider = styled(Slider)`
     .slick-slide div{
       outline: none;
+    }   
+    .slick-list {
+       margin-left:auto;
+       margin-right:auto;
+       display:block;
+       width: 1350px;
+       height: 100%
+    }    
+    .slick-prev {
+        left: 10px;
+        z-index: 999;
+    }
+    .slick-next {
+        right: 6px;
+        z-index: 999;
     }
 `;
 
@@ -20,37 +35,35 @@ const ImageContainer = styled.div`
 `;
 
 const Image = styled.img`
-width:100%;
-`;
+width:100%;`;
 
 const imgUrl = require('../BJH/230203.jpg');
+const imgUrl2 = require('../BJH/idol_han.jpg');
+const imgUrl3 = require('../BJH/image.png');
 
 const items = [
     {id: 1, url: imgUrl},
-    {id: 1, url: imgUrl},
-    {id: 1, url: imgUrl},
+    {id: 2, url: imgUrl2},
+    {id: 3, url: imgUrl3},
     // {id: 2, url: imgUrl2},
 
 ];
 
 const Main = () => {
-
     const settings = {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2500,
+        pauseOnHover: true,
         arrows: true,
-        centerMode: true,
     };
-
     return (
         <div>
             <div className={'container'}>
                 <h2 hidden={true}> 캐러셀</h2>
-                <StyledSlider {...settings}
-                >
+                <StyledSlider {...settings}>
                     {items.map(item => {
                         return (
                             <div key={item.id}>
@@ -62,39 +75,6 @@ const Main = () => {
                     })}
                 </StyledSlider>
 
-                {/*<div id="mainCarousel" className="d-flex justify-content-center carousel slide"*/}
-                {/*     data-bs-ride="carousel">*/}
-                {/*    <div style={{*/}
-                {/*        width: 500,*/}
-                {/*    }} className="carousel-inner">*/}
-                {/*        <div className="carousel-item active">*/}
-                {/*            <img src="Img/up.png"/>*/}
-                {/*        </div>*/}
-                {/*        <div className="carousel-item">*/}
-                {/*            <img src="Img/down.png"/>*/}
-                {/*        </div>*/}
-                {/*        <div className="carousel-item">*/}
-                {/*            <img src="Img/up.png"/>*/}
-                {/*        </div>*/}
-                {/*        <div className="carousel-item">*/}
-                {/*            <img src="Img/down.png"/>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*    <button style={{*/}
-                {/*        color: "black"*/}
-                {/*    }} className="carousel-control-prev" type="button" data-bs-target="#mainCarousel"*/}
-                {/*            data-bs-slide="prev">*/}
-                {/*        <button className={'carousel-control-prev'}><img src={'Img/prev.png'}/></button>*/}
-                {/*        <span className="visually-hidden">Previous</span>*/}
-                {/*    </button>*/}
-                {/*    <button className="carousel-control-next" type="button" data-bs-target="#mainCarousel"*/}
-                {/*            data-bs-slide="next">*/}
-                {/*        <button className={'carousel-control-next'}><img src={'Img/next.png'}/></button>*/}
-                {/*        <span className="visually-hidden">Next</span>*/}
-                {/*    </button>*/}
-                {/*</div>*/}
-
-                {/*BJH 시작*/}
                 {/* 사이에 다른것 하나 넣기?*/}
                 <div id={"section27"}>
                     <div className={"s-pick"}>
