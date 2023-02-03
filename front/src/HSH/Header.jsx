@@ -12,6 +12,7 @@ import {sellerLogout, userLogout} from "../store";
 // 카테고리
 const Kind = (props) => {
     const [bigKind, setBigKind] = useState();
+    const [smallKind, setSmallKind] = useState();
 
     let smallKindList = [];
 
@@ -19,19 +20,24 @@ const Kind = (props) => {
         smallKindList = [props.smallKind];
         smallKindList = smallKindList[0];
     }
+    $(function (){
+        $("#dropdown0").hover()
+    })
     return (
         <div>
             <Link className={'dropdown-toggle'} id={`dropdown${props.index}`} data-bs-toggle="dropdown" style={{
                 textDecoration: "none",
                 color: '#ffffff'
-            }}><h2 onClick={()=>{
-                setBigKind($(this).text())
-                console.log(bigKind)
+            }}><h2 onClick={(event) => {
+                $(event.target).text();
+                console.log($(event.target).text());
+                setBigKind($(event.target).text());
             }} style={{
                 color: "black"
             }}>{props.bigKind}</h2></Link>
             <ul className={'dropdown-menu'} aria-labelledby={`dropdown${props.index}`}>
-                {[smallKindList][0].map((item, index) => <Link to={`/category${bigKind}/${item.productSmall}`}>
+                {[smallKindList][0].map((item, index) =>
+                    <Link to={`/category/${bigKind}/${item.productSmallKind}`}>
                         <li key={index}
                             className={'dropdown-item'}>{item.productSmallKind}</li>
                     </Link>
