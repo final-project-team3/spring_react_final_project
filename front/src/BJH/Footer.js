@@ -31,22 +31,7 @@ function Footer(props) {
                                        }} src="../Img/Bjh/kakao.png"/>카카오톡 문의</Link>
                                    </div>
                                    <p className={"footer-empty"}></p>
-                                   <div className={"footer-subtitle"}>
-                                       계좌안내
-                                   </div>
-                                   <p className={"footer-empty"}></p>
-                                   <div className={"bank"}>
-                                       <div className={"bankInfo"}>
-                                           <div className={"bankInfo-list"}>
-                                               <span>자바</span>
-                                               1234123412345
-                                           </div>
-                                           <div className={"bankInfo-list"}>
-                                               <span>예금주</span>
-                                               (주)시옷
-                                           </div>
-                                       </div>
-                                   </div>
+
                                </div>
                            </li>
                            <li flex={"1"}>
@@ -102,6 +87,23 @@ function Footer(props) {
                                    <div className={"juso"}>
                                        <Link className={"juso1"}>부산광역시 부산진구 중앙대로 708<br/>
                                            부산파이낸스센터 4F</Link>
+                                   </div>
+                                   <p className={"footer-empty"}></p>
+                                   <div className={"footer-subtitle"}>
+                                       계좌안내
+                                   </div>
+                                   <p className={"footer-empty"}></p>
+                                   <div className={"bank"}>
+                                       <div className={"bankInfo"}>
+                                           <div className={"bankInfo-list"}>
+                                               <span>자바</span>
+                                               1234123412345
+                                           </div>
+                                           <div className={"bankInfo-list"}>
+                                               <span>예금주</span>
+                                               (주)시옷
+                                           </div>
+                                       </div>
                                    </div>
                                </div>
                            </li>
