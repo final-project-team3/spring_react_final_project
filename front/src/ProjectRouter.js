@@ -54,18 +54,17 @@ const ProjectRouter = () => {
                 <Route path={'/'} element={<Header/>}>
                     {/*HSH*/}
                     <Route index element={<Main/>}/>
-                    <Route path={'productDetail'} element={<ProductDetail/>}/>
+                    <Route path={'productDetail/:productNum'} element={<ProductDetail/>}/>
                     <Route path={'productList'} element={<ProductList/>}/>
                     <Route path={'search/:searchContent'} element={<Search/>}/>
                     <Route path={'/login'} element={<Login/>}/>
-                    <Route path={'category/:bigKind/:smallKind'} element={<Category/>}/>
+                    <Route path={'/category/:bigKind/:smallKind'} element={<Category/>}/>
                     {/*HSH*/}
 
                     {/*LYS*/}
                     <Route path="/userSignUp" element={<UserSignUp/>}/>
                     <Route path="/sellerSignUp" element={<SellerSignUp/>}/>
-                    <Route path="/userInfoUpdate" element={<UserInfoUpdate/>}/>
-                    <Route path="/sellerInfoUpdate" element={<SellerInfoUpdate/>}/>
+                    <Route path="/infoUpdate" element={role == null ? <Login/> : role == "USER" ? <UserInfoUpdate/> : <SellerInfoUpdate/>}/>
                     <Route path="/myReview" element={<MyReviewList/>}/>
                     <Route path="/reviewWrite" element={<ReviewWrite/>}/>
                     {/*LYS*/}

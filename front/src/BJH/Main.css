@@ -163,7 +163,7 @@
 
 .pickList ul.C-Img li.item:nth-child(-n+4) {
     margin: 0 0 15px 0;
-    flex: 0 1 24.2%;
+    flex: 0 1 24.1%;
 }
 
 .itemBox {
@@ -240,4 +240,108 @@ span.sale {
     font-size: 15px;
     font-weight: bold;
     color: #000;
+}
+
+
+.ad-card-wrap {
+    width: 1240px;
+    margin: 0 auto;
+}
+
+.ad-card1 {
+    float: left;
+    height: 220px;
+}
+
+.ad-card2 {
+    float: right;
+    height: 220px;
+}
+
+.hiddenText {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    margin: -1px;
+    width: 1px;
+    height: 1px;
+}
+
+.ad-card-color {
+    background: #5ab29d;
+    width: 605px;
+    height: 200px;
+    border-radius: 4px;
+}
+
+.f-card {
+    position: relative;
+    height: 220px;
+    box-sizing: border-box;
+}
+
+.card-thumb {
+    overflow: hidden;
+    position: absolute;
+    right: 40px;
+    top: 30px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.card-thumb img {
+    max-width: 100%;
+    height: 100%;
+}
+
+.card-info {
+    padding: 0 240px 0 40px;
+}
+
+.card-name {
+    max-height: 60px;
+    width: 275px;
+    padding: 50px 0 0 0;
+    font-size: 24px;
+    line-height: 30px;
+}
+
+.card-name strong {
+    color: #fff;
+    font-weight: normal;
+}
+
+.card-subname {
+    margin-top: 28px;
+    vertical-align: middle;
+    zoom: 1;
+}
+
+.subexplain {
+    font-size: 24px;
+    color: #fff;
+    font-weight: bold;
+    line-height: 20px;
+    letter-spacing: 0;
+}
+
+.subexplain dt {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    margin: -1px;
+    width: 1px;
+    height: 1px;
+}
+
+.subexplain dd {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.explain {
+    font-family: "Lato", "Helvetica Neue", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", "돋움", dotum, sans-serif;
+    vertical-align: bottom;
 }

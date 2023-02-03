@@ -3,19 +3,47 @@ import '../App.css';
 import Review from "../LYS/Review";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import {Link, useParams} from "react-router-dom";
+import Pagination from "../GJY/Pagination";
+import $ from 'jquery';
 
 function ProductDetail(props) {
-    const [reviewList, setReviewList]= useState([
+    const {productNum} = useParams();
+    console.log(productNum);
+    const [optionValue, setOptionValue] = useState();
 
-    ]);
+    // 페이지네이션
+    const [limit, setLimit] = useState(3);
+    const [page, setPage] = useState(1);
+    const offset = (page - 1) * limit;
 
-    useEffect(()=> {
-        axios.post('http://localhost:8080/getReview', null,{params:{productNum:'100'}})
+
+    const [reviewList, setReviewList] = useState([]);
+    const [productInfo, setProductInfo] = useState();
+    const [productOption, setProductOption] = useState([]);
+
+
+    useEffect(() => {
+        axios.post('http://localhost:8080/getReview', null, {params: {productNum: productNum}})
             .then((req) => {
                 const {data} = req;
                 setReviewList(data);
             });
-    },[]);
+    }, []);
+    useEffect(() => {
+        return async () => {
+            const {data} = await axios.get("http://localhost:8080/getProductInfoFromDetail", {
+                params: {
+                    productNum: productNum
+                }
+            })
+            // 구조분해 할당
+            const {productInfo, productOption} = data
+
+            setProductInfo(productInfo)
+            setProductOption(productOption);
+        }
+    }, [])
 
     return (
         <div className="mt-5 container">
@@ -25,21 +53,27 @@ function ProductDetail(props) {
                     <img width={500} src={'../Img/test.png'}/>
                 </div>
                 <div className={'col-4 border-1'}>
-                    <h2>갈색 맨투맨</h2>
+                    <h2>{productInfo?.productName}</h2>
                     <div className={'row'}>
                         <div className={'col-6'}>
                             <h2>판매자 정보</h2>
                         </div>
                         <div className={'col-5'}>
-                            <h2>티팔이</h2>
+                            <h2>{productInfo?.productSellerId}</h2>
                         </div>
                     </div>
-                    <select className={'my-2 form-select'}>
-                        <option>사이즈</option>
-                        <option>S</option>
-                        <option>M</option>
-                        <option>L</option>
-                        <option>XL</option>
+                    <select onClick={(e)=> {
+                        setOptionValue($(e.target).val());
+                    }} onChange={(e)=> {
+                        setOptionValue($(e.target).val());
+                    }} id={"selectOption"} className={'my-2 form-select'}>
+                        <option className={'option'} value={'옵션'}>옵션</option>
+                        {productOption.map((option) => {
+                            return (
+                                <option
+                                    value={option.productOption1 + option.productOption2}>{option.productOption1 + option.productOption2}</option>
+                            )
+                        })}
                     </select>
                     <div className={'row'}>
                         <hr/>
@@ -47,22 +81,24 @@ function ProductDetail(props) {
                             <h2>가격</h2>
                         </div>
                         <div className={'col-5'}>
-                            <h2>150,000원</h2>
+                            <h2>{productInfo?.productPrice}원</h2>
                         </div>
                     </div>
                     <div className={'col-7'}>
                         <div className={'d-flex justify-content-between'}>
                             <button className={'btn btn-warning'}>장바구니</button>
-                            <button className={'btn btn-primary'}>바로구매</button>
+                            <Link className={'btn btn-primary'} to={'/payment'} state={{
+                                productName: productInfo?.productName,
+                                productOption: optionValue,
+                                //    수량 넣어야함
+                            }}>바로구매</Link>
                             <button className={'btn btn-danger'}>찜</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div className={'mt-3 border border-dark'}>
-                <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci aliquid assumenda commodi
-                    culpa, eos esse est eum excepturi expedita ipsa laudantium natus numquam praesentium quibusdam,
-                    quisquam repellat totam voluptatem!</h4>
+                <h4>{productInfo?.productContent}</h4>
             </div>
             <hr/>
             {/* 리뷰 들어감 */}
@@ -70,12 +106,20 @@ function ProductDetail(props) {
                 <h2 className={"text-start"}>제품 리뷰</h2>
                 <div className={"row mt-5"}>
                     {
-                        reviewList.map((item, index)=> {
-                            return <Review key={index} id={item.userId} date={item.reviewRegistrationDate} content={item.reviewContent} helpful={item.reviewHelpful} starPoint={item.reviewStarPoint}/>
+                        reviewList.slice(offset, offset + limit).map((item, index) => {
+                            return <Review key={index} id={item.userId} date={item.reviewRegistrationDate}
+                                           content={item.reviewContent} helpful={item.reviewHelpful}
+                                           starPoint={item.reviewStarPoint}/>
                         })
                     }
                 </div>
             </div>
+            <Pagination
+                total={reviewList.length}
+                limit={limit}
+                page={page}
+                setPage={setPage}
+            />
         </div>
     );
 }

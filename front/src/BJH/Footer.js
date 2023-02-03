@@ -5,6 +5,55 @@ import {Link} from "react-router-dom";
 function Footer(props) {
     return(
         <div className={"a-footer container"}>
+            {/* 추가부분*/}
+            <section className={"benefit"}>
+                <ul>
+                    <li className={"benefit-footer"}>
+                        <h3>회원혜택</h3>
+                    </li>
+                    <li className={"benefit-footer"}>
+                        <div>
+                            <span>
+                                <img src={"../Img/Bjh/Footer/coupon.png"}/>
+                            </span>
+                            <p>가입시<br/>
+                                환영쿠폰 10000원
+                            </p>
+                        </div>
+                    </li>
+                    <li className={"benefit-footer"}>
+                        <div>
+                            <span>
+                                <img src={"../Img/Bjh/Footer/delivery.png"}/>
+                            </span>
+                            <p>가입시<br/>
+                                무료 배송
+                            </p>
+                        </div>
+                    </li>
+                    <li className={"benefit-footer"}>
+                        <div>
+                            <span>
+                                <img src={"../Img/Bjh/Footer/discount.png"}/>
+                            </span>
+                            <p>가입시<br/>
+                                첫 구매 10% 할인
+                            </p>
+                        </div>
+                    </li>
+                    <li className={"benefit-footer"}>
+                        <div>
+                            <span>
+                                <img src={"../Img/Bjh/Footer/birthday.png"}/>
+                            </span>
+                            <p>생일기념<br/>
+                                축하쿠폰 5000원
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            {/* 추가부분 완*/}
             <div className={"b-footer"}>
                <div className={"footer-in-b"}>
                    <div className={"footer-box"}>
@@ -31,22 +80,7 @@ function Footer(props) {
                                        }} src="../Img/Bjh/kakao.png"/>카카오톡 문의</Link>
                                    </div>
                                    <p className={"footer-empty"}></p>
-                                   <div className={"footer-subtitle"}>
-                                       계좌안내
-                                   </div>
-                                   <p className={"footer-empty"}></p>
-                                   <div className={"bank"}>
-                                       <div className={"bankInfo"}>
-                                           <div className={"bankInfo-list"}>
-                                               <span>자바</span>
-                                               1234123412345
-                                           </div>
-                                           <div className={"bankInfo-list"}>
-                                               <span>예금주</span>
-                                               (주)시옷
-                                           </div>
-                                       </div>
-                                   </div>
+
                                </div>
                            </li>
                            <li flex={"1"}>
@@ -102,6 +136,23 @@ function Footer(props) {
                                    <div className={"juso"}>
                                        <Link className={"juso1"}>부산광역시 부산진구 중앙대로 708<br/>
                                            부산파이낸스센터 4F</Link>
+                                   </div>
+                                   <p className={"footer-empty"}></p>
+                                   <div className={"footer-subtitle"}>
+                                       계좌안내
+                                   </div>
+                                   <p className={"footer-empty"}></p>
+                                   <div className={"bank"}>
+                                       <div className={"bankInfo"}>
+                                           <div className={"bankInfo-list"}>
+                                               <span>자바</span>
+                                               1234123412345
+                                           </div>
+                                           <div className={"bankInfo-list"}>
+                                               <span>예금주</span>
+                                               (주)시옷
+                                           </div>
+                                       </div>
                                    </div>
                                </div>
                            </li>

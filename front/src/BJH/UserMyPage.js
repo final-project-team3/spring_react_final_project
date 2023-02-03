@@ -92,7 +92,7 @@ function UserMyPage(props) {
                                 height: 24
                             }} src={"./Img/Bjh/right.png"}/></div>
                         </a>
-                        <a href="#" className="item">
+                        <Link to={'/orderList'} className="item">
                             <div className="ps-5 icon"><img style={{
                                 width: 24,
                                 height: 24
@@ -104,7 +104,7 @@ function UserMyPage(props) {
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/right.png"}/></div>
-                        </a>
+                        </Link>
                         <a href="#" className="item">
                             <div className="ps-5 icon"><img style={{
                                 width: 24,
@@ -162,7 +162,7 @@ function UserMyPage(props) {
                                 <span className="point">1027 포인트</span>
                             </div>
                         </a>
-                        <a href="#" className="item">
+                        <Link to={'/orderList'} className="item">
                             <div className="ps-5 icon"><img style={{
                                 width: 24,
                                 height: 24
@@ -173,8 +173,8 @@ function UserMyPage(props) {
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/right.png"}/></div>
-                        </a>
-                        <a href="#" className="item">
+                        </Link>
+                        <Link to={'/myReview'} className="item">
                             <div className="ps-5 icon"><img style={{
                                 width: 24,
                                 height: 24
@@ -185,7 +185,7 @@ function UserMyPage(props) {
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/right.png"}/></div>
-                        </a>
+                        </Link>
                         <a href="#" className="item">
                             <div className="ps-5 icon"><img style={{
                                 width: 24,

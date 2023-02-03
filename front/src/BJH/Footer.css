@@ -1,7 +1,57 @@
+.benefit {
+    background-color: #f7f7f7;
+    padding: 30px 20px;
+}
+
+.benefit ul {
+    display: flex;
+    width: auto;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.benefit-footer {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+}
+
+.benefit-footer div {
+    display: flex;
+    align-items: center;
+}
+
+.benefit-footer span {
+    display: inline-block;
+    background-color: #fff;
+    border: 0;
+    border-radius: 100%;
+    width: 75px;
+    height: 75px;
+    line-height: 75px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.benefit-footer span img {
+    width: 50px;
+    vertical-align: middle;
+}
+
+.benefit-footer p {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* 추가부분 css*/
+
 .b-footer {
     padding: 30px 0 0 0;
     border-top: 1px solid #f3f3f3;
     background-color: #fbfbfb;
+
 }
 
 .footer-in-b {

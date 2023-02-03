@@ -5,6 +5,10 @@ import PaymentPage from "./PaymentPage";
 import {Link} from "react-router-dom";
 
 function OrderListPage(props) {
+    let userInfo = sessionStorage.getItem("userInfo");
+    userInfo = JSON.parse(userInfo);
+
+
     const [orderListData, setOrderListData] = useState([]);
     const [limit, setLimit] = useState(2);
     const [page, setPage] = useState(1);
@@ -13,7 +17,7 @@ function OrderListPage(props) {
     useEffect(() => {
         return async () => {
             const {data} = await axios.post("http://localhost:8080/order", null, {
-                params: {id: "aaa"},
+                params: {id: userInfo.userId},
             });
             console.log(data);
             setOrderListData(data);

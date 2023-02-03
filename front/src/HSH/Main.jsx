@@ -1,64 +1,143 @@
-import React from "react";
+import React, {Component} from "react";
 import $ from "jquery";
 import {Link} from "react-router-dom";
 import '../BJH/Main.css';
+import styled from "styled-components";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
+{/*BJH 시작*/}
+// BJH 캐러셀
+const StyledSlider = styled(Slider)`
+    .slick-slide div{
+      outline: none;
+    }   
+    .slick-list {
+       margin-left:auto;
+       margin-right:auto;
+       display:block;
+       width: 1350px;
+       height: 100%
+    }    
+    .slick-prev {
+        left: 16px;
+        z-index: 999;
+    }
+    .slick-next {
+        right: 6px;
+        z-index: 999;
+    }
+`;
+
+const ImageContainer = styled.div`
+  margin: 0 16px;
+`;
+
+const Image = styled.img`
+width:100%;`;
+
+const imgUrl = require('../BJH/230203.jpg');
+const imgUrl2 = require('../BJH/idol_han.jpg');
+const imgUrl3 = require('../BJH/image.png');
+
+const items = [
+    {id: 1, url: imgUrl},
+    {id: 2, url: imgUrl2},
+    {id: 3, url: imgUrl3},
+    // {id: 2, url: imgUrl2},
+
+];
 
 const Main = () => {
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        autoplay: true,
+        autoplaySpeed: 2500,
+        pauseOnHover: true,
+        arrows: true,
+    };
     return (
         <div>
             <div className={'container'}>
-                {/* BJH-캐러셀+카드로? */}
-                {/* BJH-fixed TOP 이동 버튼? */}
-                <div id="mainCarousel" className="d-flex justify-content-center carousel slide"
-                     data-bs-ride="carousel">
-                    <div style={{
-                        width: 500,
-                    }} className="carousel-inner">
-                        <div className="carousel-item active">
-                            <img src="Img/up.png"/>
-                        </div>
-                        <div className="carousel-item">
-                            <img src="Img/down.png"/>
-                        </div>
-                        <div className="carousel-item">
-                            <img src="Img/up.png"/>
-                        </div>
-                        <div className="carousel-item">
-                            <img src="Img/down.png"/>
+                <h2 hidden={true}> 캐러셀</h2>
+                <StyledSlider {...settings}>
+                    {items.map(item => {
+                        return (
+                            <div key={item.id}>
+                                <ImageContainer>
+                                    <Image src={item.url}/>
+                                </ImageContainer>
+                            </div>
+                        );
+                    })}
+                </StyledSlider>
+                <br/>
+                <br/>
+                <div className={"ad-card-wrap"}>
+                    <div className={"ad-card1"}>
+                        <div className={"ad-card-color"}>
+                            <h2 className={"hiddenText"}>광고</h2>
+                            <div className={"f-card"}>
+                                <div className={"card-thumb"}>
+                                    <img src={"./Img/Bjh/han_out.jpg"}/>
+                                </div>
+                                <div className={"card-info"}>
+                                    {/* 광고이미지*/}
+                                    <div className={"card-name"}>
+                                        <strong>광고입니다</strong>
+                                    </div>
+                                    <div className={"card-subname"}>
+                                        <dl className={"subexplain"}>
+                                            <dt>설명</dt>
+                                            <dd>
+                                                <span className={"explain"}>
+                                                    광고설명
+                                                </span>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <button style={{
-                        color: "black"
-                    }} className="carousel-control-prev" type="button" data-bs-target="#mainCarousel"
-                            data-bs-slide="prev">
-                        <button className={'carousel-control-prev'}><img src={'Img/prev.png'}/></button>
-                        <span className="visually-hidden">Previous</span>
-                    </button>
-                    <button className="carousel-control-next" type="button" data-bs-target="#mainCarousel"
-                            data-bs-slide="next">
-                        <button className={'carousel-control-next'}><img src={'Img/next.png'}/></button>
-                        <span className="visually-hidden">Next</span>
-                    </button>
+                    <div className={"ad-card2"}>
+                        <div className={"ad-card-color"}>
+                            <h2 className={"hiddenText"}>광고</h2>
+                            <div className={"f-card"}>
+                                {/* 광고이미지*/}
+                                <div className={"card-thumb"}>
+                                    <img src={"./Img/Bjh/cchod.jpg"}/>
+                                </div>
+                                <div className={"card-info"}>
+                                    <div className={"card-name"}>
+                                        <strong>광고입니다</strong>
+                                    </div>
+                                    <div className={"card-subname"}>
+                                        <dl className={"subexplain"}>
+                                            <dt>설명</dt>
+                                            <dd>
+                                                <span className={"explain"}>
+                                                    광고설명
+                                                </span>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br/><br/>
+                    <div className={"s-pick"}>
+                        <h2>Weekly 시옷's Pick</h2>
+                    </div>
                 </div>
-                {/*BJH 시작*/}
+                <br/>
                 {/* 사이에 다른것 하나 넣기?*/}
                 <div id={"section27"}>
-                    <div className={"s-pick"}>
-                        <h2>시옷's Pick</h2>
-                    </div>
                     <div className={"pickWrap"}>
-                        {/* 화면 바뀌기 안되면 클릭 이동으로?*/}
-                        <ul className={"pickTab"}>
-                            <li className={"pickTabList"}>
-                                <span>#외투</span>
-                            </li>
-                            <li className={"pickTabList2"}>
-                                <span>#상의</span>
-                            </li>
-                            <li className={"pickTabList2"}>
-                                <span>#하의</span>
-                            </li>
-                        </ul>
                         <div className={"pickContainerWrap"}>
                             <div className={"pickContainer"}>
                                 <div className={"pickList"}>
@@ -124,7 +203,8 @@ const Main = () => {
                                                     <div className={"prvImg"}>
                                                         <Link>
                                                             {/* 사진 크기가 안맞아서 억지로*/}
-                                                            <img style={{ height:257 }} className={"thumb"} src={"./Img/Bjh/w_han.jpg"}/>
+                                                            <img style={{height: 267}} className={"thumb"}
+                                                                 src={"./Img/Bjh/w_han.jpg"}/>
                                                         </Link>
                                                     </div>
                                                     {/* value?*/}
@@ -221,40 +301,8 @@ const Main = () => {
                             </div>
                         </div>
                     </div>
-                {/*    BJH*/}
+                    {/*    BJH*/}
                 </div>
-
-                {/*<div className={"best-product"}>*/}
-                {/*    <div className={"bp-head"}>*/}
-                {/*        <strong className={"bph-title"}>베스트 상품</strong>*/}
-                {/*    </div>*/}
-                {/*    <div className={"bp-list"}>*/}
-                {/*        <div className={"grid-item"}>*/}
-                {/*            <ul className={"gi-list"}>*/}
-                {/*                <li className={"gil-item"}>*/}
-                {/*                    <div className={"item-unit"}>*/}
-                {/*                        <div className={"item-goods"}>*/}
-                {/*                            <div className={"item-thumb"}>*/}
-                {/*                                <Link to={""} className={"item-thumb-link"}>*/}
-                {/*                                    <div className={"item-thumb-imgbx"}>*/}
-                {/*                                        <img src={'./Img/test.png'} className={"item-thumb-img"}/>*/}
-                {/*                                    </div>*/}
-                {/*                                    <div className={"item-detailbx"}>*/}
-                {/*                                        <div className={"item-detail-tx"}>*/}
-                {/*                                            <Link to={""} className={"item-detail-tx-link"}>*/}
-
-                {/*                                            </Link>*/}
-                {/*                                        </div>*/}
-                {/*                                    </div>*/}
-                {/*                                </Link>*/}
-                {/*                            </div>*/}
-                {/*                        </div>*/}
-                {/*                    </div>*/}
-                {/*                </li>*/}
-                {/*            </ul>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
             </div>
         </div>
     )

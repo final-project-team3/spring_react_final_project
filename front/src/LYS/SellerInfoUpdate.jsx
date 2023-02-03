@@ -49,10 +49,13 @@ function SellerInfoUpdate() {
     // 유저 정보
     const [sellerInfo, setSellerInfo] = useState();
 
+    let sessionSellerInfo = sessionStorage.getItem("sellerInfo");
+    sessionSellerInfo = JSON.parse(sessionSellerInfo);
+
     useEffect(() => {
         return async () => {
             const {data} = await axios.post("http://localhost:8080/getSellerInfo", null, {
-                params: {sellerId: "test1@naver.com"}
+                params: {sellerId: sessionSellerInfo.sellerId}
             })
             console.log(data);
             setSellerInfo(data);

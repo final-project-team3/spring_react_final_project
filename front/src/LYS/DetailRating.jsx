@@ -15,7 +15,7 @@ function DetailRating(props) {
         }
 
         setClicked([starList[0],starList[1],starList[2],starList[3],starList[4]]);
-    }, []); //컨디마 컨디업
+    },[props.rating]); //컨디마 컨디업
 
     const sendReview = () => {
         let score = clicked.filter(Boolean).length;

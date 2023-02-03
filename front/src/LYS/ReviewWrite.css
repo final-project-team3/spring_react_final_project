@@ -1,0 +1,29 @@
+.my-review__modify__review__content__text-wrap {
+    overflow: hidden;
+    padding-left: 10px;
+    border: 1px solid #ddd;
+}
+
+.my-review__modify {
+    border-top: 1px solid #111;
+}
+
+.my-review__modify__review__content__text-area {
+    width: 100%;
+    height: 146px;
+    padding: 10px 0px;
+    margin-bottom: 20px;
+    border: none;
+    color: #111;
+    outline: none;
+    resize: none;
+}
+
+.my-review__flip-write-tooltip {
+    top: -25px;
+    left: 13px;
+    color: #777777;
+    font-size: 10px;
+    position: relative;
+    perspective: 10000px !important;
+}
