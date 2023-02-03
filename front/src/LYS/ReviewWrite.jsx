@@ -4,40 +4,28 @@ import styled from "styled-components";
 import './MyReview.css';
 import $ from "jquery";
 import swal from 'sweetalert';
+import RegistRating from "./RegistRating";
 
 function ReviewWrite() {
     const location = useLocation();
     const productInfo = location.state.productInfo;
 
     const [reviewContent, setReviewContent] = useState();
-    const [star, setStar] = useState(5);
+    const [score, setScore] = useState(0);
 
     const writeReview = () => {
         var content = $('#reviewContent').val();
-
-        if (content == '') {
-            // alert("리뷰를 10자 이상 입력해주세요");
+        if (score == 0) {
+            swal("별점을 입력해주세요");
+        } else if (content.length < 10) {
             swal("리뷰를 10자 이상 입력해주세요");
-            $("#btn-write").attr("type", "button");
         } else {
-            if (content.length < 10) {
-                // alert("리뷰를 10자 이상 입력해주세요");
-                swal("리뷰를 10자 이상 입력해주세요");
-                $("#btn-write").attr("type", "button");
-            } else {
-                alert("리뷰가 등록 되었습니다.");
-                $("#btn-write").attr("type", "submit");
-                $("#btn-write").onclick();
-
-                // swal('리뷰 등록 완료', productInfo.productName + "에 대한 리뷰가 등록되었습니다.")
-                //     .then(function () {
-                //         location.href = "${pageContext.request.contextPath}/myReview";
-                //     })
-                // $("#btn-write").attr("type", "submit");
-                // $("#btn-write").onclick();
-            }
+            alert("리뷰가 등록 되었습니다.");
+            $("#btn-write").attr("type", "submit");
+            $("#btn-write").onclick();
         }
     }
+
 
     return (
         <div className={"container"}>
@@ -79,20 +67,21 @@ function ReviewWrite() {
                                 <article>
                                     <div className={"text-md-start"}>
                                         <div className={"review_starPoint"}>
-                                            <p style={{marginBottom: 0}}>만족도를 평가해 주세요</p>
-                                            <label className={"mb-3 text-end"}>
-                                                <select
-                                                    type={"number"}
-                                                    value={star}
-                                                    onChange={({target: {value}}) => setStar(Number(value))}
-                                                >
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                </select>
-                                            </label>
+                                            {/*<p style={{marginBottom: 0}}>만족도를 평가해 주세요</p>*/}
+                                            {/*<label className={"mb-3 text-end"}>*/}
+                                            {/*    <select*/}
+                                            {/*        type={"number"}*/}
+                                            {/*        value={star}*/}
+                                            {/*        onChange={({target: {value}}) => setStar(Number(value))}*/}
+                                            {/*    >*/}
+                                            {/*        <option value="1">1</option>*/}
+                                            {/*        <option value="2">2</option>*/}
+                                            {/*        <option value="3">3</option>*/}
+                                            {/*        <option value="4">4</option>*/}
+                                            {/*        <option value="5">5</option>*/}
+                                            {/*    </select>*/}
+                                            {/*</label>*/}
+                                            <RegistRating setScore={setScore}/>
                                         </div>
                                     </div>
                                     <div className={"text-md-start"}>
@@ -102,7 +91,7 @@ function ReviewWrite() {
                                             <input hidden={true} name={'productNum'} id={'productNum'}
                                                    value={productInfo.productNum}/>
                                             <input hidden={true} name={'reviewStarPoint'} id={'reviewStarPoint'}
-                                                   value={star}/>
+                                                   value={score}/>
                                             <ReviewText name={'reviewContent'} id={'reviewContent'}
                                                         placeholder={"리뷰를 입력해주세요 (10자 이상)"}
                                                         style={{marginTop: 10, paddingInline: 10}}
@@ -126,7 +115,8 @@ function ReviewWrite() {
             </form>
         </div>
     );
-};
+}
+;
 
 const WriteButton = styled.button`
     width: 90px;
