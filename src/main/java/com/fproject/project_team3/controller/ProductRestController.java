@@ -71,12 +71,8 @@ public class ProductRestController {
         Map<String, Object> test2 = new HashMap<>() ;
 
         for (int i = 0; i < test1.size() ; i++) {
-//            test2 = (HashMap) test1.get(i);
             test2.put(String.valueOf(i),test1.get(i));
-
             System.out.println(test2.get(String.valueOf(i)));
-//            productService.insertProductData();
-
         }
     }
 

@@ -50,11 +50,17 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.getProductSmallSelectList(productKind);
     }
 
-    // 상품 등록 → DB 저장
     @Override
-    public void insertProductData(String productName, int productKindNum, int productQty, String productSellerId, int productPrice) throws Exception {
-        productMapper.insertProductData(productName, productKindNum, productQty, productSellerId, productPrice);
+    public void insertProductData() throws Exception {
+
     }
+
+
+    // 상품 등록 → DB 저장
+//    @Override
+//    public void insertProductData(String productName, int productKindNum, int productQty, String productSellerId, int productPrice) throws Exception {
+//        productMapper.insertProductData(productName, productKindNum, productQty, productSellerId, productPrice);
+//    }
 
     // 제품 중복 확인
     @Override

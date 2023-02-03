@@ -34,6 +34,7 @@ import MyReviewList from "./LYS/MyReviewList";
 import ReviewWrite from "./LYS/ReviewWrite";
 import Login from "./HSH/Login";
 import Category from "./HSH/Category";
+import FirebaseTest01 from "./GJY/FirebaseTest01";
 
 const ProjectRouter = () => {
 
@@ -79,6 +80,7 @@ const ProjectRouter = () => {
                     <Route path={"/InputSample"} element={<InputSample/>}/>
                     <Route path={"/OptionList"} element={<OptionList/>}/>
                     <Route path={"/GwakApp"} element={<GwakApp/>}/>
+                    <Route path={"/FirebaseTest01"} element={<FirebaseTest01/>}/>
 
                     {/*GJY*/}
 

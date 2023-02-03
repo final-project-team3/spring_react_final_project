@@ -18,6 +18,13 @@ npm i --save react-select
 // 새로고침 시 리덕스 state 값 초기화 방지
  npm install --save redux-persist
 
+// firebase 추가
+npm install firebase
+
+// ??????
+npm install react-slick --save
+npm install slick-carousel --save
+
 
 // 기본 설치
 npm install
