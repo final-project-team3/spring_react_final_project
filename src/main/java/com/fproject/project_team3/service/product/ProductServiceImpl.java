@@ -1,13 +1,10 @@
 package com.fproject.project_team3.service.product;
 
-import com.fproject.project_team3.dto.gwak.GwakTestTblDto;
-import com.fproject.project_team3.dto.gwak.TFileDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -32,6 +29,18 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductInfoDto> getSearchProductList(String searchContent) {
         return productMapper.getSearchProductList(searchContent);
     }
+
+    @Override
+    public String productInfoInsert(String productSellerId, String productKindNum, String productName, String productPrice, String productPrice1, String productContent, String productImg, String productStarPoint, String productDeliveryDay) {
+        productMapper.productInfoInsert(productSellerId, productKindNum, productName, productPrice,productPrice, productContent, productImg, productStarPoint, productDeliveryDay);
+        return productMapper.getProductInfoLatest();
+    }
+
+    @Override
+    public void productOptionInsert(int productNum, String productCouponUseable, String productOption1, String productOption2, String productQuantity, String productOptionPrice) {
+        productMapper.productOptionInsert(productNum, productCouponUseable, productOption1, productOption2, productQuantity, productOptionPrice);
+    }
+
     //    HSH
 
     //    LYS
@@ -50,11 +59,16 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.getProductSmallSelectList(productKind);
     }
 
-    // 상품 등록 → DB 저장
     @Override
-    public void insertProductData(String productName, int productKindNum, int productQty, String productSellerId, int productPrice) throws Exception {
-        productMapper.insertProductData(productName, productKindNum, productQty, productSellerId, productPrice);
+    public void insertProductData() throws Exception {
+
     }
+
+    // 상품 등록 → DB 저장
+//    @Override
+//    public void insertProductData(String productName, int productKindNum, int productQty, String productSellerId, int productPrice) throws Exception {
+//        productMapper.insertProductData(productName, productKindNum, productQty, productSellerId, productPrice);
+//    }
 
     // 제품 중복 확인
     @Override

@@ -7,7 +7,8 @@ public class ProductOptionDto {
     int productOptionNum;
     int productNum;
     String productCouponUseable;
-    String productOptionColor;
-    String productOptionSize;
+    String productOption1;
+    String productOption2;
     int productQuantity;
+    String productOptionPrice;
 }

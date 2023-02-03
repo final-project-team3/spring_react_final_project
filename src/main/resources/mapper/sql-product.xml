@@ -18,8 +18,29 @@
             resultType="com.fproject.project_team3.dto.product.ProductInfoDto">
         SELECT *
         FROM product_info
-        WHERE product_name LIKE CONCAT('%',#{searchContent},'%')
+        WHERE product_name LIKE CONCAT('%', #{searchContent}, '%')
     </select>
+
+    <insert id="productInfoInsert" parameterType="String">
+        INSERT INTO product_info(product_kind_num, product_name, product_price, product_seller_id,
+                                 product_registration_date, product_img, product_content, review_star_point,
+                                 product_delivery_day)
+        VALUES (#{productKindNum}, #{productName}, #{productPrice}, #{productSellerId},
+                DATE_FORMAT(now(), '%Y-%m-%d'), "testImg", "testContent", "3", "2")
+    </insert>
+
+    <select id="getProductInfoLatest" resultType="String">
+        SELECT product_num
+        FROM product_info
+        ORDER BY product_num DESC LIMIT 1;
+    </select>
+
+    <insert id="productOptionInsert" parameterType="Object">
+        INSERT INTO product_option(product_num, product_coupon_useable, product_option_1,
+                                   product_option_2, product_quantity, product_option_price)
+        VALUES (#{productNum}, #{productCouponUseable}, #{productOption1}, #{productOption2},
+                #{productQuantity}, #{productOptionPrice})
+    </insert>
 
     <!-- HSH -->
 
@@ -58,16 +79,20 @@
 
     <!--  신규상품 정보 등록 -->
     <insert id="insertProductData" parameterType="com.fproject.project_team3.dto.product.ProductInfoDto">
-        INSERT INTO product_info(product_num, product_kind_num, product_name, product_price, product_seller_id, product_registration_date, product_img, product_content, review_star_point, product_delivery_day, product_qty)
-        VALUES (null, #{productKindNum}, #{productName}, #{productPrice}, #{productSellerId}, DATE_FORMAT(now(), '%Y-%m-%d'), "testImg", "testContent", "3", "2", #{productQty});
+        INSERT INTO product_info(product_num, product_kind_num, product_name, product_price, product_seller_id,
+                                 product_registration_date, product_img, product_content, review_star_point,
+                                 product_delivery_day, product_qty)
+        VALUES (null, #{productKindNum}, #{productName}, #{productPrice}, #{productSellerId},
+                DATE_FORMAT(now(), '%Y-%m-%d'), "testImg", "testContent", "3", "2", #{productQty});
     </insert>
 
-<!--    제품 이름 중복 검사 -->
+    <!--    제품 이름 중복 검사 -->
     <select id="checkProductName" parameterType="com.fproject.project_team3.dto.product.ProductInfoDto"
             resultType="int">
         SELECT COUNT(product_name)
         FROM product_info
-        where product_seller_id = #{productSellerId} AND product_name = #{productName}
+        where product_seller_id = #{productSellerId}
+          AND product_name = #{productName}
     </select>
 
     <!-- GJY -->

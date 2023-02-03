@@ -10,14 +10,18 @@ import java.util.Map;
 
 @Mapper
 public interface ProductMapper {
+
+
+    //    HSH
     List<ProductKindDto> getKind();
 
     List<ProductKindDto> getSmallKind(String productBigKind);
 
     List<ProductInfoDto> getSearchProductList(String searchContent);
+    void productInfoInsert(ProductInfoDto productInfo);
+    String getProductInfoLatest();
 
-    //    HSH
-
+    void productInfoInsert(String productSellerId, String productKindNum, String productName, String productPrice, String productPrice1, String productContent, String productImg, String productStarPoint, String productDeliveryDay);
     //    HSH
 
     //    LYS
@@ -33,6 +37,9 @@ public interface ProductMapper {
     void insertProductData(String productName, int productKindNum, int productQty, String productSellerId, int productPrice) throws Exception;
 
     int checkProductName(String productName, String productSellerId) throws Exception;
+
+    void productOptionInsert(int productNum, String productCouponUseable, String productOption1, String productOption2, String productQuantity, String productOptionPrice);
+
     //    GJY
 
     //    BJH

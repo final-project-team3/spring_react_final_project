@@ -39,6 +39,18 @@ public class ProductRestController {
     public List<ProductInfoDto> getSearchProductList(@RequestParam("searchContent") String searchContent) {
         return productService.getSearchProductList(searchContent);
     }
+
+    //    제품 정보 넣기
+    @PostMapping("/productInfoInsert")
+    public String productInfoInsert(@RequestParam("productSellerId") String productSellerId, @RequestParam("productKindNum") String productKindNum, @RequestParam("productName") String productName, @RequestParam("productPrice") String productPrice, @RequestParam("productContent") String productContent, @RequestParam("productImg") String productImg, @RequestParam("productStarPoint") String productStarPoint, @RequestParam("productDeliveryDay") String productDeliveryDay) {
+        return productService.productInfoInsert(productSellerId, productKindNum, productName, productPrice,productPrice, productContent, productImg, productStarPoint, productDeliveryDay);
+    }
+//    옵션 정보 넣기
+    @PostMapping("/productOptionInsert")
+    public void productOptionInsert(@RequestParam("productNum") int productNum, @RequestParam("productCouponUseable") String productCouponUseable, @RequestParam("productOption1") String productOption1, @RequestParam("productOption2") String productOption2,@RequestParam("productQuantity") String productQuantity, @RequestParam("productOptionPrice") String productOptionPrice) {
+        productService.productOptionInsert(productNum, productCouponUseable, productOption1, productOption2, productQuantity, productOptionPrice);
+    }
+    
     //    HSH
 
     //    LYS
@@ -68,11 +80,11 @@ public class ProductRestController {
         System.out.println(listObj.get(0));
         List<Object> test1 = listObj;
 
-        Map<String, Object> test2 = new HashMap<>() ;
+        Map<String, Object> test2 = new HashMap<>();
 
-        for (int i = 0; i < test1.size() ; i++) {
+        for (int i = 0; i < test1.size(); i++) {
 //            test2 = (HashMap) test1.get(i);
-            test2.put(String.valueOf(i),test1.get(i));
+            test2.put(String.valueOf(i), test1.get(i));
 
             System.out.println(test2.get(String.valueOf(i)));
 //            productService.insertProductData();
@@ -136,7 +148,7 @@ public class ProductRestController {
 
     // 옵션데이터
     @PostMapping("/submitOption")
-    public String submitOption(@RequestParam ("users") String users) throws Exception {
+    public String submitOption(@RequestParam("users") String users) throws Exception {
         System.out.println("----------------------");
         System.out.println(users);
         System.out.println("----------------------");

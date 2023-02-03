@@ -11,6 +11,8 @@ import {sellerLogout, userLogout} from "../store";
 
 // 카테고리
 const Kind = (props) => {
+    const [bigKind, setBigKind] = useState();
+
     let smallKindList = [];
 
     if (props.smallKind != null) {
@@ -21,13 +23,18 @@ const Kind = (props) => {
         <div>
             <Link className={'dropdown-toggle'} id={`dropdown${props.index}`} data-bs-toggle="dropdown" style={{
                 textDecoration: "none",
-                color:'#ffffff'
-            }}><h2 style={{
-                color:"black"
+                color: '#ffffff'
+            }}><h2 onClick={()=>{
+                setBigKind($(this).text())
+                console.log(bigKind)
+            }} style={{
+                color: "black"
             }}>{props.bigKind}</h2></Link>
             <ul className={'dropdown-menu'} aria-labelledby={`dropdown${props.index}`}>
-                {[smallKindList][0].map((item, index) => <li key={index}
-                                                             className={'dropdown-item'}>{item.productSmallKind}</li>
+                {[smallKindList][0].map((item, index) => <Link to={`/category${bigKind}/${item.productSmall}`}>
+                        <li key={index}
+                            className={'dropdown-item'}>{item.productSmallKind}</li>
+                    </Link>
                 )}
             </ul>
         </div>
@@ -57,7 +64,7 @@ const Header = () => {
     // 검색 가능
     const YesSearch = () => {
         return (
-            <Link to={`/search/${searchContent}`} onClick={()=> {
+            <Link to={`/search/${searchContent}`} onClick={() => {
                 console.log(location.pathname.includes("/search"))
                 if (location.pathname.includes("/search")) {
                     navi(`/search/${searchContent}`);

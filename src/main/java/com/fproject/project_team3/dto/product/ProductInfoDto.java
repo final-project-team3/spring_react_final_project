@@ -9,7 +9,6 @@ public class ProductInfoDto {
   private int productKindNum;
   private String productName;
   private int productPrice;
-  private int productQty;
   private String productContent;
   private String productImg;
   private String productRegistrationDate;

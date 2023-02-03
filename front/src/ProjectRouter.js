@@ -57,7 +57,7 @@ const ProjectRouter = () => {
                     <Route path={'productList'} element={<ProductList/>}/>
                     <Route path={'search/:searchContent'} element={<Search/>}/>
                     <Route path={'/login'} element={<Login/>}/>
-                    <Route path={'category/:bigKind/:smallKind'} element={<Category/>}/>
+                    <Route path={'/category/:bigKind/:smallKind'} element={<Category/>}/>
                     {/*HSH*/}
 
                     {/*LYS*/}
