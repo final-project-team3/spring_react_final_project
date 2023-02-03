@@ -29,7 +29,8 @@ public interface ProductService {
     List<ProductKindDto> getProductSmallSelectList(String productKind) throws Exception;
 
     // 상품 등록 → DB 저장
-    void insertProductData(String productName, int productKindNum, int productQty, String productSellerId, int productPrice) throws Exception;
+//    void insertProductData(String productName, int productKindNum, int productQty, String productSellerId, int productPrice) throws Exception;
+    void insertProductData() throws Exception;
 
     // 제품 중복 확인
     int checkProductName(String productName, String productSellerId) throws Exception;
