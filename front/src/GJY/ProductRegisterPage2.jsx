@@ -282,9 +282,6 @@ function ProductRegisterPage2() {
         }
     };
 
-    // 이 제품 등록 부분만 보면 되죠?
-    // 넹 여기서 [{...}, {...}] 형식으로 데이터는 다 넘어갔어요
-    // 보시면
     // 제품등록
     const productData = async (e) => {
         if (productNameCheckFlag === false) {

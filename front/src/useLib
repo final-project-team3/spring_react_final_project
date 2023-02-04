@@ -17,6 +17,8 @@ npm i --save react-select
  npm install redux react-redux
 // 새로고침 시 리덕스 state 값 초기화 방지
  npm install --save redux-persist
+// 리액트 native
+npm install react-native-web
 
 // firebase 추가
 npm install firebase@9.16.0
