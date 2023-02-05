@@ -12,14 +12,17 @@ import {
 
 const storage = getStorage();
 
-const FireBaseExample = () => {
-
+const FireBaseExample = (props) => {
 
   const [file, setFile] = useState("");
   const [previewURL, setPreviewURL] = useState("");
   const [preview, setPreview] = useState(null);
   const fileRef = useRef();
   const [fileRealCode, setFileRealCode] = useState();
+  const [downloadUrl, setDownloadUrl] = useState();
+// 저장할 이미지 파일명 부모 컴포넌트로 전달
+  props.setImageData(downloadUrl);
+
 
   useEffect(() => {
     if (file !== "") {
@@ -49,7 +52,7 @@ const FireBaseExample = () => {
     fileRef.current.click();
   };
 
-  // 여기가 upload 함수입니다.
+  // upload 기능
   const saveToFirebaseStorage = (file) => {
     const uniqueKey = new Date().getTime();
     const newName = file.name
@@ -80,14 +83,17 @@ const FireBaseExample = () => {
           console.log(`storageRef : ${storageRef}`);
           console.log(`fileCode : ${fileCode}`);
           setFileRealCode(fileCode);
+          setDownloadUrl(downloadUrl);
         });
       }
     );
   };
 
-  // 여기가 delete 코드입니다.
+  // delete 기능
   const deleteFile = () => {
+    console.log(fileRealCode);
     const desertRef = sRef(storage, `Images/${fileRealCode}`);
+
 
     deleteObject(desertRef)
       .then(() => {
@@ -98,18 +104,22 @@ const FireBaseExample = () => {
       })
       .catch((error) => {
         console.log(`delete ${error}`);
-
       });
   };
 
-  const aaa = () => {
-    console.log(file);
-  }
+  // const aaa = () => {
+  //   console.log(file);
+  // };
+
 
   return (
-    <div>
-      <button className={"btn btn-primary"} onClick={aaa}>파일 확인</button>
-      <div className="priveiw-rapping" id={"prDiv"}>{preview}</div>
+    <>
+      {/*<button className={"btn btn-primary"} onClick={aaa}>파일 확인</button>*/}
+      {/*<img src={downloadUrl} alt="" />*/}
+      {/* 이미지 미리보기 공간 */}
+      <div className="priveiw-rapping" id={"prDiv"}>
+        {preview}
+      </div>
       <div style={{ padding: 10 }}>
         <input
           ref={fileRef}
@@ -117,18 +127,18 @@ const FireBaseExample = () => {
           id="file"
           type="file"
           onChange={handleFileOnChange}
-        ></input>
+        />
 
         <button onClick={handleFileButtonClick} className={"btn btn-info"}>
-          UPLOAD
+          대표사진 등록
         </button>
         <button onClick={deleteFile} className={"btn btn-danger"}>
-          DELETE
+          등록한 사진 삭제
         </button>
-
       </div>
-    </div>
+    </>
   );
 };
 
 export default FireBaseExample;
+

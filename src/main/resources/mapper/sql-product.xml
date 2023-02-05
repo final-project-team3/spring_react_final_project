@@ -26,7 +26,7 @@
                                  product_registration_date, product_img, product_content, review_star_point,
                                  product_delivery_day)
         VALUES (#{productKindNum}, #{productName}, #{productPrice}, #{productSellerId},
-                DATE_FORMAT(now(), '%Y-%m-%d'), "testImg", "testContent", "3", "2")
+                DATE_FORMAT(now(), '%Y-%m-%d'), #{productImg}, "testContent", "3", "2")
     </insert>
 
     <select id="getProductInfoLatest" resultType="String">
@@ -113,7 +113,7 @@
                                  product_registration_date, product_img, product_content, review_star_point,
                                  product_delivery_day, product_qty)
         VALUES (null, #{productKindNum}, #{productName}, #{productPrice}, #{productSellerId},
-                DATE_FORMAT(now(), '%Y-%m-%d'), "testImg", "testContent", "3", "2", #{productQty});
+                DATE_FORMAT(now(), '%Y-%m-%d'), #{productImg}, "testContent", "3", "2", #{productQty});
     </insert>
 
     <!--    제품 이름 중복 검사 -->
