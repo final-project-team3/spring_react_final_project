@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useEffect, useState} from "react";
 import $ from "jquery";
 import {Link} from "react-router-dom";
 import '../BJH/Main.css';
@@ -60,6 +60,33 @@ const Main = () => {
         pauseOnHover: true,
         arrows: true,
     };
+
+    // top 버튼 코드
+    const [showButton, setShowButton] = useState(false);
+
+    const scrollToTop = () => {
+        window.scroll({
+            top: 0,
+            behavior: 'smooth'
+        })
+    }
+    useEffect(() => {
+        const handleShowButton = () => {
+            if (window.scrollY > 300) {
+                setShowButton(true)
+            } else {
+                setShowButton(false)
+            }
+        }
+
+        console.log(window.scrollY)
+        window.addEventListener("scroll", handleShowButton)
+        return () => {
+            window.removeEventListener("scroll", handleShowButton)
+        }
+    }, [])
+    // top 버튼 코드 끝
+
     return (
         <div>
             <div className={'container'}>
@@ -390,6 +417,9 @@ const Main = () => {
                         </div>
                     </div>
                     {/*    BJH*/}
+                </div>
+                <div className="scroll__container">
+                    <button id="top" onClick={scrollToTop} type="button" > Top</button>
                 </div>
             </div>
         </div>
