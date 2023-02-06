@@ -22,9 +22,6 @@ a {
     padding-top: 40px;
 }
 
-dl, dt, dd, ul, ol, menu, li {
-    list-style: none;
-}
 
 body, div, dl, dt, dd, ul, ol, menu, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, blockquote, th, td, p {
     margin: 0;
@@ -127,15 +124,6 @@ div {
     background-color: #777;
 }
 
-.prod-inquiry-item__label, .prod-inquiry-item__reply__label {
-    position: absolute;
-    top: 20px;
-    display: inline-block;
-    padding: 4px;
-    font-size: 11px;
-    letter-spacing: 1px;
-    color: #fff;
-}
 
 address, caption, cite, code, dfn, em, var {
     font-style: normal;
@@ -150,9 +138,6 @@ em {
     font-size: 12px;
 }
 
-dl, dt, dd, ul, ol, menu, li {
-    list-style: none;
-}
 
 li {
     text-align: -webkit-match-parent;
@@ -174,6 +159,33 @@ body {
 body, input, textarea, select, button, table {
     font-family: sans-serif;
     font-size: 100%;
+}
+
+.prod-inquiry-item__time, .prod-inquiry-item__reply__time {
+    /*position: absolute;*/
+    right: 10px;
+    top: 20px;
+    color: #888;
+}
+
+body, div, dl, dt, dd, ul, ol, menu, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, blockquote, th, td, p {
+    margin: 0;
+    padding: 0;
+}
+
+div {
+    display: block;
+}
+.prod-inquiry-list__container .prod-inquiry-items {
+    font-size: 12px;
+}
+
+dl, dt, dd, ul, ol, menu, li {
+    list-style: none;
+}
+
+li {
+    text-align: -webkit-match-parent;
 }
 
 

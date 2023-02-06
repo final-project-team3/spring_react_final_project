@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './ProductQna.css';
 
-function ProductQna() {
+function ProductQna(props) {
     return (
         <li className="product-qna tab-contents__content">
             <div id="prod-inquiry-list" className="prod-tab">
@@ -34,10 +34,9 @@ function ProductQna() {
                                     <div className="prod-inquiry-item__selected-option">그래파이트 | 코어i5 11세대 | 256GB | 16GB
                                         | WIN11 Home | 8PT-00030&nbsp;&nbsp;주식회사 스터프
                                     </div>
-                                    <div className="prod-inquiry-item__content">서피스 프로8을 삼성 모니터 s43am702에 연결시 서피스에서는
-                                        잡히는데 모니터 연결은 안되네요 불량인가요? 이전 노트북 사용시에는 모니터가 잘 나왔거든요...
+                                    <div className="prod-inquiry-item__content">{props.qnaContent}
                                     </div>
-                                    <div className="prod-inquiry-item__time">2023/01/31 15:37:05</div>
+                                    <div className="prod-inquiry-item__time">{props.qnaRegistrationDate}</div>
                                 </div>
 
                                 <div className="prod-inquiry-item__reply">
@@ -45,8 +44,8 @@ function ProductQna() {
                                     <em className="prod-inquiry-item__reply__label">답변</em>
                                     <div className="prod-inquiry-item__reply__wrap">
                                         <strong className="prod-inquiry-item__reply__author">주식회사 스터프</strong>
-                                        <div className="prod-inquiry-item__reply__content">쿠팡 측으로 문의 바랍니다</div>
-                                        <div className="prod-inquiry-item__reply__time">2023/02/01 11:31:17</div>
+                                        <div className="prod-inquiry-item__reply__content">{props.qnaAnswer}</div>
+                                        <div className="prod-inquiry-item__reply__time">{props.qnaAnswerRegistrationDate}</div>
                                     </div>
                                 </div>
                             </div>
