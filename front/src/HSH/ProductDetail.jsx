@@ -115,10 +115,13 @@ function ProductDetail(props) {
                 <h4>{productInfo?.productContent}</h4>
             </div>
 
-            <ul className="tab-titles row">
-                <li onClick={() => setReviewCheck(true)} className="review col-6">제품 리뷰</li>
-                <li onClick={() => setReviewCheck(false)} className="qna col-6">문의 / 답변</li>
-            </ul>
+            <div className="ec-base-tab grid2">
+                <ul className="menu">
+                    <li onClick={() => setReviewCheck(true)} className="selected"><a href="#none">제품 리뷰</a></li>
+                    <li onClick={() => setReviewCheck(false)} ><a href="#none">문의 / 답변</a></li>
+                </ul>
+            </div>
+
             {/* 리뷰 들어감 */}
             <div hidden={!reviewCheck} className="mt-5 container">
                 <h2 className={"text-start"}>제품 리뷰</h2>
