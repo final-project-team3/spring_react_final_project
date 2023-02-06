@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import Select from "react-select";
 import user from "../BJH/User";
 import {element} from "prop-types";
+import FireBaseExample from "./FireBaseExample";
 
 function ProductRegisterPage2() {
     let sellerInfo = sessionStorage.getItem("sellerInfo");
@@ -40,6 +41,9 @@ function ProductRegisterPage2() {
 
     // 체크박스 전체선택 기능
     const [checkItems, setCheckItems] = useState([]);
+
+    // 자식 -> 부모 (이미지 파일명 전달)
+    const [imageData, setImageData] = useState("");
 
     const OptionReg = () => {
         let optionNameList = [];
@@ -282,9 +286,6 @@ function ProductRegisterPage2() {
         }
     };
 
-    // 이 제품 등록 부분만 보면 되죠?
-    // 넹 여기서 [{...}, {...}] 형식으로 데이터는 다 넘어갔어요
-    // 보시면
     // 제품등록
     const productData = async (e) => {
         if (productNameCheckFlag === false) {
@@ -324,7 +325,7 @@ function ProductRegisterPage2() {
                     productName: productName,
                     productPrice: productPrice,
                     productContent: "테스트",
-                    productImg: "테스트이미지",
+                    productImg: imageData,
                     productStarPoint: 2,
                     productDeliveryDay: 2
                 }
@@ -483,10 +484,17 @@ function ProductRegisterPage2() {
 
     };
 
+    // FireBaseExample 에서 전달된 이미지 파일명 확인
+    // const imageDataOk = () => {
+    //     console.log(imageData);
+    // }
+
     //-------------------------------------------------- RETURN -------------------------------------------------- //
     //-------------------------------------------------- RETURN -------------------------------------------------- //
     return (
         <div>
+            {/*<img src="https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/Images%2Ftest_img_01.JPG1675613115132?alt=media&token=f94ce06a-0903-448c-ae39-32106d6fddc7" alt=""/>*/}
+            {/*<button className={"btn btn-primary"} onClick={imageDataOk}>imageDataOk</button>*/}
             <div className={"container"}>
                 <div className={"row"}>
                     <h1 className={"mt-4 text-center"}>제품 신규 등록</h1>
@@ -865,8 +873,7 @@ function ProductRegisterPage2() {
                                 상품 이미지 등록
                             </td>
                             <td>
-                                <p className={"ms-2 mt-3"}>파일첨부기능 준비중 . . .</p>
-                                {/*<FileUploadComponent />*/}
+                                <FireBaseExample setImageData={setImageData}/>
                             </td>
                         </tr>
                         </tbody>
