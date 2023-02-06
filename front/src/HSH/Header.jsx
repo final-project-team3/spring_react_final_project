@@ -211,9 +211,9 @@ const Header = () => {
                             </div>
                             {role == null ? <Link to={'/login'}><img className={'ms-2'}
                                                                      src={"../Img/login.png"}/></Link> : role == "USER" ?
-                                <Link onClick={() => dispatch(userLogout())}><img width={40} src={"../Img/logout.png"}
+                                <Link onClick={() => dispatch(userLogout())}><img width={40} src={"../Img/BJH/logout.png"}
                                                                                   className={'ms-2'}/></Link> :
-                                <Link onClick={() => dispatch(sellerLogout())}><img width={40} src={"../Img/logout.png"}
+                                <Link onClick={() => dispatch(sellerLogout())}><img width={40} src={"../Img/BJH/logout.png"}
                                                                                     className={'ms-2'}/></Link>}
                             {/*<li className={'nav-item'}>*/}
                             {/*    <Link to={'/login'}><img className={'ms-2'} src={"../Img/login.png"}/></Link>*/}
