@@ -35,6 +35,7 @@ import ReviewWrite from "./LYS/ReviewWrite";
 import Login from "./HSH/Login";
 import Category from "./HSH/Category";
 import FireBaseExample from "./GJY/FireBaseExample";
+import SellerProductList from "./HSH/SellerProductList";
 
 
 const ProjectRouter = () => {
@@ -55,11 +56,12 @@ const ProjectRouter = () => {
                 <Route path={'/'} element={<Header/>}>
                     {/*HSH*/}
                     <Route index element={<Main/>}/>
-                    <Route path={'productDetail/:productNum'} element={<ProductDetail/>}/>
-                    <Route path={'productList'} element={<ProductList/>}/>
-                    <Route path={'search/:searchContent'} element={<Search/>}/>
+                    <Route path={'/productDetail/:productNum'} element={<ProductDetail/>}/>
+                    <Route path={'/productList'} element={<ProductList/>}/>
+                    <Route path={'/search/:searchContent'} element={<Search/>}/>
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/category/:bigKind/:smallKind'} element={<Category/>}/>
+                    <Route path={'/productSellerPage/:productSellerBusinessName'} element={<SellerProductList/>}/>
                     {/*HSH*/}
 
                     {/*LYS*/}
@@ -87,16 +89,16 @@ const ProjectRouter = () => {
                     {/*GJY*/}
 
                     {/*BJH*/}
-                    <Route path={'myPage'}
+                    <Route path={'/myPage'}
                            element={role == null ? <NewLogin/> : role == "USER" ? <UserMyPage/> : < SellerMyPage/>}/>
                     {/*<Route path={'masterPage'} element={<MasterPage/>}/>*/}
 
-                    <Route path={'cart'} element={<Cart/>}/>
+                    <Route path={'/cart'} element={<Cart/>}/>
 
-                    <Route path={'searchMain'} element={<SearchMain/>}/>
+                    <Route path={'/searchMain'} element={<SearchMain/>}/>
 
-                    <Route path={'UserJoinResult'} element={<UserJoinResult/>}/>
-                    <Route path={'SellerJoinResult'} element={<SellerJoinResult/>}/>
+                    <Route path={'/UserJoinResult'} element={<UserJoinResult/>}/>
+                    <Route path={'/SellerJoinResult'} element={<SellerJoinResult/>}/>
 
                     <Route path={'/footer'} element={<Footer/>}/>
 
