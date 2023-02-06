@@ -1,11 +1,11 @@
 #section27 {
     width: 1350px;
-    margin: 80px auto 30px;
+    margin: 0px auto 30px;
 }
 
 .s-pick {
     width: 1350px;
-    margin: 50px auto 30px;
+    margin: 390px auto -30px;
     text-align: center;
     height: 50px;
 }
@@ -74,6 +74,7 @@
     z-index: 1;
     display: flex;
     box-sizing: content-box;
+    padding-bottom: 100px;
 }
 
 .pickList {
@@ -268,7 +269,7 @@ span.sale {
 }
 
 .ad-card-color {
-    background: #5ab29d;
+    background: #f8d7da;
     width: 605px;
     height: 200px;
     border-radius: 4px;
@@ -310,7 +311,8 @@ span.sale {
 
 .card-name strong {
     color: #fff;
-    font-weight: normal;
+    font-weight: bold;
+    font-family: "Lato", "Helvetica Neue", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", "돋움", dotum, sans-serif;
 }
 
 .card-subname {
@@ -344,4 +346,160 @@ span.sale {
 .explain {
     font-family: "Lato", "Helvetica Neue", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", "돋움", dotum, sans-serif;
     vertical-align: bottom;
+}
+
+.NewArrival {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 100px;
+}
+
+.NewProTitle {
+    text-align: center;
+    margin-top: 75px;
+    margin-bottom: 20px;
+}
+
+.NewProTitle h1{
+    font-weight: bold;
+    font-size: 33px;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.NewProTitle h2 {
+    font-weight: bold;
+    color: #888;
+    font-family: 'Noto Sans KR',Noto Sans,sans-serif !important;
+    font-size: 16px;
+}
+
+.prdList {
+    margin: 0px auto;
+    font-size: 0;
+    line-height: 0;
+}
+
+ul.grid4 > li {
+    width: 25%;
+}
+
+.prdList > li {
+    display: inline-block;
+    margin: 0;
+    padding-bottom: 60px;
+    margin-bottom: -20px;
+    vertical-align: top;
+}
+
+.thumbnail {
+    position: relative;
+    margin: 0 10px 0px;
+    text-align: center;
+}
+
+.thumbImg {
+    width: 100%;
+    box-sizing: border-box;
+    vertical-align: middle;
+    border: none;
+}
+
+.description {
+    padding: 0 10px;
+    margin: 20px auto 0;
+}
+
+.description .named {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    opacity: 1;
+    position: relative;
+    line-height: 18px;
+}
+
+.nameLink {
+    display: block;
+    width: 80%;
+    float: left;
+    text-decoration: none;
+}
+
+.nameLink * {
+    vertical-align: middle;
+    font-size: 13px;
+    line-height: 18px;
+    color: #222;
+}
+
+.nameLink:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.price {
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.moreBtn {
+    text-align: center;
+}
+
+.btnMore {
+    position: relative;
+    width: 238px;
+    height: 64px;
+    line-height: 64px;
+    color: #1a1a1a;
+    background-color: transparent;
+    font-size: 14px;
+    border: 1px solid #1a1a1a;
+    font-weight: 500;
+    display: inline-block;
+    text-align: center;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    transition: all 0.5s ease;
+}
+
+.btnMore:hover {
+    background: black;
+    color: white;
+}
+
+.btnMore:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 100%;
+    background-color: #000;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+
+.btnMore span.arrow_lb {
+    position: relative;
+    left: 8px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+
+.btnMore span.arrow_lb:before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    opacity: 0;
 }

@@ -9,19 +9,20 @@ import Slider from "react-slick";
 
 {/*BJH 시작*/}
 // BJH 캐러셀
-const StyledSlider = styled(Slider)`
-    .slick-slide div{
+const StyledSlider = styled(Slider)
+    // 화살표 색상 변경해야함
+    `.slick-slide div{
       outline: none;
     }   
     .slick-list {
        margin-left:auto;
        margin-right:auto;
        display:block;
-       width: 1350px;
-       height: 100%
+       width: 50%;
+       height: 50%;
     }    
     .slick-prev {
-        left: 16px;
+        left: 6px;
         z-index: 999;
     }
     .slick-next {
@@ -37,9 +38,9 @@ const ImageContainer = styled.div`
 const Image = styled.img`
 width:100%;`;
 
-const imgUrl = require('../BJH/230203.jpg');
-const imgUrl2 = require('../BJH/idol_han.jpg');
-const imgUrl3 = require('../BJH/image.png');
+const imgUrl = require('../BJH/logo.png');
+const imgUrl2 = require('../BJH/logo.png');
+const imgUrl3 = require('../BJH/logo.png');
 
 const items = [
     {id: 1, url: imgUrl},
@@ -87,7 +88,9 @@ const Main = () => {
                                 <div className={"card-info"}>
                                     {/* 광고이미지*/}
                                     <div className={"card-name"}>
-                                        <strong>광고입니다</strong>
+                                        <strong style={{
+                                            color: "black",
+                                        }}>광고입니다</strong>
                                     </div>
                                     <div className={"card-subname"}>
                                         <dl className={"subexplain"}>
@@ -113,7 +116,9 @@ const Main = () => {
                                 </div>
                                 <div className={"card-info"}>
                                     <div className={"card-name"}>
-                                        <strong>광고입니다</strong>
+                                        <strong style={{
+                                            color: "black"
+                                        }}>광고입니다</strong>
                                     </div>
                                     <div className={"card-subname"}>
                                         <dl className={"subexplain"}>
@@ -129,12 +134,10 @@ const Main = () => {
                             </div>
                         </div>
                     </div>
-                    <br/><br/>
-                    <div className={"s-pick"}>
-                        <h2>Weekly 시옷's Pick</h2>
-                    </div>
                 </div>
-                <br/>
+                <div className={"s-pick"}>
+                    <h2>Weekly 시옷's Pick</h2>
+                </div>
                 {/* 사이에 다른것 하나 넣기?*/}
                 <div id={"section27"}>
                     <div className={"pickWrap"}>
@@ -297,6 +300,91 @@ const Main = () => {
                                             </div>
                                         </li>
                                     </ul>
+                                </div>
+                            </div>
+                            <div className={"NewArrival"}>
+                                <div style={{
+                                    marginTop: 250,
+                                    margin: 0
+                                }} className={"NewProduct"}>
+                                    <div className={"NewProTitle"}>
+                                        <h1>New Arrivals</h1>
+                                        <h2>이번달의 신상품</h2>
+                                    </div>
+                                    <ul className={"prdList grid4"}>
+                                        <li className={"PrdBox"}>
+                                            <div className={"thumbnail"}>
+                                                <Link><img className={"thumbImg"} src={"../Img/logo.png"}/></Link>
+                                            </div>
+                                            <div className={"description"}>
+                                                <ul>
+                                                    <li className={"named"}>
+                                                        <Link className={"nameLink"}>
+                                                            <span>잘 나오는지 테스트</span>
+                                                        </Link>
+                                                    </li>
+                                                    <li className={"price"}>KRW 12,345</li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li className={"PrdBox"}>
+                                            <div className={"thumbnail"}>
+                                                <Link><img className={"thumbImg"} src={"../Img/logo.png"}/></Link>
+                                            </div>
+                                            <div className={"description"}>
+                                                <ul>
+                                                    <li className={"named"}>
+                                                        <Link className={"nameLink"}>
+                                                            <span> 잘 나오는지 테스트</span>
+                                                        </Link>
+                                                    </li>
+                                                    <li className={"price"}>KRW 12,345</li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li className={"PrdBox"}>
+                                            <div className={"thumbnail"}>
+                                                <Link><img className={"thumbImg"} src={"../Img/logo.png"}/></Link>
+                                            </div>
+                                            <div className={"description"}>
+                                                <ul>
+                                                    <li className={"named"}>
+                                                        <Link className={"nameLink"}>
+                                                            <span> 잘 나오는지 테스트</span>
+                                                        </Link>
+                                                    </li>
+                                                    <li className={"price"}>KRW 12,345</li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li className={"PrdBox"}>
+                                            <div className={"thumbnail"}>
+                                                <Link><img className={"thumbImg"} src={"../Img/logo.png"}/></Link>
+                                            </div>
+                                            <div className={"description"}>
+                                                <ul>
+                                                    <li className={"named"}>
+                                                        <Link className={"nameLink"}>
+                                                            <span> 잘 나오는지 테스트</span>
+                                                        </Link>
+                                                    </li>
+                                                    <li className={"price"}>KRW 12,345</li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className={"moreBtn"}>
+                                    <Link className={"btnMore"}>
+                                        <span>상품 더 보러 가기</span>
+                                        {/* 이미지 색이 안바뀜 왜지...*/}
+                                        <span className={"arrow_lb"}>
+                                            <img style={{
+                                                border: "none",
+                                                verticalAlign: "top"
+                                            }} src={"../Img/Bjh/arrow.svg"}/>
+                                        </span>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
