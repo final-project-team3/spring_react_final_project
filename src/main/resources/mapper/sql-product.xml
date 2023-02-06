@@ -21,12 +21,12 @@
         WHERE product_name LIKE CONCAT('%', #{searchContent}, '%')
     </select>
 
-    <insert id="productInfoInsert" parameterType="String">
+    <insert id="productInfoInsert" parameterType="com.fproject.project_team3.dto.product.ProductInfoDto">
         INSERT INTO product_info(product_kind_num, product_name, product_price, product_seller_id,
                                  product_registration_date, product_img, product_content, review_star_point,
-                                 product_delivery_day)
+                                 product_delivery_day, product_seller_business_name)
         VALUES (#{productKindNum}, #{productName}, #{productPrice}, #{productSellerId},
-                DATE_FORMAT(now(), '%Y-%m-%d'), #{productImg}, "testContent", "3", "2")
+                DATE_FORMAT(now(), '%Y-%m-%d'), #{productImg}, "testContent", "3", "2", #{productSellerBusinessName})
     </insert>
 
     <select id="getProductInfoLatest" resultType="String">
@@ -34,13 +34,6 @@
         FROM product_info
         ORDER BY product_num DESC LIMIT 1;
     </select>
-
-    <!--    <insert id="productOptionInsert" parameterType="Object">-->
-    <!--        INSERT INTO product_option(product_num, product_coupon_useable, product_option_1,-->
-    <!--                                   product_option_2, product_quantity, product_option_price)-->
-    <!--        VALUES (#{productNum}, #{productCouponUseable}, #{productOption1}, #{productOption2},-->
-    <!--                #{productQuantity}, #{productOptionPrice})-->
-    <!--    </insert>-->
 
     <insert id="productOptionInsert" parameterType="com.fproject.project_team3.dto.product.ProductOptionDto">
         INSERT INTO product_option(product_num, product_coupon_useable, product_option_1,
@@ -70,6 +63,20 @@
         SELECT *
         FROM product_option
         WHERE product_num = #{productNum};
+    </select>
+
+    <select id="getSellerProductList" parameterType="String"
+            resultType="com.fproject.project_team3.dto.product.ProductInfoDto">
+        SELECT *
+        FROM product_info
+        WHERE product_seller_business_name = #{productSellerBusinessName}
+    </select>
+
+    <select id="getSellerNameToSellerInfo" parameterType="String"
+            resultType="com.fproject.project_team3.dto.seller.SellerInfoDto">
+        SELECT *
+        FROM seller_info
+        WHERE seller_business_name = #{productSellerBusinessName}
     </select>
 
     <!-- HSH -->

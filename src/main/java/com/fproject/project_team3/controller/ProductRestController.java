@@ -6,6 +6,7 @@ import com.fproject.project_team3.dto.join.UserOrderListProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.dto.product.ProductOptionDto;
+import com.fproject.project_team3.dto.seller.SellerInfoDto;
 import com.fproject.project_team3.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -43,9 +44,11 @@ public class ProductRestController {
 
     //    제품 정보 넣기
     @PostMapping("/productInfoInsert")
-    public String productInfoInsert(@RequestParam("productSellerId") String productSellerId, @RequestParam("productKindNum") String productKindNum, @RequestParam("productName") String productName, @RequestParam("productPrice") String productPrice, @RequestParam("productContent") String productContent, @RequestParam("productImg") String productImg, @RequestParam("productStarPoint") String productStarPoint, @RequestParam("productDeliveryDay") String productDeliveryDay) {
-        return productService.productInfoInsert(productSellerId, productKindNum, productName, productPrice, productPrice, productContent, productImg, productStarPoint, productDeliveryDay);
+    public String productInfoInsert(@RequestBody ProductInfoDto productInfoDto) {
+        return productService.productInfoInsert(productInfoDto);
     }
+
+
 
     //    옵션 정보 넣기
 //    @PostMapping("/productOptionInsert")
@@ -69,11 +72,26 @@ public class ProductRestController {
     @GetMapping("/getProductInfoFromDetail")
     public Object getProductInfoFromDetail(@RequestParam("productNum") int productNum) {
         Map<String, Object> productInfoOption = new HashMap<>();
-        List<ProductOptionDto> productOptionList = (List<ProductOptionDto>) productService.getProductOptionList(productNum);
+        List<ProductOptionDto> productOptionList = productService.getProductOptionList(productNum);
 
         productInfoOption.put("productInfo", productService.getProductInfoFromDetail(productNum));
         productInfoOption.put("productOption", productOptionList);
         return productInfoOption;
+    }
+
+//    사업자 이름으로 제품 / 사업자 정보 가져오기
+    @GetMapping("/getSellerProductList")
+    public Object getSellerProductList(@RequestParam("productSellerBusinessName") String productSellerBusinessName) {
+        Map<String,Object> productInfoSellerInfo = new HashMap<>();
+        List<ProductInfoDto> productInfoList = productService.getSellerProductList(productSellerBusinessName);
+        SellerInfoDto sellerInfo = productService.getSellerNameToSellerInfo(productSellerBusinessName);
+
+        productInfoSellerInfo.put("sellerProductList", productInfoList);
+        productInfoSellerInfo.put("sellerInfo", sellerInfo);
+
+        System.out.println(productInfoSellerInfo);
+
+        return productInfoSellerInfo;
     }
 
     //    HSH

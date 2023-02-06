@@ -19,9 +19,8 @@ const FireBaseExample = (props) => {
   const [preview, setPreview] = useState(null);
   const fileRef = useRef();
   const [fileRealCode, setFileRealCode] = useState();
-  const [downloadUrl, setDownloadUrl] = useState();
-// 저장할 이미지 파일명 부모 컴포넌트로 전달
-  props.setImageData(downloadUrl);
+  const [downloadUrl, setDownloadUrl] = useState("");
+
 
 
   useEffect(() => {
@@ -84,6 +83,8 @@ const FireBaseExample = (props) => {
           console.log(`fileCode : ${fileCode}`);
           setFileRealCode(fileCode);
           setDownloadUrl(downloadUrl);
+          // 저장할 이미지 파일명 부모 컴포넌트로 전달
+          props.setImageData(downloadUrl);
         });
       }
     );

@@ -3,6 +3,7 @@ package com.fproject.project_team3.service.product;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.dto.product.ProductOptionDto;
+import com.fproject.project_team3.dto.seller.SellerInfoDto;
 import com.fproject.project_team3.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,19 +33,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public String productInfoInsert(String productSellerId, String productKindNum, String productName, String productPrice, String productPrice1, String productContent, String productImg, String productStarPoint, String productDeliveryDay) {
-        productMapper.productInfoInsert(productSellerId, productKindNum, productName, productPrice,productPrice, productContent, productImg, productStarPoint, productDeliveryDay);
-        return productMapper.getProductInfoLatest();
-    }
-
-//    @Override
-//    public void productOptionInsert(int productNum, String productCouponUseable, String productOption1, String productOption2, String productQuantity, String productOptionPrice) {
-//        productMapper.productOptionInsert(productNum, productCouponUseable, productOption1, productOption2, productQuantity, productOptionPrice);
-//    }
-
-    @Override
     public void productOptionInsert(List<ProductOptionDto> productOptionDto) {
         productMapper.productOptionInsert(productOptionDto);
+    }
+
+    @Override
+    public List<ProductInfoDto> getSellerProductList(String productSellerBusinessName) {
+        return productMapper.getSellerProductList(productSellerBusinessName);
     }
 
     @Override
@@ -60,6 +55,17 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductOptionDto> getProductOptionList(int productNum) {
         return productMapper.getProductOptionList(productNum);
+    }
+
+    @Override
+    public SellerInfoDto getSellerNameToSellerInfo(String productSellerBusinessName) {
+        return productMapper.getSellerNameToSellerInfo(productSellerBusinessName);
+    }
+
+    @Override
+    public String productInfoInsert(ProductInfoDto productInfoDto) {
+        productMapper.productInfoInsert(productInfoDto);
+        return productMapper.getProductInfoLatest();
     }
 
     //    HSH
