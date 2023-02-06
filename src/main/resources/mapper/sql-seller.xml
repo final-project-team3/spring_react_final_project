@@ -18,6 +18,7 @@
         WHERE seller_id = #{id}
           AND seller_pass = #{pass}
     </select>
+
     <!-- HSH -->
 
     <!-- LYS -->

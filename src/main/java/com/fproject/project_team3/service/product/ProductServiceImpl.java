@@ -3,6 +3,7 @@ package com.fproject.project_team3.service.product;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.dto.product.ProductOptionDto;
+import com.fproject.project_team3.dto.seller.SellerInfoDto;
 import com.fproject.project_team3.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductInfoDto> getSellerProductList(String productSellerBusinessName) {
+        return productMapper.getSellerProductList(productSellerBusinessName);
+    }
+
+    @Override
     public List<ProductInfoDto> getProductList() {
         return productMapper.getProductList();
     }
@@ -60,6 +66,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductOptionDto> getProductOptionList(int productNum) {
         return productMapper.getProductOptionList(productNum);
+    }
+
+    @Override
+    public SellerInfoDto getSellerNameToSellerInfo(String productSellerBusinessName) {
+        return productMapper.getSellerNameToSellerInfo(productSellerBusinessName);
     }
 
     //    HSH

@@ -4,6 +4,7 @@ import com.fproject.project_team3.dto.gwak.GwakTestTblDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.dto.product.ProductOptionDto;
+import com.fproject.project_team3.dto.seller.SellerInfoDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -52,6 +53,10 @@ public interface ProductMapper {
     void insertProductData(String productName, int productKindNum, int productQty, String productSellerId, int productPrice) throws Exception;
 
     int checkProductName(String productName, String productSellerId) throws Exception;
+
+    List<ProductInfoDto> getSellerProductList(String productSellerBusinessName);
+
+    SellerInfoDto getSellerNameToSellerInfo(String productSellerBusinessName);
 
     //    GJY
 
