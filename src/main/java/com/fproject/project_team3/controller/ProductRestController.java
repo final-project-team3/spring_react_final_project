@@ -48,13 +48,10 @@ public class ProductRestController {
         return productService.productInfoInsert(productInfoDto);
     }
 
-
-
-    //    옵션 정보 넣기
-//    @PostMapping("/productOptionInsert")
-//    public void productOptionInsert(@RequestParam("productNum") int productNum, @RequestParam("productCouponUseable") String productCouponUseable, @RequestParam("productOption1") String productOption1, @RequestParam("productOption2") String productOption2, @RequestParam("productQuantity") String productQuantity, @RequestParam("productOptionPrice") String productOptionPrice) {
-//        productService.productOptionInsert(productNum, productCouponUseable, productOption1, productOption2, productQuantity, productOptionPrice);
-//    }
+    @GetMapping("/categoryProductList")
+    public List<ProductInfoDto> categoryProductList(@RequestParam("bigKind") String bigKind, @RequestParam("smallKind") String smallKind) {
+        return productService.categoryProductList(bigKind, smallKind);
+    }
 
     @PostMapping("/productOptionInsert")
     public void productOptionInsert(@RequestBody List<ProductOptionDto> productOptionDto) {

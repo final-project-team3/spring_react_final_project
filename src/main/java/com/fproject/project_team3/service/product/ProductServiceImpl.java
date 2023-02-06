@@ -68,6 +68,12 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.getProductInfoLatest();
     }
 
+    @Override
+    public List<ProductInfoDto> categoryProductList(String bigKind, String smallKind) {
+        int kindNum = productMapper.getKindNum(bigKind, smallKind);
+        return productMapper.categoryProductList(kindNum);
+    }
+
     //    HSH
 
     //    LYS

@@ -55,6 +55,10 @@ public interface ProductMapper {
 
     SellerInfoDto getSellerNameToSellerInfo(String productSellerBusinessName);
 
+    List<ProductInfoDto> categoryProductList(int kindNum);
+
+    int getKindNum(String bigKind, String smallKind);
+
     //    GJY
 
     //    BJH
