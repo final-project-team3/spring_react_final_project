@@ -6,6 +6,7 @@ import axios from "axios";
 import {Link, useParams} from "react-router-dom";
 import Pagination from "../GJY/Pagination";
 import $ from 'jquery';
+import ProductQna from "../LYS/ProductQna";
 
 function ProductDetail(props) {
     const {productNum} = useParams();
@@ -21,6 +22,8 @@ function ProductDetail(props) {
     const [reviewList, setReviewList] = useState([]);
     const [productInfo, setProductInfo] = useState();
     const [productOption, setProductOption] = useState([]);
+    const [qnaList, setQnaList] = useState([]);
+
 
 
     useEffect(() => {
@@ -30,6 +33,7 @@ function ProductDetail(props) {
                 setReviewList(data);
             });
     }, []);
+
     useEffect(() => {
         return async () => {
             const {data} = await axios.get("http://localhost:8080/getProductInfoFromDetail", {
@@ -62,9 +66,9 @@ function ProductDetail(props) {
                             <h2>{productInfo?.productSellerId}</h2>
                         </div>
                     </div>
-                    <select onClick={(e)=> {
+                    <select onClick={(e) => {
                         setOptionValue($(e.target).val());
-                    }} onChange={(e)=> {
+                    }} onChange={(e) => {
                         setOptionValue($(e.target).val());
                     }} id={"selectOption"} className={'my-2 form-select'}>
                         <option className={'option'} value={'옵션'}>옵션</option>
@@ -110,6 +114,19 @@ function ProductDetail(props) {
                             return <Review key={index} id={item.userId} date={item.reviewRegistrationDate}
                                            content={item.reviewContent} helpful={item.reviewHelpful}
                                            starPoint={item.reviewStarPoint}/>
+                        })
+                    }
+                </div>
+
+                <h2 className={"text-start"}>문의 / 답변 </h2>
+                <div className={"row mt-5"}>
+                    {
+                        qnaList.map((item, index) => {
+                            return <ProductQna key={index} qnaNum={item.qnaNum} productNum={item.productNum}
+                                               userId={item.userId} qnaTitle={item.qnaTitle}
+                                               qnaContent={item.qnaContent}
+                                               qnaRegistrationDate={item.qnaRegistrationDate} qnaState={item.qnaState}
+                                               qnaAnswer={item.qnaAnswer}/>
                         })
                     }
                 </div>
