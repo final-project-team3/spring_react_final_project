@@ -33,17 +33,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public String productInfoInsert(String productSellerId, String productKindNum, String productName, String productPrice, String productPrice1, String productContent, String productImg, String productStarPoint, String productDeliveryDay) {
-        productMapper.productInfoInsert(productSellerId, productKindNum, productName, productPrice,productPrice, productContent, productImg, productStarPoint, productDeliveryDay);
-        return productMapper.getProductInfoLatest();
-    }
-
-//    @Override
-//    public void productOptionInsert(int productNum, String productCouponUseable, String productOption1, String productOption2, String productQuantity, String productOptionPrice) {
-//        productMapper.productOptionInsert(productNum, productCouponUseable, productOption1, productOption2, productQuantity, productOptionPrice);
-//    }
-
-    @Override
     public void productOptionInsert(List<ProductOptionDto> productOptionDto) {
         productMapper.productOptionInsert(productOptionDto);
     }
@@ -71,6 +60,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public SellerInfoDto getSellerNameToSellerInfo(String productSellerBusinessName) {
         return productMapper.getSellerNameToSellerInfo(productSellerBusinessName);
+    }
+
+    @Override
+    public String productInfoInsert(ProductInfoDto productInfoDto) {
+        productMapper.productInfoInsert(productInfoDto);
+        return productMapper.getProductInfoLatest();
     }
 
     //    HSH

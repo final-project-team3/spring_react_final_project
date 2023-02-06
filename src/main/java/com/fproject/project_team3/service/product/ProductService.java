@@ -17,10 +17,6 @@ public interface ProductService {
 
     List<ProductInfoDto> getSearchProductList(String searchContent);
 
-    String productInfoInsert(String productSellerId, String productKindNum, String productName, String productPrice, String productPrice1, String productContent, String productImg, String productStarPoint, String productDeliveryDay);
-
-//    void productOptionInsert(int productNum, String productCouponUseable, String productOption1, String productOption2, String productQuantity, String productOptionPrice);
-
     void productOptionInsert(List<ProductOptionDto> productOptionDto);
 
     List<ProductInfoDto> getSellerProductList(String productSellerBusinessName);
@@ -50,6 +46,8 @@ public interface ProductService {
     List<ProductOptionDto> getProductOptionList(int productNum);
 
     SellerInfoDto getSellerNameToSellerInfo(String productSellerBusinessName);
+
+    String productInfoInsert(ProductInfoDto productInfoDto);
 
     //    GJY
 

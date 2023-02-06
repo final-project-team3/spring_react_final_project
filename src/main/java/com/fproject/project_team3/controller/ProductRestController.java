@@ -44,8 +44,8 @@ public class ProductRestController {
 
     //    제품 정보 넣기
     @PostMapping("/productInfoInsert")
-    public String productInfoInsert(@RequestParam("productSellerId") String productSellerId, @RequestParam("productKindNum") String productKindNum, @RequestParam("productName") String productName, @RequestParam("productPrice") String productPrice, @RequestParam("productContent") String productContent, @RequestParam("productImg") String productImg, @RequestParam("productStarPoint") String productStarPoint, @RequestParam("productDeliveryDay") String productDeliveryDay) {
-        return productService.productInfoInsert(productSellerId, productKindNum, productName, productPrice, productPrice, productContent, productImg, productStarPoint, productDeliveryDay);
+    public String productInfoInsert(@RequestBody ProductInfoDto productInfoDto) {
+        return productService.productInfoInsert(productInfoDto);
     }
 
 

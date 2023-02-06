@@ -8,7 +8,6 @@ import com.fproject.project_team3.dto.seller.SellerInfoDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface ProductMapper {
@@ -24,8 +23,6 @@ public interface ProductMapper {
     void productInfoInsert(ProductInfoDto productInfo);
 
     String getProductInfoLatest();
-
-    void productInfoInsert(String productSellerId, String productKindNum, String productName, String productPrice, String productPrice1, String productContent, String productImg, String productStarPoint, String productDeliveryDay);
 
 //    void productOptionInsert(int productNum, String productCouponUseable, String productOption1, String productOption2, String productQuantity, String productOptionPrice);
 
