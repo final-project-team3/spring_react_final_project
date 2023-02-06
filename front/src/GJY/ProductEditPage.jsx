@@ -4,7 +4,7 @@ import axios from "axios";
 const ProductEditPage = () => {
   const { data } = axios.post("http://localhost:8080/selectProductInfo", null, {
     params: {
-      productSellerId: productSellerId,
+      // productSellerId: productSellerId,
     },
   });
 
