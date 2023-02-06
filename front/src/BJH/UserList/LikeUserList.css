@@ -117,10 +117,10 @@
 }
 
 .content {
-    float: left;
+    /*float: left;*/
     position: relative;
-    width: 980px !important;
-    padding: 40px 40px 120px;
+    /*width: 980px !important;*/
+    padding: 40px 40px 120px 250px;
 }
 
 .likeUser {
@@ -231,7 +231,7 @@
 .management {
     overflow: hidden;
     line-height: 30px;
-    padding: 16px 0 11px;
+    padding: 12px 0 0px;
 }
 
 .management button:hover {
