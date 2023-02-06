@@ -64,11 +64,8 @@ function ProductRegisterPage2() {
 
     for (let i = 0; i < optionValueList[0].length; i++) {
       for (let j = 0; j < optionValueList[1].length; j++) {
-        // console.log(`${optionValueList[0][i]}` + `, ${optionValueList[1][j]}`);
         let valueObj = {
           index: ii,
-          // value1: `${optionValueList[0][i]}`,
-          // value2: `${optionValueList[1][j]}`,
           productOption1: `${optionValueList[0][i]}`,
           productOption2: `${optionValueList[1][j]}`,
         };
@@ -96,137 +93,6 @@ function ProductRegisterPage2() {
       $(`#checkboxes${iValue}`).prop("disabled", false);
     }
   };
-
-  /**
-   * 옵션명 개수 가져와서 그만큼 옵션명 설정할 수 있게 하기 위한 함수
-   * */
-  // const optionTyped = () => {
-  //   let optionCount = optionTotal;
-  //   let returnDiv = [];
-  //   // console.log(optionTotal);
-  //   for (let i = 0; i < optionCount; i++) {
-  //     switch (i) {
-  //       case 0:
-  //         returnDiv.push(
-  //           <div className={"row my-2"}>
-  //             <div className={"col-3 mb-2"}>옵션명</div>
-  //             <div className={"col-6 mb-2"}>옵션값</div>
-  //             <div className={"col-3"}></div>
-  //             <div className={"col-3"}>
-  //               <input
-  //                 type={"text"}
-  //                 id={`option${i}`}
-  //                 className={"col-3"}
-  //                 placeholder={"예시 : 컬러"}
-  //               />
-  //             </div>
-  //             <div className={"col-6"}>
-  //               <input
-  //                 type={"text"}
-  //                 id={`option${i}-${i}`}
-  //                 className={"col-6"}
-  //                 placeholder={"예시 : 빨강,노랑 (,로 구분)"}
-  //               />
-  //             </div>
-  //             <div className={"col-2"}>
-  //               <button
-  //                 hidden={optionTotal >= 2 ? true : false}
-  //                 className={"btn btn-outline-primary"}
-  //                 onClick={() => {
-  //                   setOptionTotal(2);
-  //                 }}
-  //               >
-  //                 +
-  //               </button>
-  //             </div>
-  //           </div>
-  //         );
-  //         break;
-  //       case 1:
-  //         returnDiv.push(
-  //           <div className={"row my-2"}>
-  //             <div className={"col-3"}>
-  //               <input
-  //                 type={"text"}
-  //                 id={`option${i}`}
-  //                 className={"col-3"}
-  //                 placeholder={"예시 : 컬러"}
-  //               />
-  //             </div>
-  //             <div className={"col-6"}>
-  //               <input
-  //                 type={"text"}
-  //                 id={`option${i}-${i}`}
-  //                 className={"col-6"}
-  //                 placeholder={"예시 : 빨강,노랑 (,로 구분)"}
-  //               />
-  //             </div>
-  //             <div className={"col-1"}>
-  //               <button
-  //                 hidden={optionTotal == 3 ? true : false}
-  //                 className={"btn btn-outline-primary"}
-  //                 onClick={() => {
-  //                   setOptionTotal(1);
-  //                 }}
-  //               >
-  //                 -
-  //               </button>
-  //             </div>
-  //             <div className={"col-1"}>
-  //               <button
-  //                 hidden={optionTotal == 3 ? true : false}
-  //                 className={"btn btn-outline-primary"}
-  //                 onClick={() => {
-  //                   setOptionTotal(3);
-  //                 }}
-  //               >
-  //                 +
-  //               </button>
-  //             </div>
-  //           </div>
-  //         );
-  //         break;
-  //       case 2:
-  //         returnDiv.push(
-  //           <div className={"row my-2"}>
-  //             <div className={"col-3"}>
-  //               <input
-  //                 type={"text"}
-  //                 id={`option${i}`}
-  //                 className={"col-3"}
-  //                 placeholder={"예시 : 컬러"}
-  //               />
-  //             </div>
-  //             <div className={"col-6"}>
-  //               <input
-  //                 type={"text"}
-  //                 id={`option${i}-${i}`}
-  //                 className={"col-6"}
-  //                 placeholder={"예시 : 빨강,노랑 (,로 구분)"}
-  //               />
-  //             </div>
-  //             <div className={"col-1"}>
-  //               <button
-  //                 className={"btn btn-outline-primary"}
-  //                 onClick={() => {
-  //                   setOptionTotal(2);
-  //                 }}
-  //               >
-  //                 -
-  //               </button>
-  //             </div>
-  //           </div>
-  //         );
-  //     }
-  //     $("#option-total").val(optionTotal).prop("selected", true);
-  //     setOptionInputList(returnDiv);
-  //   }
-  // };
-
-  // 이걸 해야 처음에 옵션명 입력하는 인풋태그가 1개 들어감
-  // useEffect(() => {
-  //   optionTyped();
-  // }, [optionTotal]);
 
   // 대분류, 소분류
   useEffect(() => {
@@ -312,7 +178,6 @@ function ProductRegisterPage2() {
       } else if (selectBigKind === "여자" && selectSmallKind === "바지") {
         kindNum = 8;
       }
-      // console.log((JSON.stringify(productList)));
 
       setImageData(imageData);
       const { data } = await axios.post(
@@ -321,7 +186,7 @@ function ProductRegisterPage2() {
         {
           params: {
             productSellerId: sellerInfo.sellerId,
-            // productKindNum: productKindNum,
+            productSellerBusinessName: sellerInfo.sellerBusinessName,
             productKindNum: kindNum,
             productName: productName,
             productPrice: productPrice,
@@ -333,10 +198,10 @@ function ProductRegisterPage2() {
         }
       );
 
-      for (let i = 0; i < copyOptionList.length; i++) {
-        copyOptionList[i]["productNum"] = data;
+      for (let i = 0; i < optionList.length; i++) {
+        optionList[i]["productNum"] = data;
       }
-      setOptionList(copyOptionList);
+      setOptionList(optionList);
       console.log(optionList);
 
       axios
@@ -359,15 +224,6 @@ function ProductRegisterPage2() {
     }
   };
 
-  // Size 체크박스 값 배열로 받기 --- 사용 X
-  // const onCheckedSizeElement = (checked, item) => {
-  //   if (checked) {
-  //     setCheckedSizeList([...checkedSizeList, item]);
-  //   } else if (!checked) {
-  //     setCheckedSizeList(checkedSizeList.filter((el) => el !== item));
-  //   }
-  // };
-
   const onRemove = (index) => {
     // user.id 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듦
     // = user.id 가 id 인 것을 제거함
@@ -375,8 +231,6 @@ function ProductRegisterPage2() {
     setOptionList(
       optionList.filter((optionList) => optionList.index !== index)
     );
-    // console.log(users.length);
-    // console.log(users[1].id);
   };
 
   const handleSingleCheck = (checked, index) => {
@@ -412,17 +266,22 @@ function ProductRegisterPage2() {
     setOptionList(filterList);
   };
 
+  // 옵션 데이터 확정 버튼
   const tblData = () => {
     // 고정값 : productName, productPrice
     // 변동값 : optionValue, optionPrice, stockQty, sailsStatusOption
+    console.log("=================전전전 copyOptionList : ");
+    console.log(copyOptionList);
+    console.log("전전전 optionList : ");
+    console.log(optionList);
     copyOptionList = optionList;
+    console.log("후후후 copyOptionList : ");
+    console.log(copyOptionList);
+    console.log("=================후후후 optionList : ");
+    console.log(optionList);
 
     setProductName($("#productName").val()); // 제품명
     setProductPrice($("#productPrice").val()); // 제품명
-
-
-    console.log("======================");
-    console.log(copyOptionList);
 
     for (let i = 0; i < optionList.length; i++) {
       let iValue = optionList[i].index;
@@ -448,33 +307,14 @@ function ProductRegisterPage2() {
       copyOptionList[i]["productOptionPrice"] = optionPriceN;
       copyOptionList[i]["productQuantity"] = stockQtyN;
       copyOptionList[i]["productCouponUseable"] = sailsStatusOptionN;
-      /*
-          index: 0
-          optionPrice: "2"
-          optionValue: "빨강,  큰"
-          productName: "상품명123"
-          productPrice: "125533"
-          sailsStatusOption: "판매중"
-          stockQty:"55"
-          value1: "빨강"
-          value2: "큰"
-       */
     }
     setOptionList(copyOptionList);
-    console.log(copyOptionList);
   };
-
-  // FireBaseExample 에서 전달된 이미지 파일명 확인
-  // const imageDataOk = () => {
-  //     console.log(imageData);
-  // }
 
   //-------------------------------------------------- RETURN -------------------------------------------------- //
   //-------------------------------------------------- RETURN -------------------------------------------------- //
   return (
     <div>
-      {/*<img src="https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/Images%2Ftest_img_01.JPG1675613115132?alt=media&token=f94ce06a-0903-448c-ae39-32106d6fddc7" alt=""/>*/}
-      {/*<button className={"btn btn-primary"} onClick={imageDataOk}>imageDataOk</button>*/}
       <div className={"container"}>
         <div className={"row"}>
           <h1 className={"mt-4 text-center"}>제품 신규 등록</h1>
@@ -584,7 +424,6 @@ function ProductRegisterPage2() {
                 </td>
               </tr>
 
-
               <tr className={"border text-center"}>
                 <td>옵션 등록</td>
                 <td className={"border text-center"} style={{ height: 60 }}>
@@ -596,7 +435,7 @@ function ProductRegisterPage2() {
                         className={"col-3"}
                         placeholder={"컬러를 입력하세요"}
                         defaultValue={"컬러"}
-
+                        readOnly={true}
                       />
                     </div>
                     <div className={"col-6"}>
@@ -616,7 +455,7 @@ function ProductRegisterPage2() {
                         className={"col-3"}
                         placeholder={"사이즈를 입력하세요"}
                         defaultValue={"사이즈"}
-
+                        readOnly={true}
                       />
                     </div>
                     <div className={"col-6"}>
@@ -628,13 +467,13 @@ function ProductRegisterPage2() {
                       />
                     </div>
                     <div className={"d-flex mt-3"}>
-                    <button
-                      className={"btn btn-outline-primary mb-2"}
-                      onClick={OptionReg}
-                      checked={optionChecked}
-                    >
-                      옵션 목록으로 적용
-                    </button>
+                      <button
+                        className={"btn btn-outline-primary mb-2"}
+                        onClick={OptionReg}
+                        checked={optionChecked}
+                      >
+                        옵션 목록으로 적용
+                      </button>
                     </div>
                   </div>
                 </td>
@@ -679,13 +518,21 @@ function ProductRegisterPage2() {
                                 }
                               >
                                 {optionName.map((item, index) => {
-                                  return <p className={"col fs-5 mt-2"}>{item}</p>;
+                                  return (
+                                    <p className={"col fs-5 mt-2"}>{item}</p>
+                                  );
                                 })}
                               </div>
                             </th>
-                            <th className={"col align-self-center align"}>옵션가</th>
-                            <th className={"col align-self-center align"}>재고수량</th>
-                            <th className={"col align-self-center align"}>판매상태</th>
+                            <th className={"col align-self-center align"}>
+                              옵션가
+                            </th>
+                            <th className={"col align-self-center align"}>
+                              재고수량
+                            </th>
+                            <th className={"col align-self-center align"}>
+                              판매상태
+                            </th>
                             <th className={"col align-self-center align"}>
                               삭제{" "}
                               <div>
