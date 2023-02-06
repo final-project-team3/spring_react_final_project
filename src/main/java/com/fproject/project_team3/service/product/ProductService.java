@@ -49,6 +49,8 @@ public interface ProductService {
 
     String productInfoInsert(ProductInfoDto productInfoDto);
 
+    List<ProductInfoDto> categoryProductList(String bigKind, String smallKind);
+
     //    GJY
 
     //    BJH

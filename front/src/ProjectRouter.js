@@ -36,6 +36,7 @@ import Login from "./HSH/Login";
 import Category from "./HSH/Category";
 import FireBaseExample from "./GJY/FireBaseExample";
 import SellerProductList from "./HSH/SellerProductList";
+import ProductEditPage from "./GJY/ProductEditPage";
 
 
 const ProjectRouter = () => {
@@ -83,6 +84,7 @@ const ProjectRouter = () => {
                     <Route path={"/OptionList"} element={<OptionList/>}/>
                     <Route path={"/GwakApp"} element={<GwakApp/>}/>
                     <Route path={"/FireBaseExample"} element={<FireBaseExample/>}/>
+                    <Route path={"/ProductEditPage"} element={<ProductEditPage/>}/>
 
 
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useLocation, useParams} from "react-router-dom";
+import {Link, useLocation, useParams} from "react-router-dom";
 import axios from "axios";
 import $ from "jquery";
 
@@ -8,9 +8,9 @@ const Search = () => {
     const [searchData, setSearchData] = useState([]);
     const [prevSearchData, setPrevSearchData] = useState([]);
     const {searchContent} = useParams();
+
+    // 주소 변화를 알기 위함
     const location = useLocation();
-
-
     let locationPath = location.pathname;
 
     $(function () {
@@ -19,6 +19,13 @@ const Search = () => {
         }
     });
 
+    const moneySplice = money => {
+        for (let i = 1; i < money.length; i--) {
+            if (i)
+                money.add(",")
+        }
+    }
+
     useEffect(() => {
         return async () => {
 
@@ -26,26 +33,32 @@ const Search = () => {
                 params: {searchContent: searchContent}
             });
             console.log(data);
-            console.log("data 문자열로 변환한 값 : "+JSON.stringify(data));
-            console.log("--------------------------------------------------");
-            console.log("searchData 문자열로 변환한 값 : "+JSON.stringify(searchData));
-            setPrevSearchData(data);
-            console.log("prevSearchData 문자열로 변환한 값 : "+JSON.stringify(prevSearchData));
 
-            console.log(JSON.stringify(data) !== JSON.stringify(searchData));
-            if (JSON.stringify(data) !== JSON.stringify(searchData)) {
-                setSearchData(data);
-            };
+            setSearchData(data);
         }
     }, [locationPath])
 
     return (
-        <div>
-            {searchData.length == 0 ? <h2>검색된 제품이 없습니다.</h2> : searchData.map((item, index) => {
-                return (
-                    <h2 key={index} className={'text-center'}>{item.productName}</h2>
-                )
-            })}
+        <div className={'container'}>
+            <div className={"row"}>
+                {searchData.length == 0 ? <h2>검색된 제품이 없습니다.</h2> : searchData.map((product, index) => {
+                    return (
+                        <div key={index} className={'mt-5 col-3'}>
+                            <Link to={`/productDetail/${product.productNum}`}>
+                                <img width={300} src={product.productImg}/>
+                            </Link>
+                            <Link to={`/productSellerPage/${product.productSellerBusinessName}`}>
+                                <h5 className={"my-3"}>{product.productSellerBusinessName}</h5>
+                            </Link>
+                            <Link to={`/productDetail/${product.productNum}`}>
+                                <h5 className={'mb-0'}>{product.productName}</h5>
+                                <h5 className={'mb-4'}>{product.productPrice = product.productPrice.toString()
+                                    .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</h5>
+                            </Link>
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     )
 }
