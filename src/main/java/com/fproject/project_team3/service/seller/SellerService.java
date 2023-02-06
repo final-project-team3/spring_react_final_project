@@ -22,6 +22,8 @@ public interface SellerService {
 
     Object sellerLogin(String id, String pass);
 
+    String businessNameCheck(String businessName);
+
     //    LYS
 
     //    GJY

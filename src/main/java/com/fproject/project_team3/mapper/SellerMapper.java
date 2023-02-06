@@ -22,6 +22,8 @@ public interface SellerMapper {
     void sellerInfoUpdate(SellerInfoDto sellerInfoDto);
 
     Object sellerLogin(String id, String pass);
+
+    String businessNameCheck(String businessName);
     //    HSH
 
     //    LYS

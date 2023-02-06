@@ -56,6 +56,12 @@
         WHERE seller_business_num = #{sellerBusinessNum}
     </select>
 
+    <select id="businessNameCheck" parameterType="String" resultType="String">
+        SELECT seller_business_name
+        FROM seller_info
+        WHERE seller_business_name = #{sellerBusinessName}
+    </select>
+
 
     <!-- LYS -->
 

@@ -42,6 +42,9 @@ public class SellerServiceImpl implements SellerService {
         return sellerMapper.sellerLogin(id,pass);
     }
 
+    @Override
+    public String businessNameCheck(String businessName) { return sellerMapper.businessNameCheck(businessName); }
+
     //    HSH
 
     //    HSH

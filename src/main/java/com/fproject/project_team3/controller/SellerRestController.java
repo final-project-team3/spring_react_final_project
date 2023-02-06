@@ -72,6 +72,15 @@ public class SellerRestController {
         return BNum;
     }
 
+    @PostMapping("/businessNameCheck")
+    public Object businessNameCheck(@RequestParam("businessNameData") String sellerBusinessName){
+        String bName = sellerService.businessNameCheck(sellerBusinessName);
+        if (bName == null){
+            return "";
+        }
+        return bName;
+    }
+
     //    LYS
 
     //    GJY
