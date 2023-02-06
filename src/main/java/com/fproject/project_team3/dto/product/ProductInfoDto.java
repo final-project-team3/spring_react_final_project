@@ -14,4 +14,5 @@ public class ProductInfoDto {
   private String productRegistrationDate;
   private String reviewStarPoint;
   private String productDeliveryDay;
+  private String productSellerBusinessName;
 }
