@@ -1,6 +1,7 @@
 package com.fproject.project_team3.controller;
 
 import com.fproject.project_team3.dto.user.UserInfoDto;
+import com.fproject.project_team3.dto.userAndseller.QnaDto;
 import com.fproject.project_team3.dto.userAndseller.ReviewDto;
 import com.fproject.project_team3.service.review.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class ReviewRestController {
     }
 
     @PostMapping("/writeMyReview")
-    public void writeMyReview(ReviewDto reviewDto, HttpServletResponse httpServletResponse)throws IOException{
+    public void writeMyReview(ReviewDto reviewDto, HttpServletResponse httpServletResponse) throws IOException {
         reviewService.writeMyReview(reviewDto);
         httpServletResponse.sendRedirect("http://localhost:3000/myReview");
     }

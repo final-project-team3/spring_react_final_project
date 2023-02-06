@@ -12,4 +12,6 @@ public class QnaDto {
     String qnaRegistrationDate;
     String qnaState;
     String qnaAnswer;
+    String qnaAnswerRegistrationDate;
+
 }

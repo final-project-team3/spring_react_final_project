@@ -6,6 +6,8 @@ import axios from "axios";
 import {Link, useParams} from "react-router-dom";
 import Pagination from "../GJY/Pagination";
 import $ from 'jquery';
+import ProductQna from "../LYS/ProductQna";
+import './ProductDetail.css'
 
 function ProductDetail(props) {
     const {productNum} = useParams();
@@ -21,7 +23,9 @@ function ProductDetail(props) {
     const [reviewList, setReviewList] = useState([]);
     const [productInfo, setProductInfo] = useState();
     const [productOption, setProductOption] = useState([]);
+    const [qnaList, setQnaList] = useState([]);
 
+    const [reviewCheck, setReviewCheck] = useState(true);
 
     useEffect(() => {
         axios.post('http://localhost:8080/getReview', null, {params: {productNum: productNum}})
@@ -30,6 +34,15 @@ function ProductDetail(props) {
                 setReviewList(data);
             });
     }, []);
+
+    useEffect(() => {
+        axios.post('http://localhost:8080/getQna', null, {params: {productNum: productNum}})
+            .then((req) => {
+                const {data} = req;
+                setQnaList(data);
+            });
+    }, [])
+
     useEffect(() => {
         return async () => {
             const {data} = await axios.get("http://localhost:8080/getProductInfoFromDetail", {
@@ -62,9 +75,9 @@ function ProductDetail(props) {
                             <h2>{productInfo?.productSellerId}</h2>
                         </div>
                     </div>
-                    <select onClick={(e)=> {
+                    <select onClick={(e) => {
                         setOptionValue($(e.target).val());
-                    }} onChange={(e)=> {
+                    }} onChange={(e) => {
                         setOptionValue($(e.target).val());
                     }} id={"selectOption"} className={'my-2 form-select'}>
                         <option className={'option'} value={'옵션'}>옵션</option>
@@ -97,12 +110,17 @@ function ProductDetail(props) {
                     </div>
                 </div>
             </div>
+
             <div className={'mt-3 border border-dark'}>
                 <h4>{productInfo?.productContent}</h4>
             </div>
-            <hr/>
+
+            <ul className="tab-titles row">
+                <li onClick={() => setReviewCheck(true)} className="review col-6">제품 리뷰</li>
+                <li onClick={() => setReviewCheck(false)} className="qna col-6">문의 / 답변</li>
+            </ul>
             {/* 리뷰 들어감 */}
-            <div className="mt-5 container">
+            <div hidden={!reviewCheck} className="mt-5 container">
                 <h2 className={"text-start"}>제품 리뷰</h2>
                 <div className={"row mt-5"}>
                     {
@@ -113,15 +131,33 @@ function ProductDetail(props) {
                         })
                     }
                 </div>
+                <br/>
+                <Pagination
+                    total={reviewList.length}
+                    limit={limit}
+                    page={page}
+                    setPage={setPage}
+                />
             </div>
-            <Pagination
-                total={reviewList.length}
-                limit={limit}
-                page={page}
-                setPage={setPage}
-            />
+
+            <div hidden={reviewCheck} className="mt-5 container">
+                <h2 className={"text-start"}>문의 / 답변</h2>
+                <div className={"row mt-5"}>
+                    {
+                        qnaList.map((item, index) => {
+                            return <ProductQna key={index} qnaNum={item.qnaNum} productNum={item.productNum}
+                                               userId={item.userId} qnaTitle={item.qnaTitle}
+                                               qnaContent={item.qnaContent}
+                                               qnaRegistrationDate={item.qnaRegistrationDate} qnaState={item.qnaState}
+                                               qnaAnswer={item.qnaAnswer}
+                                               qnaAnswerRegistrationDate={item.qnaAnswerRegistrationDate}/>
+                        })
+                    }
+                </div>
+            </div>
         </div>
     );
 }
+
 
 export default ProductDetail;

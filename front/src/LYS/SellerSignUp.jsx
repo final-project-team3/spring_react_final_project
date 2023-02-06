@@ -1,7 +1,6 @@
 import axios from "axios";
-import React, {useState, useEffect} from "react";
+import React from "react";
 import styled from "styled-components";
-import DaumPostcode from 'react-daum-postcode';
 import Popup from "./Popup";
 import $ from "jquery";
 import {useNavigate} from "react-router-dom";
@@ -221,6 +220,7 @@ function SellerSignUp() {
 
         if (bir == '' || gen == '') { //빈값
             $('.checkBG').css('display', 'inline-block');
+            $('.checkBirth').css('display', 'none');
             checkList[5] = false;
         } else {
             $('.checkBG').css('display', 'none');
@@ -347,15 +347,27 @@ function SellerSignUp() {
     };
 
     //사업자명
-    function businessNameCheck() {
+    async function businessNameCheck() {
         var bName = $('#businessName').val();
+        let {data} = await axios.post("http://localhost:8080/businessNameCheck", null, {
+            params: {
+                businessNameData: bName
+            }
+        });
 
         if (bName == '') {
             $('.business_name_blank').css('display', 'inline-block');
+            $('.business_name_already').css("display", "none");
+            $('.business_name_ok').css('display', 'none');
+            checkList[9] = false;
+        } else if (data != "") { //중복된 사업자명 일때
+            $('.business_name_blank').css('display', 'none');
+            $('.business_name_already').css("display", "inline-block");
             $('.business_name_ok').css('display', 'none');
             checkList[9] = false;
         } else {
             $('.business_name_blank').css('display', 'none');
+            $('.business_name_already').css("display", "none");
             $('.business_name_ok').css('display', 'inline-block');
             checkList[9] = true;
         }
@@ -592,7 +604,7 @@ function SellerSignUp() {
                                             입니다.</HiddenMessage>
                                         <HiddenMessage style={noStyle} className="business_name_blank no">필수
                                             항목입니다.</HiddenMessage>
-                                        <HiddenMessage style={noStyle} className="business_name_exist no">이미 등록된 사업자
+                                        <HiddenMessage style={noStyle} className="business_name_already no">이미 등록된 사업자
                                             이름입니다.</HiddenMessage>
                                     </InputTextSizeWTypeL>
                                 </FormBlockBody>
