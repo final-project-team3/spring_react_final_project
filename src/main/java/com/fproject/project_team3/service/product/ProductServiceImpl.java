@@ -74,6 +74,8 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.categoryProductList(kindNum);
     }
 
+
+
     //    HSH
 
     //    LYS
@@ -107,6 +109,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int checkProductName(String productName, String productSellerId) throws Exception {
         return productMapper.checkProductName(productName, productSellerId);
+    }
+    @Override
+    public List<ProductInfoDto> getProductInfo(String productSellerId, String productName) {
+        return productMapper.getProductInfo(productSellerId, productName);
     }
 
     //    GJY
