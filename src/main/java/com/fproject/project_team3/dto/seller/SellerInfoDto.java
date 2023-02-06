@@ -19,4 +19,5 @@ public class SellerInfoDto {
     String sellerBusinessNum;
     String sellerDeliveryPrice;
     String sellerDeliveryFree;
+    int sellerInterestedCount;
 }

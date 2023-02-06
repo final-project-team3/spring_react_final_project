@@ -50,7 +50,7 @@ function ProductDetail(props) {
             <h1 className={"text-center"}>제품 상세</h1>
             <div className={'row mt-5'}>
                 <div className={'col-6'}>
-                    <img width={500} src={'../Img/test.png'}/>
+                    <img width={500} src={productInfo?.productImg}/>
                 </div>
                 <div className={'col-4 border-1'}>
                     <h2>{productInfo?.productName}</h2>

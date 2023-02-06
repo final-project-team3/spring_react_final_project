@@ -9,7 +9,7 @@ function ProductList(props) {
             const {data} = await axios.get("http://localhost:8080/getProductList");
             setProductList(data);
         }
-    },[])
+    }, [])
     return (
         <div>
             <div className="container">
@@ -19,7 +19,12 @@ function ProductList(props) {
                             return (
                                 <div key={index} className={'mt-5 col-3'}>
                                     <Link to={`/productDetail/${product.productNum}`}>
-                                        <img width={300} src={"../Img/ma.jpg"}/>
+                                        <img width={300} src={product.productImg}/>
+                                    </Link>
+                                    <Link to={`/productSellerPage/${product.productSellerBusinessName}`}>
+                                        <h5 className={"my-3"}>{product.productSellerBusinessName}</h5>
+                                    </Link>
+                                    <Link to={`/productDetail/${product.productNum}`}>
                                         <h5 className={'mb-0'}>{product.productName}</h5>
                                         <h5 className={'mb-4'}>{product.productPrice}</h5>
                                     </Link>
