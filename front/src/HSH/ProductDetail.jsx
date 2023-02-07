@@ -13,7 +13,6 @@ import './ProductDetail.css';
 
 function ProductDetail(props) {
     const {productNum} = useParams();
-    console.log(productNum);
     const [optionValue, setOptionValue] = useState();
     const [buyList, setBuyList] = useState([]);
 
@@ -102,8 +101,12 @@ function ProductDetail(props) {
                             <h2>{productInfo?.productSellerId}</h2>
                         </div>
                     </div>
+                    {/* 셀렉트 */}
                     <select onChange={(e) => {
-                        let selectOptionValue = $(e.target).val();
+                        let selectOptionList = $(e.target).val().split(",");
+                        let selectOptionValue = selectOptionList[0];
+
+                        console.log(selectOptionValue);
                         if (selectOptionValue == "옵션") {
                             Swal.fire({
                                 position: "top-center",
@@ -114,9 +117,10 @@ function ProductDetail(props) {
                             });
                         } else {
                             let doubleCheck = true;
+                            let selectOptionPrice = selectOptionList[1].toString()
+                                .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
                             for (let i = 0; i < buyList.length; i++) {
                                 if (selectOptionValue == buyList[i]?.optionValue) {
-                                    doubleCheck = false;
                                     Swal.fire({
                                         position: "top-center",
                                         icon: "warning",
@@ -124,27 +128,44 @@ function ProductDetail(props) {
                                         showConfirmButton: true,
                                         timer: 1500
                                     })
+                                    doubleCheck = false;
                                     break;
                                 }
                             }
+
+                            // doubleCheck 가 true일 때
                             if (doubleCheck) {
-                                buyListPushFunc(buyList, {optionValue: selectOptionValue})
+                                buyListPushFunc(buyList, {
+                                    optionValue: selectOptionValue,
+                                    optionPrice: selectOptionPrice
+                                });
+                                // $("#selectOption").val("옵션").prop("selected", true);
+                                console.log(buyList);
                             }
-                            // doubleCheck ? buyListPushFunc(buyList, [{optionValue: selectOptionValue}]) : null
-                            // doubleCheck == true ? buyListAddFunc(buyList, {optionValue : selectOptionValue}) : null
+                            if (buyList.length != 0) $("#div-optionShow").prop("hidden", false);
+                            else $("#div-optionShow").prop("hidden", true);
                         }
                     }} id={"selectOption"} className={'my-2 form-select'}>
-                        <option className={'option'} value={'옵션'}>[필수] 옵션을 선택해주세요.</option>
-                        {productOption.map((option) => {
+                        {/* 옵션 div */}
+                        <option value={'옵션'}>[필수] 옵션을 선택해주세요.</option>
+                        {productOption.map((option, index) => {
+                            // 옵션 Array
+                            let optionArray = [`${option.productOption1}${option.productOption2}`, option.productOptionPrice !== "" ? `${option.productOptionPrice}` : option.productOptionPrice = 0]
                             return (
-                                <option className={'d-flex justify-content-around'}
-                                        value={option.productOption1 + option.productOption2}>{option.productOption1 + option.productOption2}</option>
+                                <option key={index} value={optionArray}><p>{option.productOption1 + option.productOption2} + </p>
+                                    <p>{option.productOptionPrice}</p></option>
                             )
                         })}
                     </select>
                     {/* 옵션 넣으면 값 뜨는 데*/}
-                    <div hidden={true} className={'div-option'}>
-
+                    <div id={"div-optionShow"} hidden={true} className={'border border-dark'}>
+                        {buyList.map((buyItem, index) => {
+                            return (
+                                <ul key={index}>
+                                    <li>{buyItem.optionValue}</li>
+                                </ul>
+                            )
+                        })}
                     </div>
                     <div className={'row'}>
                         <hr/>
@@ -176,9 +197,9 @@ function ProductDetail(props) {
             <div className="ec-base-tab grid2">
                 <ul className="menu">
                     <li onClick={() => setReviewCheck(true)} className={reviewCheck == true ? "selected" : null}><a
-                        >제품 리뷰</a></li>
+                    >제품 리뷰</a></li>
                     <li onClick={() => setReviewCheck(false)} className={reviewCheck == false ? "selected" : null}><a
-                        >문의 / 답변</a></li>
+                    >문의 / 답변</a></li>
                 </ul>
             </div>
 
@@ -208,7 +229,8 @@ function ProductDetail(props) {
                 <div className={"row mt-5"}>
                     <div className="prod-inquiry-list">
                         <div className="clearFix">
-                            <Link to={`/qnaWrite/${productNum}`} state={{pathname:pathname}} className="prod-inquiry-list__write-btn" type={"button"}>문의하기</Link>
+                            <Link to={`/qnaWrite/${productNum}`} state={{pathname: pathname}}
+                                  className="prod-inquiry-list__write-btn" type={"button"}>문의하기</Link>
                         </div>
 
                         <div className="prod-inquiry-list__emphasis">
@@ -225,7 +247,8 @@ function ProductDetail(props) {
                                     return <ProductQna key={index} qnaNum={item.qnaNum} productNum={item.productNum}
                                                        userId={item.userId} qnaTitle={item.qnaTitle}
                                                        qnaContent={item.qnaContent}
-                                                       qnaRegistrationDate={item.qnaRegistrationDate} qnaState={item.qnaState}
+                                                       qnaRegistrationDate={item.qnaRegistrationDate}
+                                                       qnaState={item.qnaState}
                                                        qnaAnswer={item.qnaAnswer}
                                                        qnaAnswerRegistrationDate={item.qnaAnswerRegistrationDate}/>
                                 })
