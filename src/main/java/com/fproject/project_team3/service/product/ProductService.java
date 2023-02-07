@@ -51,7 +51,7 @@ public interface ProductService {
 
     List<ProductInfoDto> categoryProductList(String bigKind, String smallKind);
 
-    List<ProductInfoDto> getProductInfo(String productSellerId, String productName);
+    ProductInfoDto getProductInfo(String productSellerId, String productName);
 
     //    GJY
 

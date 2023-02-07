@@ -152,8 +152,8 @@ public class ProductRestController {
 
     // 상품 수정하기 (선택한 상품명의 데이터 가져오기)
     @PostMapping("/selectProductInfo")
-    public List<ProductInfoDto> selectProductInfo(@RequestParam("productSellerId") String productSellerId, @RequestParam("productName") String productName) {
-        List<ProductInfoDto> ProductInfoDto = productService.getProductInfo(productSellerId,productName);
+    public ProductInfoDto selectProductInfo(@RequestParam("productSellerId") String productSellerId, @RequestParam("productName") String productName) {
+        ProductInfoDto ProductInfoDto = productService.getProductInfo(productSellerId,productName);
 //        System.out.println(productSelectList);
         return ProductInfoDto;
     }

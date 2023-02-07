@@ -111,7 +111,7 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.checkProductName(productName, productSellerId);
     }
     @Override
-    public List<ProductInfoDto> getProductInfo(String productSellerId, String productName) {
+    public ProductInfoDto getProductInfo(String productSellerId, String productName) {
         return productMapper.getProductInfo(productSellerId, productName);
     }
 
