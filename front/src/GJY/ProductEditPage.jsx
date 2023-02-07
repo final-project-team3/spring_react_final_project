@@ -3,6 +3,30 @@ import axios from "axios";
 import $ from "jquery";
 import FireBaseExample from "./FireBaseExample";
 
+// const tableTest = (props) => {
+//   return (
+//     <tr>
+//       <td>
+//         <input type="text" id={`productOption1${index}`} value={props.option1Value} onChange={()=> {
+//           props.setStateList.
+//         }}/>
+//       </td>
+//       <td>
+//         <input type="text" id={props.id} value={props.option1Value} />
+//       </td>
+//       <td>
+//         <input type="text" id={`productOptionPrice${index}`} value={productOptionPrice[index]}/>
+//       </td>
+//       <td>
+//         <input type="text" id={`productQuantity${index}`} value={productQuantity[index]}/>
+//       </td>
+//       <td>
+//         <input type="text" id={`productCouponUseable${index}`} value={productCouponUseable[index]}/>
+//       </td>
+//     </tr>
+//   )
+// }
+
 const ProductEditPage = () => {
   let sellerInfo = sessionStorage.getItem("sellerInfo");
   sellerInfo = JSON.parse(sellerInfo);
@@ -24,6 +48,7 @@ const ProductEditPage = () => {
   const [productOptionPrice, setProductOptionPrice] = useState([]);
   const [productQuantity, setProductQuantity] = useState([]);
   const [productCouponUseable, setProductCouponUseable] = useState([]);
+  const [productOptionNum, setProductOptionNum] = useState([]);
 
   useEffect(() => {
     return () => {
@@ -67,6 +92,7 @@ const ProductEditPage = () => {
               setProductGender(kindData.productGender);
               setProductSmallKind(kindData.productSmallKind);
 
+
               $("#productGender").prop("value", kindData.productGender);
               $("#productSmallKind").prop("value", kindData.productSmallKind);
 
@@ -98,12 +124,17 @@ const ProductEditPage = () => {
               const copyProductOptionPrice = [];
               const copyProductQuantity = [];
               const copyProductCouponUseable = [];
+              const copyProductOptionNum = [];
+
               for (let i = 0; i < data3.data.length; i++) {
                 copyProductOption1.push(data3.data[i].productOption1);
                 copyProductOption2.push(data3.data[i].productOption2);
                 copyProductOptionPrice.push(data3.data[i].productOptionPrice);
                 copyProductQuantity.push(data3.data[i].productQuantity);
-                copyProductCouponUseable.push(data3.data[i].productCouponUseable);
+                copyProductCouponUseable.push(
+                  data3.data[i].productCouponUseable
+                );
+                copyProductOptionNum.push(data3.data[i].productOptionNum);
               }
               console.log(copyProductOption1);
               setProductOption1(copyProductOption1);
@@ -111,8 +142,7 @@ const ProductEditPage = () => {
               setProductOptionPrice(copyProductOptionPrice);
               setProductQuantity(copyProductQuantity);
               setProductCouponUseable(copyProductCouponUseable);
-
-
+              setProductOptionNum(copyProductOptionNum);
             });
         });
     };
@@ -126,7 +156,98 @@ const ProductEditPage = () => {
           .replace(/[^0-9]/g, "")
       );
     });
+    for (let i = 0; i < optionData.length; i++) {
+      console.log(i);
+      $(`#productOptionPrice${i}`).on("blur keyup", function () {
+        $(this).val(
+          $(this)
+            .val()
+            .replace(/[^0-9]/g, "")
+        );
+      });
+
+      $(`#productQuantity${i}`).on("blur keyup", function () {
+        $(this).val(
+          $(this)
+            .val()
+            .replace(/[^0-9]/g, "")
+        );
+      });
+    }
   });
+
+  const editFnc = async () => {
+    const productName = $("#productName").val();
+    const productPrice = $("#productPrice").val();
+    const productContent = $("#productContent").val();
+    // const imageData = imageData;
+
+    console.log(productName);
+    console.log(productPrice);
+    console.log(productContent);
+    console.log(imageData);
+
+    const productOption1 = [];
+    const productOption2 = [];
+    const productOptionPrice = [];
+    const productQuantity = [];
+    const productCouponUseable = [];
+
+    for (let i = 0; i < optionData.length; i++) {
+      productOption1.push($(`#productOption1${i}`).val());
+      productOption2.push($(`#productOption2${i}`).val());
+      productOptionPrice.push($(`#productOptionPrice${i}`).val());
+      productQuantity.push($(`#productQuantity${i}`).val());
+      productCouponUseable.push($(`#productCouponUseable${i}`).val());
+    }
+    const arrayAll = {
+      productNum,
+      // productCouponUseable,
+      // productOption1,
+      // productOption2,
+      // productQuantity,
+      // productOptionPrice,
+      productSellerId: sellerInfo.sellerId,
+      productName: productName,
+      productPrice: productPrice,
+      productContent: productContent,
+      productImg: productImg,
+    }
+
+    await
+      axios.post("http://localhost:8080/editDataUpdate", arrayAll, {
+        params: {
+          my: "info",
+        }
+      });
+    productOption1.map(async (item, i) => {
+      const arrayAll2 = {
+        productCouponUseable: productCouponUseable[i],
+        productOption1: productOption1[i],
+        productOption2: productOption2[i],
+        productQuantity: productQuantity[i],
+        productOptionPrice: productOptionPrice[i],
+        productOptionNum: productOptionNum[i],
+      };
+      await axios.post("http://localhost:8080/editDataUpdate", arrayAll2, {
+        params: {
+          my: "option",
+        }
+      })
+    })
+    // const arrayAll2 = [{
+    //   productCouponUseable: productCouponUseable[i],
+    //   productOption1: productOption1[i],
+    //   productOption2: productOption2[i],
+    //   productQuantity: productQuantity[i],
+    //   productOptionPrice: productOptionPrice[i],
+    // }]
+    // await axios.post("http://localhost:8080/editDataUpdate", arrayAll2, {
+    //   params: {
+    //     my: "option",
+    //   }
+    // })
+  };
 
   return (
     <div className={"container mb-5"}>
@@ -173,8 +294,14 @@ const ProductEditPage = () => {
       <div>
         옵션 변경
         <table className={"border border-primary"}>
-          <thead className={"border border-primary"}>
-          <tr>
+          <thead
+            style={{
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+            className={"border border-primary"}
+          >
+          <tr className={"text-center"}>
             <td>컬러</td>
             <td>사이즈</td>
             <td>옵션가</td>
@@ -182,38 +309,66 @@ const ProductEditPage = () => {
             <td>쿠폰사용가능여부</td>
           </tr>
           </thead>
-          <tbody className={"border border-primary"}>
+          <tbody
+            style={{
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+            className={"border border-primary"}
+          >
           {optionData.map((item, index) => {
-            let productOption1Value = productOption1[index];
-            let productOption2Value = productOption1[index];
-            let productOptionPriceValue = productOptionPrice[index];
-            let productQuantityValue = productQuantity[index];
-            let productCouponUseableValue = productOption1[index];
             return (
               <tr>
                 <td>
-                  <input type="text" id={`productOption1${index}`} value={productOption1Value} onChange={(e) => {
-                    console.log($(e.target).val());
-                    $(`#productOption1${index}`).prop("value", $(e.target).val());
-                  }}/>
+                  <input
+                    type="text"
+                    id={`productOption1${index}`}
+                    defaultValue={productOption1[index]}
+                    className={"text-center"}
+                  />
                 </td>
                 <td>
-                  <input type="text" id={`productOption2${index}`} value={productOption2[index]}/>
+                  <input
+                    type="text"
+                    id={`productOption2${index}`}
+                    defaultValue={productOption2[index]}
+                    className={"text-center"}
+                  />
                 </td>
                 <td>
-                  <input type="text" id={`productOptionPrice${index}`} value={productOptionPrice[index]}/>
+                  <input
+                    type="text"
+                    id={`productOptionPrice${index}`}
+                    defaultValue={productOptionPrice[index]}
+                    className={"text-center"}
+                  />
                 </td>
                 <td>
-                  <input type="text" id={`productQuantity${index}`} value={productQuantity[index]}/>
+                  <input
+                    type="text"
+                    id={`productQuantity${index}`}
+                    defaultValue={productQuantity[index]}
+                    className={"text-center"}
+                  />
                 </td>
                 <td>
-                  <input type="text" id={`productCouponUseable${index}`} value={productCouponUseable[index]}/>
+                  <input
+                    type="text"
+                    id={`productCouponUseable${index}`}
+                    defaultValue={productCouponUseable[index]}
+                    className={"text-center"}
+                  />
                 </td>
               </tr>
-            )
+            );
           })}
           </tbody>
         </table>
+      </div>
+      <div className={"d-flex justify-content-end me-5 col-7 mt-5"}>
+        <button className={"btn btn-primary me-5"} onClick={editFnc}>
+          수정 완료
+        </button>
       </div>
     </div>
   );

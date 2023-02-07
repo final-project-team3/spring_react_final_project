@@ -1,5 +1,6 @@
 package com.fproject.project_team3.service.product;
 
+import com.fproject.project_team3.dto.join.ProductInfoOptionDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.dto.product.ProductOptionDto;
@@ -123,6 +124,17 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductOptionDto> selectOptionData(int productNum) {
         return productMapper.selectOptionData(productNum);
+    }
+
+    @Override
+    public void editDataUpdate(Object productInfoOptionDto, String my) {
+        if (my.equals("info")) {
+            productMapper.productInfoUpdate(productInfoOptionDto);
+        } else {
+            productMapper.productOptionUpdate(productInfoOptionDto);
+        }
+
+
     }
 
     //    GJY

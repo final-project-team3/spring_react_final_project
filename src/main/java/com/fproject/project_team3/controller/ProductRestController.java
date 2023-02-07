@@ -1,5 +1,6 @@
 package com.fproject.project_team3.controller;
 
+import com.fproject.project_team3.dto.join.ProductInfoOptionDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.dto.product.ProductOptionDto;
@@ -159,6 +160,14 @@ public class ProductRestController {
     public List<ProductOptionDto> selectOptionData(@RequestParam("productNum") int productNum) {
 
         return productService.selectOptionData(productNum);
+    }
+
+    @PostMapping("/editDataUpdate")
+    public void editDataUpdate(@RequestBody ProductInfoOptionDto productInfoOptionDto, @RequestParam("my") String my) {
+        System.out.println(productInfoOptionDto.getProductName());
+//        System.out.println(productInfoOptionDto.getProductOption1());
+        productService.editDataUpdate(productInfoOptionDto, my);
+
     }
 
     //    GJY
