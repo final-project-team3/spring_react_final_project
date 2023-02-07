@@ -14,4 +14,9 @@ public class QnaServiceImpl implements QnaService{
 
     @Override
     public List<QnaDto> getQna(String productNum){ return qnaMapper.getQna(productNum);}
+
+    @Override
+    public void writeQna(QnaDto qnaDto) {
+        qnaMapper.writeQna(qnaDto);
+    }
 }

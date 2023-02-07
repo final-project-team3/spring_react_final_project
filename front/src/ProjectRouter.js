@@ -37,6 +37,7 @@ import Category from "./HSH/Category";
 import FireBaseExample from "./GJY/FireBaseExample";
 import SellerProductList from "./HSH/SellerProductList";
 import ProductEditPage from "./GJY/ProductEditPage";
+import QnaWrite from "./LYS/QnaWrite";
 
 
 const ProjectRouter = () => {
@@ -71,6 +72,7 @@ const ProjectRouter = () => {
                     <Route path="/infoUpdate" element={role == null ? <Login/> : role == "USER" ? <UserInfoUpdate/> : <SellerInfoUpdate/>}/>
                     <Route path="/myReview" element={<MyReviewList/>}/>
                     <Route path="/reviewWrite" element={<ReviewWrite/>}/>
+                    <Route path={"/qnaWrite/:productNum"} element={<QnaWrite/>}/>
                     {/*LYS*/}
 
                     {/*GJY*/}
