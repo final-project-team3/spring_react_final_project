@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -18,5 +20,12 @@ public class QnaController {
     public Object getQna(@RequestParam("productNum") String productNum) {
         List<QnaDto> qnaList = qnaService.getQna(productNum);
         return qnaList;
+    }
+
+    @PostMapping("/writeQna")
+    public void writeQna(@RequestParam("pathname") String pathname,QnaDto qnaDto, HttpServletResponse httpServletResponse) throws IOException{
+        System.out.println(pathname);
+        qnaService.writeQna(qnaDto);
+        httpServletResponse.sendRedirect("http://localhost:3000" + pathname);
     }
 }

@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface QnaMapper {
     List<QnaDto> getQna(String productNum);
+
+    void writeQna(QnaDto qnaDto);
 }

@@ -3,12 +3,13 @@ import '../App.css';
 import Review from "../LYS/Review";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {Link, useParams} from "react-router-dom";
+import {Link, useLocation, useParams} from "react-router-dom";
 import Pagination from "../GJY/Pagination";
 import $ from 'jquery';
 import ProductQna from "../LYS/ProductQna";
 import './ProductDetail.css'
 import Swal from "sweetalert2";
+import './ProductDetail.css';
 
 function ProductDetail(props) {
     const {productNum} = useParams();
@@ -81,6 +82,8 @@ function ProductDetail(props) {
             setProductOption(productOption);
         }
     }, [])
+
+    const pathname = useLocation();
 
     return (
         <div className="mt-5 container">
@@ -170,10 +173,15 @@ function ProductDetail(props) {
                 <h4>{productInfo?.productContent}</h4>
             </div>
 
-            <ul className="tab-titles row">
-                <li onClick={() => setReviewCheck(true)} className="review col-6">제품 리뷰</li>
-                <li onClick={() => setReviewCheck(false)} className="qna col-6">문의 / 답변</li>
-            </ul>
+            <div className="ec-base-tab grid2">
+                <ul className="menu">
+                    <li onClick={() => setReviewCheck(true)} className={reviewCheck == true ? "selected" : null}><a
+                        >제품 리뷰</a></li>
+                    <li onClick={() => setReviewCheck(false)} className={reviewCheck == false ? "selected" : null}><a
+                        >문의 / 답변</a></li>
+                </ul>
+            </div>
+
             {/* 리뷰 들어감 */}
             <div hidden={!reviewCheck} className="mt-5 container">
                 <h2 className={"text-start"}>제품 리뷰</h2>
@@ -198,16 +206,32 @@ function ProductDetail(props) {
             <div hidden={reviewCheck} className="mt-5 container">
                 <h2 className={"text-start"}>문의 / 답변</h2>
                 <div className={"row mt-5"}>
-                    {
-                        qnaList.map((item, index) => {
-                            return <ProductQna key={index} qnaNum={item.qnaNum} productNum={item.productNum}
-                                               userId={item.userId} qnaTitle={item.qnaTitle}
-                                               qnaContent={item.qnaContent}
-                                               qnaRegistrationDate={item.qnaRegistrationDate} qnaState={item.qnaState}
-                                               qnaAnswer={item.qnaAnswer}
-                                               qnaAnswerRegistrationDate={item.qnaAnswerRegistrationDate}/>
-                        })
-                    }
+                    <div className="prod-inquiry-list">
+                        <div className="clearFix">
+                            <Link to={`/qnaWrite/${productNum}`} state={{pathname:pathname}} className="prod-inquiry-list__write-btn" type={"button"}>문의하기</Link>
+                        </div>
+
+                        <div className="prod-inquiry-list__emphasis">
+                            <ul>
+                                <li>구매한 상품의 <em>취소/반품은 마이페이지 구매내역에서 신청</em> 가능합니다.</li>
+                                <li>상품문의 및 후기게시판을 통해 취소나 환불, 반품 등은 처리되지 않습니다.</li>
+                                <li><em>가격, 판매자, 교환/환불 및 배송 등 해당 상품 자체와 관련 없는 문의는 고객센터 내 1:1 문의하기</em>를 이용해주세요.</li>
+                                <li><em>"해당 상품 자체"와 관계없는 글, 양도, 광고성, 욕설, 비방, 도배 등의 글은 예고 없이 이동, 노출제한, 삭제 등의 조치가 취해질 수
+                                    있습니다.</em></li>
+                                <li>공개 게시판이므로 전화번호, 메일 주소 등 고객님의 소중한 개인정보는 절대 남기지 말아주세요.</li>
+                            </ul>
+                            {
+                                qnaList.map((item, index) => {
+                                    return <ProductQna key={index} qnaNum={item.qnaNum} productNum={item.productNum}
+                                                       userId={item.userId} qnaTitle={item.qnaTitle}
+                                                       qnaContent={item.qnaContent}
+                                                       qnaRegistrationDate={item.qnaRegistrationDate} qnaState={item.qnaState}
+                                                       qnaAnswer={item.qnaAnswer}
+                                                       qnaAnswerRegistrationDate={item.qnaAnswerRegistrationDate}/>
+                                })
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
