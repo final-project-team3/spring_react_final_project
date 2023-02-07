@@ -17,7 +17,6 @@ function QnaWrite(props) {
 
     const location = useLocation();
     const {pathname} = location.state.pathname;
-    console.log(pathname);
 
     useEffect(() => {
         return async () => {
