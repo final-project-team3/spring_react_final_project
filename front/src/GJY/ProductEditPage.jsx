@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import $ from "jquery";
+import FireBaseExample from "./FireBaseExample";
 
 const ProductEditPage = () => {
   let sellerInfo = sessionStorage.getItem("sellerInfo");
@@ -14,6 +15,15 @@ const ProductEditPage = () => {
   const [infoData, setInfoData] = useState({});
   const [productNum, setProductNum] = useState(0);
   const [productKindNum, setProductKindNum] = useState(0);
+  const [productGender, setProductGender] = useState("");
+  const [productSmallKind, setProductSmallKind] = useState("");
+  const [imageData, setImageData] = useState("");
+  const [optionData, setOptionData] = useState([]);
+  const [productOption1, setProductOption1] = useState([]);
+  const [productOption2, setProductOption2] = useState([]);
+  const [productOptionPrice, setProductOptionPrice] = useState([]);
+  const [productQuantity, setProductQuantity] = useState([]);
+  const [productCouponUseable, setProductCouponUseable] = useState([]);
 
   useEffect(() => {
     return () => {
@@ -26,7 +36,7 @@ const ProductEditPage = () => {
           },
         })
         .then((req) => {
-          const { data } = req;
+          const {data} = req;
 
           setInfoData(data);
 
@@ -44,12 +54,67 @@ const ProductEditPage = () => {
           $("#productName").prop("value", data.productName);
           $("#productPrice").prop("value", data.productPrice);
           $("#productContent").prop("value", data.productContent);
-          $("#productImg").prop(
-            "src",
-            "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/Images%2F%ED%96%84%EB%B2%84%EA%B1%B07.png1675666175833?alt=media&token=44ce5dd9-2e14-4f93-8c98-40373fcf73ac"
-          );
+          // $("#productImg").prop("src", data.productImg);
+
+          const {data2} = axios
+            .post("http://localhost:8080/selectProductKindInfo", null, {
+              params: {productKindNum: data.productKindNum},
+            })
+            .then((data2) => {
+              const kindData = data2.data;
+              console.log(kindData);
+              console.log("성공");
+              setProductGender(kindData.productGender);
+              setProductSmallKind(kindData.productSmallKind);
+
+              $("#productGender").prop("value", kindData.productGender);
+              $("#productSmallKind").prop("value", kindData.productSmallKind);
+
+              $("#p").text(kindData.productGender);
+              $("#p2").text(kindData.productSmallKind);
+            });
+
+          const {data3} = axios
+            .post("http://localhost:8080/selectOptionData", null, {
+              params: {productNum: data.productNum},
+            })
+            .then((data3) => {
+              setOptionData(data3.data);
+              console.log(optionData);
+
+              // const OptionDataSample = req.data;
+              // for (let i = 0; i < OptionDataSample.length; i++) {
+              //   console.log("OptionDataSample.length");
+              //   // console.log(OptionDataSample.length);
+              //   $(`#productOption1${i}`).prop("value", optionData[i].productOption1);
+              //   $(`#productOption2${i}`).prop("value", optionData[i].productOption2);
+              //   $(`#productOptionPrice${i}`).prop("value", optionData[i].productOptionPrice);
+              //   $(`#productQuantity${i}`).prop("value", optionData[i].productQuantity);
+              //   $(`#productCouponUseable${i}`).prop("value", optionData[i].productCouponUseable);
+              // }
+
+              const copyProductOption1 = [];
+              const copyProductOption2 = [];
+              const copyProductOptionPrice = [];
+              const copyProductQuantity = [];
+              const copyProductCouponUseable = [];
+              for (let i = 0; i < data3.data.length; i++) {
+                copyProductOption1.push(data3.data[i].productOption1);
+                copyProductOption2.push(data3.data[i].productOption2);
+                copyProductOptionPrice.push(data3.data[i].productOptionPrice);
+                copyProductQuantity.push(data3.data[i].productQuantity);
+                copyProductCouponUseable.push(data3.data[i].productCouponUseable);
+              }
+              console.log(copyProductOption1);
+              setProductOption1(copyProductOption1);
+              setProductOption2(copyProductOption2);
+              setProductOptionPrice(copyProductOptionPrice);
+              setProductQuantity(copyProductQuantity);
+              setProductCouponUseable(copyProductCouponUseable);
+
+
+            });
         });
-      axios.post("http://localhost:8080/selectCategory", null, {params:{productKindNum: productKindNum}})
     };
   }, []);
 
@@ -63,39 +128,21 @@ const ProductEditPage = () => {
     });
   });
 
-  const data2 = () => {
-    console.log(productPrice);
-    console.log(infoData);
-    console.log(infoData.productContent);
-  };
-
-  const data3 = () => {
-    $("#productName").prop("value", "11");
-    const a = $("#productName").val();
-    // $("#selectBigKind").val();
-    console.log(a);
-  };
-
   return (
     <div className={"container mb-5"}>
-      <button className={"btn btn-secondary"} onClick={data2}>
-        data2
-      </button>
-      <button className={"btn btn-secondary"} onClick={data3}>
-        data3
-      </button>
-
-      <h2 className={"text-center"}>제품 정보 수정 페이지</h2>
+      <h2 className={"text-center"}>제품 정보 수정</h2>
+      {/*<h2>{optionData[0]?.productOptionNum}</h2>*/}
       <div className={"mt-3"}>
         <label htmlFor="productName">제품 이름</label>
-        <input type="text" id={"productName"} placeholder={productName} />
+        <input type="text" id={"productName"} placeholder={productName}/>
       </div>
-      <div className={"mt-3"}>
-        <p>카테고리 : ... > ...</p>
+      <div className={"mt-3 d-flex"}>
+        <p className={"me-2"}>카테고리 :</p>
+        <p id={"p"}></p> <p className={"mx-2"}>></p> <p id={"p2"}></p>
       </div>
       <div className={"mt-3"}>
         <label htmlFor="productPrice">제품 가격</label>
-        <input type="text" id={"productPrice"} />
+        <input type="text" id={"productPrice"}/>
       </div>
       <div className={"mt-3"}>
         <label htmlFor="productContent">제품 설명</label>
@@ -106,21 +153,67 @@ const ProductEditPage = () => {
       <div className={"mt-3"}>
         <label htmlFor="">제품 이미지</label>
         <div>
-          <img
-            src={""}
-            alt={"사진없음..."}
-            id={"productImg"}
-            style={{ width: 200, height: 200 }}
+          {imageData == "" ? (
+            <img
+              src={productImg}
+              alt={"사진없음..."}
+              id={"productImg"}
+              style={{width: 200, height: 200}}
+            />
+          ) : null}
+        </div>
+        <div>
+          <FireBaseExample
+            setImageData={setImageData}
+            btnTitle1="이미지 변경"
+            btnTitle2={"등록된 사진 삭제"}
           />
         </div>
-        <button className={"btn btn-danger"}>이미지 변경</button>
       </div>
       <div>
         옵션 변경
-        <label htmlFor="">색상</label>
-        map
-        <label htmlFor="">사이즈</label>
-        map
+        <table className={"border border-primary"}>
+          <thead className={"border border-primary"}>
+          <tr>
+            <td>컬러</td>
+            <td>사이즈</td>
+            <td>옵션가</td>
+            <td>재고수량</td>
+            <td>쿠폰사용가능여부</td>
+          </tr>
+          </thead>
+          <tbody className={"border border-primary"}>
+          {optionData.map((item, index) => {
+            let productOption1Value = productOption1[index];
+            let productOption2Value = productOption1[index];
+            let productOptionPriceValue = productOptionPrice[index];
+            let productQuantityValue = productQuantity[index];
+            let productCouponUseableValue = productOption1[index];
+            return (
+              <tr>
+                <td>
+                  <input type="text" id={`productOption1${index}`} value={productOption1Value} onChange={(e) => {
+                    console.log($(e.target).val());
+                    $(`#productOption1${index}`).prop("value", $(e.target).val());
+                  }}/>
+                </td>
+                <td>
+                  <input type="text" id={`productOption2${index}`} value={productOption2[index]}/>
+                </td>
+                <td>
+                  <input type="text" id={`productOptionPrice${index}`} value={productOptionPrice[index]}/>
+                </td>
+                <td>
+                  <input type="text" id={`productQuantity${index}`} value={productQuantity[index]}/>
+                </td>
+                <td>
+                  <input type="text" id={`productCouponUseable${index}`} value={productCouponUseable[index]}/>
+                </td>
+              </tr>
+            )
+          })}
+          </tbody>
+        </table>
       </div>
     </div>
   );

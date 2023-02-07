@@ -53,6 +53,10 @@ public interface ProductService {
 
     ProductInfoDto getProductInfo(String productSellerId, String productName);
 
+    ProductKindDto getProductKind(int productKindNum);
+
+    List<ProductOptionDto> selectOptionData(int productNum);
+
     //    GJY
 
     //    BJH

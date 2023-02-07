@@ -115,6 +115,16 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.getProductInfo(productSellerId, productName);
     }
 
+    @Override
+    public ProductKindDto getProductKind(int productKindNum) {
+        return productMapper.getProductKind(productKindNum);
+    }
+
+    @Override
+    public List<ProductOptionDto> selectOptionData(int productNum) {
+        return productMapper.selectOptionData(productNum);
+    }
+
     //    GJY
 
     //    BJH

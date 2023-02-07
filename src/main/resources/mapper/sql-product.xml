@@ -154,6 +154,19 @@
       AND product_name = #{productName}
   </select>
 
+  <!-- 카테고리 번호로 카테고리 값 가져오기 -->
+  <select id="getProductKind" parameterType="int" resultType="com.fproject.project_team3.dto.product.ProductKindDto">
+    SELECT *
+    FROM product_kind
+    WHERE product_kind_num = #{productKindNum}
+  </select>
+
+  <select id="selectOptionData" parameterType="int" resultType="com.fproject.project_team3.dto.product.ProductOptionDto">
+    SELECT *
+    FROM product_option
+    WHERE product_num = #{productNum}
+  </select>
+
   <!-- GJY -->
 
   <!-- BJH -->

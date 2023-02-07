@@ -43,6 +43,7 @@ function ProductRegisterPage2() {
   // 자식 -> 부모 (이미지 파일명 전달)
   const [imageData, setImageData] = useState("");
 
+
   // 옵션 목록으로 적용 버튼
   const OptionReg = () => {
     let optionNameList = [];
@@ -284,6 +285,7 @@ function ProductRegisterPage2() {
 
     setProductName($("#productName").val()); // 제품명
     setProductPrice($("#productPrice").val()); // 제품명
+
 
     for (let i = 0; i < optionList.length; i++) {
       copyOptionList = optionList;
@@ -677,7 +679,7 @@ function ProductRegisterPage2() {
                   상품 이미지 등록
                 </td>
                 <td>
-                  <FireBaseExample setImageData={setImageData} />
+                  <FireBaseExample setImageData={setImageData} btnTitle1="이미지 등록" btnTitle2={"등록한 사진 삭제"}/>
                 </td>
               </tr>
             </tbody>

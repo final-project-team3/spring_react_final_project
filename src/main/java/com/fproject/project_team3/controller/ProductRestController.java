@@ -1,23 +1,13 @@
 package com.fproject.project_team3.controller;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.fproject.project_team3.dto.gwak.GwakTestTblDto;
-import com.fproject.project_team3.dto.join.UserOrderListProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.dto.product.ProductOptionDto;
 import com.fproject.project_team3.dto.seller.SellerInfoDto;
 import com.fproject.project_team3.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.*;
 
 @RestController
@@ -156,6 +146,19 @@ public class ProductRestController {
         ProductInfoDto ProductInfoDto = productService.getProductInfo(productSellerId,productName);
 //        System.out.println(productSelectList);
         return ProductInfoDto;
+    }
+
+    // 수정할 상품의 카테고리 값 받아오기
+    @PostMapping("/selectProductKindInfo")
+    public ProductKindDto selectProductKindInfo(@RequestParam("productKindNum") int productKindNum) {
+        ProductKindDto ProductKindDto = productService.getProductKind(productKindNum);
+        return ProductKindDto;
+    }
+
+    @PostMapping("/selectOptionData")
+    public List<ProductOptionDto> selectOptionData(@RequestParam("productNum") int productNum) {
+
+        return productService.selectOptionData(productNum);
     }
 
     //    GJY
