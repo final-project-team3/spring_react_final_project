@@ -8,17 +8,41 @@ import Pagination from "../GJY/Pagination";
 import $ from 'jquery';
 import ProductQna from "../LYS/ProductQna";
 import './ProductDetail.css'
+import Swal from "sweetalert2";
 
 function ProductDetail(props) {
     const {productNum} = useParams();
     console.log(productNum);
     const [optionValue, setOptionValue] = useState();
+    const [buyList, setBuyList] = useState([]);
+
+    /**
+     * buyList push 하는 함수
+     * @param state : *[]
+     * @param addValue : Object
+     * */
+    const buyListPushFunc = (state, addValue) => {
+        let prevState = [];
+        prevState = state;
+        prevState?.push(addValue);
+        setBuyList(prevState);
+    }
+
+    // /**
+    //  * buyList 하는 함수
+    //  * @param state : 넣을state
+    //  * @param addValue : 넣을value
+    //  * */
+    // const buyListAddFunc = (state, addValue) => {
+    //     let prevState = state;
+    //     prevState.add(addValue);
+    //     setBuyList(prevState);
+    // }
 
     // 페이지네이션
     const [limit, setLimit] = useState(3);
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
-
 
     const [reviewList, setReviewList] = useState([]);
     const [productInfo, setProductInfo] = useState();
@@ -75,19 +99,50 @@ function ProductDetail(props) {
                             <h2>{productInfo?.productSellerId}</h2>
                         </div>
                     </div>
-                    <select onClick={(e) => {
-                        setOptionValue($(e.target).val());
-                    }} onChange={(e) => {
-                        setOptionValue($(e.target).val());
+                    <select onChange={(e) => {
+                        let selectOptionValue = $(e.target).val();
+                        if (selectOptionValue == "옵션") {
+                            Swal.fire({
+                                position: "top-center",
+                                icon: "error",
+                                title: "옵션을 선택해주세요.",
+                                showConfirmButton: true,
+                                timer: 1500
+                            });
+                        } else {
+                            let doubleCheck = true;
+                            for (let i = 0; i < buyList.length; i++) {
+                                if (selectOptionValue == buyList[i]?.optionValue) {
+                                    doubleCheck = false;
+                                    Swal.fire({
+                                        position: "top-center",
+                                        icon: "warning",
+                                        title: "이미 추가한 옵션입니다.",
+                                        showConfirmButton: true,
+                                        timer: 1500
+                                    })
+                                    break;
+                                }
+                            }
+                            if (doubleCheck) {
+                                buyListPushFunc(buyList, {optionValue: selectOptionValue})
+                            }
+                            // doubleCheck ? buyListPushFunc(buyList, [{optionValue: selectOptionValue}]) : null
+                            // doubleCheck == true ? buyListAddFunc(buyList, {optionValue : selectOptionValue}) : null
+                        }
                     }} id={"selectOption"} className={'my-2 form-select'}>
-                        <option className={'option'} value={'옵션'}>옵션</option>
+                        <option className={'option'} value={'옵션'}>[필수] 옵션을 선택해주세요.</option>
                         {productOption.map((option) => {
                             return (
-                                <option
-                                    value={option.productOption1 + option.productOption2}>{option.productOption1 + option.productOption2}</option>
+                                <option className={'d-flex justify-content-around'}
+                                        value={option.productOption1 + option.productOption2}>{option.productOption1 + option.productOption2}</option>
                             )
                         })}
                     </select>
+                    {/* 옵션 넣으면 값 뜨는 데*/}
+                    <div hidden={true} className={'div-option'}>
+
+                    </div>
                     <div className={'row'}>
                         <hr/>
                         <div className={'col-6'}>
