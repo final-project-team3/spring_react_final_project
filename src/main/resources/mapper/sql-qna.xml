@@ -17,6 +17,24 @@
         INSERT INTO qna (product_num, user_id, qna_title, qna_content, qna_registration_date)
         VALUES (#{productNum}, #{userId}, #{qnaTitle}, #{qnaContent}, NOW())
     </insert>
+
+    <select id="getReadyToAnswer" parameterType="String"
+            resultType="com.fproject.project_team3.dto.product.ProductInfoDto">
+        SELECT *
+        FROM product_info
+        WHERE product_seller_id = #{sellerId}
+    </select>
+
+    <select id="getSellerQnaList" parameterType="com.fproject.project_team3.dto.product.ProductInfoDto"
+            resultType="com.fproject.project_team3.dto.userAndseller.QnaDto">
+        SELECT *
+        FROM qna
+        <where>
+            <foreach item="item" collection="list" open="product_num in (" separator="," close=")" nullable="true">
+                #{item.productNum}
+            </foreach>
+        </where>
+    </select>
     <!-- LYS -->
 
     <!-- GJY -->
