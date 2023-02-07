@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface QnaService {
     List<QnaDto> getQna(String productNum);
+
+    void writeQna(QnaDto qnaDto);
 }

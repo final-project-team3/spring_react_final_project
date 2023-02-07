@@ -12,6 +12,11 @@
         WHERE product_num = #{productNum}
         ORDER BY qna_num DESC
     </select>
+
+    <insert id="writeQna" parameterType="com.fproject.project_team3.dto.userAndseller.QnaDto">
+        INSERT INTO qna (product_num, user_id, qna_title, qna_content, qna_registration_date)
+        VALUES (#{productNum}, #{userId}, #{qnaTitle}, #{qnaContent}, NOW())
+    </insert>
     <!-- LYS -->
 
     <!-- GJY -->
