@@ -402,7 +402,7 @@ const Main = () => {
                                 <div className={"moreBtn"}>
                                     <Link className={"btnMore"}>
                                         <span>상품 더 보러 가기</span>
-                                        {/* 이미지 색이 안바뀜 왜지...*/}
+                                        {/* 화살표는 걍 냅두자...*/}
                                         <span className={"arrow_lb"}>
                                             <img style={{
                                                 border: "none",
