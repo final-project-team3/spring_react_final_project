@@ -16,4 +16,8 @@ public interface ReviewMapper {
     void updateMyReview(ReviewDto reviewDto);
 
     void writeMyReview(ReviewDto reviewDto);
+
+    int reviewWriteCheck(int orderNum);
+
+    void updateReviewState(ReviewDto reviewDto);
 }

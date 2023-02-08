@@ -23,6 +23,8 @@ public interface ReviewService {
 
     void writeMyReview(ReviewDto reviewDto);
 
+    int reviewWriteCheck(int orderNum);
+
     //    LYS
 
     //    GJY

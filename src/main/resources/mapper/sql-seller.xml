@@ -6,10 +6,10 @@
     <insert id="insertSeller" parameterType="com.fproject.project_team3.dto.seller.SellerInfoDto">
         INSERT INTO seller_info(seller_name, seller_tel, seller_id, seller_pass, seller_birth, seller_gender,
                                 seller_addr_num, seller_addr_jibun, seller_addr_road, seller_addr_detail,
-                                seller_business_name, seller_business_num)
+                                seller_business_name, seller_business_num, seller_delivery_price, seller_delivery_free)
         VALUES (#{sellerName}, #{sellerTel}, #{sellerId}, #{sellerPass}, #{sellerBirth}, #{sellerGender},
                 #{sellerAddrNum}, #{sellerAddrJibun}, #{sellerAddrRoad}, #{sellerAddrDetail}, #{sellerBusinessName},
-                #{sellerBusinessNum})
+                #{sellerBusinessNum}, #{sellerDeliveryPrice}, #{sellerDeliveryFree})
     </insert>
 
     <select id="sellerLogin" parameterType="String" resultType="com.fproject.project_team3.dto.seller.SellerInfoDto">

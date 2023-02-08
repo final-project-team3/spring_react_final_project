@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Popup from "./Popup";
 import $ from "jquery";
 import {useNavigate} from "react-router-dom";
+import {string} from "prop-types";
 
 function SellerSignUp() {
     //메인페이지 이동
@@ -14,7 +15,7 @@ function SellerSignUp() {
 
     // 유효성 검사 true false 리스트
     let checkList = [];
-    for (let i = 1; i <= 11; i++) {
+    for (let i = 1; i <= 13; i++) {
         checkList.push(false);
     }
 
@@ -322,7 +323,6 @@ function SellerSignUp() {
 
     }
 
-
     let confirmNum = '';
     /**
      * 이메일 인증 보내는 함수
@@ -411,6 +411,43 @@ function SellerSignUp() {
             return bNum;
         }
     }
+
+    async function deliveryPriceCheck() {
+        $(function () { // 배송비 숫자만 입력 가능
+            $("#sellerDeliveryPrice").on("blur keyup", function () {
+                $(this).val($(this).val().replace(/[^0-9]/g, ""));
+            });
+        });
+
+        var delPrice = $('#sellerDeliveryPrice').val();
+
+        if (delPrice === "") {
+            $('.seller_delivery_price_no').css('display', 'inline-block');
+            checkList[11] = false;
+        } else {
+            $('.seller_delivery_price_no').css('display', 'none');
+            checkList[11] = true;
+        }
+    }
+
+    async function deliveryFreeCheck() {
+        $(function () { // 무료 배송기준 숫자만 입력 가능
+            $("#sellerDeliveryFree").on("blur keyup", function () {
+                $(this).val($(this).val().replace(/[^0-9]/g, ""));
+            });
+        });
+
+        var freePrice = $('#sellerDeliveryFree').val();
+
+        if (freePrice === "") {
+            $('.seller_delivery_free_no').css('display', 'inline-block');
+            checkList[12] = false;
+        } else {
+            $('.seller_delivery_free_no').css('display', 'none');
+            checkList[12] = true;
+        }
+    }
+
 
     //마지막으로 모든 배열 true확인
     const checkAll = () => {
@@ -535,7 +572,7 @@ function SellerSignUp() {
                                                onClick={checkTel} onChange={checkTel}
                                                id={"sellerTel"}
                                                data-auth="cell_phone"
-                                               maxLength={10}/>
+                                               maxLength={11}/>
                                         <HiddenMessage style={okStyle} className="ph_ok ok">사용 가능한
                                             전화번호입니다.</HiddenMessage>
                                         <HiddenMessage style={noStyle} className="ph_already no">이미 사용중인
@@ -617,7 +654,7 @@ function SellerSignUp() {
                                 <FormBlockBody>
                                     <InputTextSizeWTypeL>
                                         <Input onClick={businessNumCheck} onChange={businessNumCheck}
-                                               name={"sellerBusinessNum"} id={"businessNum"} type="text" maxLength={11}
+                                               name={"sellerBusinessNum"} id={"businessNum"} type="text" maxLength={10}
                                                placeholder="사업자 등록번호 10자리를 '-'없이 입력해주세요"/>
                                         <HiddenMessage style={okStyle} className="business_num_ok ok">사용가능한 사업자 등록번호
                                             입니다.</HiddenMessage>
@@ -627,6 +664,44 @@ function SellerSignUp() {
                                             번호입니다.</HiddenMessage>
                                         <HiddenMessage style={noStyle} className={"business_num_not10 no"}>사업자 등록번호
                                             10자리를 '-'없이 입력해주세요.</HiddenMessage>
+                                    </InputTextSizeWTypeL>
+                                </FormBlockBody>
+                            </FormBlock>
+
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 기본 배송비
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeWTypeL>
+                                        <Input onClick={deliveryPriceCheck} onChange={deliveryPriceCheck}
+                                               name={"sellerDeliveryPrice"} id={"sellerDeliveryPrice"} type="text"
+                                               placeholder="설정하실 기본배송비를 입력해주세요"/>
+                                        <HiddenMessage style={okStyle} className="seller_delivery_price_ok ok">입력
+                                            되었습니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="seller_delivery_price_no no">필수
+                                            항목입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="seller_delivery_price_0 no">0원 이라면 0을
+                                            입력해주세요</HiddenMessage>
+                                    </InputTextSizeWTypeL>
+                                </FormBlockBody>
+                            </FormBlock>
+
+                            <FormBlock>
+                                <FormBlockHead>
+                                    <AsteriskRed>*</AsteriskRed> 무료배송 기준 금액
+                                </FormBlockHead>
+                                <FormBlockBody>
+                                    <InputTextSizeWTypeL>
+                                        <Input onClick={deliveryFreeCheck} onChange={deliveryFreeCheck}
+                                               name={"sellerDeliveryFree"} id={"sellerDeliveryFree"} type="text"
+                                               placeholder="무료배송하실 기준 금액을 입력해주세요"/>
+                                        <HiddenMessage style={okStyle} className="seller_delivery_free_ok ok">입력
+                                            되었습니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="seller_delivery_free_no no">필수
+                                            항목입니다.</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="seller_delivery_free_0 no">0원 이라면 0을
+                                            입력해주세요</HiddenMessage>
                                     </InputTextSizeWTypeL>
                                 </FormBlockBody>
                             </FormBlock>
