@@ -18,7 +18,9 @@ function QnaAnswerWrite(props) {
             })
             setProductInfo(data.productInfoList);
             setQnaInfo(data.qnaDtoList);
-            console.log(data);
+            // console.log(data);
+            // console.log(data.productInfoList);
+            // console.log(data.qnaDtoList);
         }
     }, [])
 

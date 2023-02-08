@@ -30,7 +30,7 @@
         SELECT *
         FROM qna
         <where>
-            <foreach item="item" collection="list" open="product_num in (" separator="," close=")" nullable="true">
+            <foreach item="item" collection="list" open="product_num in (" separator="," close=")">
                 #{item.productNum}
             </foreach>
         </where>

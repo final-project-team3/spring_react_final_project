@@ -13,6 +13,8 @@ import {sellerLogout, userLogout} from "../store";
 const Kind = (props) => {
     const [bigKind, setBigKind] = useState();
     const [smallKind, setSmallKind] = useState();
+    const location = useLocation();
+    const navi = useNavigate();
 
     let smallKindList = [];
 
@@ -37,7 +39,13 @@ const Kind = (props) => {
             }}>{props.bigKind}</h2></Link>
             <ul className={'dropdown-menu'} aria-labelledby={`dropdown${props.index}`}>
                 {[smallKindList][0].map((item, index) =>
-                    <Link to={`/category/${bigKind}/${item.productSmallKind}`}>
+                    <Link to={`/category/${bigKind}/${item.productSmallKind}`} onClick={()=>{
+                        console.log(location.pathname.includes("/category"));
+                        if (location.pathname.includes("/category")) {
+                        navi(`/category/${bigKind}/${item.productSmallKind}`);
+                        window.location.reload();
+                    }
+                    }}>
                         <li key={index}
                             className={'dropdown-item'}>{item.productSmallKind}</li>
                     </Link>
