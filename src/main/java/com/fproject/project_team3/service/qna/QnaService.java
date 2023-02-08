@@ -11,4 +11,6 @@ public interface QnaService {
     void writeQna(QnaDto qnaDto);
 
     Object getReadyToAnswer(String sellerId);
+
+    void answerWrite(QnaDto qnaDto);
 }

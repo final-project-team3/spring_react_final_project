@@ -35,4 +35,10 @@ public class QnaController {
         qnaService.writeQna(qnaDto);
         httpServletResponse.sendRedirect("http://localhost:3000" + pathname);
     }
+
+    @PostMapping("/answerWrite")
+    public void answerWrite(QnaDto qnaDto, HttpServletResponse httpServletResponse)throws IOException{
+        qnaService.answerWrite(qnaDto);
+        httpServletResponse.sendRedirect("http://localhost:3000/qnaAnswerWrite");
+    }
 }

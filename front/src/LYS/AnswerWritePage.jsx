@@ -1,40 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation, useParams} from "react-router-dom";
-import RegistRating from "./RegistRating";
 import styled from "styled-components";
-import axios from "axios";
-import swal from "sweetalert";
+import {Link, useLocation, useParams} from "react-router-dom";
 import $ from "jquery";
-import data from "bootstrap/js/src/dom/data";
+import axios from "axios";
 
-function QnaWrite(props) {
-    const {productNum} = useParams();
-    const [productInfo, setProductInfo] = useState();
-    const [qnaContent, setQnaContent] = useState();
-
-    let userInfo = sessionStorage.getItem("userInfo");
-    userInfo = JSON.parse(userInfo);
-
+function AnswerWritePage(props) {
     const location = useLocation();
-    const {pathname} = location.state.pathname;
+    const qnaInfo = location.state.qnaInfo;
+    console.log(qnaInfo?.qnaContent);
 
-    useEffect(() => {
-        return async () => {
-            const {data} = await axios.get("http://localhost:8080/getProductInfoFromDetail", {
-                params: {
-                    productNum: productNum,
-                }
-            })
-            setProductInfo(data.productInfo);
-        }
-    }, [])
+    const answerWrite = () => {
+        var qnaAnswer = $('#qnaAnswer').val();
 
-    const writeQna = () => {
-        var content = $('#qnaContent').val();
-        if (content.length < 10) {
-            swal("문의를 10자 이상 입력해주세요");
+        if (qnaAnswer == '') {
+            alert("답변을 입력해 주세요.");
+            $("#btn-write").attr("type", "button");
+            $("#btn-write").onclick();
         } else {
-            alert("문의가 등록 되었습니다.");
+            alert("답변 완료 되었습니다.");
             $("#btn-write").attr("type", "submit");
             $("#btn-write").onclick();
         }
@@ -49,14 +32,14 @@ function QnaWrite(props) {
                     }}>
                         <div style={{
                             textAlign: "center"
-                        }} className="text-center name">상품 문의 페이지
+                        }} className="text-center name">문의 답변 페이지
                         </div>
                     </div>
                 </div>
             </div>
 
-            <form action={"/writeQna"} method={'post'} style={{padding: 0, margin: 0}}>
-                <input value={pathname} name={"pathname"} hidden={true}/>
+            <form action={"/answerWrite"} method={'post'} style={{padding: 0, margin: 0}}>
+                <input hidden value={qnaInfo.qnaNum} name={"qnaNum"}/>
                 <div className={'mt-5'}>
                     <div className="reviewContainer">
                         <ul>
@@ -70,40 +53,47 @@ function QnaWrite(props) {
                                                         <img src="https://cdn-icons-png.flaticon.com/512/768/768821.png"
                                                              style={{width: 50, margin: 10}}
                                                              className="review-intake-form__logo"/>
-                                                        <span className="review-intake-form__text">상품 문의</span>
+                                                        <span className="review-intake-form__text">문의 답변</span>
                                                     </div>
                                                     <div className="review-intake-form__subtitle">
                                                         <span
-                                                            className="review-intake-form__sub-text">문의 사항을 작성해주세요.</span>
+                                                            className="review-intake-form__sub-text">아래의 문의 사항에 대한 답변을 작성해주세요.</span>
                                                     </div>
                                                 </div>
-                                                <hr/>
-                                                <div className="review-intake-form__rating">
-                                                    <div className="review-table row">
-                                                        <div
-                                                            className="review-table__cell review-intake-head title col-2">
-                                                            <img src={productInfo?.productImg} width="200"/>
-                                                        </div>
-                                                        <div className="review-table__cell col-10">
-                                                            <div
-                                                                className="review-intake-form__product-title"
-                                                                style={{fontSize: 20}}>{`${productInfo?.productName}`}</div>
-                                                            <div
-                                                                className="my-review__modify__star js_reviewModifyStarContainer">
+
+                                                <li className="product-qna tab-contents__content">
+                                                    <div id="prod-inquiry-list" className="prod-tab">
+                                                        <div className="prod-inquiry-items">
+                                                            <div className="prod-inquiry-item row">
+                                                                <img className="prod-inquiry-item__img col-2"
+                                                                     src={`${qnaInfo?.productImg}`}></img>
+                                                                <div className="prod-inquiry-item__wrap col-10">
+                                                                    <strong
+                                                                        className="prod-inquiry-item__author"></strong>
+                                                                    <div
+                                                                        className="prod-inquiry-item__selected-option">{`${qnaInfo?.productName}`}</div>
+                                                                    <div
+                                                                        className="prod-inquiry-item__userId">{`${qnaInfo?.userId}`}</div>
+                                                                    <div
+                                                                        className="prod-inquiry-item__content">{`${qnaInfo?.qnaContent}`}</div>
+                                                                    <div
+                                                                        className="prod-inquiry-item__time">{`${qnaInfo?.qnaRegistrationDate}`}</div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </li>
                                                 <br/>
                                                 <div className="review-intake-form__detail-review">
                                                     <div className="my-review__modify__review">
-                                                        <div className="my-review__modify__field__title">문의 내용</div>
+                                                        <div className="my-review__modify__field__title">답변 내용</div>
                                                         <div className="my-review__modify__review__content">
                                                             <div
                                                                 className="my-review__modify__review__content__text-wrap">
-                                                            <textarea name={'qnaContent'} id={'qnaContent'} value={qnaContent} style={{fontSize: 20}}
+                                                            <textarea name={'qnaAnswer'} id={'qnaAnswer'}
+                                                                      style={{fontSize: 20}}
                                                                       className="my-review__modify__review__content__text-area"
-                                                                      placeholder="상품에 대한 궁금한 점을 작성해주세요. (10자 이상)"></textarea>
+                                                                      placeholder="문의 사항에 대한 답변을 작성해주세요."></textarea>
                                                             </div>
                                                             <div className="my-review__flip-write-tooltip" style={{
                                                                 perspective: 28,
@@ -118,14 +108,10 @@ function QnaWrite(props) {
                                             </div>
                                         </div>
                                         <div className={"text-md-start"}>
-                                            <div className={"review_content"}>
-                                                <input hidden={true} name={'userId'} id={'userId'} value={userInfo.userId}/>
-                                                <input hidden={true} name={'productNum'} id={'productNum'} value={productNum}/>
-                                            </div>
-                                        </div>
-                                        <div className={"text-md-start"}>
                                             <div className={"ui-button col-6 my-2"}>
-                                                <WriteButton id={"btn-write"} className={"btn btn-primary"} onClick={writeQna} type="button">문의 등록</WriteButton>
+                                                <WriteButton onClick={answerWrite} id={"btn-write"}
+                                                             className={"btn btn-primary"} type="button">답변
+                                                    등록</WriteButton>
                                             </div>
                                         </div>
                                         <hr/>
@@ -139,7 +125,6 @@ function QnaWrite(props) {
         </div>
     );
 }
-;
 
 const WriteButton = styled.button`
 width: 90px;
@@ -148,4 +133,4 @@ padding: 0px;
 margin: 0px;
 `
 
-export default QnaWrite;
+export default AnswerWritePage;

@@ -15,4 +15,6 @@ public interface QnaMapper {
     List<ProductInfoDto> getReadyToAnswer(String sellerId);
 
     List<QnaDto> getSellerQnaList(List<ProductInfoDto> productInfoList);
+
+    void answerWrite(QnaDto qnaDto);
 }
