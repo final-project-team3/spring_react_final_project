@@ -40,8 +40,6 @@ function QnaWrite(props) {
         }
     }
 
-    // (product_num, user_id, qna_title, qna_content, qna_registration_date)
-
     return (
         <div className={"container"}>
             <div className="wrap">

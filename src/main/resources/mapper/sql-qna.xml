@@ -34,7 +34,14 @@
                 #{item.productNum}
             </foreach>
         </where>
+        ORDER BY qna_num DESC;
     </select>
+
+    <update id="answerWrite" parameterType="com.fproject.project_team3.dto.userAndseller.QnaDto">
+        UPDATE qna
+        SET qna_state = "답변완료", qna_answer = #{qnaAnswer}, qna_answer_registration_date = NOW()
+        WHERE qna_num = #{qnaNum}
+    </update>
     <!-- LYS -->
 
     <!-- GJY -->
