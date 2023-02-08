@@ -1,173 +1,152 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import './LikeUserList.css';
 import {Link} from "react-router-dom";
 import axios from "axios";
 import $ from "jquery";
+import Pagination from "../../GJY/Pagination";
 
 function LikeUserList(props) {
+
     let sellerInfo = sessionStorage.getItem("sellerInfo");
     sellerInfo = JSON.parse(sellerInfo);
-    const productSellerId = sellerInfo.sellerId;
+    const sellerId = sellerInfo.sellerId;
+    // console.log(sellerInfo);
 
-    // useEffect(() => {
-    //     return () => {
-    //         axios
-    //           .post("http://localhost:8080/selectLikeUserList", null, {
-    //               params: {
-    //                   productSellerId: productSellerId,
-    //                   productName: "테스터2수정할상품",
-    //               },
-    //           })}
-    //     }, []);
+    const [interestedListData, setInterestedListData] = useState([]);
+
+    const [limit, setLimit] = useState(10);
+    const [page, setPage] = useState(1);
+    const offset = (page - 1) * limit;
+
+    useEffect(() => {
+        return async () => {
+            const {data} = await axios.post("http://localhost:8080/getInterestedUserList", null, {
+                params: {sellerBusinessName: sellerInfo.sellerBusinessName},
+            });
+
+            console.log(data);
+            setInterestedListData(data);
+        };
+    }, []);
 
 
 
     return (
-        <div className={"ViewMain"}>
-            <div className={"container"} id={"ViewMain-sub"}>
-                <h2 className={"blind"}>여긴 본문부분</h2>
-                <div className={"l-sidebar"}>
-                    <div className={"profile"}>
-                        <Link className={"profile-set"}>
-                            <img style={{
-                                width: 94,
-                                height: 94
-                            }} src={"./Img/Bjh/kakao.png"}/>
-                        </Link>
-                        <h2 className={"blind"}>정보</h2>
-                        <div className={"profile-name"}>
+      <div className={"ViewMain"}>
+          <div className={"container"} id={"ViewMain-sub"}>
+              <h2 className={"blind"}>여긴 본문부분</h2>
+              <div className={"l-sidebar"}>
+                  <div className={"profile"}>
+                      <Link className={"profile-set"}>
+                          <img style={{
+                              width: 94,
+                              height: 94
+                          }} src={"./Img/Bjh/kakao.png"}/>
+                      </Link>
+                      <h2 className={"blind"}>정보</h2>
+                      <div className={"profile-name"}>
                             <span className={"profile-subName"}>
-                                ~~~님
+                                <p>{sellerInfo.sellerBusinessName} 님</p>
                             </span>
-                            <em className={"secretId"}>아이디</em>
-                            <div className={"page"}>
-                                <Link to={"/sellerMyPage"} className={"pageClass"}>마이페이지</Link>
-                            </div>
-                        </div>
-                    </div>
-                    <ul className={"lookUp"}>
-                        <li>
-                            <span className={"listCheck"}>·</span>
-                            결제 완료
-                            <Link className={"listCheck2"}>
-                                <em>0 </em>
-                                건
-                            </Link>
-                        </li>
-                        <li>
-                            <span className={"listCheck"}>·</span>
-                            주문, 배송 현황
-                            <Link className={"listCheck2"}>
-                                <em>0 </em>
-                                건
-                            </Link>
-                        </li>
-                        <li>
-                            <span className={"listCheck"}>·</span>
-                            신규 리뷰
-                            <Link className={"listCheck2"}>
-                                <em>2 </em>
-                                건
-                            </Link>
-                        </li>
-                    </ul>
-                    <ul>
+                          <em className={"secretId"}>{sellerId}</em>
+                          <div className={"page"}>
+                              <Link to={"/myPage"} className={"pageClass"}>마이페이지</Link>
+                          </div>
+                      </div>
+                  </div>
+                  <ul className={"lookUp"}>
+                      <li>
+                          <span className={"listCheck"}>·</span>
+                          결제 완료
+                          <Link className={"listCheck2"}>
+                              <em>0 </em>
+                              건
+                          </Link>
+                      </li>
+                      <li>
+                          <span className={"listCheck"}>·</span>
+                          주문, 배송 현황
+                          <Link className={"listCheck2"}>
+                              <em>0 </em>
+                              건
+                          </Link>
+                      </li>
+                      <li>
+                          <span className={"listCheck"}>·</span>
+                          신규 리뷰
+                          <Link className={"listCheck2"}>
+                              <em>2 </em>
+                              건
+                          </Link>
+                      </li>
+                  </ul>
+                  <ul>
 
-                    </ul>
-                </div>
-                <div className={"content"}>
-                    <div className={"likeUser"}>
-                        <h3 className={"usersList"}>찜한 고객 목록</h3>
-                        <span className={"listLittle"}>내 가게를 찜한 고객 내역입니다.</span>
-                    </div>
-                    <div className={"content-sub"}>
-                        {/*<div className={"customers"}>*/}
-                        {/*    <div className={"cus-list"}>*/}
-                        {/*        <ul className={"cus-group"} role={"radiogroup"}>*/}
-                        {/*            <li className={"cus-radio1"}>*/}
-                        {/*                <Link className={"userRole"}>회원 고객</Link>*/}
-                        {/*            </li>*/}
-                        {/*            <li className={"cus-radio1"}>*/}
-                        {/*                <Link className={"userRole"}>비회원 고객</Link>*/}
-                        {/*            </li>*/}
-                        {/*        </ul>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
-                        <div className={"userAll"}>
-                            <div className={"userAll-sub"}>
-                                <ul className={"userAll-ul"}>
-                                    <li className={"userState"}>
-                                        <Link className={"userState-title"}>
-                                            <em style={{
-                                                borderBottomColor: "green"
-                                            }} className={"customerRole"}>전체</em>
-                                        </Link>
-                                    </li>
-                                    {/*<li className={"userState"}>*/}
-                                    {/*    <Link className={"userState-title"}>*/}
-                                    {/*        <em className={"customerRole"}>비로그인 회원</em>*/}
-                                    {/*    </Link>*/}
-                                    {/*</li>*/}
-                                </ul>
-                            </div>
-                        </div>
-                        <div className={"management"}>
-                            <div className={"select"}>
+                  </ul>
+              </div>
+              <div className={"content"}>
+                  <div className={"likeUser"}>
+                      <h3 className={"usersList"}>찜 목록</h3>
+                      <span className={"listLittle"}>내 상품을 찜한 고객 내역입니다.</span>
+                  </div>
+                  <div className={"content-sub"}>
+                      <div className={"userAll"}>
+                          <div className={"userAll-sub"}>
+                              <ul className={"userAll-ul"}>
+                                  <li className={"userState"}>
+                                      <Link className={"userState-title"}>
+                                          <em style={{
+                                              borderBottomColor: "green"
+                                          }} className={"customerRole"}>전체</em>
+                                      </Link>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                      <table className={"table table-hover text-center align-middle"}>
+                          <thead>
+                          <tr className="table-dark">
+                              <th>주문일자</th>
+                              <th>고객 ID</th>
+                              <th>상품 이미지</th>
+                              <th>제품정보</th>
+                              <th>주문금액(수량)</th>
+                              <th>주문상태</th>
+                              <th>최종 실결제금액</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          {interestedListData.length == 0 ?
+                            <h2 className={'text-center mt-3'}>찜한 상품이 없습니다.</h2> : interestedListData.slice(offset, offset + limit).map((item, index) => {
+                                return (
+                                  <tr className="table-light" key={index}>
+                                      <td>{item.productName}</td>
+                                      <td>{item.userId}</td>
+                                      <td><img src={item.productImg} alt="" width={100}/></td>
+                                      <td>{item.productName}</td>
+                                      <td>
+                                          {item.productPrice * item.productOrderQuantity} ({item.productOrderQuantity}개)
+                                      </td>
+                                      <td>
+                                          {(item.userOrderState) === "배송 중" ? <p style={{color: "olive"}}>배송 중</p> : <p style={{color: "blueviolet"}}>배송 완료</p>}
+                                      </td>
+                                      <td>{item.productPrice * item.productOrderQuantity} 원</td>
+                                  </tr>
+                                );
+                            })}
+                          </tbody>
+                      </table>
+                      <Pagination
+                        total={interestedListData.length}
+                        limit={limit}
+                        page={page}
+                        setPage={setPage}
+                      />
+                  </div>
+              </div>
 
-                            </div>
-                            <button type={"button"} className={"manageSetting"}>
-                                목록 관리
-                            </button>
-                        </div>
-                        {/*<div className={"likeUserList"}>*/}
-                        {/*    <img style={{*/}
-                        {/*        width: 64,*/}
-                        {/*        height: 64,*/}
-                        {/*        display: "inline-block",*/}
-                        {/*        verticalAlign: "top",*/}
-                        {/*        marginBottom: 20*/}
-                        {/*    }} src={"./Img/Bjh/heart.png"}/>*/}
-                        {/*    <strong>*/}
-                        {/*        <em>찜한 고객이 </em>*/}
-                        {/*        아직 없습니다.*/}
-                        {/*    </strong>*/}
-                        {/*    <p className={"likeGuide"}>*/}
-                        {/*        고객이 찜하면*/}
-                        {/*        <br/>*/}
-                        {/*        이곳에서 볼 수 있습니다.*/}
-                        {/*    </p>*/}
-                        {/*</div>*/}
-                        <ul className={"zzim-list"}>
-                            <li className={"zzim-user"}>
-                                <label className={"setting"}>
-
-                                </label>
-                                <div className={"view-list"}>
-                                    <Link><img width={120} height={120} src={"Img/logo.png"}/></Link>
-                                </div>
-                                <div className={"zzim-content"}>
-                                    <div className={"content-title"}>
-                                        2023.01.30.
-                                    </div>
-                                    <span className={"nameDetail"}>이름
-                                        <Link target={"_blank"} className={"n-strong"}>홍길동</Link>
-                                    </span>
-                                    <br/>
-                                    <div className={"c-name"}>
-                                        <span className={"nameDetail"}>아이디
-                                            <strong className={"n-strong"}>gildong</strong>
-                                        </span>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                        <div className={"c-number"}>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+          </div>
+      </div>
     );
 }
 

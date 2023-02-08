@@ -97,11 +97,6 @@ function PayUserList(props) {
                                             }} className={"customerRole"}>전체</em>
                                         </Link>
                                     </li>
-                                    {/*<li className={"userState"}>*/}
-                                    {/*    <Link className={"userState-title"}>*/}
-                                    {/*        <em className={"customerRole"}>비로그인 회원</em>*/}
-                                    {/*    </Link>*/}
-                                    {/*</li>*/}
                                 </ul>
                             </div>
                         </div>
@@ -131,7 +126,6 @@ function PayUserList(props) {
                                         </td>
                                         <td>
                                             {(item.userOrderState) === "배송 중" ? <p style={{color: "olive"}}>배송 중</p> : <p style={{color: "blueviolet"}}>배송 완료</p>}
-                                            {/*{item.userOrderState}*/}
                                         </td>
                                         <td>{item.productPrice * item.productOrderQuantity} 원</td>
                                     </tr>

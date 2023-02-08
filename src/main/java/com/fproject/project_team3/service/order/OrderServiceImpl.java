@@ -1,5 +1,6 @@
 package com.fproject.project_team3.service.order;
 
+import com.fproject.project_team3.dto.join.InterestedListProductInfoDto;
 import com.fproject.project_team3.dto.join.OrderListProductInfoDto;
 import com.fproject.project_team3.dto.join.UserOrderListProductInfoDto;
 import com.fproject.project_team3.mapper.OrderListMapper;
@@ -25,6 +26,11 @@ public class OrderServiceImpl implements OrderService {
   @Override
   public List<OrderListProductInfoDto> getPayUserList(String sellerBusinessName) {
     return orderListMapper.getPayUserList(sellerBusinessName);
+  }
+
+  @Override
+  public List<InterestedListProductInfoDto> getInterestedUserList(String sellerBusinessName) {
+    return orderListMapper.getInterestedUserList(sellerBusinessName);
   }
 
 
