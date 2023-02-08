@@ -4,6 +4,7 @@ import com.fproject.project_team3.dto.join.ProductInfoOptionDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.dto.product.ProductOptionDto;
+import com.fproject.project_team3.dto.product.SearchDto;
 import com.fproject.project_team3.dto.seller.SellerInfoDto;
 import com.fproject.project_team3.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,20 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.categoryProductList(kindNum);
     }
 
+    @Override
+    public void searchContentTotalInsert(String searchContent) {
+        int count = productMapper.searchContentCheck(searchContent);
+        if (count == 0) {
+            productMapper.searchContentTotalInsert(searchContent);
+        } else {
+            productMapper.searchContentTotalUpdate(searchContent);
+        }
+    }
+
+    @Override
+    public List<SearchDto> getSearchTotal10() {
+        return productMapper.getSearchTotal10();
+    }
 
 
     //    HSH
@@ -111,6 +126,7 @@ public class ProductServiceImpl implements ProductService {
     public int checkProductName(String productName, String productSellerId) throws Exception {
         return productMapper.checkProductName(productName, productSellerId);
     }
+
     @Override
     public ProductInfoDto getProductInfo(String productSellerId, String productName) {
         return productMapper.getProductInfo(productSellerId, productName);
@@ -136,6 +152,7 @@ public class ProductServiceImpl implements ProductService {
 
 
     }
+
 
     //    GJY
 

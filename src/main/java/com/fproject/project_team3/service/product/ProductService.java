@@ -4,6 +4,7 @@ import com.fproject.project_team3.dto.join.ProductInfoOptionDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.dto.product.ProductOptionDto;
+import com.fproject.project_team3.dto.product.SearchDto;
 import com.fproject.project_team3.dto.seller.SellerInfoDto;
 
 import java.util.List;
@@ -59,6 +60,10 @@ public interface ProductService {
     List<ProductOptionDto> selectOptionData(int productNum);
 
     void editDataUpdate(Object productInfoOptionDto, String my);
+
+    void searchContentTotalInsert(String searchContent);
+
+    List<SearchDto> getSearchTotal10();
 
     //    GJY
 

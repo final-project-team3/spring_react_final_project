@@ -5,6 +5,7 @@ import com.fproject.project_team3.dto.join.ProductInfoOptionDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.dto.product.ProductOptionDto;
+import com.fproject.project_team3.dto.product.SearchDto;
 import com.fproject.project_team3.dto.seller.SellerInfoDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -34,6 +35,17 @@ public interface ProductMapper {
     ProductInfoDto getProductInfoFromDetail(int productNum);
 
     List<ProductOptionDto> getProductOptionList(int productNum);
+
+    //     실검
+    void searchContentTotalInsert(String searchContent);
+
+    int searchContentCheck(String searchContent);
+
+    void searchContentTotalUpdate(String searchContent);
+
+    List<SearchDto> getSearchTotal10();
+    //     실검
+
     //    HSH
 
     //    LYS
