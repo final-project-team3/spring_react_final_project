@@ -14,7 +14,7 @@ function Footer(props) {
                     <li className={"benefit-footer"}>
                         <div>
                             <span>
-                                <img src={"../Img/Bjh/Footer/coupon.png"}/>
+                                <img src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Fcoupon.png?alt=media&token=262f14d3-1678-4212-acf9-992519fb4c6b"}/>
                             </span>
                             <p>가입시<br/>
                                 환영쿠폰 10000원
@@ -24,7 +24,7 @@ function Footer(props) {
                     <li className={"benefit-footer"}>
                         <div>
                             <span>
-                                <img src={"../Img/Bjh/Footer/delivery.png"}/>
+                                <img src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Fdelivery.png?alt=media&token=cc650548-b113-4116-b98b-9e105004dab4"}/>
                             </span>
                             <p>가입시<br/>
                                 무료 배송
@@ -34,7 +34,7 @@ function Footer(props) {
                     <li className={"benefit-footer"}>
                         <div>
                             <span>
-                                <img src={"../Img/Bjh/Footer/discount.png"}/>
+                                <img src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Fdiscount.png?alt=media&token=6d36776d-2920-4528-b007-6770e1f67e0b"}/>
                             </span>
                             <p>가입시<br/>
                                 첫 구매 10% 할인
@@ -44,7 +44,7 @@ function Footer(props) {
                     <li className={"benefit-footer"}>
                         <div>
                             <span>
-                                <img src={"../Img/Bjh/Footer/birthday.png"}/>
+                                <img src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Fbirthday.png?alt=media&token=49679f34-0a93-475f-8400-d7808df36ea7"}/>
                             </span>
                             <p>생일기념<br/>
                                 축하쿠폰 5000원
@@ -77,7 +77,7 @@ function Footer(props) {
                                    <div className={"footer-kakao"}>
                                        <Link className={"kakao"}><img style={{
                                            paddingRight: 10
-                                       }} src="../Img/Bjh/kakao.png"/>카카오톡 문의</Link>
+                                       }} src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Fkakao.png?alt=media&token=bca05c56-1b18-4723-bdc3-79bee866cbd3"}/>카카오톡 문의</Link>
                                    </div>
                                    <p className={"footer-empty"}></p>
 
@@ -104,17 +104,17 @@ function Footer(props) {
                                        <div className={"icon-link"}>
                                            <ul>
                                                <li>
-                                                   <Link className={"hyup"}><img src="../Img/Bjh/hyup.png"/>
+                                                   <Link className={"hyup"}><img src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Fhyup.png?alt=media&token=cf5be55d-4476-4812-8d3f-04b102ce891a"}/>
                                                        <p>협찬문의</p>
                                                    </Link>
                                                </li>
                                                <li>
-                                                   <Link className={"hyup"}><img src="../Img/Bjh/col.png"/>
+                                                   <Link className={"hyup"}><img src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Fcol.png?alt=media&token=1ad70e42-3e59-42dd-a3ae-05cfbe21bf4e"}/>
                                                        <p>콜라보제안</p>
                                                    </Link>
                                                </li>
                                                <li>
-                                                   <Link className={"hyup"}><img src="../Img/Bjh/custom.png"/>
+                                                   <Link className={"hyup"}><img src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Fcustom.png?alt=media&token=d307429b-6471-404c-a4d1-6fd262921aa1"}/>
                                                        <p>주문제작 문의</p>
                                                    </Link>
                                                </li>
