@@ -63,7 +63,7 @@ const Search = () => {
                     return (
                         <div key={index} className={'mt-5 col-3'}>
                             <Link to={`/productDetail/${product.productNum}`}>
-                                <img width={300} src={product.productImg}/>
+                                <img width={300} height={450} src={product.productImg}/>
                             </Link>
                             <Link to={`/productSellerPage/${product.productSellerBusinessName}`}>
                                 <h5 className={"my-3"}>{product.productSellerBusinessName}</h5>
