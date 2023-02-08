@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import $ from "jquery";
 import FireBaseExample from "./FireBaseExample";
+import {getSpaceUntilMaxLength} from "@testing-library/user-event/dist/utils";
 
 // const tableTest = (props) => {
 //   return (
@@ -108,17 +109,6 @@ const ProductEditPage = () => {
               setOptionData(data3.data);
               console.log(optionData);
 
-              // const OptionDataSample = req.data;
-              // for (let i = 0; i < OptionDataSample.length; i++) {
-              //   console.log("OptionDataSample.length");
-              //   // console.log(OptionDataSample.length);
-              //   $(`#productOption1${i}`).prop("value", optionData[i].productOption1);
-              //   $(`#productOption2${i}`).prop("value", optionData[i].productOption2);
-              //   $(`#productOptionPrice${i}`).prop("value", optionData[i].productOptionPrice);
-              //   $(`#productQuantity${i}`).prop("value", optionData[i].productQuantity);
-              //   $(`#productCouponUseable${i}`).prop("value", optionData[i].productCouponUseable);
-              // }
-
               const copyProductOption1 = [];
               const copyProductOption2 = [];
               const copyProductOptionPrice = [];
@@ -175,6 +165,10 @@ const ProductEditPage = () => {
       });
     }
   });
+
+  // const textareaOnchange = () => {
+  //   value.replace(/<br\s*\/?>/gm, "\n").length
+  // }
 
   const editFnc = async () => {
     const productName = $("#productName").val();
@@ -235,24 +229,11 @@ const ProductEditPage = () => {
         }
       })
     })
-    // const arrayAll2 = [{
-    //   productCouponUseable: productCouponUseable[i],
-    //   productOption1: productOption1[i],
-    //   productOption2: productOption2[i],
-    //   productQuantity: productQuantity[i],
-    //   productOptionPrice: productOptionPrice[i],
-    // }]
-    // await axios.post("http://localhost:8080/editDataUpdate", arrayAll2, {
-    //   params: {
-    //     my: "option",
-    //   }
-    // })
   };
 
   return (
     <div className={"container mb-5"}>
       <h2 className={"text-center"}>제품 정보 수정</h2>
-      {/*<h2>{optionData[0]?.productOptionNum}</h2>*/}
       <div className={"mt-3"}>
         <label htmlFor="productName">제품 이름</label>
         <input type="text" id={"productName"} placeholder={productName}/>
@@ -268,7 +249,12 @@ const ProductEditPage = () => {
       <div className={"mt-3"}>
         <label htmlFor="productContent">제품 설명</label>
         <div>
-          <textarea name="" id="productContent" cols="100" rows="5"></textarea>
+          <textarea name="" id="productContent" cols="100" rows="5"
+                    // maxLength={500}
+                    // onChange={textareaOnchange}
+          >
+
+          </textarea>
         </div>
       </div>
       <div className={"mt-3"}>

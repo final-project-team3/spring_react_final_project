@@ -1,8 +1,27 @@
-import React from "react";
+import React, {useEffect} from "react";
 import './LikeUserList.css';
 import {Link} from "react-router-dom";
+import axios from "axios";
+import $ from "jquery";
 
 function LikeUserList(props) {
+    let sellerInfo = sessionStorage.getItem("sellerInfo");
+    sellerInfo = JSON.parse(sellerInfo);
+    const productSellerId = sellerInfo.sellerId;
+
+    // useEffect(() => {
+    //     return () => {
+    //         axios
+    //           .post("http://localhost:8080/selectLikeUserList", null, {
+    //               params: {
+    //                   productSellerId: productSellerId,
+    //                   productName: "테스터2수정할상품",
+    //               },
+    //           })}
+    //     }, []);
+
+
+
     return (
         <div className={"ViewMain"}>
             <div className={"container"} id={"ViewMain-sub"}>

@@ -21,7 +21,9 @@ function OrderListPage(props) {
             });
             console.log(data);
             setOrderListData(data);
+            console.log(orderListData);
         };
+
     }, []);
 
     return (

@@ -18,6 +18,13 @@
                            on uol.product_num = pi.product_num
         where uol.user_id = #{id};
     </select>
+
+    <select id="getPayUserList" parameterType="String" resultType="com.fproject.project_team3.dto.join.UserOrderListProductInfoDto">
+        SELECT *
+        FROM product_info info, user_order_list olist
+        WHERE info.product_num = olist.product_num
+          AND info.product_seller_business_name = #{productSellerBusinessName};
+    </select>
     <!-- GJY -->
 
     <!-- BJH -->

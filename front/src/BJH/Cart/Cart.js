@@ -8,7 +8,7 @@ import axios from "axios";
 // import CartList from "./CartList";
 
 function Cart() {
-    
+
     return (
         <>
             {/*<Header />*/}
