@@ -22,7 +22,7 @@ const Kind = (props) => {
         smallKindList = [props.smallKind];
         smallKindList = smallKindList[0];
     }
-    $(function (){
+    $(function () {
         $("#dropdown0").hover()
     })
     return (
@@ -39,12 +39,12 @@ const Kind = (props) => {
             }}>{props.bigKind}</h2></Link>
             <ul className={'dropdown-menu'} aria-labelledby={`dropdown${props.index}`}>
                 {[smallKindList][0].map((item, index) =>
-                    <Link to={`/category/${bigKind}/${item.productSmallKind}`} onClick={()=>{
+                    <Link to={`/category/${bigKind}/${item.productSmallKind}`} onClick={() => {
                         console.log(location.pathname.includes("/category"));
                         if (location.pathname.includes("/category")) {
-                        navi(`/category/${bigKind}/${item.productSmallKind}`);
-                        window.location.reload();
-                    }
+                            navi(`/category/${bigKind}/${item.productSmallKind}`);
+                            window.location.reload();
+                        }
                     }}>
                         <li key={index}
                             className={'dropdown-item'}>{item.productSmallKind}</li>
@@ -141,7 +141,7 @@ const Header = () => {
                         }}><img width={60} src={"../Img/menu.png"}/></Link>
                         <Link className={'navbar-brand'} to={"/"}><img width={150} src={'../Img/logo.png'}/></Link>
                     </div>
-                    <div className="collapse navbar-collapse" id="collapsibleNavbar">
+                    <div className="px-5 ms-3 collapse navbar-collapse" id="collapsibleNavbar">
                         <ul className={'navbar-nav my-auto'}>
                             <li className={'nav-item'}>
                                 <div className={'d-flex'}>
@@ -169,15 +169,23 @@ const Header = () => {
                                     <ul className={'mx-auto text-center row justify-content-around d-flex'}>
                                         <li onClick={() => setRankClick(true)} style={{
                                             backgroundColor: rankClick == true ? "white" : "lightgray"
-                                        }} className={'col-6 border border-dark'}><h5>1 ~ 10위</h5></li>
+                                        }} className={'col-6'}><h5 style={{
+                                            fontWeight: "bold"
+                                        }}>1 ~ 10위</h5></li>
 
-                                        <li style={{
-                                            backgroundColor: rankClick == false ? "white" : "lightgray"
-                                        }} className={'col-6 border border-dark'}><Link
-                                            onClick={() => setRankClick(false)} style={{
-                                            textDecoration: "none"
-                                        }}><h5>11 ~ 20위</h5></Link></li>
+                                        {/*<li style={{*/}
+                                        {/*    backgroundColor: rankClick == false ? "white" : "lightgray"*/}
+                                        {/*}} className={'col-6 border border-dark'}><Link*/}
+                                        {/*    onClick={() => setRankClick(false)} style={{*/}
+                                        {/*    textDecoration: "none"*/}
+                                        {/*}}><h5>11 ~ 20위</h5></Link></li>*/}
                                     </ul>
+                                    <li><Link className={'dropdown-item'} to={'#'}>테스트</Link></li>
+                                    <li><Link className={'dropdown-item'} to={'#'}>테스트</Link></li>
+                                    <li><Link className={'dropdown-item'} to={'#'}>테스트</Link></li>
+                                    <li><Link className={'dropdown-item'} to={'#'}>테스트</Link></li>
+                                    <li><Link className={'dropdown-item'} to={'#'}>테스트</Link></li>
+                                    <li><Link className={'dropdown-item'} to={'#'}>테스트</Link></li>
                                     <li><Link className={'dropdown-item'} to={'#'}>테스트</Link></li>
                                     <li><Link className={'dropdown-item'} to={'#'}>테스트</Link></li>
                                     <li><Link className={'dropdown-item'} to={'#'}>테스트</Link></li>
@@ -217,27 +225,33 @@ const Header = () => {
 
                                 </div>
                             </div>
-                            {role == null ? <Link to={'/login'}><img className={'ms-2'}
-                                                                     src={"../Img/login.png"}/></Link> : role == "USER" ?
-                                <Link onClick={() => dispatch(userLogout())}><img width={40} src={"../Img/BJH/logout.png"}
-                                                                                  className={'ms-2'}/></Link> :
-                                <Link onClick={() => dispatch(sellerLogout())}><img width={40} src={"../Img/BJH/logout.png"}
-                                                                                    className={'ms-2'}/></Link>}
-                            {/*<li className={'nav-item'}>*/}
-                            {/*    <Link to={'/login'}><img className={'ms-2'} src={"../Img/login.png"}/></Link>*/}
-                            {/*</li>*/}
-                            <li className={'nav-item'}>
-                                <Link to={'/cart'}><img className={'ms-2 mt-2'} width={40}
-                                                        src={"../Img/shoppingCart.png"}/></Link>
-                            </li>
-                            <li className={'nav-item'}>
-                                <Link to={'/mypage'}><img className={'ms-2'} width={40}
-                                                          src={"../Img/mypage.png"}/></Link>
-                            </li>
-                            <li className={'nav-item'}>
-                                <Link to={'/login'}><img className={'ms-2'} src={"../Img/login.png"}/></Link>
-                            </li>
                         </ul>
+                        {role == null ? <Link style={{
+                            marginLeft: 20
+                        }} to={'/login'}><img className={'ms-2'}
+                                                                 src={"../Img/login.png"}/></Link> : role == "USER" ?
+                            <Link style={{
+                                marginLeft: 20
+                            }} onClick={() => dispatch(userLogout())}><img width={40}
+                                                                              src={"../Img/BJH/logout.png"}
+                                                                              className={'ms-2'}/></Link> :
+                            <Link style={{
+                                marginLeft: 20
+                            }} onClick={() => dispatch(sellerLogout())}><img width={40}
+                                                                                src={"../Img/BJH/logout.png"}
+                                                                                className={'ms-2'}/></Link>}
+                        {/*<li className={'nav-item'}>*/}
+                        {/*    <Link to={'/login'}><img className={'ms-2'} src={"../Img/login.png"}/></Link>*/}
+                        {/*</li>*/}
+                        <li className={'nav-item'}>
+                            <Link to={'/cart'}><img className={'ms-4'} width={40}
+                                                    src={"../Img/shoppingCart.png"}/></Link>
+                        </li>
+                        <li className={'nav-item'}>
+                            <Link to={'/mypage'}><img className={'ms-4'} width={40}
+                                                      src={"../Img/mypage.png"}/></Link>
+                        </li>
+
                     </div>
                 </div>
             </nav>

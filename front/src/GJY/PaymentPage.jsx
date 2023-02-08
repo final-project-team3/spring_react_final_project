@@ -174,11 +174,11 @@ function PaymentPage(props) {
                                 {productCnt}
                             </p>
                         </div>
-                        <div className={"row col-6 d-flex justify-content-end ms-3"}>
-                            <button className={"btn btn-warning mt-3"} onClick={ChangeOpt}>
-                                옵션 변경
-                            </button>
-                        </div>
+                        {/*<div className={"row col-6 d-flex justify-content-end ms-3"}>*/}
+                        {/*    <button className={"btn btn-warning mt-3"} onClick={ChangeOpt}>*/}
+                        {/*        옵션 변경*/}
+                        {/*    </button>*/}
+                        {/*</div>*/}
                     </div>
                     <div className={"col-6"} style={styles.vertical}>
                         <div className={"row"}>
