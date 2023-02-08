@@ -38,16 +38,14 @@ const ImageContainer = styled.div`
 const Image = styled.img`
 width:100%;`;
 
-const imgUrl = require('../BJH/logo.png');
-const imgUrl2 = require('../BJH/logo.png');
-const imgUrl3 = require('../BJH/logo.png');
+const mainImg1 = require('../HSH/Img/main1.jpg');
+const mainImg2 = require('../HSH/Img/main2.jpg');
+const mainImg3 = require('../HSH/Img/main3.jpg');
 
-const items = [
-    {id: 1, url: imgUrl},
-    {id: 2, url: imgUrl2},
-    {id: 3, url: imgUrl3},
-    // {id: 2, url: imgUrl2},
-
+const mainImg = [
+    {url: mainImg1},
+    {url: mainImg2},
+    {url: mainImg3},
 ];
 
 const Main = () => {
@@ -92,7 +90,7 @@ const Main = () => {
             <div className={'container'}>
                 <h2 hidden={true}> 캐러셀</h2>
                 <StyledSlider {...settings}>
-                    {items.map(item => {
+                    {mainImg.map(item => {
                         return (
                             <div key={item.id}>
                                 <ImageContainer>
@@ -404,7 +402,7 @@ const Main = () => {
                                 <div className={"moreBtn"}>
                                     <Link className={"btnMore"}>
                                         <span>상품 더 보러 가기</span>
-                                        {/* 이미지 색이 안바뀜 왜지...*/}
+                                        {/* 화살표는 걍 냅두자...*/}
                                         <span className={"arrow_lb"}>
                                             <img style={{
                                                 border: "none",

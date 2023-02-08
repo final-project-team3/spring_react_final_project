@@ -8,10 +8,6 @@ import axios from "axios";
 // import CartList from "./CartList";
 
 function Cart() {
-    // if (localStorage.getItem("token") === null) {
-    //     alert("로그인 후 이용해 보세요! 🛒");
-    //     document.location.href = "/login";
-    // }
 
     return (
         <>

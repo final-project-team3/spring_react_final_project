@@ -93,6 +93,29 @@
           AND product_small_kind = #{smallKind}
     </select>
 
+    <insert id="searchContentTotalInsert" parameterType="String">
+        INSERT INTO search(search_content)
+        VALUES (#{searchContent})
+    </insert>
+
+    <select id="searchContentCheck" parameterType="String" resultType="int">
+        SELECT COUNT(search_content)
+        FROM search
+        WHERE search_content = #{searchContent}
+    </select>
+
+    <update id="searchContentTotalUpdate" parameterType="String">
+        UPDATE search
+        SET search_count = search_count + 1
+        WHERE search_content = #{searchContent}
+    </update>
+
+    <select id="getSearchTotal10" resultType="com.fproject.project_team3.dto.product.SearchDto">
+        SELECT *
+        FROM search
+        ORDER BY search_count DESC LIMIT 10;
+    </select>
+
     <!-- HSH -->
 
     <!-- LYS -->

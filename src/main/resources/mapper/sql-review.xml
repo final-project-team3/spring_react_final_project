@@ -36,9 +36,22 @@
     </update>
 
     <insert id="writeMyReview" parameterType="com.fproject.project_team3.dto.userAndseller.ReviewDto">
-        INSERT INTO review (user_id, product_num, review_content, review_registration_date, review_star_point)
-        VALUES (#{userId}, #{productNum}, #{reviewContent}, NOW(), #{reviewStarPoint})
+        INSERT INTO review (user_id, product_num, review_content, review_registration_date, review_star_point,
+                            order_num)
+        VALUES (#{userId}, #{productNum}, #{reviewContent}, NOW(), #{reviewStarPoint}, #{orderNum})
     </insert>
+
+    <select id="reviewWriteCheck" parameterType="int" resultType="int">
+        SELECT COUNT(order_num)
+        FROM review
+        WHERE order_num = #{orderNum}
+    </select>
+
+    <update id="updateReviewState" parameterType="com.fproject.project_team3.dto.userAndseller.ReviewDto">
+        UPDATE user_order_list
+        SET review_state = "작성 완료"
+        WHERE order_num = #{orderNum}
+    </update>
 
     <!-- LYS -->
 

@@ -12,4 +12,5 @@ public class ReviewDto {
     int reviewHelpful;
     int reviewStarPoint;
     String reviewDeletedYn;
+    int orderNum;
 }

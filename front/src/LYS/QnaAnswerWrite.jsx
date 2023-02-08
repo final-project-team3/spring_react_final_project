@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import './ProductQna.css'
 import {Link} from "react-router-dom";
-import styled from "styled-components";
-import $ from "jquery";
 
 function QnaAnswerWrite(props) {
     const [productInfo, setProductInfo] = useState([]);
@@ -40,14 +38,10 @@ function QnaAnswerWrite(props) {
         }
     }, [])
 
-    // function whatState(){
-    //     var state = $('#qnaState').val();
-    //     console.log(state);
-    //     if (state == "답변완료"){
-    //         console.log(state);
-    //         $('.qnaState').attr("disabled", "true");
-    //     }
-    // }
+    function StateWait() {
+        return
+
+    }
 
     return (
         <div className={"container"}>
@@ -95,18 +89,39 @@ function QnaAnswerWrite(props) {
                                                                 className="prod-inquiry-item__time">{`${item.qnaRegistrationDate}`}</div>
                                                         </div>
                                                         <div className={"col-6"}>
-                                                            <Link to={`/answerWritePage`} state={{qnaInfo: item}}
-                                                                  style={{
-                                                                      display: "flex",
-                                                                      flexDirection: "row-reverse"
-                                                                  }}>
-                                                                <button id={"qnaState"} name={"qnaState"} hidden={false}
-                                                                        className={"btn btn-primary"}>{item.qnaState}
-                                                                </button>
-                                                                <button id={"qnaState2"} name={"qnaState2"} hidden={true}
-                                                                        className={"btn btn-primary"}>{item.qnaState}
-                                                                </button>
-                                                            </Link>
+                                                            {item.qnaState == "답변대기" ?
+                                                                <Link to={`/answerWritePage`} state={{qnaInfo: item}}
+                                                                      style={{
+                                                                          display: "flex",
+                                                                          flexDirection: "row-reverse"
+                                                                      }}>
+                                                                    <button id={"qnaState"} name={"qnaState"}
+                                                                            value={item.qnaState}
+                                                                            className={"btn btn-primary"}>{item.qnaState}
+                                                                    </button>
+                                                                </Link>
+                                                                :
+                                                                <div style={{
+                                                                    display: "flex",
+                                                                    flexDirection: "row-reverse"
+                                                                }}>
+                                                                    <button id={"qnaState"} name={"qnaState"}
+                                                                            value={item.qnaState}
+                                                                            className={"btn btn-primary"}
+                                                                            disabled={true}>{item.qnaState}
+                                                                    </button>
+                                                                </div>
+                                                            }
+                                                            {/*<Link to={`/answerWritePage`} state={{qnaInfo: item}}*/}
+                                                            {/*      style={{*/}
+                                                            {/*          display: "flex",*/}
+                                                            {/*          flexDirection: "row-reverse"*/}
+                                                            {/*      }}>*/}
+                                                            {/*    <button id={"qnaState"} name={"qnaState"}*/}
+                                                            {/*            value={item.qnaState}*/}
+                                                            {/*            className={"btn btn-primary"}>{item.qnaState}*/}
+                                                            {/*    </button>*/}
+                                                            {/*</Link>*/}
                                                         </div>
                                                     </div>
                                                 </div>

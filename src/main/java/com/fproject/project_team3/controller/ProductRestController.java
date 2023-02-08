@@ -4,6 +4,7 @@ import com.fproject.project_team3.dto.join.ProductInfoOptionDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.dto.product.ProductOptionDto;
+import com.fproject.project_team3.dto.product.SearchDto;
 import com.fproject.project_team3.dto.seller.SellerInfoDto;
 import com.fproject.project_team3.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,10 +68,10 @@ public class ProductRestController {
         return productInfoOption;
     }
 
-//    사업자 이름으로 제품 / 사업자 정보 가져오기
+    //    사업자 이름으로 제품 / 사업자 정보 가져오기
     @GetMapping("/getSellerProductList")
     public Object getSellerProductList(@RequestParam("productSellerBusinessName") String productSellerBusinessName) {
-        Map<String,Object> productInfoSellerInfo = new HashMap<>();
+        Map<String, Object> productInfoSellerInfo = new HashMap<>();
         List<ProductInfoDto> productInfoList = productService.getSellerProductList(productSellerBusinessName);
         SellerInfoDto sellerInfo = productService.getSellerNameToSellerInfo(productSellerBusinessName);
 
@@ -81,6 +82,17 @@ public class ProductRestController {
 
         return productInfoSellerInfo;
     }
+
+    @PostMapping("/searchContentTotalInsert")
+    public void searchContentTotalInsert(@RequestParam("searchContent") String searchContent) {
+        productService.searchContentTotalInsert(searchContent);
+    }
+
+    @GetMapping("/getSearchTotal10")
+    public List<SearchDto> getSearchTotal10() {
+        return productService.getSearchTotal10();
+    }
+
 
     //    HSH
 
@@ -144,7 +156,7 @@ public class ProductRestController {
     // 상품 수정하기 (선택한 상품명의 데이터 가져오기)
     @PostMapping("/selectProductInfo")
     public ProductInfoDto selectProductInfo(@RequestParam("productSellerId") String productSellerId, @RequestParam("productName") String productName) {
-        ProductInfoDto ProductInfoDto = productService.getProductInfo(productSellerId,productName);
+        ProductInfoDto ProductInfoDto = productService.getProductInfo(productSellerId, productName);
 //        System.out.println(productSelectList);
         return ProductInfoDto;
     }
