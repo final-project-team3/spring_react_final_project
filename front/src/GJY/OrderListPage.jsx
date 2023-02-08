@@ -3,10 +3,30 @@ import axios from "axios";
 import Pagination from "./Pagination";
 import PaymentPage from "./PaymentPage";
 import {Link} from "react-router-dom";
+import $ from 'jquery';
 
 function OrderListPage(props) {
+
     let userInfo = sessionStorage.getItem("userInfo");
     userInfo = JSON.parse(userInfo);
+
+    const ReviewYesButton = (props) => {
+        return (
+            <Link to={'/reviewWrite'} state={{productInfo: props.item}}>
+                <button className={"btn btn-secondary btn-sm"}
+                >{props.state}
+                </button>
+            </Link>
+        )
+    }
+
+    const ReviewNoButton = (props) => {
+        return (
+            <button className={"btn btn-secondary btn-sm"} disabled={true}
+            >{props.state}
+            </button>
+        )
+    }
 
 
     const [orderListData, setOrderListData] = useState([]);
@@ -60,7 +80,8 @@ function OrderListPage(props) {
                     </thead>
                     <tbody>
                     {orderListData.length == 0 ?
-                        <h2 className={'text-center mt-3'}>현재 주문내역이 없습니다</h2> : orderListData.slice(offset, offset + limit).map((item, index) => {
+                        <h2 className={'text-center mt-3'}>현재 주문내역이
+                            없습니다</h2> : orderListData.slice(offset, offset + limit).map((item, index) => {
                             return (
                                 <tr className="table-light" key={index}>
                                     <td>{item.userOrderDate}</td>
@@ -73,9 +94,9 @@ function OrderListPage(props) {
                                     <td>
                                         {item.userOrderState}
                                         <div className={"mt-2"}>
-                                            <Link to={'/reviewWrite'} state={{productInfo: item}}>
-                                                <button className={"btn btn-secondary btn-sm"}>리뷰작성</button>
-                                            </Link>
+                                            {item.reviewState == "리뷰 작성" ?
+                                                <ReviewYesButton state={item.reviewState} item={item}/> :
+                                                <ReviewNoButton state={item.reviewState}/>}
                                         </div>
                                     </td>
 

@@ -119,6 +119,8 @@ function ReviewWrite() {
                                                        value={productInfo.productNum}/>
                                                 <input hidden={true} name={'reviewStarPoint'} id={'reviewStarPoint'}
                                                        value={score}/>
+                                                <input hidden={true} name={'orderNum'} id={'reviewStarPoint'}
+                                                       value={productInfo.orderNum}/>
                                             </div>
                                         </div>
                                         <div className={"text-md-start"}>

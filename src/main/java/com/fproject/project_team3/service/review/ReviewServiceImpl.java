@@ -40,6 +40,12 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void writeMyReview(ReviewDto reviewDto) {
         reviewMapper.writeMyReview(reviewDto);
+        reviewMapper.updateReviewState(reviewDto);
+    }
+
+    @Override
+    public int reviewWriteCheck(int orderNum) {
+        return reviewMapper.reviewWriteCheck(orderNum);
     }
 
 

@@ -6,10 +6,7 @@ import com.fproject.project_team3.dto.userAndseller.ReviewDto;
 import com.fproject.project_team3.service.review.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -50,6 +47,11 @@ public class ReviewRestController {
     public void writeMyReview(ReviewDto reviewDto, HttpServletResponse httpServletResponse) throws IOException {
         reviewService.writeMyReview(reviewDto);
         httpServletResponse.sendRedirect("http://localhost:3000/myReview");
+    }
+
+    @GetMapping("/reviewWriteCheck")
+    public int reviewWriteCheck(@RequestParam("orderNum") int orderNum) {
+        return reviewService.reviewWriteCheck(orderNum);
     }
 }
 
