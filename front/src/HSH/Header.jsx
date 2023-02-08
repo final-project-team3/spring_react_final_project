@@ -94,7 +94,6 @@ const Header = () => {
         var timeString = hours + ':' + minutes + ':' + seconds;
 
         let time = dateString + " " + timeString;
-        console.log(time);
         return time;
     }
 
@@ -111,12 +110,13 @@ const Header = () => {
         }
     }, [])
 
-    setInterval(async () => {
-        const {data} = await axios.get("http://localhost:8080/getSearchTotal10");
-        setSearchTop10(data);
-        clearInterval();
-        setNowTime(getNowTime);
-    }, 60000)
+        const timer = setInterval(async () => {
+            const {data} = await axios.get("http://localhost:8080/getSearchTotal10");
+            setSearchTop10(data);
+            setNowTime(getNowTime);
+            clearInterval(timer);
+        }, 60000)
+
     // 실시간 검색
 
     // 검색 무한반복을 없애기 위함
