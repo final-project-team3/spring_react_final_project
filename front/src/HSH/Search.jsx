@@ -19,13 +19,6 @@ const Search = () => {
         }
     });
 
-    const moneySplice = money => {
-        for (let i = 1; i < money.length; i--) {
-            if (i)
-                money.add(",")
-        }
-    }
-
     useEffect(() => {
         return async () => {
 

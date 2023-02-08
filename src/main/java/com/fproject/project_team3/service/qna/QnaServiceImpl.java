@@ -32,4 +32,9 @@ public class QnaServiceImpl implements QnaService{
         productInfoQnaInfo.put("qnaDtoList", qnaDtoList);
         return productInfoQnaInfo;
     }
+
+    @Override
+    public void answerWrite(QnaDto qnaDto) {
+        qnaMapper.answerWrite(qnaDto);
+    }
 }

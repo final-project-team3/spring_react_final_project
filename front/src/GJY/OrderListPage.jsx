@@ -57,29 +57,30 @@ function OrderListPage(props) {
                     </tr>
                     </thead>
                     <tbody>
-                    {orderListData.slice(offset, offset + limit).map((item, index) => {
-                        return (
-                            <tr className="table-light" key={index}>
-                                <td>{item.userOrderDate}</td>
-                                <td>{item.userId}</td>
-                                <td><img src={item.productImg} alt="" width={100}/></td>
-                                <td>{item.productName}</td>
-                                <td>
-                                    {item.productPrice * item.productOrderQuantity} ({item.productOrderQuantity}개)
-                                </td>
-                                <td>
-                                    {item.userOrderState}
-                                    <div className={"mt-2"}>
-                                        <Link to={'/reviewWrite'} state={{productInfo:item}}>
-                                            <button className={"btn btn-secondary btn-sm"}>리뷰작성</button>
-                                        </Link>
-                                    </div>
-                                </td>
+                    {orderListData.length == 0 ?
+                        <h2 className={'text-center mt-3'}>현재 주문내역이 없습니다</h2> : orderListData.slice(offset, offset + limit).map((item, index) => {
+                            return (
+                                <tr className="table-light" key={index}>
+                                    <td>{item.userOrderDate}</td>
+                                    <td>{item.userId}</td>
+                                    <td><img src={item.productImg} alt="" width={100}/></td>
+                                    <td>{item.productName}</td>
+                                    <td>
+                                        {item.productPrice * item.productOrderQuantity} ({item.productOrderQuantity}개)
+                                    </td>
+                                    <td>
+                                        {item.userOrderState}
+                                        <div className={"mt-2"}>
+                                            <Link to={'/reviewWrite'} state={{productInfo: item}}>
+                                                <button className={"btn btn-secondary btn-sm"}>리뷰작성</button>
+                                            </Link>
+                                        </div>
+                                    </td>
 
-                                <td>{item.productPrice * item.productOrderQuantity} 원</td>
-                            </tr>
-                        );
-                    })}
+                                    <td>{item.productPrice * item.productOrderQuantity} 원</td>
+                                </tr>
+                            );
+                        })}
                     </tbody>
                 </table>
             </div>
