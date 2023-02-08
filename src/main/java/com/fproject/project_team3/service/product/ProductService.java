@@ -1,5 +1,6 @@
 package com.fproject.project_team3.service.product;
 
+import com.fproject.project_team3.dto.join.ProductInfoOptionDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.dto.product.ProductOptionDto;
@@ -50,6 +51,14 @@ public interface ProductService {
     String productInfoInsert(ProductInfoDto productInfoDto);
 
     List<ProductInfoDto> categoryProductList(String bigKind, String smallKind);
+
+    ProductInfoDto getProductInfo(String productSellerId, String productName);
+
+    ProductKindDto getProductKind(int productKindNum);
+
+    List<ProductOptionDto> selectOptionData(int productNum);
+
+    void editDataUpdate(Object productInfoOptionDto, String my);
 
     //    GJY
 

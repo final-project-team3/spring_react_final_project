@@ -1,5 +1,6 @@
 package com.fproject.project_team3.service.product;
 
+import com.fproject.project_team3.dto.join.ProductInfoOptionDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.dto.product.ProductOptionDto;
@@ -74,6 +75,8 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.categoryProductList(kindNum);
     }
 
+
+
     //    HSH
 
     //    LYS
@@ -107,6 +110,31 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int checkProductName(String productName, String productSellerId) throws Exception {
         return productMapper.checkProductName(productName, productSellerId);
+    }
+    @Override
+    public ProductInfoDto getProductInfo(String productSellerId, String productName) {
+        return productMapper.getProductInfo(productSellerId, productName);
+    }
+
+    @Override
+    public ProductKindDto getProductKind(int productKindNum) {
+        return productMapper.getProductKind(productKindNum);
+    }
+
+    @Override
+    public List<ProductOptionDto> selectOptionData(int productNum) {
+        return productMapper.selectOptionData(productNum);
+    }
+
+    @Override
+    public void editDataUpdate(Object productInfoOptionDto, String my) {
+        if (my.equals("info")) {
+            productMapper.productInfoUpdate(productInfoOptionDto);
+        } else {
+            productMapper.productOptionUpdate(productInfoOptionDto);
+        }
+
+
     }
 
     //    GJY

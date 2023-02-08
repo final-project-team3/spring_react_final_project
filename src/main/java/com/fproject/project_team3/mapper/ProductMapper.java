@@ -1,6 +1,7 @@
 package com.fproject.project_team3.mapper;
 
 import com.fproject.project_team3.dto.gwak.GwakTestTblDto;
+import com.fproject.project_team3.dto.join.ProductInfoOptionDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.dto.product.ProductOptionDto;
@@ -58,6 +59,16 @@ public interface ProductMapper {
     List<ProductInfoDto> categoryProductList(int kindNum);
 
     int getKindNum(String bigKind, String smallKind);
+
+    ProductInfoDto getProductInfo(String productSellerId, String productName);
+
+    ProductKindDto getProductKind(int productKindNum);
+
+    List<ProductOptionDto> selectOptionData(int productNum);
+
+    void productInfoUpdate(Object productInfoOptionDto);
+
+    void productOptionUpdate(Object productInfoOptionDto);
 
     //    GJY
 

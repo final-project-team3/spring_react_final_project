@@ -146,7 +146,51 @@
           AND product_name = #{productName}
     </select>
 
+    <!-- 제품 수정 - 수정 전 정보 가져오기 -->
+    <select id="getProductInfo" parameterType="String"
+            resultType="com.fproject.project_team3.dto.product.ProductInfoDto">
+        SELECT *
+        FROM product_info
+        WHERE product_seller_id = #{productSellerId}
+          AND product_name = #{productName}
+    </select>
 
+    <!-- 카테고리 번호로 카테고리 값 가져오기 -->
+    <select id="getProductKind" parameterType="int" resultType="com.fproject.project_team3.dto.product.ProductKindDto">
+        SELECT *
+        FROM product_kind
+        WHERE product_kind_num = #{productKindNum}
+    </select>
+
+    <select id="selectOptionData" parameterType="int"
+            resultType="com.fproject.project_team3.dto.product.ProductOptionDto">
+        SELECT *
+        FROM product_option
+        WHERE product_num = #{productNum}
+    </select>
+
+    <!--  info 업데이트 -->
+    <update id="productInfoUpdate" parameterType="Object">
+        UPDATE product_info
+        SET product_name    = #{productName},
+            product_price   = #{productPrice},
+            product_content = #{productContent},
+            product_img     = #{productImg}
+        WHERE product_num = #{productNum}
+    </update>
+
+
+    <update id="productOptionUpdate" parameterType="Object">
+        UPDATE
+            product_option
+        SET product_option_1       = #{productOption1}
+          , product_option_2       = #{productOption2}
+          , product_quantity       = #{productQuantity}
+          , product_option_price   = #{productOptionPrice}
+          , product_coupon_useable = #{productCouponUseable}
+
+        WHERE product_option_num = #{productOptionNum}
+    </update>
     <!-- GJY -->
 
     <!-- BJH -->

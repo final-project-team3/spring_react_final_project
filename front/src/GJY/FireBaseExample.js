@@ -21,15 +21,20 @@ const FireBaseExample = (props) => {
   const [fileRealCode, setFileRealCode] = useState();
   const [downloadUrl, setDownloadUrl] = useState("");
 
+  const btnTitle1 = props.btnTitle1;
+  const btnTitle2 = props.btnTitle2;
+
+
 
 
   useEffect(() => {
     if (file !== "") {
       setPreview(
-        <img className="img_preview" src={previewURL} alt="previewImage" />
+        <img className="img_preview" src={previewURL} alt="previewImage" style={{width:200, height:200}}/>
       );
     }
-    return () => {};
+    return (
+    ) => {};
   }, [file, previewURL]);
 
   const handleFileOnChange = (event) => {
@@ -85,6 +90,7 @@ const FireBaseExample = (props) => {
           setDownloadUrl(downloadUrl);
           // 저장할 이미지 파일명 부모 컴포넌트로 전달
           props.setImageData(downloadUrl);
+
         });
       }
     );
@@ -108,14 +114,8 @@ const FireBaseExample = (props) => {
       });
   };
 
-  // const aaa = () => {
-  //   console.log(file);
-  // };
-
-
   return (
     <>
-      {/*<button className={"btn btn-primary"} onClick={aaa}>파일 확인</button>*/}
       {/*<img src={downloadUrl} alt="" />*/}
       {/* 이미지 미리보기 공간 */}
       <div className="priveiw-rapping" id={"prDiv"}>
@@ -128,13 +128,14 @@ const FireBaseExample = (props) => {
           id="file"
           type="file"
           onChange={handleFileOnChange}
+          style={{width:50, height:50}}
         />
 
         <button onClick={handleFileButtonClick} className={"btn btn-info"}>
-          대표사진 등록
+          {btnTitle1}
         </button>
         <button onClick={deleteFile} className={"btn btn-danger"}>
-          등록한 사진 삭제
+          {btnTitle2}
         </button>
       </div>
     </>
