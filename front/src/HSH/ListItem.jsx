@@ -51,10 +51,10 @@ const ListItem = ({
                 }
             }).then((req) => {
                 // 이미 찜한 상품일 경우
-                if (req == 1) {
+                if (req.data == 1) {
                     Swal.fire({
                         position: "top-center",
-                        icon: "error",
+                        icon: "warning",
                         title: "이미 찜한 상품입니다",
                         text: "찜한 상품목록으로 가시겠습니까?",
                         showCancelButton: true, // cancel 버튼 보이기. 기본은 원래 없음
