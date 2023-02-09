@@ -40,6 +40,8 @@ import ProductEditPage from "./GJY/ProductEditPage";
 import QnaWrite from "./LYS/QnaWrite";
 import QnaAnswerWrite from "./LYS/QnaAnswerWrite";
 import AnswerWritePage from "./LYS/AnswerWritePage";
+import "./Fonts/Font.css";
+import "./App.css";
 
 
 const ProjectRouter = () => {

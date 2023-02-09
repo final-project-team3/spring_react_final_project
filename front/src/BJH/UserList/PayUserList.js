@@ -4,6 +4,11 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import Pagination from "../../GJY/Pagination";
 // import Pagination from "./Pagination";
+import "../../Fonts/Font.css";
+
+
+
+
 
 function PayUserList(props) {
     let sellerInfo = sessionStorage.getItem("sellerInfo");
