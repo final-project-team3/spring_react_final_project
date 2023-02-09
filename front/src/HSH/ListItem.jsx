@@ -64,7 +64,7 @@ const ListItem = ({
                         cancelButtonText: '취소',
                     }).then((req) => {
                         if (req.isConfirmed) {
-                            navi("/");
+                            navi("/LikeProduct");
                         }
                     });
                 } else {
@@ -80,7 +80,7 @@ const ListItem = ({
                         cancelButtonText: '취소',
                     }).then((req) => {
                         if (req.isConfirmed) {
-                            navi("/");
+                            navi("/LikeProduct");
                         }
                     });
                 }
