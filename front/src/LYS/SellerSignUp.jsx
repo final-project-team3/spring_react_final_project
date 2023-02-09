@@ -412,8 +412,8 @@ function SellerSignUp() {
         }
     }
 
-    async function deliveryPriceCheck() {
-        $(function () { // 배송비 숫자만 입력 가능
+    async function deliveryPriceCheck() {  // 배송비 숫자만 입력 가능, '0'을 입력 할 수는 있지만 03500이렇게 입력은 불가능
+        $(function () {
             $("#sellerDeliveryPrice").on("blur keyup", function () {
                 $(this).val($(this).val().replace(/[^0-9]/g, ""));
             });
@@ -423,10 +423,18 @@ function SellerSignUp() {
 
         if (delPrice === "") {
             $('.seller_delivery_price_no').css('display', 'inline-block');
+            $('.seller_delivery_price_0').css('display', 'none');
             checkList[11] = false;
         } else {
-            $('.seller_delivery_price_no').css('display', 'none');
-            checkList[11] = true;
+            if (delPrice.length >= 2 && delPrice.charAt(0) === "0") {
+                $('.seller_delivery_price_no').css('display', 'none');
+                $('.seller_delivery_price_0').css('display', 'inline-block');
+                checkList[11] = false;
+            } else {
+                $('.seller_delivery_price_no').css('display', 'none');
+                $('.seller_delivery_price_0').css('display', 'none');
+                checkList[11] = true;
+            }
         }
     }
 
@@ -451,6 +459,21 @@ function SellerSignUp() {
 
     //마지막으로 모든 배열 true확인
     const checkAll = () => {
+        let checkVal = [$('#sellerId').val(), $("#sellerPass").val(), $("#sellerPass2").val(), $("#sellerName").val(), $("#sellerTel").val(),
+            $("#sellerBirth").val(), $("#businessName").val(), $("#businessNum").val(), $("#sellerDeliveryPrice").val(), $("#sellerDeliveryFree").val(), $("#sigunguCode").val()]
+
+        let checkSpan = [$('.checkMail'), $('.checkPw'), $('.checkPw2'), $('.checkName'), $('.checkPh'), $('.checkBG'), $('.business_name_blank'), $('.business_num_blank'), $('.seller_delivery_price_no'), $('.seller_delivery_free_no'), $('.checkAddr')]
+
+        let true_cnt = 0;
+
+        for (let i = 0; i < 11; i++) {
+            if (checkList[i] == false && checkVal[i] == '') {
+                checkSpan[i].css('display', 'inline-block')
+            } else if (checkList[i] == true) {
+                true_cnt++
+            }
+        }
+
         const AllChecked = (val) => val == true;
 
         if (checkList.every(AllChecked)) {
@@ -459,7 +482,6 @@ function SellerSignUp() {
             $("#btn-signUp").onclick();
             console.log(checkList);
         } else {
-            alert("공백란이나 잘못된 입력을 확인해 주세요");
             console.log(checkList);
         }
     };
@@ -681,8 +703,9 @@ function SellerSignUp() {
                                             되었습니다.</HiddenMessage>
                                         <HiddenMessage style={noStyle} className="seller_delivery_price_no no">필수
                                             항목입니다.</HiddenMessage>
-                                        <HiddenMessage style={noStyle} className="seller_delivery_price_0 no">0원 이라면 0을
-                                            입력해주세요</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="seller_delivery_price_0 no">잘못된
+                                            입력(금액)입니다. 기본배송비가 없다면 '0'을
+                                            입력해주세요.</HiddenMessage>
                                     </InputTextSizeWTypeL>
                                 </FormBlockBody>
                             </FormBlock>
@@ -700,8 +723,8 @@ function SellerSignUp() {
                                             되었습니다.</HiddenMessage>
                                         <HiddenMessage style={noStyle} className="seller_delivery_free_no no">필수
                                             항목입니다.</HiddenMessage>
-                                        <HiddenMessage style={noStyle} className="seller_delivery_free_0 no">0원 이라면 0을
-                                            입력해주세요</HiddenMessage>
+                                        <HiddenMessage style={noStyle} className="seller_delivery_free_0 no">잘못된
+                                            입력(금액)입니다.</HiddenMessage>
                                     </InputTextSizeWTypeL>
                                 </FormBlockBody>
                             </FormBlock>
