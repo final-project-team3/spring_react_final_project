@@ -20,7 +20,7 @@ const ListItem = ({
     /**
      * 찜 하는 함수
      */
-    const productInterestedFunc = async (productNum = productNum) => {
+    const productInterestedFunc = async (productNum) => {
         // 로그인 하지 않았을 시
         if (userInfo == null) {
             Swal.fire({
@@ -35,40 +35,57 @@ const ListItem = ({
                 cancelButtonText: '취소',
             }).then((req) => {
                 if (req.isConfirmed) {
-
+                    navi("/login", {
+                        state: {
+                            pathname: pathname
+                        }
+                    })
                 }
             });
+        } else {
+            // 이미 찜한 상품인지 비교해서 있으면 1 반환 시킴 없으면 insert
+            await axios.get("http://localhost:8080/productInterestedInsert", {
+                params: {
+                    productNum: productNum,
+                    userId: userInfo.userId
+                }
+            }).then((req) => {
+                // 이미 찜한 상품일 경우
+                if (req == 1) {
+                    Swal.fire({
+                        position: "top-center",
+                        icon: "error",
+                        title: "이미 찜한 상품입니다",
+                        text: "찜한 상품목록으로 가시겠습니까?",
+                        showCancelButton: true, // cancel 버튼 보이기. 기본은 원래 없음
+                        confirmButtonColor: '#3085d6', // confirm 버튼 색깔 지정
+                        cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+                        confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+                        cancelButtonText: '취소',
+                    }).then((req) => {
+                        if (req.isConfirmed) {
+                            navi("/LikeProduct");
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        position: "top-center",
+                        icon: "info",
+                        title: "찜 상품에 등록되었습니다!!",
+                        text: "찜한 상품목록으로 가시겠습니까?",
+                        showCancelButton: true, // cancel 버튼 보이기. 기본은 원래 없음
+                        confirmButtonColor: '#3085d6', // confirm 버튼 색깔 지정
+                        cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+                        confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+                        cancelButtonText: '취소',
+                    }).then((req) => {
+                        if (req.isConfirmed) {
+                            navi("/LikeProduct");
+                        }
+                    });
+                }
+            })
         }
-        // 이미 찜한 상품인지 비교해서 있으면 1 반환 시킴 없으면 insert
-        await axios.get("http://localhost:8080/productInterestedInsert", {
-            params: {
-                productNum: productNum,
-                userId: userInfo.userId
-            }
-        }).then((req) => {
-            // 이미 찜한 상품일 경우
-            if (req == 1) {
-                Swal.fire({
-                    position: "top-center",
-                    icon: "error",
-                    title: "이미 찜한 상품입니다",
-                    text: "찜한 상품목록으로 가시겠습니까?",
-                    showCancelButton: true, // cancel 버튼 보이기. 기본은 원래 없음
-                    confirmButtonColor: '#3085d6', // confirm 버튼 색깔 지정
-                    cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
-                    confirmButtonText: '확인', // confirm 버튼 텍스트 지정
-                    cancelButtonText: '취소',
-                }).then((req) => {
-                    if (req.isConfirmed) {
-                        navi("/login");
-                    }
-                });
-            } else {
-
-            }
-        })
-
-
     }
 
     return (
@@ -85,7 +102,7 @@ const ListItem = ({
                     <h5 className={'mb-4'}>{productPrice.toString()
                         .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</h5>
                 </Link>
-                <Link onClick={productInterestedFunc}>
+                <Link onClick={() => productInterestedFunc(productNum)}>
                     <img className={'me-3'} width={30} src={"../Img/Bjh/wish.png"}/>
                 </Link>
             </div>
