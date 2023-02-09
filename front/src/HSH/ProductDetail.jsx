@@ -176,15 +176,14 @@ function ProductDetail(props) {
                             <h2>{productInfo?.productPrice}원</h2>
                         </div>
                     </div>
-                    <div className={'col-7'}>
-                        <div className={'d-flex justify-content-between'}>
+                    <div className={'col-10'}>
+                        <div className={'mt-3 d-flex justify-content-between'}>
                             <button className={'btn btn-warning'}>장바구니</button>
-                            <Link className={'btn btn-primary'} to={'/payment'} state={{
+                            <Link className={'btn btn-primary ms-2'} to={'/payment'} state={{
                                 productName: productInfo?.productName,
                                 productOption: optionValue,
                                 //    수량 넣어야함
                             }}>바로구매</Link>
-                            <button className={'btn btn-danger'}>찜</button>
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,7 @@ const ListItem = ({
     /**
      * 찜 하는 함수
      */
-    const productInterestedFunc = async (productNum = productNum) => {
+    const productInterestedFunc = async (productNum) => {
         // 로그인 하지 않았을 시
         if (userInfo == null) {
             Swal.fire({
@@ -37,7 +37,7 @@ const ListItem = ({
                 if (req.isConfirmed) {
                     navi("/login", {
                         state: {
-                            pathname: JSON.stringify(pathname)
+                            pathname: pathname
                         }
                     })
                 }
@@ -64,11 +64,25 @@ const ListItem = ({
                         cancelButtonText: '취소',
                     }).then((req) => {
                         if (req.isConfirmed) {
-                            navi("/login");
+                            navi("/");
                         }
                     });
                 } else {
-
+                    Swal.fire({
+                        position: "top-center",
+                        icon: "info",
+                        title: "찜 상품에 등록되었습니다!!",
+                        text: "찜한 상품목록으로 가시겠습니까?",
+                        showCancelButton: true, // cancel 버튼 보이기. 기본은 원래 없음
+                        confirmButtonColor: '#3085d6', // confirm 버튼 색깔 지정
+                        cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+                        confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+                        cancelButtonText: '취소',
+                    }).then((req) => {
+                        if (req.isConfirmed) {
+                            navi("/");
+                        }
+                    });
                 }
             })
         }
@@ -88,7 +102,7 @@ const ListItem = ({
                     <h5 className={'mb-4'}>{productPrice.toString()
                         .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</h5>
                 </Link>
-                <Link onClick={productInterestedFunc}>
+                <Link onClick={() => productInterestedFunc(productNum)}>
                     <img className={'me-3'} width={30} src={"../Img/Bjh/wish.png"}/>
                 </Link>
             </div>
