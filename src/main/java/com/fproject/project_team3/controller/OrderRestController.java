@@ -1,6 +1,8 @@
 package com.fproject.project_team3.controller;
 
+import com.fproject.project_team3.dto.join.InterestedListProductInfoDto;
 import com.fproject.project_team3.dto.join.OrderListProductInfoDto;
+import com.fproject.project_team3.dto.join.UserInfoProductInfoDto;
 import com.fproject.project_team3.dto.join.UserOrderListProductInfoDto;
 import com.fproject.project_team3.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +28,22 @@ public class OrderRestController {
   @PostMapping("/getPayUserList")
   public List<OrderListProductInfoDto> getPayUserList(@RequestParam("sellerBusinessName") String sellerBusinessName) throws Exception {
     List<OrderListProductInfoDto> getPayUserList = orderService.getPayUserList(sellerBusinessName);
-    System.out.println(getPayUserList);
     return getPayUserList;
+  }
+
+
+  // 찜한 고객 리스트 조회
+  @PostMapping("/getInterestedUserList")
+  public List<InterestedListProductInfoDto> getInterestedUserList(@RequestParam("sellerBusinessName") String sellerBusinessName) throws Exception {
+    List<InterestedListProductInfoDto> getInterestedUserList = orderService.getInterestedUserList(sellerBusinessName);
+    return getInterestedUserList;
+  }
+
+  @PostMapping("/getZzimDetail")
+  public List<UserInfoProductInfoDto> getZzimDetail(@RequestParam("productNum") int productNum) throws Exception {
+    List<UserInfoProductInfoDto> getZzimDetail = orderService.getZzimDetail(productNum);
+    System.out.println(getZzimDetail);
+    return getZzimDetail;
   }
   // GJY
 

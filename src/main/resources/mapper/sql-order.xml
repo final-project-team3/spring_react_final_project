@@ -19,11 +19,30 @@
         where uol.user_id = #{id};
     </select>
 
+<!--    결제한 고객 리스트 -->
     <select id="getPayUserList" parameterType="String" resultType="com.fproject.project_team3.dto.join.UserOrderListProductInfoDto">
         SELECT *
         FROM product_info info, user_order_list olist
         WHERE info.product_num = olist.product_num
           AND info.product_seller_business_name = #{productSellerBusinessName};
+    </select>
+
+<!--    찜한 고객 리스트-->
+    <select id="getInterestedUserList" parameterType="String" resultType="com.fproject.project_team3.dto.join.InterestedListProductInfoDto">
+        SELECT * , COUNT(*) countProductNum
+        FROM product_info info, user_interested_list interest
+        WHERE info.product_num = interest.product_num
+          AND info.product_seller_business_name = #{productSellerBusinessName}
+        group by interest.product_num;
+    </select>
+
+<!--    찜 분석 -->
+    <select id="getZzimDetail" parameterType="int" resultType="com.fproject.project_team3.dto.join.InterestedListProductInfoDto">
+        SELECT * , COUNT(*) countProductNum
+        FROM product_info info, user_interested_list interest
+        WHERE info.product_num = interest.product_num
+          AND info.product_seller_business_name = #{productSellerBusinessName}
+        group by interest.product_num;
     </select>
     <!-- GJY -->
 

@@ -1,5 +1,8 @@
 package com.fproject.project_team3.dto.join;
 
+import lombok.Data;
+
+@Data
 public class OrderListProductInfoDto {
   private int userOrderListNum;
   private String userId;

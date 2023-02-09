@@ -40,6 +40,9 @@ import ProductEditPage from "./GJY/ProductEditPage";
 import QnaWrite from "./LYS/QnaWrite";
 import QnaAnswerWrite from "./LYS/QnaAnswerWrite";
 import AnswerWritePage from "./LYS/AnswerWritePage";
+import "./Fonts/Font.css";
+import "./App.css";
+import LikeUserListDetail from "./BJH/UserList/LikeUserListDetail";
 
 
 const ProjectRouter = () => {
@@ -91,6 +94,7 @@ const ProjectRouter = () => {
                     <Route path={"/GwakApp"} element={<GwakApp/>}/>
                     <Route path={"/FireBaseExample"} element={<FireBaseExample/>}/>
                     <Route path={"/ProductEditPage"} element={<ProductEditPage/>}/>
+                    <Route path={'/likeUserListDetail/:productNum'} element={<LikeUserListDetail/>}/>
 
 
 

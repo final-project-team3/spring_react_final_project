@@ -9,7 +9,6 @@
     vertical-align: middle;
     color: #346aff;
     background-color: #fff;
-    font-family: apple sd gothic neo, malgun gothic, "맑은 고딕", nanumgothic, "나눔고딕", dotum, "돋움", sans-serif;
     font-weight: bold;
     float: right;
 }
@@ -43,11 +42,9 @@ ul {
 
 body {
     background-color: #fff !important;
-    font-family: apple sd gothic neo, "맑은 고딕", malgun gothic, "나눔고딕", nanumgothic, "돋움", dotum, sans-serif;
 }
 
 body, input, textarea, select, button, table {
-    font-family: sans-serif;
     font-size: 100%;
 }
 
@@ -68,7 +65,6 @@ body, input, textarea, select, button, table {
     color: #555;
     letter-spacing: -1px;
     background: url(//img1a.coupangcdn.com/image/coupang/product/bg-product-inquiry-01.png) no-repeat left 4px;
-    font-family: apple sd gothic neo, malgun gothic, "맑은 고딕", nanumgothic, "나눔고딕", dotum, "돋움", sans-serif;
 }
 
 .prod-inquiry-list__container .prod-inquiry-items {
@@ -153,11 +149,9 @@ ul {
 
 body {
     background-color: #fff !important;
-    font-family: apple sd gothic neo, "맑은 고딕", malgun gothic, "나눔고딕", nanumgothic, "돋움", dotum, sans-serif;
 }
 
 body, input, textarea, select, button, table {
-    font-family: sans-serif;
     font-size: 100%;
 }
 

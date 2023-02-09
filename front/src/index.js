@@ -9,7 +9,8 @@ import reducer from "./store";
 import {Provider, useSelector} from "react-redux";
 import {persistStore} from "redux-persist";
 import {PersistGate} from "redux-persist/integration/react";
-
+import "./Fonts/Font.css";
+import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const store = createStore(reducer);
