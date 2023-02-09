@@ -93,6 +93,11 @@ public class ProductRestController {
         return productService.getSearchTotal10();
     }
 
+    @GetMapping("/productInterestedInsert")
+    public int productInterestedInsert(@RequestParam("userId") String userId, @RequestParam("productNum") int productNum) {
+        return productService.productInterestedInsert(userId, productNum);
+    }
+
 
     //    HSH
 

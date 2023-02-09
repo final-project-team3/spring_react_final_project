@@ -199,14 +199,16 @@ const Header = () => {
             <nav className="bg-white navbar navbar-expand navbar-dark fixed-top">
                 <div className={'container'}>
                     <div>
-                        <Link onClick={() => {
-                            alert("하이");
-                        }}><img width={60}
-                                src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Fmenu.png?alt=media&token=b569d405-c761-471c-a93d-637bf238258a"}/></Link>
+                        {/*<Link onClick={() => {*/}
+                        {/*    alert("하이");*/}
+                        {/*}}><img width={60}*/}
+                        {/*        src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Fmenu.png?alt=media&token=b569d405-c761-471c-a93d-637bf238258a"}/></Link>*/}
                         <Link className={'navbar-brand'} to={"/"}><img width={150}
                                                                        src={'https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Flogo.png?alt=media&token=32eb4e27-caf0-4016-9c7e-5b932c5d451b'}/></Link>
                     </div>
-                    <div className="collapse navbar-collapse" id="collapsibleNavbar">
+                    <div style={{
+                        marginTop:20
+                    }} className="px-5 ms-3 collapse navbar-collapse" id="collapsibleNavbar">
                         <ul className={'navbar-nav my-auto'}>
                             <li className={'nav-item'}>
                                 <div className={'d-flex'}>
@@ -248,27 +250,33 @@ const Header = () => {
                                     })}
                                 </div>
                             </div>
-                            {role == null ? <Link to={'/login'}><img className={'ms-2'}
-                                                                     src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Flogin.png?alt=media&token=1d00f7f1-47b0-4c6a-8ed3-21877afa66a1"}/></Link> : role == "USER" ?
-                                <Link onClick={() => dispatch(userLogout())}><img width={40}
-                                                                                  src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Flogout.png?alt=media&token=35a56d27-ca79-40dc-b0ec-caa389e81d6f"}
-                                                                                  className={'ms-2'}/></Link> :
-                                <Link onClick={() => dispatch(sellerLogout())}><img width={40}
-                                                                                    src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Flogout.png?alt=media&token=35a56d27-ca79-40dc-b0ec-caa389e81d6f"}
-                                                                                    className={'ms-2'}/></Link>}
-                            <li className={'nav-item'}>
-                                <Link to={'/cart'}><img className={'ms-2 mt-2'} width={40}
-                                                        src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2FshoppingCart.png?alt=media&token=2fadaa13-7ea2-4507-a7a7-000412a2a91f"}/></Link>
-                            </li>
-                            <li className={'nav-item'}>
-                                <Link to={'/mypage'}><img className={'ms-2'} width={40}
-                                                          src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Fmypage.png?alt=media&token=e436e13f-c5cd-4573-b632-3b342a703802"}/></Link>
-                            </li>
-                            <li className={'nav-item'}>
-                                <Link to={'/login'}><img className={'ms-2'}
-                                                         src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Flogin.png?alt=media&token=1d00f7f1-47b0-4c6a-8ed3-21877afa66a1"}/></Link>
-                            </li>
+                            {/*<li className={'nav-item'}>*/}
+                            {/*    <Link to={'/login'}><img className={'ms-2'}*/}
+                            {/*                             src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Flogin.png?alt=media&token=1d00f7f1-47b0-4c6a-8ed3-21877afa66a1"}/></Link>*/}
+                            {/*</li>*/}
                         </ul>
+                        {role == null ? <Link to={'/login'}><img style={{
+                            marginTop:8
+                        }} className={'ms-4'}
+                                                                 src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Flogin.png?alt=media&token=1d00f7f1-47b0-4c6a-8ed3-21877afa66a1"}/></Link> : role == "USER" ?
+                            <Link onClick={() => dispatch(userLogout())}><img style={{
+                                marginTop:3
+                            }} width={40}
+                                                                              src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Flogout.png?alt=media&token=35a56d27-ca79-40dc-b0ec-caa389e81d6f"}
+                                                                              className={'ms-4'}/></Link> :
+                            <Link onClick={() => dispatch(sellerLogout())}><img style={{
+                                marginTop:3
+                            }} width={40}
+                                                                                src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Flogout.png?alt=media&token=35a56d27-ca79-40dc-b0ec-caa389e81d6f"}
+                                                                                className={'ms-4'}/></Link>}
+                        <li className={'nav-item'}>
+                            <Link to={'/cart'}><img className={'ms-4'} width={40}
+                                                    src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2FshoppingCart.png?alt=media&token=2fadaa13-7ea2-4507-a7a7-000412a2a91f"}/></Link>
+                        </li>
+                        <li className={'nav-item'}>
+                            <Link to={'/mypage'}><img className={'ms-4'} width={40}
+                                                      src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Fmypage.png?alt=media&token=e436e13f-c5cd-4573-b632-3b342a703802"}/></Link>
+                        </li>
                     </div>
                 </div>
             </nav>

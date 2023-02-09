@@ -22,11 +22,11 @@ function ProductList(props) {
                                         <img width={300} src={product.productImg}/>
                                     </Link>
                                     <Link to={`/productSellerPage/${product.productSellerBusinessName}`}>
-                                        <h5 className={"my-3"}>{product.productSellerBusinessName}</h5>
+                                        <h5 className={"my-3 text-center"}>{product.productSellerBusinessName}</h5>
                                     </Link>
                                     <Link to={`/productDetail/${product.productNum}`}>
-                                        <h5 className={'mb-0'}>{product.productName}</h5>
-                                        <h5 className={'mb-4'}>{product.productPrice}</h5>
+                                        <h5 className={'mb-0 text-center'}>{product.productName}</h5>
+                                        <h5 className={'mb-4 text-center'}>{product.productPrice}</h5>
                                     </Link>
                                 </div>
                             )

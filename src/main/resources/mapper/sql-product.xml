@@ -116,6 +116,18 @@
         ORDER BY search_count DESC LIMIT 10;
     </select>
 
+    <select id="productInterestedCheck" parameterType="Object" resultType="int">
+        SELECT COUNT(product_num)
+        FROM user_interested_list
+        WHERE user_id = #{userId}
+          AND product_num = #{productNum}
+    </select>
+
+    <insert id="productInterestedInsert" parameterType="Object">
+        INSERT INTO user_interested_list (product_num, user_id)
+        VALUES (#{productNum}, #{userId})
+    </insert>
+
     <!-- HSH -->
 
     <!-- LYS -->

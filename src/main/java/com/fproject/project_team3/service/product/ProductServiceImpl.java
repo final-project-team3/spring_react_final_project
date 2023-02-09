@@ -91,6 +91,16 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.getSearchTotal10();
     }
 
+    @Override
+    public int productInterestedInsert(String userId, int productNum) {
+        int checkNum = productMapper.productInterestedCheck(userId, productNum);
+        if (checkNum == 0) {
+            productMapper.productInterestedInsert(userId, productNum);
+            return checkNum;
+        }
+        return checkNum;
+    }
+
 
     //    HSH
 

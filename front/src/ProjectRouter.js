@@ -43,6 +43,8 @@ import AnswerWritePage from "./LYS/AnswerWritePage";
 import "./Fonts/Font.css";
 import "./App.css";
 import LikeUserListDetail from "./BJH/UserList/LikeUserListDetail";
+import LikeProduct from "./BJH/UserList/LikeProduct";
+import UserLikeStore from "./BJH/UserList/UserLikeStore";
 
 
 const ProjectRouter = () => {
@@ -117,6 +119,8 @@ const ProjectRouter = () => {
                     <Route path={'/likeUserList'} element={<LikeUserList/>}/>
                     <Route path={'/orderUserList'} element={<OrderUserList/>}/>
                     <Route path={'/payUserList'} element={<PayUserList/>}/>
+                    <Route path={'/LikeProduct'} element={<LikeProduct/>}/>
+                    <Route path={'/UserLikeStore'} element={<UserLikeStore/>}/>
                     {/*BJH*/}
                 </Route>
             </Routes>
