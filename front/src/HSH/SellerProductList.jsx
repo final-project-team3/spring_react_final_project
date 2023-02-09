@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
 import axios from "axios";
+import ListItem from "./ListItem";
 
 const SellerProductList = () => {
     const {productSellerBusinessName} = useParams();
@@ -37,18 +38,10 @@ const SellerProductList = () => {
                 <div className={"row"}>
                     {sellerProductList.map((product, index) => {
                         return (
-                            <div key={index} className={'mt-5 col-3'}>
-                                <Link to={`/productDetail/${product.productNum}`}>
-                                    <img  width={300} height={450} src={product.productImg}/>
-                                </Link>
-                                <Link to={`/productSellerPage/${product.productSellerBusinessName}`}>
-                                    <h5 className={"my-3 text-center"}>{product.productSellerBusinessName}</h5>
-                                </Link>
-                                <Link to={`/productDetail/${product.productNum}`}>
-                                    <h5 className={'mb-0 text-center'}>{product.productName}</h5>
-                                    <h5 className={'mb-4 text-center'}>{product.productPrice}</h5>
-                                </Link>
-                            </div>
+                            <ListItem index={index} productNum={product.productNum} productName={product.productName}
+                                      productImg={product.productImg}
+                                      productSellerBusinessName={product.productSellerBusinessName}
+                                      productPrice={product.productPrice}/>
                         )
                     })}
                 </div>

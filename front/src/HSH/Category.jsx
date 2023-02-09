@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link, useLocation, useParams} from "react-router-dom";
 import axios from "axios";
 import $ from "jquery";
+import ListItem from "./ListItem";
 
 const Category = () => {
     const {bigKind, smallKind} = useParams();
@@ -48,19 +49,7 @@ const Category = () => {
                 {categoryData.length == 0 ?
                     <h2 className={'text-center'}>준비된 상품이 없습니다.</h2> : categoryData.map((product, index) => {
                         return (
-                            <div key={index} className={'mt-5 col-3'}>
-                                <Link to={`/productDetail/${product?.productNum}`}>
-                                    <img width={300} height={450} src={product?.productImg}/>
-                                </Link>
-                                <Link to={`/productSellerPage/${product?.productSellerBusinessName}`}>
-                                    <h5 className={"my-3"}>{product?.productSellerBusinessName}</h5>
-                                </Link>
-                                <Link to={`/productDetail/${product?.productNum}`}>
-                                    <h5 className={'mb-0'}>{product?.productName}</h5>
-                                    <h5 className={'mb-4'}>{product.productPrice = product.productPrice.toString()
-                                        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</h5>
-                                </Link>
-                            </div>
+                            <ListItem  index ={index} productNum={product.productNum} productName={product.productName} productImg={product.productImg} productSellerBusinessName={product.productSellerBusinessName} productPrice={product.productPrice}/>
                         )
                     })}
             </div>

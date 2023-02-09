@@ -199,10 +199,10 @@ const Header = () => {
             <nav className="bg-white navbar navbar-expand navbar-dark fixed-top">
                 <div className={'container'}>
                     <div>
-                        <Link onClick={() => {
-                            alert("하이");
-                        }}><img width={60}
-                                src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Fmenu.png?alt=media&token=b569d405-c761-471c-a93d-637bf238258a"}/></Link>
+                        {/*<Link onClick={() => {*/}
+                        {/*    alert("하이");*/}
+                        {/*}}><img width={60}*/}
+                        {/*        src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Fmenu.png?alt=media&token=b569d405-c761-471c-a93d-637bf238258a"}/></Link>*/}
                         <Link className={'navbar-brand'} to={"/"}><img width={150}
                                                                        src={'https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Flogo.png?alt=media&token=32eb4e27-caf0-4016-9c7e-5b932c5d451b'}/></Link>
                     </div>
