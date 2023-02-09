@@ -42,8 +42,13 @@ public class OrderRestController {
   @PostMapping("/getZzimDetail")
   public List<UserInfoProductInfoDto> getZzimDetail(@RequestParam("productNum") int productNum) throws Exception {
     List<UserInfoProductInfoDto> getZzimDetail = orderService.getZzimDetail(productNum);
-    System.out.println(getZzimDetail);
     return getZzimDetail;
+  }
+
+  @PostMapping("/gender13Count")
+  public List<UserInfoProductInfoDto> gender13Count(@RequestParam("productNum") int productNum) throws Exception {
+    List<UserInfoProductInfoDto> gender13Count = orderService.gender13Count(productNum);
+    return gender13Count;
   }
   // GJY
 

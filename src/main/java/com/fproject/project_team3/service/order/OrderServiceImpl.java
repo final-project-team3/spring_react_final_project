@@ -39,6 +39,11 @@ public class OrderServiceImpl implements OrderService {
     return orderListMapper.getZzimDetail(productNum);
   }
 
+  @Override
+  public List<UserInfoProductInfoDto> gender13Count(int productNum) {
+    return orderListMapper.gender13Count(productNum);
+  }
+
 
   // GJY
 }

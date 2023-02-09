@@ -17,4 +17,6 @@ public interface OrderListMapper {
   List<InterestedListProductInfoDto> getInterestedUserList(String sellerBusinessName);
 
   List<UserInfoProductInfoDto> getZzimDetail(int productNum);
+
+  List<UserInfoProductInfoDto> gender13Count(int productNum);
 }

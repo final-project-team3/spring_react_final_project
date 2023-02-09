@@ -37,12 +37,20 @@
     </select>
 
 <!--    찜 분석 -->
-    <select id="getZzimDetail" parameterType="int" resultType="com.fproject.project_team3.dto.join.InterestedListProductInfoDto">
-        SELECT * , COUNT(*) countProductNum
-        FROM product_info info, user_interested_list interest
-        WHERE info.product_num = interest.product_num
-          AND info.product_seller_business_name = #{productSellerBusinessName}
-        group by interest.product_num;
+    <select id="getZzimDetail" parameterType="int" resultType="com.fproject.project_team3.dto.join.UserInfoProductInfoDto">
+        select i.user_id, u.user_gender
+        from user_interested_list i, user_info u
+        where i.user_id = u.user_id
+          and i.product_num = ${productNum};
+    </select>
+
+    <!--    13 성별 count -->
+    <select id="gender13Count" parameterType="int" resultType="com.fproject.project_team3.dto.join.UserInfoProductInfoDto">
+        select count(*) countGender13
+        from user_interested_list i, user_info u
+        where i.user_id = u.user_id
+          and i.product_num = ${productNum}
+          and (u.user_gender = 1 or u.user_gender = 3);
     </select>
     <!-- GJY -->
 
