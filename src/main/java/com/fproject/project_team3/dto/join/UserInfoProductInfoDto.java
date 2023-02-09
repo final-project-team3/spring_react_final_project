@@ -3,10 +3,19 @@ package com.fproject.project_team3.dto.join;
 import lombok.Data;
 
 @Data
-public class InterestedListProductInfoDto {
-  int userInterestedListNum;
-  int productNum;
+public class UserInfoProductInfoDto {
+  int userInfoNum;
   String userId;
+  String userPass;
+  String userName;
+  String userTel;
+  String userBirth;
+  String userGender;
+  String userAddrNum;
+  String userAddrJibun;
+  String userAddrRoad;
+  String userAddrDetail;
+  private int productNum;
   private String productSellerId;
   private int productKindNum;
   private String productName;
@@ -17,5 +26,4 @@ public class InterestedListProductInfoDto {
   private String reviewStarPoint;
   private String productDeliveryDay;
   private String productSellerBusinessName;
-  private int countProductNum;
 }

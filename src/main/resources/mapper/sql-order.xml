@@ -29,10 +29,20 @@
 
 <!--    찜한 고객 리스트-->
     <select id="getInterestedUserList" parameterType="String" resultType="com.fproject.project_team3.dto.join.InterestedListProductInfoDto">
-        SELECT *
+        SELECT * , COUNT(*) countProductNum
         FROM product_info info, user_interested_list interest
         WHERE info.product_num = interest.product_num
-          AND info.product_seller_business_name = #{productSellerBusinessName};
+          AND info.product_seller_business_name = #{productSellerBusinessName}
+        group by interest.product_num;
+    </select>
+
+<!--    찜 분석 -->
+    <select id="getZzimDetail" parameterType="int" resultType="com.fproject.project_team3.dto.join.InterestedListProductInfoDto">
+        SELECT * , COUNT(*) countProductNum
+        FROM product_info info, user_interested_list interest
+        WHERE info.product_num = interest.product_num
+          AND info.product_seller_business_name = #{productSellerBusinessName}
+        group by interest.product_num;
     </select>
     <!-- GJY -->
 
