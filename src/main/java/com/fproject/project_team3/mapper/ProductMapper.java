@@ -46,6 +46,10 @@ public interface ProductMapper {
     List<SearchDto> getSearchTotal10();
     //     실검
 
+    int productInterestedCheck(String userId, int productNum);
+
+    void productInterestedInsert(String userId, int productNum);
+
     //    HSH
 
     //    LYS
