@@ -10,6 +10,7 @@ function LikeUserListDetail(props) {
   const [gender24Count, setGender24Count] = useState(0);
   const [totalUser, setTotalUser] = useState(0);
   let total = 0;
+  const [apexArray, setApexArray] = useState([40,60]);
 
   useEffect(() => {
     return async () => {
@@ -62,26 +63,38 @@ function LikeUserListDetail(props) {
         총 인원 {totalUser} 중, 남성은 {gender13Count}{" "}
       </h2>
       <h2>여성은 : {gender24Count}</h2>
+
       <div>
-      {/*  <ApexCharts*/}
-      {/*    type="line"*/}
-      {/*    series={[44, 55, 13, 43, 22]}*/}
-      {/*    options: {{*/}
-      {/*    chart: {*/}
-      {/*    width: 380,*/}
-      {/*    type: 'pie',*/}
-      {/*    },*/}
-      {/*  labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],*/}
-      {/*  responsive: [{*/}
-      {/*  breakpoint: 480,*/}
-      {/*  options: {*/}
-      {/*  chart: {*/}
-      {/*  width: 200*/}
-      {/*},*/}
-      {/*  legend: {*/}
-      {/*  position: 'bottom'*/}
-      {/*}}}]}}>*/}
-      {/*  </ApexCharts>*/}
+        <ApexCharts
+          series={apexArray}
+          type={"pie"}
+          width={800}
+          options={{
+            chart: { height: 200, width: 200, type:"pie"},
+            plotOptions: {
+              pie: {
+                customScale: 0.3
+              }
+            },
+            labels: ['여성', "남성"],
+            dataLabels: {
+              style: {
+                fontSize: 50,
+              }
+            },
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 30
+                },
+                legend: {
+                  position: "middle"
+                }
+              }
+            }]
+          }}
+        />
 
       </div>
     </div>
