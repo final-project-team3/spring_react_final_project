@@ -65,6 +65,8 @@ public interface ProductService {
 
     List<SearchDto> getSearchTotal10();
 
+    int productInterestedInsert(String userId, int productNum);
+
     //    GJY
 
     //    BJH

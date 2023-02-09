@@ -14,8 +14,8 @@ const Login = () => {
 
     const [loginChange,setLoginChange] = useState("userLogin");
 
-    if(location.state.pathname != null) {
-        console.log(location.state.pathname);
+    if(location?.state?.pathname != null) {
+        console.log(location?.state?.pathname);
     }
 
 
@@ -40,7 +40,7 @@ const Login = () => {
             }
             // 주소가 login이면 홈으로, 주소가 로그인이 필요한 주소면 그 주소로 보냄
             if (location.pathname == "/login") {
-                navi(location.state.pathname);
+                navi(location?.state?.pathname);
                 navi("/");
                 window.location.reload();
             } else {

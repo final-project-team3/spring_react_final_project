@@ -39,7 +39,7 @@ const ListItem = ({
                 }
             });
         }
-        // 이미 찜한 상품인지 비교 함
+        // 이미 찜한 상품인지 비교해서 있으면 1 반환 시킴 없으면 insert
         await axios.get("http://localhost:8080/productInterestedInsert", {
             params: {
                 productNum: productNum,
