@@ -50,7 +50,6 @@ const ListItem = ({
                     userId: userInfo.userId
                 }
             }).then((req) => {
-                console.log(req);
                 // 이미 찜한 상품일 경우
                 if (req.data == 1) {
                     Swal.fire({
