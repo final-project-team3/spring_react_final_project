@@ -16,4 +16,8 @@ public interface OrderService {
   List<InterestedListProductInfoDto> getInterestedUserList(String sellerBusinessName);
 
   List<UserInfoProductInfoDto> getZzimDetail(int productNum);
+
+  int gender13Count(int productNum);
+
+  int gender24Count(int productNum);
 }

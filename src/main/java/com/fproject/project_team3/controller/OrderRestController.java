@@ -8,6 +8,7 @@ import com.fproject.project_team3.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -42,8 +43,22 @@ public class OrderRestController {
   @PostMapping("/getZzimDetail")
   public List<UserInfoProductInfoDto> getZzimDetail(@RequestParam("productNum") int productNum) throws Exception {
     List<UserInfoProductInfoDto> getZzimDetail = orderService.getZzimDetail(productNum);
-    System.out.println(getZzimDetail);
     return getZzimDetail;
+  }
+
+  @PostMapping("/genderCount")
+  public String gender13Count(@RequestParam("productNum") int productNum) throws Exception {
+    int gender13Count = orderService.gender13Count(productNum);
+    int gender24Count = orderService.gender24Count(productNum);
+    int[] genderArrayCount = new int[2];
+    genderArrayCount[0] = gender13Count;
+    genderArrayCount[1] = gender24Count;
+    System.out.println("=========================");
+    System.out.println(gender13Count);
+    System.out.println(gender24Count);
+    String newArray = Arrays.toString(genderArrayCount);
+    System.out.println("=========================");
+    return newArray;
   }
   // GJY
 

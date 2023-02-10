@@ -23,6 +23,9 @@ npm install react-native-web
 // firebase 추가
 npm install firebase@9.16.0
 
+// 리액트 차트 추가
+npm install --save react-apexcharts apexcharts
+
 // ??????
 npm install react-slick --save
 npm install slick-carousel --save
