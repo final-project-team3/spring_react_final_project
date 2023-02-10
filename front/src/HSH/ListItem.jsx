@@ -93,11 +93,15 @@ const ListItem = ({
             <Link to={`/productDetail/${productNum}`}>
                 <img width={300} src={productImg}/>
             </Link>
-            <Link to={`/productSellerPage/${productSellerBusinessName}`}>
+            <Link style={{
+                textDecoration: "none"
+            }} to={`/productSellerPage/${productSellerBusinessName}`}>
                 <h5 className={"my-3"}>{productSellerBusinessName}</h5>
             </Link>
             <div className={'d-flex justify-content-between'}>
-                <Link to={`/productDetail/${productNum}`}>
+                <Link style={{
+                    textDecoration: "none"
+                }} to={`/productDetail/${productNum}`}>
                     <h5 className={'mb-0'}>{productName}</h5>
                     <h5 className={'mb-4'}>{productPrice.toString()
                         .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</h5>
