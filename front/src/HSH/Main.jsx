@@ -77,7 +77,7 @@ const Main = () => {
             }
         }
 
-        console.log(window.scrollY)
+        // console.log(window.scrollY)
         window.addEventListener("scroll", handleShowButton)
         return () => {
             window.removeEventListener("scroll", handleShowButton)
@@ -90,9 +90,9 @@ const Main = () => {
             <div className={'container'}>
                 <h2 hidden={true}> 캐러셀</h2>
                 <StyledSlider {...settings}>
-                    {mainImg.map(item => {
+                    {mainImg.map((item, index) => {
                         return (
-                            <div key={item.id}>
+                            <div key={index}>
                                 <ImageContainer>
                                     <Image src={item.url}/>
                                 </ImageContainer>

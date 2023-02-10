@@ -50,6 +50,8 @@ public interface ProductMapper {
 
     void productInterestedInsert(String userId, int productNum);
 
+    void deleteProductLikeItem(String userId,int productNum);
+
     //    HSH
 
     //    LYS
@@ -85,6 +87,8 @@ public interface ProductMapper {
     void productInfoUpdate(Object productInfoOptionDto);
 
     void productOptionUpdate(Object productInfoOptionDto);
+
+    List<ProductInfoDto> getLikeProducts(String userId);
 
     //    GJY
 

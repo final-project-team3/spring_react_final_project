@@ -6,6 +6,7 @@ import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.dto.product.ProductOptionDto;
 import com.fproject.project_team3.dto.product.SearchDto;
 import com.fproject.project_team3.dto.seller.SellerInfoDto;
+import com.fproject.project_team3.dto.user.UserInterestedListDto;
 import com.fproject.project_team3.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -96,6 +97,16 @@ public class ProductRestController {
     @GetMapping("/productInterestedInsert")
     public int productInterestedInsert(@RequestParam("userId") String userId, @RequestParam("productNum") int productNum) {
         return productService.productInterestedInsert(userId, productNum);
+    }
+
+    @GetMapping("/getLikeProducts")
+    public List<ProductInfoDto> getLikeProducts(@RequestParam("userId") String userId) {
+        return productService.getLikeProducts(userId);
+    }
+
+    @PostMapping("/deleteProductLikeItem")
+    public void deleteProductLikeItem(@RequestParam("userId") String userId, @RequestParam("productNum") int productNum) {
+        productService.deleteProductLikeItem(userId,productNum);
     }
 
 

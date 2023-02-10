@@ -45,6 +45,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductInfoDto> getLikeProducts(String userId) {
+        return productMapper.getLikeProducts(userId);
+    }
+
+    @Override
+    public void deleteProductLikeItem(String userId, int productNum) {
+        productMapper.deleteProductLikeItem(userId, productNum);
+    }
+
+    @Override
     public List<ProductInfoDto> getProductList() {
         return productMapper.getProductList();
     }

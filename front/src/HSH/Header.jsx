@@ -110,12 +110,14 @@ const Header = () => {
         }
     }, [])
 
+    const minute = 60000;
     const timer = setInterval(async () => {
         const {data} = await axios.get("http://localhost:8080/getSearchTotal10");
         setSearchTop10(data);
         setNowTime(getNowTime);
         clearInterval(timer);
-    }, 60000)
+
+    }, minute * 30)
 
     // 실시간 검색
 

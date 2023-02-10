@@ -23,6 +23,10 @@ public interface ProductService {
 
     List<ProductInfoDto> getSellerProductList(String productSellerBusinessName);
 
+    List<ProductInfoDto> getLikeProducts(String userId);
+
+    void deleteProductLikeItem(String userId,int productNum);
+
     //    HSH
 
     //    LYS
