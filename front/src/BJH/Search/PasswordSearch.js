@@ -1,5 +1,36 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import './loginSearch.css';
+import styled from "styled-components";
+import $ from "jquery";
+import axios from "axios";
+
+async function checkMail() {
+    var mail = $('#userId').val();
+    let {data} = await axios.post("http://localhost:8080/emailCheck", null, {
+        params: {
+            email: mail
+        }
+    });
+
+    if (mail === '') {
+        $('.checkId_blank').css('display', 'inline-block');
+        $('.checkId_exist_no').css('display', 'none');
+        $('.checkId_exist_ok').css('display', 'none');
+    } else {
+        if (data !== "") { // data에 값이 있으면 = 중복일때
+            $('.checkId_blank').css('display', 'none');
+            $('.checkId_exist_no').css('display', 'none');
+            $('.checkId_exist_ok').css('display', 'inline-block');
+        } else if (data === "") { // data가 비어있으면 = 중복이 아닐때
+            $('.checkId_blank').css('display', 'none');
+            $('.checkId_exist_no').css('display', 'inline-block');
+            $('.checkId_exist_ok').css('display', 'none');
+        }
+    }
+};
+
+// const [myInfo, SetMyinfo] = useState([]);
+
 
 class PasswordSearch extends React.Component {
     constructor(props) {
@@ -12,45 +43,50 @@ class PasswordSearch extends React.Component {
 
     render() {
         return (
-                <div className={"tab-container"}>
-                    <div id={"tab2"}>
-                        <h3 className={"aria-hidden"}>비밀번호 찾기</h3>
-                        <div className={"find-id-pwd"}>
-                            <label htmlFor={"inp-id"}>ID</label>
-                            <input type={"text"} id={"inp-id"} className={"input"} placeholder={"8~20자의 영문, 숫자 조합"}
-                                   title={"ID 입력"} maxLength={20}/>
-                        </div>
-                        <div className={"find-id-pwd"}>
-                            <label htmlFor={"inp-name01"}>Name</label>
-                            <input type={"text"} id={"inp-name01"} className={"input text-uppercase"}
-                                   placeholder={"이름"} title={"성명(한글) 입력"}/>
-                            <input type="hidden" id="inp-name02" className={"input text-uppercase"}
-                                   placeholder="Last Name(성)" title="성명(한글) Last Name 입력"/>
-                        </div>
-                        <div className={"find-id-pwd"}>
-                            <div className={"input-type-mail"} id={"mailContainer1"}>
-                                <div>
-                                    <label htmlFor={"inp-name01"}>Email</label>
-                                </div>
-                                <input type={"text"} id={"inp-id-mail01"} className={"input"}
-                                       placeholder={"이메일"} title={"이메일 아이디 입력"}/>
-                                <span className={"hyp"}>@</span>
-                                <input type={"text"} className={"input email"} title={"이메일 주소 입력"}
-                                       id={"inp-id-mail02"}/>
-                                <select className={"inp-select"} id={"inp-id-mail03"} title={"이메일 주소 선택"}>
-                                    {/* value값 필요*/}
-                                    <option>직접입력</option>
-                                    <option>naver.com</option>
-                                </select>
-                            </div>
-                        </div>
-                        <button id={"loginSubmit"} type={"submit"}>
-                            비밀번호 찾기
-                        </button>
+            <div className={"tab-container"}>
+                <div id={"tab2"}>
+                    <h3 className={"aria-hidden"}>비밀번호 찾기</h3>
+                    <div className={"find-id-pwd"}>
+                        <label htmlFor={"inp-id"}>Email</label>
+                        <input type={"text"} id={"userId"} name={"userId"} className={"userId"} onClick={checkMail}
+                               onChange={checkMail}
+                               placeholder={"가입하신 이메일(ID)을 입력해 주세요"}
+                               title={"ID 입력"} maxLength={20}/>
+                        <HiddenMessage style={noStyle} className="checkId_blank no">필수 입력 사항입니다.</HiddenMessage>
+                        <HiddenMessage style={noStyle} className="checkId_exist_no no">등록된 이메일(ID)이
+                            아닙니다.</HiddenMessage>
+                        <HiddenMessage style={okStyle} className="checkId_exist_ok no">등록된 이메일(ID) 입니다.</HiddenMessage>
                     </div>
+                    <div className={"find-id-pwd"}>
+                        <label htmlFor={"inp-name01"}>Name</label>
+                        <input type={"text"} id={"userName"} name={"userName"} className={"userName"}
+                               placeholder={"성함을 입력해 주세요 "}/>
+                        <HiddenMessage style={noStyle} className="checkName no">잘못된 이름 입니다.</HiddenMessage>
+                    </div>
+                    <div className={"find-id-pwd"}>
+                        <label>Phone Number</label>
+                        <input type={"text"} id={"userTel"} name={"userTel"} className={"userTel"}
+                               placeholder={"가입시 등록한 전화번호를 입력해 주세요 "}/>
+                        <HiddenMessage style={noStyle} className="checkTel no">잘못된 전화번호 입니다.</HiddenMessage>
+                    </div>
+                    <button id={"loginSubmit"} type={"submit"}>
+                        비밀번호 찾기
+                    </button>
                 </div>
+            </div>
         )
     }
 }
+
+const okStyle = {
+    color: "#009000"
+}
+const noStyle = {
+    color: "#ff0000"
+}
+const HiddenMessage = styled.span`
+    font-size: smaller;
+    display: none;
+`
 
 export default PasswordSearch;
