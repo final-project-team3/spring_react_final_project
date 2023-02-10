@@ -508,7 +508,7 @@ function SellerSignUp() {
                                         <button id={'btn-send'} className={"btn btn-primary ms-1"} type={'button'}
                                                 disabled={true}
                                                 style={{width: 90}}>
-                                            <p className={"p-0 m-0"} onClick={sendEmail}>인증코드전송</p></button>
+                                            <p className={"p-0 m-0"} onClick={sendEmail}>인증코드 전송</p></button>
                                         <HiddenMessage style={okStyle} className="mail_ok ok">사용 가능한
                                             이메일입니다.</HiddenMessage>
                                         <HiddenMessage style={noStyle} className="mail_already no">이미 사용중인
