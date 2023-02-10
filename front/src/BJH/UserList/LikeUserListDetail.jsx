@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 import axios from "axios";
 import ApexCharts from "react-apexcharts";
+import "../../Fonts/Font.css";
 
 function LikeUserListDetail(props) {
-  const { productNum } = useParams(); // 넘어온 productNum
+  const {productNum} = useParams(); // 넘어온 productNum
   const [getZzimDetail, setGetZzimDetail] = useState([]);
   const [gender13Count, setGender13Count] = useState(0);
   const [gender24Count, setGender24Count] = useState(0);
   const [totalUser, setTotalUser] = useState(0);
   let total = 0;
-  const [apexArray, setApexArray] = useState([40,60]);
+  const [apexArray, setApexArray] = useState([40, 60]);
 
   useEffect(() => {
     return async () => {
-      const { data } = await axios.post(
+      const {data} = await axios.post(
         "http://localhost:8080/getZzimDetail",
         null,
         {
@@ -30,8 +31,8 @@ function LikeUserListDetail(props) {
 
   useEffect(() => {
     return async () => {
-      const { data } = await axios.post(
-        "http://localhost:8080/gender13Count",
+      const {data} = await axios.post(
+        "http://localhost:8080/genderCount",
         null,
         {
           params: {
@@ -39,11 +40,12 @@ function LikeUserListDetail(props) {
           },
         }
       );
-      // 1과 3으로 시작하는 유저의 수 (남성)
-      setGender13Count(data[0].countGender13);
-      const total13 = data[0].countGender13;
+      console.log("data : ");
+      console.log(data);
+      setGender13Count(data[0]);
+      setGender24Count(data[1]);
+      console.log("totalUser : ");
       console.log(totalUser);
-      setGender24Count(totalUser - total13); // 총 인원수에서 남성의 수 뺀것 == 여성의 수
     };
   }, []);
 
@@ -64,23 +66,42 @@ function LikeUserListDetail(props) {
       </h2>
       <h2>여성은 : {gender24Count}</h2>
 
-      <div>
+      <div>{totalUser !== 0 ?
         <ApexCharts
-          series={apexArray}
+          // series={apexArray}
+          series={[gender13Count, gender24Count]}
           type={"pie"}
-          width={800}
+          width={600}
           options={{
-            chart: { height: 200, width: 200, type:"pie"},
-            plotOptions: {
-              pie: {
-                customScale: 0.3
+            chart: {height: 300, width: 300, type: "pie", sparkline: true},
+            fill: {
+              colors: ['#99CCFF', '#FFCCE5']
+            },
+            legend: {
+              fontSize: 20,
+              fontFamily: "MICEMyungjo",
+              markers:{
+                strokeColor: "#99CCFF",
+                fillColors: "#99CCFF"
               }
             },
-            labels: ['여성', "남성"],
+            plotOptions: {
+              pie: {
+                customScale: 0.6,
+                dataLabels: {
+                  offset: -45,
+                }
+              }
+            },
+            labels: ['남성', "여성"],
             dataLabels: {
               style: {
-                fontSize: 50,
-              }
+                fontSize: 40
+                , colors: ['black', 'black']
+                , fontWeight: "bold"
+                , fontFamily: "MICEMyungjo",
+              },
+              textAnchor: "end"
             },
             responsive: [{
               breakpoint: 480,
@@ -89,12 +110,12 @@ function LikeUserListDetail(props) {
                   width: 30
                 },
                 legend: {
-                  position: "middle"
+                  position: "middle",
                 }
               }
             }]
           }}
-        />
+        /> : null}
 
       </div>
     </div>

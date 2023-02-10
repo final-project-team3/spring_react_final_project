@@ -18,5 +18,7 @@ public interface OrderListMapper {
 
   List<UserInfoProductInfoDto> getZzimDetail(int productNum);
 
-  List<UserInfoProductInfoDto> gender13Count(int productNum);
+  int gender13Count(int productNum);
+
+  int gender24Count(int productNum);
 }

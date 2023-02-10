@@ -40,8 +40,15 @@ public class OrderServiceImpl implements OrderService {
   }
 
   @Override
-  public List<UserInfoProductInfoDto> gender13Count(int productNum) {
-    return orderListMapper.gender13Count(productNum);
+  public int gender13Count(int productNum) {
+    int count13 = orderListMapper.gender13Count(productNum);
+    return count13;
+  }
+
+  @Override
+  public int gender24Count(int productNum) {
+    int count24 = orderListMapper.gender24Count(productNum);
+    return count24;
   }
 
 
