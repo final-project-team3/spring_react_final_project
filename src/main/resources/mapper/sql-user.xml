@@ -47,6 +47,23 @@
         WHERE user_id = #{userId}
     </update>
 
+    <select id="getEmailUserInfo" parameterType="String" resultType="com.fproject.project_team3.dto.user.UserInfoDto">
+        SELECT *
+        FROM user_info
+        WHERE user_id = #{email}
+    </select>
+
+    <select id="emailNumCheck" parameterType="String" resultType="int">
+        SELECT COUNT(user_id)
+        FROM user_info
+        WHERE user_id = #{email};
+    </select>
+
+    <update id="postPassMail" parameterType="String">
+        UPDATE user_info
+        SET user_pass = #{newPass}
+        WHERE user_id = #{mail}
+    </update>
     <!-- LYS -->
 
     <!-- GJY -->

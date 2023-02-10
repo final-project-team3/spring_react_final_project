@@ -24,6 +24,12 @@ public interface UserMapper {
 
     Object userLogin(String id, String pass);
 
+    Object getEmailUserInfo(String email);
+
+    int emailNumCheck(String email);
+
+    void postPassMail(String mail, String newPass);
+
     //    LYS
 
     //    GJY
