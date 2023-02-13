@@ -163,36 +163,37 @@ const Main = () => {
                         <li className={"item"}>
                           <div className={"itemBox"}>
                             <div className={"box"}>
-                              <div className={"prvImg"}>
+
+                              <div className={"prvImg row"}>
                                 <Link>
+                                  {/* 사진 크기가 안맞아서 억지로*/}
                                   <img
+                                    style={{ height: 267, width:200}}
                                     className={"thumb"}
                                     src={item.productImg}
-                                    style={{width:100}}
                                   />
                                 </Link>
-                              </div>
-                            </div>
-                            <div className={"th-name"}>
-                              <Link className={"th-title text-start"}>
-                                <font color={"#FF6666"}>
-                                  <b>pick! </b>
-                                </font>
-                                <span className={"text-start"}>
+                                {/* value?*/}
+                                  <Link className={"th-title text-start fs-6 mt-1"} style={{textDecoration: "none"}}>
+                                    <font color={"#FF6666"}>
+                                      <b>pick! </b>
+                                    </font>
+                                    <span className={"text-start"}>
                                     {item.productName}
                                   </span>
-                              </Link>
-                            </div>
-                            {/* value?*/}
-                            <div className={"th-listInfo"}>
-                              <ul>
-                                <li className={"cash"}>
-                                    <span className={"fs-10"}>
+                                  </Link>
+                                </div>
+                                {/* value?*/}
+                                <div className={"th-listInfo"}>
+                                  <ul>
+                                    <li className={"cash mt-2"}>
+                                    <span className={"fs-5"}>
                                       KRW {item.productPrice}
                                     </span>
-                                </li>
-                              </ul>
-                            </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
                           </div>
                         </li>
                       );
@@ -216,7 +217,7 @@ const Main = () => {
                               </div>
                               {/* value?*/}
                               <div className={"th-name"}>
-                                <Link className={"th-title text-start"}>
+                                <Link className={"th-title text-start fs-5"}>
                                   <font color={"#007cd8"}>
                                     <b>pick! </b>
                                   </font>
