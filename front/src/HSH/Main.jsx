@@ -153,7 +153,8 @@ const Main = () => {
                         <h2>OVERCOAT</h2>
                         <p>쌀쌀한 날씨에는 포근한 #외투</p>
                       </div>
-                      <img src={"./Img/Bjh/han_out.jpg"} />
+                      <img src={"./Img/Bjh/han_out.jpg"}
+                           style={{height:"auto"}}/>
                     </Link>
                   </div>
                   {/* 첫번째줄 : 상품 4개 나오게*/}
@@ -209,7 +210,7 @@ const Main = () => {
                                 <Link>
                                   {/* 사진 크기가 안맞아서 억지로*/}
                                   <img
-                                    style={{ height: 267 }}
+                                    style={{ height: 267}}
                                     className={"thumb"}
                                     src={item.productImg}
                                   />
