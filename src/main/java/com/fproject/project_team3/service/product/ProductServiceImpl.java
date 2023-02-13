@@ -1,6 +1,5 @@
 package com.fproject.project_team3.service.product;
 
-import com.fproject.project_team3.dto.join.ProductInfoOptionDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.dto.product.ProductOptionDto;
@@ -109,6 +108,16 @@ public class ProductServiceImpl implements ProductService {
             return checkNum;
         }
         return checkNum;
+    }
+
+    @Override
+    public List<ProductInfoDto> thisMonthData() {
+        return productMapper.thisMonthData();
+    }
+
+    @Override
+    public List<ProductInfoDto> randomData() {
+        return productMapper.randomData();
     }
 
 

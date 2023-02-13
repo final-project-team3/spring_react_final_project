@@ -6,6 +6,7 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import axios from "axios";
 
 {/*BJH 시작*/}
 // BJH 캐러셀
@@ -85,6 +86,31 @@ const Main = () => {
     }, [])
     // top 버튼 코드 끝
 
+
+    // GJY 시작
+
+    // 이번달에 등록된 상품 최근순으로 4개 가져오기
+    const [thisMonthData, setThisMonthData] = useState([]);
+
+    useEffect(() => {
+        return async () => {
+            const {data} = await axios.post("http://localhost:8080/thisMonthData", null, null);
+            console.log(data);
+            setThisMonthData(data);
+        };
+    }, []);
+
+    const [randomData, setRandomData] = useState([]);
+    // weekly 시옷's pick : 랜덤 7개 가져와서 순서대로 4개, 3개 할당 ( + 이번주로 date 한정?)
+    useEffect(() => {
+        return async () => {
+            const {data} = await axios.post("http://localhost:8080/randomData", null, null);
+            console.log(data);
+        };
+    }, []);
+
+
+    // GJY 끝
     return (
         <div>
             <div className={'container'}>
@@ -100,68 +126,69 @@ const Main = () => {
                         );
                     })}
                 </StyledSlider>
-                <br/>
-                <br/>
-                <div className={"ad-card-wrap"}>
-                    <div className={"ad-card1"}>
-                        <div className={"ad-card-color"}>
-                            <h2 className={"hiddenText"}>광고</h2>
-                            <div className={"f-card"}>
-                                <div className={"card-thumb"}>
-                                    <img src={"./Img/Bjh/han_out.jpg"}/>
-                                </div>
-                                <div className={"card-info"}>
-                                    {/* 광고이미지*/}
-                                    <div className={"card-name"}>
-                                        <strong style={{
-                                            color: "black",
-                                        }}>광고입니다</strong>
-                                    </div>
-                                    <div className={"card-subname"}>
-                                        <dl className={"subexplain"}>
-                                            <dt>설명</dt>
-                                            <dd>
-                                                <span className={"explain"}>
-                                                    광고설명
-                                                </span>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={"ad-card2"}>
-                        <div className={"ad-card-color"}>
-                            <h2 className={"hiddenText"}>광고</h2>
-                            <div className={"f-card"}>
-                                {/* 광고이미지*/}
-                                <div className={"card-thumb"}>
-                                    <img src={"./Img/Bjh/cchod.jpg"}/>
-                                </div>
-                                <div className={"card-info"}>
-                                    <div className={"card-name"}>
-                                        <strong style={{
-                                            color: "black"
-                                        }}>광고입니다</strong>
-                                    </div>
-                                    <div className={"card-subname"}>
-                                        <dl className={"subexplain"}>
-                                            <dt>설명</dt>
-                                            <dd>
-                                                <span className={"explain"}>
-                                                    광고설명
-                                                </span>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className={"s-pick"}>
-                    <h2>Weekly 시옷's Pick</h2>
+                {/*<br/>*/}
+                {/*<br/>*/}
+                {/*<div className={"ad-card-wrap"}>*/}
+                {/*    <div className={"ad-card1"}>*/}
+                {/*        <div className={"ad-card-color"}>*/}
+                {/*            <h2 className={"hiddenText"}>광고</h2>*/}
+                {/*            <div className={"f-card"}>*/}
+                {/*                <div className={"card-thumb"}>*/}
+                {/*                    <img src={"./Img/Bjh/han_out.jpg"}/>*/}
+                {/*                </div>*/}
+                {/*                <div className={"card-info"}>*/}
+                    {/*                /!* 광고이미지*!/*/}
+                    {/*                <div className={"card-name"}>*/}
+                    {/*                    <strong style={{*/}
+                    {/*                        color: "black",*/}
+                    {/*                    }}>광고입니다</strong>*/}
+                    {/*                </div>*/}
+                    {/*                <div className={"card-subname"}>*/}
+                    {/*                    <dl className={"subexplain"}>*/}
+                    {/*                        <dt>설명</dt>*/}
+                    {/*                        <dd>*/}
+                    {/*                            <span className={"explain"}>*/}
+                    {/*                                광고설명*/}
+                    {/*                            </span>*/}
+                    {/*                        </dd>*/}
+                    {/*                    </dl>*/}
+                    {/*                </div>*/}
+                    {/*            </div>*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                    {/*<div className={"ad-card2"}>*/}
+                    {/*    <div className={"ad-card-color"}>*/}
+                    {/*        <h2 className={"hiddenText"}>광고</h2>*/}
+                    {/*        <div className={"f-card"}>*/}
+                    {/*            /!* 광고이미지*!/*/}
+                {/*                <div className={"card-thumb"}>*/}
+                {/*                    <img src={"./Img/Bjh/cchod.jpg"}/>*/}
+                {/*                </div>*/}
+                {/*                <div className={"card-info"}>*/}
+                {/*                    <div className={"card-name"}>*/}
+                {/*                        <strong style={{*/}
+                {/*                            color: "black"*/}
+                {/*                        }}>광고입니다</strong>*/}
+                {/*                    </div>*/}
+                {/*                    <div className={"card-subname"}>*/}
+                {/*                        <dl className={"subexplain"}>*/}
+                {/*                            <dt>설명</dt>*/}
+                {/*                            <dd>*/}
+                {/*                                <span className={"explain"}>*/}
+                {/*                                    광고설명*/}
+                {/*                                </span>*/}
+                {/*                            </dd>*/}
+                {/*                        </dl>*/}
+                {/*                    </div>*/}
+                {/*                </div>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+
+                <div className={"container text-center mt-5"}>
+                    <h1>Weekly 시옷's Pick</h1>
                 </div>
                 {/* 사이에 다른것 하나 넣기?*/}
                 <div id={"section27"}>
@@ -336,67 +363,29 @@ const Main = () => {
                                         <h1>New Arrivals</h1>
                                         <h2>이번달의 신상품</h2>
                                     </div>
+
                                     <ul className={"prdList grid4"}>
-                                        <li className={"PrdBox"}>
-                                            <div className={"thumbnail"}>
-                                                <Link><img className={"thumbImg"} src={"../Img/logo.png"}/></Link>
-                                            </div>
-                                            <div className={"description"}>
-                                                <ul>
-                                                    <li className={"named"}>
-                                                        <Link className={"nameLink"}>
-                                                            <span>잘 나오는지 테스트</span>
-                                                        </Link>
-                                                    </li>
-                                                    <li className={"price"}>KRW 12,345</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li className={"PrdBox"}>
-                                            <div className={"thumbnail"}>
-                                                <Link><img className={"thumbImg"} src={"../Img/logo.png"}/></Link>
-                                            </div>
-                                            <div className={"description"}>
-                                                <ul>
-                                                    <li className={"named"}>
-                                                        <Link className={"nameLink"}>
-                                                            <span> 잘 나오는지 테스트</span>
-                                                        </Link>
-                                                    </li>
-                                                    <li className={"price"}>KRW 12,345</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li className={"PrdBox"}>
-                                            <div className={"thumbnail"}>
-                                                <Link><img className={"thumbImg"} src={"../Img/logo.png"}/></Link>
-                                            </div>
-                                            <div className={"description"}>
-                                                <ul>
-                                                    <li className={"named"}>
-                                                        <Link className={"nameLink"}>
-                                                            <span> 잘 나오는지 테스트</span>
-                                                        </Link>
-                                                    </li>
-                                                    <li className={"price"}>KRW 12,345</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li className={"PrdBox"}>
-                                            <div className={"thumbnail"}>
-                                                <Link><img className={"thumbImg"} src={"../Img/logo.png"}/></Link>
-                                            </div>
-                                            <div className={"description"}>
-                                                <ul>
-                                                    <li className={"named"}>
-                                                        <Link className={"nameLink"}>
-                                                            <span> 잘 나오는지 테스트</span>
-                                                        </Link>
-                                                    </li>
-                                                    <li className={"price"}>KRW 12,345</li>
-                                                </ul>
-                                            </div>
-                                        </li>
+                                        {
+                                            thisMonthData.map((item) => {
+                                                return (
+                                                <li className={"PrdBox"}>
+                                                    <div className={"thumbnail"}>
+                                                        <Link><img className={"thumbImg"} src={item.productImg}/></Link>
+                                                    </div>
+                                                    <div className={"description"}>
+                                                        <ul>
+                                                            <li className={"named"}>
+                                                                <Link className={"nameLink"}>
+                                                                    <span>{item.productName}</span>
+                                                                </Link>
+                                                            </li>
+                                                            <li className={"price"}>KRW {item.productPrice}</li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                );
+                                            })
+                                        }
                                     </ul>
                                 </div>
                                 <div className={"moreBtn"}>

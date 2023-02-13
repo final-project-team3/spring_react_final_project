@@ -1,6 +1,5 @@
 package com.fproject.project_team3.service.product;
 
-import com.fproject.project_team3.dto.join.ProductInfoOptionDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.product.ProductKindDto;
 import com.fproject.project_team3.dto.product.ProductOptionDto;
@@ -70,6 +69,11 @@ public interface ProductService {
     List<SearchDto> getSearchTotal10();
 
     int productInterestedInsert(String userId, int productNum);
+
+    List<ProductInfoDto> thisMonthData();
+
+    List<ProductInfoDto> randomData();
+
 
     //    GJY
 
