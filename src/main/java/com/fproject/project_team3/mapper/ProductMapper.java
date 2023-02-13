@@ -88,7 +88,7 @@ public interface ProductMapper {
     void productOptionUpdate(Object productInfoOptionDto);
 
     List<ProductInfoDto> getLikeProducts(String userId);
-    
+
     List<ProductInfoDto> thisMonthData();
 
     List<ProductInfoDto> randomData();

@@ -48,6 +48,7 @@ function ProductDetail(props) {
     const [productInfo, setProductInfo] = useState();
     const [productOption, setProductOption] = useState([]);
     const [qnaList, setQnaList] = useState([]);
+    const [optionCount, setOptionCount] = useState(0);
 
     const [reviewCheck, setReviewCheck] = useState(true);
 
@@ -82,6 +83,21 @@ function ProductDetail(props) {
         }
     }, [])
 
+    useEffect(() => {
+        console.log(buyList);
+        console.log('테스트');
+        let returnHtml = "";
+        buyList.map((buyItem, index) => {
+            returnHtml +=
+                `<ul key={index}>
+                    <li>${buyItem.optionValue}</li>
+                    <li>아무말</li>
+                </ul>`
+        })
+        console.log(returnHtml);
+        $("#div-buyList").html(returnHtml);
+    }, [optionCount])
+
     const pathname = useLocation();
 
     return (
@@ -106,7 +122,6 @@ function ProductDetail(props) {
                         let selectOptionList = $(e.target).val().split(",");
                         let selectOptionValue = selectOptionList[0];
 
-                        console.log(selectOptionValue);
                         if (selectOptionValue == "옵션") {
                             Swal.fire({
                                 position: "top-center",
@@ -135,12 +150,13 @@ function ProductDetail(props) {
 
                             // doubleCheck 가 true일 때
                             if (doubleCheck) {
-                                buyListPushFunc(buyList, {
-                                    optionValue: selectOptionValue,
-                                    optionPrice: selectOptionPrice
-                                });
-                                // $("#selectOption").val("옵션").prop("selected", true);
-                                console.log(buyList);
+                                console.log('테스트');
+                                let prevBuyList = buyList;
+                                prevBuyList.push({optionValue: selectOptionValue, optionPrice: selectOptionPrice});
+                                // console.log(prevBuyList.length);
+                                setBuyList(prevBuyList);
+                                setOptionCount(optionCount + 1);
+                                // console.log(buyList);
                             }
                             if (buyList.length != 0) $("#div-optionShow").prop("hidden", false);
                             else $("#div-optionShow").prop("hidden", true);
@@ -152,20 +168,22 @@ function ProductDetail(props) {
                             // 옵션 Array
                             let optionArray = [`${option.productOption1}${option.productOption2}`, option.productOptionPrice !== "" ? `${option.productOptionPrice}` : option.productOptionPrice = 0]
                             return (
-                                <option key={index} value={optionArray}><p>{option.productOption1 + option.productOption2} + </p>
+                                <option key={index} value={optionArray}>
+                                    <p>{option.productOption1 + option.productOption2} + </p>
                                     <p>{option.productOptionPrice}</p></option>
                             )
                         })}
                     </select>
                     {/* 옵션 넣으면 값 뜨는 데*/}
-                    <div id={"div-optionShow"} hidden={true} className={'border border-dark'}>
-                        {buyList.map((buyItem, index) => {
-                            return (
-                                <ul key={index}>
-                                    <li>{buyItem.optionValue}</li>
-                                </ul>
-                            )
-                        })}
+                    <div id={'div-buyList'}>
+                        {/*{buyList.map((buyItem, index) => {*/}
+                        {/*    console.log(buyList);*/}
+                        {/*    return (*/}
+                        {/*        <ul key={index}>*/}
+                        {/*            <li>{buyItem.optionValue}</li>*/}
+                        {/*        </ul>*/}
+                        {/*    )*/}
+                        {/*})}*/}
                     </div>
                     <div className={'row'}>
                         <hr/>
