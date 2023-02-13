@@ -35,7 +35,7 @@ const Payment = (props) => {
             pg: "kakaopay.TC0ONETIME",
             pay_method: 'card', // 결제수단 (필수항목)
             // merchant_uid: `mid_${new Date().getTime()}`, // 결제금액 (필수항목)
-            name: '시옷' + props.productName, // 주문명 (필수항목)
+            name: `시옷 (${props.productName})`, // 주문명 (필수항목)
             amount: props.price, // 금액 (필수항목)
             custom_data: {name: '부가정보', desc: '세부 부가정보'},
             // buyer_name: props.userName, // 구매자 이름
