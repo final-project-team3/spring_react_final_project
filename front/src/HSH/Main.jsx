@@ -331,7 +331,7 @@ const Main = () => {
                                       }
                                       alt="이미지 없음"
                                       style={{height: 30, width: 30}}
-                                      onClick={userInfo == null ? null : async () => {
+                                      onClick={userInfo == null ? async ()=> {await productInterestedFunc(item.productNum)} : async () => {
                                         if (
                                           $("#zzimImg4" + item?.productNum).prop("src") ===
                                           "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"

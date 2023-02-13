@@ -18,6 +18,10 @@ const ListItem = ({
     /**
      * 찜 하는 함수
      */
+
+    let userInfo = sessionStorage.getItem("userInfo");
+    userInfo = JSON.parse(userInfo);
+
     const productInterestedFunc = async (productNum) => {
         // 로그인 하지 않았을 시
         if (userInfo == null) {

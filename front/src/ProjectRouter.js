@@ -76,7 +76,6 @@ const ProjectRouter = () => {
           <Route path={'/likeUserList'} element={<LikeUserList/>}/>
           <Route path={'/orderUserList'} element={<OrderUserList/>}/>
           <Route path={'/payUserList'} element={<PayUserList/>}/>
-          <Route path={'/LikeProduct'} element={<LikeProduct/>}/>
           <Route path={"/productR2"} element={<ProductRegisterPage2/>}/>
           <Route path={'/footer'} element={<Footer/>}/>
         </Route> :
@@ -90,6 +89,7 @@ const ProjectRouter = () => {
           <Route path={'/search/:searchContent'} element={<Search/>}/>
           <Route path={'/login'} element={<Login/>}/>
           <Route path={'/category/:bigKind/:smallKind'} element={<Category/>}/>
+          <Route path={'/LikeProduct'} element={<LikeProduct/>}/>
           {/*HSH*/}
 
           {/*LYS*/}
