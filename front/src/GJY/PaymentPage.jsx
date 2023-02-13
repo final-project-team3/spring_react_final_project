@@ -3,7 +3,7 @@ import Popup from "../LYS/Popup";
 import styled from "styled-components";
 import Pay from "./pay";
 import {useLocation} from "react-router-dom";
-import $ from "jquery";
+import axios from "axios";
 
 const styles = {
     vertical: {
@@ -38,27 +38,26 @@ const FormBlockBody = styled.div`
 
 function PaymentPage(props) {
     const location = useLocation();
-    const {productName, productOption} = location.state;
+    const {productName, productImg, buyList, totalPrice, productNum, productInfo} = location.state;
 
-    const [order, setOrder] = useState(0);
-    const [delivery, setDelivery] = useState(3000);
+    const [sellerInfo, setSellerInfo] = useState();
+
+    let userInfo = sessionStorage.getItem("userInfo");
+    userInfo = JSON.parse(userInfo);
+
 
     useEffect(() => {
-        if (order >= 30000) {
-            setDelivery(0);
+        return async () => {
+            const {data} = await axios.get("http://localhost:8080/getProductSellerInfo", {params: {productNum: productNum}});
+            setSellerInfo(data);
+            console.log(data);
         }
-    }, [order]);
+    }, [])
 
-    const discount = 1200;
-    const cost = order + delivery - discount;
-    // productName = "productName";
-    // const productOpt = "productOpt";
-    const productCnt = "productCnt";
-
-    function checkAddress() {
-        var addr1 = $('#sigunguCode').val();
-        var addr2 = $('#jibunAddress').val();
-        var addr3 = $('#roadAddress').val();
+    const showMoney = value => {
+        value = parseInt(value).toString()
+            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+        return value;
     }
 
     return (
@@ -100,9 +99,7 @@ function PaymentPage(props) {
                         <AsteriskRed>*</AsteriskRed> 주소
                     </FormBlockHead>
                     <FormBlockBody>
-                        <Popup
-                          checkFunc={checkAddress}
-                          />
+                        <Popup/>
                         <div className={"row ms-1"}>
                             <input
                                 className={"my-1"}
@@ -153,7 +150,7 @@ function PaymentPage(props) {
             <br/>
             <div className={"col-12"}>
                 <div className={"row"}>
-                    <img src="/logo192.png" alt="제품 사진" className={"col-3"}/>
+                    <img src={productImg} alt="제품 사진" className={"col-3"}/>
                     <div className={"col-3 ms-5"}>
                         <div className={"row mb-3"}>
                             <label className={"float-start col-3"} htmlFor={"productName"}>
@@ -164,26 +161,22 @@ function PaymentPage(props) {
                             </p>
                         </div>
                         <div className={"row mb-3"}>
-                            <label className={"float-start col-3"} htmlFor={"productOpt"}>
-                                옵션
-                            </label>
-                            <p id={"productOpt"} className={"col-3"}>
-                                {productOption}
-                            </p>
+                            {buyList.map((item, index) => {
+                                console.log(item);
+                                return (
+                                    <div className={'d-flex'}>
+                                        <label className={"float-start col-3"} htmlFor={"productOpt"}>
+                                            옵션{index + 1}
+                                        </label>
+                                        <p id={"productOpt"} className={"col-3"}>
+                                            {item.optionValue}{item.optionTotal}개
+                                        </p>
+
+                                    </div>
+                                )
+                            })}
+
                         </div>
-                        <div className={"row"}>
-                            <label className={"float-start col-3"} htmlFor={"productCnt"}>
-                                수량
-                            </label>
-                            <p id={"productCnt"} className={"col-3"}>
-                                {productCnt}
-                            </p>
-                        </div>
-                        {/*<div className={"row col-6 d-flex justify-content-end ms-3"}>*/}
-                        {/*    <button className={"btn btn-warning mt-3"} onClick={ChangeOpt}>*/}
-                        {/*        옵션 변경*/}
-                        {/*    </button>*/}
-                        {/*</div>*/}
                     </div>
                     <div className={"col-6"} style={styles.vertical}>
                         <div className={"row"}>
@@ -191,7 +184,7 @@ function PaymentPage(props) {
                                 주문금액
                             </label>
                             <p id={"order"} className={"col-3"}>
-                                {order} 원
+                                {showMoney(totalPrice)} 원
                             </p>
                         </div>
                         <div className={"row mt-3"}>
@@ -199,37 +192,38 @@ function PaymentPage(props) {
                                 배송비
                             </label>
                             <p id={"delivery"} className={"col-5"}>
-                                {delivery} 원
+                                {totalPrice < sellerInfo?.sellerDeliveryFree ? showMoney(parseInt(sellerInfo.sellerDeliveryPrice)) : 0}원
                             </p>
                             <p style={styles.btnDiscount}>
-                                {delivery !== 0 &&
-                                    `\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a03만원이상 주문 시 배송비 무료!`}
+                                {totalPrice < sellerInfo?.sellerDeliveryFree ?
+                                    `\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0${showMoney(sellerInfo?.sellerDeliveryFree)}원이상 주문 시 배송비 무료!` : null}
                             </p>
                         </div>
-                        <div className={"row"}>
-                            <label htmlFor={"discount"} className={"float-start col-3"}>
-                                할인 적용
-                            </label>
-                            <p id={"discount"} className={"col"}>
-                                {discount}원
-                                {`\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0`}
-                                <button className={"btn btn-success col-2"}>포인트/쿠폰</button>
-                            </p>
-                        </div>
+                        {/*<div className={"row"}>*/}
+                        {/*    <label htmlFor={"discount"} className={"float-start col-3"}>*/}
+                        {/*        할인 적용*/}
+                        {/*    </label>*/}
+                        {/*    <p id={"discount"} className={"col"}>*/}
+                        {/*        {discount}원*/}
+                        {/*        {`\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0`}*/}
+                        {/*        <button className={"btn btn-success col-2"}>포인트/쿠폰</button>*/}
+                        {/*    </p>*/}
+                        {/*</div>*/}
                         <div className={"row"}>
                             <label className={"float-start col-3"} htmlFor={"cost"}>
                                 결제 금액
                             </label>
                             <p id={"cost"} className={"col-3"}>
-                                {cost}원
+                                {totalPrice < sellerInfo?.sellerDeliveryFree ? showMoney(parseInt(totalPrice) + parseInt(sellerInfo.sellerDeliveryPrice)) : showMoney(totalPrice)}원
                             </p>
                         </div>
                     </div>
                 </div>
                 <div className={"d-flex justify-content-end me-5"}>
-                    <img src="" alt=""/>
-
-                    <Pay/>
+                    <Pay
+                        price={totalPrice < sellerInfo?.sellerDeliveryFree ? showMoney(parseInt(totalPrice) + parseInt(sellerInfo.sellerDeliveryPrice)) : showMoney(totalPrice)}
+                        userName={userInfo.userName}
+                        productName={productInfo.productName}/>
                     <button className={"btn btn-dark fs-3"}>취소</button>
                 </div>
             </div>
