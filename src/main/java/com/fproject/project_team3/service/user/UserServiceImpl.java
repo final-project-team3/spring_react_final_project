@@ -1,5 +1,6 @@
 package com.fproject.project_team3.service.user;
 
+import com.fproject.project_team3.dto.join.InterestedListUserInfoDto;
 import com.fproject.project_team3.dto.user.UserInfoDto;
 import com.fproject.project_team3.dto.user.UserInterestedListDto;
 import com.fproject.project_team3.mapper.UserMapper;
@@ -70,6 +71,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserInterestedListDto> selectLikeData(String userId) {
         return userMapper.selectLikeData(userId);
+    }
+
+    @Override
+    public List<InterestedListUserInfoDto> getGenerationData() {
+        return userMapper.getGenerationData();
     }
 
     //    HSH
