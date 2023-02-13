@@ -19,7 +19,7 @@ const Popup = (props) => {
     return(
         <div>
             <button type='button' className={'my-2 btn btn-primary'} onClick={()=> {
-                props.checkFunc();
+                props?.checkFunc();
                 openPostCode();
             }}>주소 찾기</button>
 
@@ -27,7 +27,7 @@ const Popup = (props) => {
             <div id='popupDom'>
                 {isPopupOpen && (
                     <PopupDom>
-                        <PopupPostCode addrChangeFunc={props.addrChangeFunc} checkFunc={props.checkFunc} onClose={closePostCode} />
+                        <PopupPostCode addrChangeFunc={props?.addrChangeFunc} checkFunc={props?.checkFunc} onClose={closePostCode} />
                     </PopupDom>
                 )}
             </div>

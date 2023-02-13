@@ -67,6 +67,11 @@
     <!-- LYS -->
 
     <!-- GJY -->
+    <select id="selectLikeData" parameterType="String" resultType="com.fproject.project_team3.dto.user.UserInterestedListDto">
+        SELECT *
+        FROM user_interested_list
+        WHERE user_id = #{userId};
+    </select>
 
     <!-- GJY -->
 

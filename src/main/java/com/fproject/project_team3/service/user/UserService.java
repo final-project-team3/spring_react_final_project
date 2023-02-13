@@ -1,6 +1,7 @@
 package com.fproject.project_team3.service.user;
 
 import com.fproject.project_team3.dto.user.UserInfoDto;
+import com.fproject.project_team3.dto.user.UserInterestedListDto;
 
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,8 @@ public interface UserService {
     void postPassMail(String mail) throws Exception;
 
 
+
+
     //    HSH
 
     //    HSH
@@ -33,7 +36,7 @@ public interface UserService {
     //    LYS
 
     //    GJY
-
+    List<UserInterestedListDto> selectLikeData(String userId);
     //    GJY
 
     //    BJH

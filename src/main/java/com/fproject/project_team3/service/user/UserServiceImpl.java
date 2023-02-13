@@ -1,6 +1,7 @@
 package com.fproject.project_team3.service.user;
 
 import com.fproject.project_team3.dto.user.UserInfoDto;
+import com.fproject.project_team3.dto.user.UserInterestedListDto;
 import com.fproject.project_team3.mapper.UserMapper;
 import com.fproject.project_team3.service.email.EmailService;
 import com.fproject.project_team3.service.email.EmailServiceImpl;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -63,6 +65,11 @@ public class UserServiceImpl implements UserService {
     public void postPassMail(String mail) throws Exception {
         String newPass = emailServiceImpl.sendSimpleMessage(mail);
         userMapper.postPassMail(mail, newPass);
+    }
+
+    @Override
+    public List<UserInterestedListDto> selectLikeData(String userId) {
+        return userMapper.selectLikeData(userId);
     }
 
     //    HSH
