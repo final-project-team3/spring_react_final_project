@@ -3,7 +3,7 @@ import '../App.css';
 import Review from "../LYS/Review";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {Link, useLocation, useParams} from "react-router-dom";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import Pagination from "../GJY/Pagination";
 import $ from 'jquery';
 import ProductQna from "../LYS/ProductQna";
@@ -15,6 +15,7 @@ function ProductDetail(props) {
     const {productNum} = useParams();
     const [optionValue, setOptionValue] = useState();
     const [buyList, setBuyList] = useState([]);
+    const navi = useNavigate();
 
     /**
      * buyList push 하는 함수
@@ -28,16 +29,11 @@ function ProductDetail(props) {
         setBuyList(prevState);
     }
 
-    // /**
-    //  * buyList 하는 함수
-    //  * @param state : 넣을state
-    //  * @param addValue : 넣을value
-    //  * */
-    // const buyListAddFunc = (state, addValue) => {
-    //     let prevState = state;
-    //     prevState.add(addValue);
-    //     setBuyList(prevState);
-    // }
+    const showMoney = value => {
+        value = value.toString()
+            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+        return value;
+    }
 
     // 페이지네이션
     const [limit, setLimit] = useState(3);
@@ -49,7 +45,9 @@ function ProductDetail(props) {
     const [productOption, setProductOption] = useState([]);
     const [qnaList, setQnaList] = useState([]);
     const [optionCount, setOptionCount] = useState(0);
-    const [price,setPrice] = useState(0);
+    const [price, setPrice] = useState(0);
+    const [selectOptionTotal, setSelectOptionTotal] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0)
 
     const [reviewCheck, setReviewCheck] = useState(true);
 
@@ -83,20 +81,6 @@ function ProductDetail(props) {
             setProductOption(productOption);
         }
     }, [])
-
-    useEffect(() => {
-        console.log(buyList);
-        console.log('테스트');
-        let returnHtml = "";
-        buyList.map((buyItem, index) => {
-            returnHtml +=
-                `<ul key={index}>
-                    <li>${buyItem.optionValue}</li>
-                </ul>`
-        })
-        console.log(returnHtml);
-        $("#div-buyList").html(returnHtml);
-    }, [optionCount])
 
     const pathname = useLocation();
 
@@ -132,8 +116,7 @@ function ProductDetail(props) {
                             });
                         } else {
                             let doubleCheck = true;
-                            let selectOptionPrice = selectOptionList[1].toString()
-                                .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+                            let selectOptionPrice = selectOptionList[1];
                             for (let i = 0; i < buyList.length; i++) {
                                 if (selectOptionValue == buyList[i]?.optionValue) {
                                     Swal.fire({
@@ -150,16 +133,20 @@ function ProductDetail(props) {
 
                             // doubleCheck 가 true일 때
                             if (doubleCheck) {
-                                console.log('테스트');
                                 let prevBuyList = buyList;
-                                prevBuyList.push({optionValue: selectOptionValue, optionPrice: selectOptionPrice});
-                                // console.log(prevBuyList.length);
+                                prevBuyList.push({
+                                    optionValue: selectOptionValue,
+                                    optionPrice: parseInt(productInfo.productPrice) + parseInt(selectOptionPrice),
+                                });
                                 setBuyList(prevBuyList);
+                                let price = 0;
+                                prevBuyList.map((item)=> {
+                                    price += parseInt(item.optionPrice);
+                                })
+                                setTotalPrice(price);
                                 setOptionCount(optionCount + 1);
-                                // console.log(buyList);
+                                $('#selectOption').val('옵션').prop("selected", true);
                             }
-                            if (buyList.length != 0) $("#div-optionShow").prop("hidden", false);
-                            else $("#div-optionShow").prop("hidden", true);
                         }
                     }} id={"selectOption"} className={'my-2 form-select'}>
                         {/* 옵션 div */}
@@ -176,14 +163,41 @@ function ProductDetail(props) {
                     </select>
                     {/* 옵션 넣으면 값 뜨는 데*/}
                     <div id={'div-buyList'}>
-                        {/*{buyList.map((buyItem, index) => {*/}
-                        {/*    console.log(buyList);*/}
-                        {/*    return (*/}
-                        {/*        <ul key={index}>*/}
-                        {/*            <li>{buyItem.optionValue}</li>*/}
-                        {/*        </ul>*/}
-                        {/*    )*/}
-                        {/*})}*/}
+                        {buyList.map((buyItem, index) => {
+                            return (
+                                <ul key={index}>
+                                    <li className="">
+                                        <h3>{buyItem.optionValue}</h3>
+                                    </li>
+                                    <li>
+                                        <button onClick={() => {
+                                            if ($("#optionInput" + index).val() == 1) {
+                                                return;
+                                            }
+                                            $(`#optionInput${index}`).val(parseInt($("#optionInput" + index).val()) - 1);
+                                        }} className="btn btn-primary"><h3>-</h3></button>
+                                        <input id={`optionInput${index}`} style={{
+                                            width: 60,
+                                            height: 60
+                                        }} className="text-center" onChange={(e) => {
+                                            console.log(e.target.value);
+                                            if (e.target.value > productOption[index].productQuantity) {
+                                                alert("재고수량보다 작게 입력해주세요.\n재고수량 : " + productOption[index].productQuantity);
+                                                e.target.value = productOption[index].productQuantity;
+                                            }
+                                        }} defaultValue={1}/>
+                                        <button onClick={() => {
+                                            if ($(`#optionInput${index}`).val() >= productOption[index].productQuantity) {
+                                                alert("재고수량보다 작게 입력해주세요.\n재고수량 : " + productOption[index].productQuantity);
+                                                $(`#optionInput${index}`).val(productOption[index].productQuantity);
+                                                return;
+                                            }
+                                            $(`#optionInput${index}`).val(parseInt($("#optionInput" + index).val()) + 1);
+                                        }} className="btn btn-primary"><h3>+</h3></button>
+                                    </li>
+                                </ul>
+                            )
+                        })}
                     </div>
                     <div className={'row'}>
                         <hr/>
@@ -191,17 +205,31 @@ function ProductDetail(props) {
                             <h2>가격</h2>
                         </div>
                         <div className={'col-5'}>
-                            <h2>{productInfo?.productPrice}원</h2>
+                            <h2>{showMoney(totalPrice)}원</h2>
                         </div>
                     </div>
                     <div className={'col-10'}>
                         <div className={'mt-3 d-flex justify-content-between'}>
                             <button className={'btn btn-warning'}>장바구니</button>
-                            <Link className={'btn btn-primary ms-2'} to={'/payment'} state={{
+                            <button onClick={() => {
+                                if (optionCount == 0) {
+                                    alert("옵션을 선택 또는 입력 후 구매하기를 선택해 주세요.");
+                                    return;
+                                }
+                                navi("/payment", {
+                                    state: {
+                                        productName: productInfo?.productName,
+                                        productOption: optionValue,
+                                        //    수량 넣어야함
+                                    }
+                                });
+
+                            }} className={'btn btn-primary ms-2'} to={'/payment'} state={{
                                 productName: productInfo?.productName,
                                 productOption: optionValue,
                                 //    수량 넣어야함
-                            }}>바로구매</Link>
+                            }}>바로구매
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -213,20 +241,24 @@ function ProductDetail(props) {
 
             <div className="ec-base-tab grid2">
                 <ul className="menu">
-                    <li onClick={() => setReviewCheck(true)} className={reviewCheck == true ? "selected" : null}><a
+                    <li onClick={() => setReviewCheck(true)}
+                        className={reviewCheck == true ? "selected" : null}><a
                     >제품 리뷰</a></li>
-                    <li onClick={() => setReviewCheck(false)} className={reviewCheck == false ? "selected" : null}><a
+                    <li onClick={() => setReviewCheck(false)}
+                        className={reviewCheck == false ? "selected" : null}><a
                     >문의 / 답변</a></li>
                 </ul>
             </div>
 
-            {/* 리뷰 들어감 */}
+            {/* 리뷰 들어감 */
+            }
             <div hidden={!reviewCheck} className="mt-5 container">
                 <h2 className={"text-start"}>제품 리뷰</h2>
                 <div className={"row mt-5"}>
                     {
                         reviewList.slice(offset, offset + limit).map((item, index) => {
-                            return <Review key={index} id={item.userId} date={item.reviewRegistrationDate}
+                            return <Review key={index} id={item.userId}
+                                           date={item.reviewRegistrationDate}
                                            content={item.reviewContent} helpful={item.reviewHelpful}
                                            starPoint={item.reviewStarPoint}/>
                         })
@@ -254,14 +286,18 @@ function ProductDetail(props) {
                             <ul>
                                 <li>구매한 상품의 <em>취소/반품은 마이페이지 구매내역에서 신청</em> 가능합니다.</li>
                                 <li>상품문의 및 후기게시판을 통해 취소나 환불, 반품 등은 처리되지 않습니다.</li>
-                                <li><em>가격, 판매자, 교환/환불 및 배송 등 해당 상품 자체와 관련 없는 문의는 고객센터 내 1:1 문의하기</em>를 이용해주세요.</li>
-                                <li><em>"해당 상품 자체"와 관계없는 글, 양도, 광고성, 욕설, 비방, 도배 등의 글은 예고 없이 이동, 노출제한, 삭제 등의 조치가 취해질 수
+                                <li><em>가격, 판매자, 교환/환불 및 배송 등 해당 상품 자체와 관련 없는 문의는 고객센터 내 1:1 문의하기</em>를
+                                    이용해주세요.
+                                </li>
+                                <li><em>"해당 상품 자체"와 관계없는 글, 양도, 광고성, 욕설, 비방, 도배 등의 글은 예고 없이 이동, 노출제한, 삭제
+                                    등의 조치가 취해질 수
                                     있습니다.</em></li>
                                 <li>공개 게시판이므로 전화번호, 메일 주소 등 고객님의 소중한 개인정보는 절대 남기지 말아주세요.</li>
                             </ul>
                             {
                                 qnaList.map((item, index) => {
-                                    return <ProductQna key={index} qnaNum={item.qnaNum} productNum={item.productNum}
+                                    return <ProductQna key={index} qnaNum={item.qnaNum}
+                                                       productNum={item.productNum}
                                                        userId={item.userId} qnaTitle={item.qnaTitle}
                                                        qnaContent={item.qnaContent}
                                                        qnaRegistrationDate={item.qnaRegistrationDate}
@@ -275,7 +311,8 @@ function ProductDetail(props) {
                 </div>
             </div>
         </div>
-    );
+    )
+        ;
 }
 
 

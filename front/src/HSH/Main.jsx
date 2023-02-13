@@ -165,7 +165,7 @@ const Main = () => {
                             <div className={"box"}>
 
                               <div className={"prvImg row"}>
-                                <Link>
+                                <Link to={`productDetail/${item.productNum}`}>
                                   {/* 사진 크기가 안맞아서 억지로*/}
                                   <img
                                     style={{ height: 267, width:200}}
@@ -174,7 +174,7 @@ const Main = () => {
                                   />
                                 </Link>
                                 {/* value?*/}
-                                  <Link className={"th-title text-start fs-6 mt-1"} style={{textDecoration: "none"}}>
+                                  <Link className={"th-title text-start fs-6 mt-1"} style={{textDecoration: "none"}} to={`productDetail/${item.productNum}`}>
                                     <font color={"#FF6666"}>
                                       <b>pick! </b>
                                     </font>
@@ -206,7 +206,7 @@ const Main = () => {
                           <div className={"itemBox"}>
                             <div className={"box"}>
                               <div className={"prvImg"}>
-                                <Link>
+                                <Link to={`productDetail/${item.productNum}`}>
                                   {/* 사진 크기가 안맞아서 억지로*/}
                                   <img
                                     style={{ height: 267 }}
@@ -217,7 +217,7 @@ const Main = () => {
                               </div>
                               {/* value?*/}
                               <div className={"th-name"}>
-                                <Link className={"th-title text-start fs-5"}>
+                                <Link className={"th-title text-start fs-5"} to={`productDetail/${item.productNum}`}>
                                   <font color={"#007cd8"}>
                                     <b>pick! </b>
                                   </font>
@@ -262,7 +262,7 @@ const Main = () => {
                       return (
                         <li className={"PrdBox"}>
                           <div className={"thumbnail"}>
-                            <Link>
+                            <Link to={`productDetail/${item.productNum}`}>
                               <img
                                 className={"thumbImg"}
                                 src={item.productImg}
@@ -272,7 +272,7 @@ const Main = () => {
                           <div className={"description"}>
                             <ul>
                               <li className={"named"}>
-                                <Link className={"nameLink"}>
+                                <Link to={`productDetail/${item.productNum}`}>
                                   <span>{item.productName}</span>
                                 </Link>
                               </li>

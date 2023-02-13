@@ -103,7 +103,8 @@ const ListItem = ({
                         .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</h5>
                 </Link>
                 <Link onClick={() => productInterestedFunc(productNum)}>
-                    <img className={'me-3'} width={30} src={"../Img/Bjh/wish.png"}/>
+                    {/*<img className={'me-3'} width={30} src={"../Img/Bjh/wish.png"}/>*/}
+                    <img className={'me-3'} width={30} src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"}/>
                 </Link>
             </div>
         </div>
