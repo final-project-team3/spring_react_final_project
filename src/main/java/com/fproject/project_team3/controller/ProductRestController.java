@@ -187,6 +187,20 @@ public class ProductRestController {
 
     }
 
+    // 이번 달 등록된 신규 상품 최신순으로 4개 가져오기
+    @PostMapping("/thisMonthData")
+    public List<ProductInfoDto> thisMonthData() throws Exception {
+        List<ProductInfoDto> thisMonthData = productService.thisMonthData();
+        return thisMonthData;
+    }
+
+
+    // 랜덤 7개 상품데이터 가져오기
+    @PostMapping("/randomData")
+    public List<ProductInfoDto> randomData() throws Exception {
+        List<ProductInfoDto> randomData = productService.randomData();
+        return randomData;
+    }
     //    GJY
 
     //    BJH
