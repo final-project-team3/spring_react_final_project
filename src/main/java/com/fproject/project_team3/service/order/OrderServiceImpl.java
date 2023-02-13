@@ -4,6 +4,7 @@ import com.fproject.project_team3.dto.join.InterestedListProductInfoDto;
 import com.fproject.project_team3.dto.join.OrderListProductInfoDto;
 import com.fproject.project_team3.dto.join.UserInfoProductInfoDto;
 import com.fproject.project_team3.dto.join.UserOrderListProductInfoDto;
+import com.fproject.project_team3.dto.user.UserOrderListDto;
 import com.fproject.project_team3.mapper.OrderListMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,6 +50,11 @@ public class OrderServiceImpl implements OrderService {
   public int gender24Count(int productNum) {
     int count24 = orderListMapper.gender24Count(productNum);
     return count24;
+  }
+
+  @Override
+  public void insertOrderList(UserOrderListDto userOrderListDto) {
+    orderListMapper.insertOrderList(userOrderListDto);
   }
 
 

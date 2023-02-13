@@ -18,7 +18,7 @@
                  left join product_info as pi
                            on uol.product_num = pi.product_num
         where uol.user_id = #{id}
-        ORDER By uol.order_num DESC;
+        ORDER By uol.user_order_list_num DESC;
     </select>
 
     <!--    결제한 고객 리스트 -->
@@ -42,10 +42,12 @@
         group by interest.product_num;
     </select>
 
-<!--    찜 분석 -->
-    <select id="getZzimDetail" parameterType="int" resultType="com.fproject.project_team3.dto.join.UserInfoProductInfoDto">
+    <!--    찜 분석 -->
+    <select id="getZzimDetail" parameterType="int"
+            resultType="com.fproject.project_team3.dto.join.UserInfoProductInfoDto">
         select i.user_id, u.user_gender
-        from user_interested_list i, user_info u
+        from user_interested_list i,
+             user_info u
         where i.user_id = u.user_id
           and i.product_num = ${productNum};
     </select>
@@ -53,7 +55,8 @@
     <!--    13 성별 count -->
     <select id="gender13Count" parameterType="int" resultType="int">
         select count(*) countGender13
-        from user_interested_list i, user_info u
+        from user_interested_list i,
+             user_info u
         where i.user_id = u.user_id
           and i.product_num = ${productNum}
           and (u.user_gender = 1 or u.user_gender = 3);
@@ -62,11 +65,18 @@
     <!--    13 성별 count -->
     <select id="gender24Count" parameterType="int" resultType="int">
         select count(*) countGender24
-        from user_interested_list i, user_info u
+        from user_interested_list i,
+             user_info u
         where i.user_id = u.user_id
           and i.product_num = ${productNum}
           and (u.user_gender = 2 or u.user_gender = 4);
     </select>
+
+    <insert id="insertOrderList" parameterType="com.fproject.project_team3.dto.user.UserOrderListDto">
+        INSERT INTO user_order_list(user_id, product_num, product_order_quantity, user_order_date, order_num,
+                                    order_price)
+        VALUES (#{userId}, #{productNum}, #{productOrderQuantity}, DATE_FORMAT(now(), '%Y-%m-%d'), #{orderNum}, #{orderPrice})
+    </insert>
     <!-- GJY -->
 
     <!-- BJH -->

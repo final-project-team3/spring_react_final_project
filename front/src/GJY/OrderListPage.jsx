@@ -76,6 +76,7 @@ function OrderListPage(props) {
                         <th>주문금액(수량)</th>
                         <th>주문상태</th>
                         <th>최종 실결제금액</th>
+                        <th>주문번호</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -89,7 +90,7 @@ function OrderListPage(props) {
                                     <td><img src={item.productImg} alt="" width={100}/></td>
                                     <td>{item.productName}</td>
                                     <td>
-                                        {item.productPrice * item.productOrderQuantity} ({item.productOrderQuantity}개)
+                                        {item.orderPrice} ({item.productOrderQuantity}개)
                                     </td>
                                     <td>
                                         {item.userOrderState}
@@ -100,7 +101,8 @@ function OrderListPage(props) {
                                         </div>
                                     </td>
 
-                                    <td>{item.productPrice * item.productOrderQuantity} 원</td>
+                                    <td>{item.orderPrice} 원</td>
+                                    <td>{item.orderNum}</td>
                                 </tr>
                             );
                         })}

@@ -275,7 +275,8 @@ function ProductDetail(props) {
                                             totalPrice: totalPrice,
                                             productNum: productNum,
                                             productImg: productInfo.productImg,
-                                            productInfo: productInfo
+                                            productInfo: productInfo,
+                                            userInfo:userInfo
                                         }
                                     });
                                 }
