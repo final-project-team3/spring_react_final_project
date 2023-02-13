@@ -1,7 +1,10 @@
 package com.fproject.project_team3.mapper;
 
 import com.fproject.project_team3.dto.user.UserInfoDto;
+import com.fproject.project_team3.dto.user.UserInterestedListDto;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface UserMapper {
@@ -30,10 +33,12 @@ public interface UserMapper {
 
     void postPassMail(String mail, String newPass);
 
-    //    LYS
+
+
+  //    LYS
 
     //    GJY
-
+    List<UserInterestedListDto> selectLikeData(String userId);
     //    GJY
 
     //    BJH

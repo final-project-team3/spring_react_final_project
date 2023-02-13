@@ -3,6 +3,7 @@ import Popup from "../LYS/Popup";
 import styled from "styled-components";
 import Pay from "./pay";
 import {useLocation} from "react-router-dom";
+import $ from "jquery";
 
 const styles = {
     vertical: {
@@ -54,6 +55,12 @@ function PaymentPage(props) {
     // const productOpt = "productOpt";
     const productCnt = "productCnt";
 
+    function checkAddress() {
+        var addr1 = $('#sigunguCode').val();
+        var addr2 = $('#jibunAddress').val();
+        var addr3 = $('#roadAddress').val();
+    }
+
     return (
         <div className={"container"}>
             <script
@@ -93,7 +100,9 @@ function PaymentPage(props) {
                         <AsteriskRed>*</AsteriskRed> 주소
                     </FormBlockHead>
                     <FormBlockBody>
-                        <Popup/>
+                        <Popup
+                          checkFunc={checkAddress}
+                          />
                         <div className={"row ms-1"}>
                             <input
                                 className={"my-1"}
