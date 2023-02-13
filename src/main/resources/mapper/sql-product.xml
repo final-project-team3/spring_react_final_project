@@ -239,8 +239,8 @@
     </select>
 
 <!--    랜덤 데이터 7개 가져오기 -->
-    <select id="thisMonthData" resultType="com.fproject.project_team3.dto.product.ProductInfoDto">
-        SELECT FORMAT(product_price,0) pi, product_num, product_seller_id, product_seller_business_name, product_kind_num, product_name, product_content, product_img, product_registration_date, review_star_point, product_delivery_day
+    <select id="randomData" resultType="com.fproject.project_team3.dto.product.ProductInfoDto">
+        SELECT FORMAT(product_price,0) productPrice, product_num, product_seller_id, product_seller_business_name, product_kind_num, product_name, product_content, product_img, product_registration_date, review_star_point, product_delivery_day
         FROM product_info ORDER BY RAND() LIMIT 7;
     </select>
     <!-- GJY -->
