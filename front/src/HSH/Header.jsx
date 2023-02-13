@@ -275,12 +275,12 @@ const Header = () => {
                                                                                 src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Flogout.png?alt=media&token=35a56d27-ca79-40dc-b0ec-caa389e81d6f"}
                                                                                 className={'ms-4'}/></Link>}
                         <li className={'nav-item'}>
-                            <Link to={'/cart'}><img className={'ms-4'} width={40}
-                                                    src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2FshoppingCart.png?alt=media&token=2fadaa13-7ea2-4507-a7a7-000412a2a91f"}/></Link>
+                            <Link to={'/cart'}>{role == "SELLER" ? null : <img className={'ms-4'} width={40}
+                                                    src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2FshoppingCart.png?alt=media&token=2fadaa13-7ea2-4507-a7a7-000412a2a91f"}/>}</Link>
                         </li>
                         <li className={'nav-item'}>
-                            <Link to={'/mypage'}><img className={'ms-4'} width={40}
-                                                      src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Fmypage.png?alt=media&token=e436e13f-c5cd-4573-b632-3b342a703802"}/></Link>
+                            <Link to={'/mypage'}>{role == "SELLER" ? null : <img className={'ms-4'} width={40}
+                                                      src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/fileImages%2Fmypage.png?alt=media&token=e436e13f-c5cd-4573-b632-3b342a703802"}/>}</Link>
                         </li>
                     </div>
                 </div>
