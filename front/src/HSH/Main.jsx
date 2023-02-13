@@ -11,8 +11,10 @@ import axios from "axios";
 {
   /*BJH 시작*/
 }
+
 // BJH 캐러셀
-const StyledSlider = styled(Slider)` // 화살표 색상 변경해야함
+const StyledSlider = styled(Slider)`
+  // 화살표 색상 변경해야함
   .slick-slide div {
     outline: none;
   }
@@ -48,6 +50,9 @@ const mainImg3 = require("../HSH/Img/main3.jpg");
 const mainImg = [{ url: mainImg1 }, { url: mainImg2 }, { url: mainImg3 }];
 
 const Main = () => {
+  let userInfo = sessionStorage.getItem("userInfo");
+  userInfo = JSON.parse(userInfo);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -121,9 +126,26 @@ const Main = () => {
     };
   }, []);
 
+  const [heartFlag, setHeartFlag] = useState(true);
+
+  // 좋아요 리스트
+  useEffect(() => {
+    return async () => {
+      const { data } = await axios.post(
+        "http://localhost:8080/selectLikeData",
+        null,
+        {params: {
+          userId: userInfo.userId
+          }}
+      );
+      console.log(data);
+    };
+  }, []);
+
   // GJY 끝
   return (
     <div>
+      <h2>{userInfo.userId}</h2>
       <div className={"container"}>
         <h2 hidden={true}> 캐러셀</h2>
         <StyledSlider {...settings}>
@@ -141,6 +163,7 @@ const Main = () => {
           <h1>Weekly 시옷's Pick</h1>
         </div>
         {/* 사이에 다른것 하나 넣기?*/}
+
         <div id={"section27"}>
           <div className={"pickWrap"}>
             <div className={"pickContainerWrap"}>
@@ -153,48 +176,79 @@ const Main = () => {
                         <h2>OVERCOAT</h2>
                         <p>쌀쌀한 날씨에는 포근한 #외투</p>
                       </div>
-                      <img src={"./Img/Bjh/han_out.jpg"}
-                           style={{height:"auto"}}/>
+                      <img
+                        src={"./Img/Bjh/han_out.jpg"}
+                        style={{ height: "auto" }}
+                      />
                     </Link>
                   </div>
                   {/* 첫번째줄 : 상품 4개 나오게*/}
                   <ul className={"C-Img"}>
-                    {randomData4.map((item) => {
+                    {randomData4.map((item, index) => {
                       return (
                         <li className={"item"}>
                           <div className={"itemBox"}>
                             <div className={"box"}>
-
                               <div className={"prvImg row"}>
                                 <Link>
+                                  <div
+                                    className={"pick-title-textGG"}
+                                    style={{
+                                      height: 73,
+                                      marginTop: -38,
+                                      paddingRight: 20,
+                                      position: "absolute",
+                                      textAlign: "end",
+                                      top: "18%",
+                                      width: "90%",
+                                    }}
+                                  >
+                                    <img
+                                      id={"zzimImg" + item.productNum}
+                                      src={"https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"}
+                                      alt="이미지 없음"
+                                      style={{ height: 30, width: 30 }}
+                                      onClick={() => {
+                                        // setHeartFlag(!heartFlag);
+                                        if ($("#zzimImg" + item.productNum).prop("src") == "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1") {
+                                          $("#zzimImg" + item.productNum).prop("src", "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19");
+                                        } else {
+                                          $("#zzimImg" + item.productNum).prop("src", "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1");
+                                        }
+                                      }}
+                                    />
+                                  </div>
                                   {/* 사진 크기가 안맞아서 억지로*/}
                                   <img
-                                    style={{ height: 267, width:200}}
+                                    style={{ height: 267, width: 200 }}
                                     className={"thumb"}
                                     src={item.productImg}
                                   />
                                 </Link>
                                 {/* value?*/}
-                                  <Link className={"th-title text-start fs-6 mt-1"} style={{textDecoration: "none"}}>
-                                    <font color={"#FF6666"}>
-                                      <b>pick! </b>
-                                    </font>
-                                    <span className={"text-start"}>
+                                <Link
+                                  className={"th-title text-start fs-6 mt-1"}
+                                  style={{ textDecoration: "none" }}
+                                >
+                                  <font color={"#FF6666"}>
+                                    <b>pick! </b>
+                                  </font>
+                                  <span className={"text-start"}>
                                     {item.productName}
                                   </span>
-                                  </Link>
-                                </div>
-                                {/* value?*/}
-                                <div className={"th-listInfo"}>
-                                  <ul>
-                                    <li className={"cash mt-2"}>
+                                </Link>
+                              </div>
+                              {/* value?*/}
+                              <div className={"th-listInfo"}>
+                                <ul>
+                                  <li className={"cash mt-2"}>
                                     <span className={"fs-5"}>
                                       KRW {item.productPrice}
                                     </span>
-                                    </li>
-                                  </ul>
-                                </div>
+                                  </li>
+                                </ul>
                               </div>
+                            </div>
                           </div>
                         </li>
                       );
@@ -207,14 +261,15 @@ const Main = () => {
                           <div className={"itemBox"}>
                             <div className={"box"}>
                               <div className={"prvImg"}>
-                                <Link>
-                                  {/* 사진 크기가 안맞아서 억지로*/}
-                                  <img
-                                    style={{ height: 267}}
-                                    className={"thumb"}
-                                    src={item.productImg}
-                                  />
-                                </Link>
+                                {/* 사진 크기가 안맞아서 억지로*/}
+                                <img
+                                  style={{ height: 267 }}
+                                  className={"thumb"}
+                                  src={item.productImg}
+                                  onClick={() => {
+                                    window.location.reload();
+                                  }}
+                                />
                               </div>
                               {/* value?*/}
                               <div className={"th-name"}>

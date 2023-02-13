@@ -1,6 +1,7 @@
 package com.fproject.project_team3.controller;
 
 import com.fproject.project_team3.dto.user.UserInfoDto;
+import com.fproject.project_team3.dto.user.UserInterestedListDto;
 import com.fproject.project_team3.service.email.EmailService;
 import com.fproject.project_team3.service.user.UserService;
 import org.apache.ibatis.annotations.Update;
@@ -83,6 +84,11 @@ public class UserRestController {
     //    LYS
 
     //    GJY
+
+//    @PostMapping("/selectLikeData")
+//    public List<UserInterestedListDto> selectLikeData(@RequestParam("userId") String userId) throws Exception {
+//
+//    }
 
     //    GJY
 
