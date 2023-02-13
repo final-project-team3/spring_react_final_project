@@ -49,6 +49,8 @@ public interface ProductMapper {
 
     void productInterestedInsert(String userId, int productNum);
 
+    void deleteProductLikeItem(String userId,int productNum);
+
     //    HSH
 
     //    LYS
@@ -88,6 +90,8 @@ public interface ProductMapper {
     List<ProductInfoDto> thisMonthData();
 
     List<ProductInfoDto> randomData();
+
+    List<ProductInfoDto> getLikeProducts(String userId);
 
 
     //    GJY

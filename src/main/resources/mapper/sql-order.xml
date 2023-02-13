@@ -11,26 +11,32 @@
     <!-- LYS -->
 
     <!-- GJY -->
-    <select id="getOrderList" parameterType="String" resultType="com.fproject.project_team3.dto.join.UserOrderListProductInfoDto">
+    <select id="getOrderList" parameterType="String"
+            resultType="com.fproject.project_team3.dto.join.UserOrderListProductInfoDto">
         SELECT *
         FROM user_order_list as uol
                  left join product_info as pi
                            on uol.product_num = pi.product_num
-        where uol.user_id = #{id};
+        where uol.user_id = #{id}
+        ORDER By uol.order_num DESC;
     </select>
 
-<!--    결제한 고객 리스트 -->
-    <select id="getPayUserList" parameterType="String" resultType="com.fproject.project_team3.dto.join.UserOrderListProductInfoDto">
+    <!--    결제한 고객 리스트 -->
+    <select id="getPayUserList" parameterType="String"
+            resultType="com.fproject.project_team3.dto.join.UserOrderListProductInfoDto">
         SELECT *
-        FROM product_info info, user_order_list olist
+        FROM product_info info,
+             user_order_list olist
         WHERE info.product_num = olist.product_num
           AND info.product_seller_business_name = #{productSellerBusinessName};
     </select>
 
-<!--    찜한 고객 리스트-->
-    <select id="getInterestedUserList" parameterType="String" resultType="com.fproject.project_team3.dto.join.InterestedListProductInfoDto">
-        SELECT * , COUNT(*) countProductNum
-        FROM product_info info, user_interested_list interest
+    <!--    찜한 고객 리스트-->
+    <select id="getInterestedUserList" parameterType="String"
+            resultType="com.fproject.project_team3.dto.join.InterestedListProductInfoDto">
+        SELECT *, COUNT(*) countProductNum
+        FROM product_info info,
+             user_interested_list interest
         WHERE info.product_num = interest.product_num
           AND info.product_seller_business_name = #{productSellerBusinessName}
         group by interest.product_num;

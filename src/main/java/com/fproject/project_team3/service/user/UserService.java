@@ -3,6 +3,7 @@ package com.fproject.project_team3.service.user;
 import com.fproject.project_team3.dto.user.UserInfoDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
 
@@ -17,6 +18,10 @@ public interface UserService {
     void userInfoUpdate(UserInfoDto userInfoDto);
 
     Object userLogin(String id, String pass);
+
+    Map<String, Object> getEmailUserInfo(String email);
+
+    void postPassMail(String mail) throws Exception;
 
 
     //    HSH

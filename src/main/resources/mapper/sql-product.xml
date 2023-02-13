@@ -128,6 +128,23 @@
         VALUES (#{productNum}, #{userId})
     </insert>
 
+    <select id="getLikeProducts" parameterType="String"
+            resultType="com.fproject.project_team3.dto.product.ProductInfoDto">
+        SELECT *
+        FROM product_info as pi
+                 INNER JOIN user_interested_list as uil
+                            ON pi.product_num = uil.product_num
+        WHERE uil.user_id = #{userId}
+        ORDER BY uil.user_interested_list_num DESC;
+    </select>
+
+    <delete id="deleteProductLikeItem" parameterType="Object">
+        DELETE
+        FROM user_interested_list
+        WHERE user_id = #{userId}
+          AND product_num = #{productNum}
+    </delete>
+
     <!-- HSH -->
 
     <!-- LYS -->

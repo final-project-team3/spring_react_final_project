@@ -1,6 +1,7 @@
 package com.fproject.project_team3.controller;
 
 import com.fproject.project_team3.dto.user.UserInfoDto;
+import com.fproject.project_team3.service.email.EmailService;
 import com.fproject.project_team3.service.user.UserService;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UserRestController {
@@ -66,6 +69,16 @@ public class UserRestController {
         return Tel;
     }
 
+    @PostMapping("/getEmailUserInfo")
+    public Map<String, Object> getEmailUserInfo(@RequestParam("email") String email) {
+        System.out.println(userService.getEmailUserInfo(email));
+        return userService.getEmailUserInfo(email);
+    }
+
+    @PostMapping("/postPassMail")
+    public void postPassMail(@RequestParam("mail") String mail) throws Exception {
+        userService.postPassMail(mail);
+    }
 
     //    LYS
 
