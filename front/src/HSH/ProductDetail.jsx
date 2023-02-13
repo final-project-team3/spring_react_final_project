@@ -49,6 +49,7 @@ function ProductDetail(props) {
     const [productOption, setProductOption] = useState([]);
     const [qnaList, setQnaList] = useState([]);
     const [optionCount, setOptionCount] = useState(0);
+    const [price,setPrice] = useState(0);
 
     const [reviewCheck, setReviewCheck] = useState(true);
 
@@ -91,7 +92,6 @@ function ProductDetail(props) {
             returnHtml +=
                 `<ul key={index}>
                     <li>${buyItem.optionValue}</li>
-                    <li>아무말</li>
                 </ul>`
         })
         console.log(returnHtml);

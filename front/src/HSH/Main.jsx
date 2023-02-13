@@ -174,24 +174,22 @@ const Main = () => {
                               </div>
                             </div>
                             <div className={"th-name"}>
-                              <Link className={"th-title text-start"}>
+                              {/*<Link className={"th-title text-start"}>*/}
                                 <font color={"#FF6666"}>
                                   <b>pick! </b>
                                 </font>
-                                <span className={"text-start"}>
                                     {item.productName}
-                                  </span>
-                              </Link>
+                              {/*</Link>*/}
                             </div>
                             {/* value?*/}
                             <div className={"th-listInfo"}>
-                              <ul>
-                                <li className={"cash"}>
-                                    <span className={"fs-10"}>
+                              {/*<ul>*/}
+                              {/*  <li className={"cash"}>*/}
+                              {/*      <span className={"fs-10"}>*/}
                                       KRW {item.productPrice}
-                                    </span>
-                                </li>
-                              </ul>
+                              {/*      </span>*/}
+                              {/*  </li>*/}
+                              {/*</ul>*/}
                             </div>
                           </div>
                         </li>
