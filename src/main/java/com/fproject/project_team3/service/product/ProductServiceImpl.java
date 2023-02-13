@@ -54,6 +54,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public SellerInfoDto getProductSellerInfo(int productNum) {
+        return productMapper.getProductSellerInfo(productNum);
+    }
+
+    @Override
     public List<ProductInfoDto> getProductList() {
         return productMapper.getProductList();
     }

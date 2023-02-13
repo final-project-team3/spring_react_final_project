@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const Payment = (effect, deps) => {
+const Payment = (props) => {
   useEffect(() => {
     const jquery = document.createElement("script");
     jquery.src = "https://code.jquery.com/jquery-1.12.4.min.js";
@@ -20,10 +20,10 @@ const Payment = (effect, deps) => {
       pg: "kakaopay.TC0ONETIME",
       pay_method: 'card', // 결제수단 (필수항목)
       // merchant_uid: `mid_${new Date().getTime()}`, // 결제금액 (필수항목)
-      name: '결제 테스트', // 주문명 (필수항목)
-      amount: '1000', // 금액 (필수항목)
+      name: '시옷' + props.productName, // 주문명 (필수항목)
+      amount: props.price, // 금액 (필수항목)
       custom_data: { name: '부가정보', desc: '세부 부가정보' },
-      buyer_name: '곽지연', // 구매자 이름
+      buyer_name: props.userName, // 구매자 이름
       buyer_tel: '010-2876-8537', // 구매자 전화번호 (필수항목)
       buyer_email: 'nmk02@naver.com', // 구매자 이메일
       buyer_addr: '경남 창원시',

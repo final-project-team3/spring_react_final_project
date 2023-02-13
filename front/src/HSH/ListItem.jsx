@@ -11,8 +11,6 @@ const ListItem = ({
                       productPrice,
                       productName,
                   }) => {
-    let userInfo = sessionStorage.getItem("userInfo");
-    userInfo = JSON.parse(userInfo);
 
     const navi = useNavigate();
     const {pathname} = useLocation();

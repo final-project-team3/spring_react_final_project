@@ -93,6 +93,8 @@ public interface ProductMapper {
 
     List<ProductInfoDto> randomData();
 
+    SellerInfoDto getProductSellerInfo(int productNum);
+
     //    GJY
 
     //    BJH

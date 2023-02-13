@@ -145,6 +145,14 @@
           AND product_num = #{productNum}
     </delete>
 
+    <select id="getProductSellerInfo" parameterType="int" resultType="com.fproject.project_team3.dto.seller.SellerInfoDto">
+        SELECT *
+        FROM seller_info as sInfo
+                 INNER JOIN product_info as pi
+                            ON pi.product_seller_id = sInfo.seller_id
+        WHERE pi.product_num = #{productNum}
+    </select>
+
     <!-- HSH -->
 
     <!-- LYS -->

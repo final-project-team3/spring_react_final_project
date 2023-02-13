@@ -26,6 +26,8 @@ public interface ProductService {
 
     void deleteProductLikeItem(String userId,int productNum);
 
+    SellerInfoDto getProductSellerInfo(int productNum);
+
     //    HSH
 
     //    LYS

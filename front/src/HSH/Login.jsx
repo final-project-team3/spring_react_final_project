@@ -12,10 +12,7 @@ const Login = () => {
     const navi = useNavigate();
     const location = useLocation();
 
-    const [loginChange,setLoginChange] = useState("userLogin");
-
-
-
+    const [loginChange, setLoginChange] = useState("userLogin");
 
 
     const userLoginCheck = async () => {
@@ -37,7 +34,7 @@ const Login = () => {
                 dispatch(sellerLogin(data, "SELLER"));
             }
             // pathname이 state로 넘어오면 그 주소로 보내줌
-            if(location?.state?.pathname != null) {
+            if (location?.state?.pathname != null) {
                 navi(decodeURI(location?.state?.pathname));
             }
             // 주소가 login이면 홈으로, 주소가 로그인이 필요한 주소면 그 주소로 보냄
@@ -68,7 +65,9 @@ const Login = () => {
 
                     </LoginHeadText>
                     <BorderAndText>
-                        <Link onClick={()=> loginChange == "userLogin" ? setLoginChange("sellerLogin") : setLoginChange("userLogin")}>{location?.state?.pathname == null ? <span>{loginChange == "userLogin" ? "사업자 로그인" : "일반회원 로그인"}</span> : null}</Link>
+                        <Link
+                            onClick={() => loginChange == "userLogin" ? setLoginChange("sellerLogin") : setLoginChange("userLogin")}>{location?.state?.pathname == null ?
+                            <span>{loginChange == "userLogin" ? "사업자 로그인" : "일반회원 로그인"}</span> : null}</Link>
                     </BorderAndText>
 
                     <EmailLoginContainer>

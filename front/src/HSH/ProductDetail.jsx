@@ -17,6 +17,9 @@ function ProductDetail(props) {
     const [buyList, setBuyList] = useState([]);
     const navi = useNavigate();
 
+    let userInfo = sessionStorage.getItem("userInfo");
+    userInfo = JSON.parse(userInfo);
+
     /**
      * buyList push 하는 함수
      * @param state : *[]
@@ -30,7 +33,7 @@ function ProductDetail(props) {
     }
 
     const showMoney = value => {
-        value = value.toString()
+        value = parseInt(value).toString()
             .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
         return value;
     }
@@ -137,11 +140,12 @@ function ProductDetail(props) {
                                 prevBuyList.push({
                                     optionValue: selectOptionValue,
                                     optionPrice: parseInt(productInfo.productPrice) + parseInt(selectOptionPrice),
+                                    optionTotal: 1,
                                 });
                                 setBuyList(prevBuyList);
                                 let price = 0;
-                                prevBuyList.map((item)=> {
-                                    price += parseInt(item.optionPrice);
+                                prevBuyList.map((item) => {
+                                    price += parseInt(item.optionPrice) * item.optionTotal;
                                 })
                                 setTotalPrice(price);
                                 setOptionCount(optionCount + 1);
@@ -153,11 +157,13 @@ function ProductDetail(props) {
                         <option value={'옵션'}>[필수] 옵션을 선택해주세요.</option>
                         {productOption.map((option, index) => {
                             // 옵션 Array
-                            let optionArray = [`${option.productOption1}${option.productOption2}`, option.productOptionPrice !== "" ? `${option.productOptionPrice}` : option.productOptionPrice = 0]
+                            console.log(option.productOptionPrice);
+                            let optionArray = [`${option.productOption1}${option.productOption2}`, option.productOptionPrice != null || option.productOptionPrice != "" ? option.productOptionPrice = 0 : option.productOptionPrice = 0]
                             return (
                                 <option key={index} value={optionArray}>
                                     <p>{option.productOption1 + option.productOption2} + </p>
-                                    <p>{option.productOptionPrice}</p></option>
+                                    <p>{option.productOptionPrice}</p>
+                                </option>
                             )
                         })}
                     </select>
@@ -175,16 +181,31 @@ function ProductDetail(props) {
                                                 return;
                                             }
                                             $(`#optionInput${index}`).val(parseInt($("#optionInput" + index).val()) - 1);
+                                            let prev = buyList;
+                                            prev[index].optionTotal = $(`#optionInput${index}`).val();
+                                            let price = 0;
+                                            prev.map((item) => {
+                                                price += item.optionPrice * item.optionTotal;
+                                            })
+                                            setTotalPrice(price);
                                         }} className="btn btn-primary"><h3>-</h3></button>
                                         <input id={`optionInput${index}`} style={{
                                             width: 60,
                                             height: 60
                                         }} className="text-center" onChange={(e) => {
-                                            console.log(e.target.value);
+
                                             if (e.target.value > productOption[index].productQuantity) {
                                                 alert("재고수량보다 작게 입력해주세요.\n재고수량 : " + productOption[index].productQuantity);
                                                 e.target.value = productOption[index].productQuantity;
+                                                return;
                                             }
+                                            let prev = buyList;
+                                            prev[index].optionTotal = e.target.value;
+                                            let price = 0;
+                                            prev.map((item) => {
+                                                price += item.optionPrice * item.optionTotal;
+                                            })
+                                            setTotalPrice(price);
                                         }} defaultValue={1}/>
                                         <button onClick={() => {
                                             if ($(`#optionInput${index}`).val() >= productOption[index].productQuantity) {
@@ -193,6 +214,13 @@ function ProductDetail(props) {
                                                 return;
                                             }
                                             $(`#optionInput${index}`).val(parseInt($("#optionInput" + index).val()) + 1);
+                                            let prev = buyList;
+                                            prev[index].optionTotal = $(`#optionInput${index}`).val();
+                                            let price = 0;
+                                            prev.map((item) => {
+                                                price += item.optionPrice * item.optionTotal;
+                                            })
+                                            setTotalPrice(price);
                                         }} className="btn btn-primary"><h3>+</h3></button>
                                     </li>
                                 </ul>
@@ -212,18 +240,45 @@ function ProductDetail(props) {
                         <div className={'mt-3 d-flex justify-content-between'}>
                             <button className={'btn btn-warning'}>장바구니</button>
                             <button onClick={() => {
-                                if (optionCount == 0) {
-                                    alert("옵션을 선택 또는 입력 후 구매하기를 선택해 주세요.");
-                                    return;
-                                }
-                                navi("/payment", {
-                                    state: {
-                                        productName: productInfo?.productName,
-                                        productOption: optionValue,
-                                        //    수량 넣어야함
+                                // 로그인 하지 않았을 시
+                                if (userInfo == null) {
+                                    Swal.fire({
+                                        position: "top-center",
+                                        icon: "error",
+                                        title: "로그인 후 이용할 수 있습니다.",
+                                        text: "로그인창으로 이동할까요?",
+                                        showCancelButton: true, // cancel 버튼 보이기. 기본은 원래 없음
+                                        confirmButtonColor: '#3085d6', // confirm 버튼 색깔 지정
+                                        cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+                                        confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+                                        cancelButtonText: '취소',
+                                    }).then((req) => {
+                                        if (req.isConfirmed) {
+                                            navi("/login", {
+                                                state: {
+                                                    pathname: pathname.pathname
+                                                }
+                                            })
+                                            return;
+                                        }
+                                    });
+                                } else {
+                                    if (optionCount == 0) {
+                                        alert("옵션을 선택 또는 입력 후 구매하기를 선택해 주세요.");
+                                        return;
                                     }
-                                });
-
+                                    navi("/payment", {
+                                        state: {
+                                            productName: productInfo?.productName,
+                                            productOption: optionValue,
+                                            buyList: buyList,
+                                            totalPrice: totalPrice,
+                                            productNum: productNum,
+                                            productImg: productInfo.productImg,
+                                            productInfo: productInfo
+                                        }
+                                    });
+                                }
                             }} className={'btn btn-primary ms-2'} to={'/payment'} state={{
                                 productName: productInfo?.productName,
                                 productOption: optionValue,
