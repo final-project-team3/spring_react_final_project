@@ -68,6 +68,11 @@
 
     <!-- GJY -->
 
+    <select id="businessNameCheck" parameterType="String" resultType="">
+        select count(*)
+        from product_info
+        where product_seller_id = #{sellerId};
+    </select>
     <!-- GJY -->
 
     <!-- BJH -->
