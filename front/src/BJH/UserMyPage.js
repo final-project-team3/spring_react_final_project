@@ -198,7 +198,7 @@ function UserMyPage(props) {
                                 height: 24
                             }} src={"./Img/Bjh/right.png"}/></div>
                         </a>
-                        <a href="#" className="item">
+                        <a href="/infoUpdate" className="item">
                             <div className="ps-5 icon"><img style={{
                                 width: 24,
                                 height: 24
