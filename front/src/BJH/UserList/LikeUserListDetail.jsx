@@ -88,22 +88,24 @@ function LikeUserListDetail(props) {
         humanCountArray.push(data[i].cnt);
         console.log("humanCountArray");
         console.log(humanCountArray);
-        const maxValue = Math.max(...humanCountArray);
+        const maxValue = Math.max(...humanCountArray).toString();
         const maxIndex = humanCountArray.indexOf(maxValue);
-
-        console.log("==maxValue==");
-        console.log(maxIndex);
+        console.log("maxValue");
         console.log(maxValue);
+        console.log("maxIndex");
+        console.log(maxIndex);
+
         console.log(generationArray[maxIndex]);
         setGene(generationArray[maxIndex]);
       }
     };
   }, []);
 
-
+//
   return (
     <div className={"container text-center mt-5 mb-5"}>
       <h1 className={"mb-5"}>상품 통계</h1>
+      <h2 className={"mt-5 mb-5"}>해당 상품은 {wM}, {gene}가 선호하는 상품입니다.</h2>
       <div className={"container"}>
         <div className={"d-flex"}>
           <div className={"me-5"}>
@@ -264,7 +266,6 @@ function LikeUserListDetail(props) {
           </div>
         </div>
       </div>
-      <h2>해당 제품은 {wM}, {gene}</h2>
     </div>
   );
 }
