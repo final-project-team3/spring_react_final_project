@@ -46,6 +46,7 @@ import LikeUserListDetail from "./BJH/UserList/LikeUserListDetail";
 import LikeProduct from "./BJH/UserList/LikeProduct";
 import UserLikeStore from "./BJH/UserList/UserLikeStore";
 import MyQnaList from "./LYS/MyQnaList";
+import NotExist from "./LYS/NotExist";
 
 
 const ProjectRouter = () => {
@@ -133,6 +134,7 @@ const ProjectRouter = () => {
 
                     <Route path={'/UserLikeStore'} element={<UserLikeStore/>}/>
                     {/*BJH*/}
+                    <Route path={'*'} element={<NotExist/>}/>
                 </Route>
             }
             </Routes>
