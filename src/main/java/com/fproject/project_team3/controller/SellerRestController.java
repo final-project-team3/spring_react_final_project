@@ -84,7 +84,12 @@ public class SellerRestController {
     //    LYS
 
     //    GJY
-
+//    @PostMapping("/getSellerMyPageData")
+//    public List<> getSellerMyPageData(@RequestParam("sellerId") String sellerId){
+//        String getSellerMyPageData = sellerService.getSellerMyPageData(sellerId);
+//
+//        return getSellerMyPageData;
+//    }
     //    GJY
 
     //    BJH
