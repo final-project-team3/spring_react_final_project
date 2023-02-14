@@ -45,96 +45,100 @@ import "./App.css";
 import LikeUserListDetail from "./BJH/UserList/LikeUserListDetail";
 import LikeProduct from "./BJH/UserList/LikeProduct";
 import UserLikeStore from "./BJH/UserList/UserLikeStore";
+import MyQnaList from "./LYS/MyQnaList";
 
 
 const ProjectRouter = () => {
 
-  let role = sessionStorage.getItem("role");
-  console.log(role);
-  let userInfo = sessionStorage.getItem("userInfo");
-  userInfo = JSON.parse(userInfo);
+    let role = sessionStorage.getItem("role");
+    console.log(role);
+    let userInfo = sessionStorage.getItem("userInfo");
+    userInfo = JSON.parse(userInfo);
 
-  let sellerInfo = sessionStorage.getItem("sellerInfo");
-  sellerInfo = JSON.parse(sellerInfo);
+    let sellerInfo = sessionStorage.getItem("sellerInfo");
+    sellerInfo = JSON.parse(sellerInfo);
 
-  console.log(userInfo);
-  console.log(sellerInfo);
+    console.log(userInfo);
+    console.log(sellerInfo);
 
-  return (
-    <BrowserRouter>
-      {/* 셀러 */}
-      <Routes>{role == "SELLER" ? <Route path={'/'} element={<Header/>}>
-          <Route index element={<SellerMyPage/>}/>
-          <Route path={'/productSellerPage/:productSellerBusinessName'} element={<SellerProductList/>}/>
-          <Route path="/infoUpdate"
-                 element={role == null ? <Login/> : role == "USER" ? <UserInfoUpdate/> : <SellerInfoUpdate/>}/>
-          <Route path={"/OptionList"} element={<OptionList/>}/>
-          <Route path={"/GwakApp"} element={<GwakApp/>}/>
-          <Route path={"/FireBaseExample"} element={<FireBaseExample/>}/>
-          <Route path={"/ProductEditPage"} element={<ProductEditPage/>}/>
-          <Route path={'/likeUserListDetail/:productNum'} element={<LikeUserListDetail/>}/>
-          <Route path={'/likeUserList'} element={<LikeUserList/>}/>
-          <Route path={'/orderUserList'} element={<OrderUserList/>}/>
-          <Route path={'/payUserList'} element={<PayUserList/>}/>
-          <Route path={"/productR2"} element={<ProductRegisterPage2/>}/>
-          <Route path={'/footer'} element={<Footer/>}/>
-        </Route> :
+    return (
+        <BrowserRouter>
+            {/* 셀러 */}
+            <Routes>{role == "SELLER" ? <Route path={'/'} element={<Header/>}>
+                    <Route index path={"/"} element={<SellerMyPage/>}/>
+                    <Route path={"/mypage"} element={<SellerMyPage/>}/>
+                    <Route path={'/productSellerPage/:productSellerBusinessName'} element={<SellerProductList/>}/>
+                    <Route path="/infoUpdate"
+                           element={role == null ? <Login/> : role == "USER" ? <UserInfoUpdate/> : <SellerInfoUpdate/>}/>
+                    <Route path={"/OptionList"} element={<OptionList/>}/>
+                    <Route path={"/GwakApp"} element={<GwakApp/>}/>
+                    <Route path={"/FireBaseExample"} element={<FireBaseExample/>}/>
+                    <Route path={"/ProductEditPage"} element={<ProductEditPage/>}/>
+                    <Route path={'/likeUserListDetail/:productNum'} element={<LikeUserListDetail/>}/>
+                    <Route path={'/likeUserList'} element={<LikeUserList/>}/>
+                    <Route path={'/orderUserList'} element={<OrderUserList/>}/>
+                    <Route path={'/payUserList'} element={<PayUserList/>}/>
+                    <Route path={"/productR2"} element={<ProductRegisterPage2/>}/>
+                    <Route path={'/footer'} element={<Footer/>}/>
+                    <Route path="/qnaAnswerWrite" element={<QnaAnswerWrite/>}/>
+                    <Route path={"/answerWritePage"} element={<AnswerWritePage/>}/>
+                </Route> :
 
-        // 유저, 비로그인
-        <Route path={'/'} element={<Header/>}>
-          {/*HSH*/}
-          <Route index element={<Main/>}/>
-          <Route path={'/productDetail/:productNum'} element={<ProductDetail/>}/>
-          <Route path={'/productList'} element={<ProductList/>}/>
-          <Route path={'/search/:searchContent'} element={<Search/>}/>
-          <Route path={'/login'} element={<Login/>}/>
-          <Route path={'/category/:bigKind/:smallKind'} element={<Category/>}/>
-          <Route path={'/LikeProduct'} element={<LikeProduct/>}/>
-          {/*HSH*/}
+                // 유저, 비로그인
+                <Route path={'/'} element={<Header/>}>
+                    {/*HSH*/}
+                    <Route index element={<Main/>}/>
+                    <Route path={'/productDetail/:productNum'} element={<ProductDetail/>}/>
+                    <Route path={'/productList'} element={<ProductList/>}/>
+                    <Route path={'/search/:searchContent'} element={<Search/>}/>
+                    <Route path={'/login'} element={<Login/>}/>
+                    <Route path={'/category/:bigKind/:smallKind'} element={<Category/>}/>
+                    <Route path={'/LikeProduct'} element={<LikeProduct/>}/>
+                    <Route path={"myQna"} element={<MyQnaList/>}/>
+                    {/*HSH*/}
 
-          {/*LYS*/}
-          <Route path="/userSignUp" element={<UserSignUp/>}/>
-          <Route path="/sellerSignUp" element={<SellerSignUp/>}/>
-          <Route path="/infoUpdate"
-                 element={role == null ? <Login/> : role == "USER" ? <UserInfoUpdate/> : <SellerInfoUpdate/>}/>
-          <Route path="/myReview" element={<MyReviewList/>}/>
-          <Route path="/reviewWrite" element={<ReviewWrite/>}/>
-          <Route path={"/qnaWrite/:productNum"} element={<QnaWrite/>}/>
-          <Route path="/qnaAnswerWrite" element={<QnaAnswerWrite/>}/>
-          <Route path={"/answerWritePage"} element={<AnswerWritePage/>}/>
-          {/*LYS*/}
+                    {/*LYS*/}
+                    <Route path="/userSignUp" element={<UserSignUp/>}/>
+                    <Route path="/sellerSignUp" element={<SellerSignUp/>}/>
+                    <Route path="/infoUpdate"
+                           element={role == null ? <Login/> : role == "USER" ? <UserInfoUpdate/> :
+                               <SellerInfoUpdate/>}/>
+                    <Route path="/myReview" element={<MyReviewList/>}/>
+                    <Route path="/reviewWrite" element={<ReviewWrite/>}/>
+                    <Route path={"/qnaWrite/:productNum"} element={<QnaWrite/>}/>
+                    {/*LYS*/}
 
-          {/*GJY*/}
-          <Route path={'/payment'} element={<PaymentPage/>}/>
-          <Route path={'/orderList'} element={<OrderListPage/>}/>
-          <Route path={"/OptionTable"} element={<OptionTable/>}/>
-          <Route path={"/test"} element={<Test/>}/>
-          <Route path={"/fu"} element={<FileUpload/>}/>
-          <Route path={"/InputSample"} element={<InputSample/>}/>
+                    {/*GJY*/}
+                    <Route path={'/payment'} element={<PaymentPage/>}/>
+                    <Route path={'/orderList'} element={<OrderListPage/>}/>
+                    <Route path={"/OptionTable"} element={<OptionTable/>}/>
+                    <Route path={"/test"} element={<Test/>}/>
+                    <Route path={"/fu"} element={<FileUpload/>}/>
+                    <Route path={"/InputSample"} element={<InputSample/>}/>
 
 
-          {/*GJY*/}
+                    {/*GJY*/}
 
-          {/*BJH*/}
-          <Route path={'/myPage'}
-                 element={role == null ? <Login/> : role == "USER" ? <UserMyPage/> : < SellerMyPage/>}/>
-          {/*<Route path={'masterPage'} element={<MasterPage/>}/>*/}
+                    {/*BJH*/}
+                    <Route path={'/myPage'}
+                           element={role == null ? <Login/> : role == "USER" ? <UserMyPage/> : < SellerMyPage/>}/>
+                    {/*<Route path={'masterPage'} element={<MasterPage/>}/>*/}
 
-          <Route path={'/cart'} element={<Cart/>}/>
+                    <Route path={'/cart'} element={<Cart/>}/>
 
-          <Route path={'/searchMain'} element={<SearchMain/>}/>
-          <Route path={'/UserJoinResult'} element={<UserJoinResult/>}/>
-          <Route path={'/SellerJoinResult'} element={<SellerJoinResult/>}/>
-          <Route path={'/footer'} element={<Footer/>}/>
+                    <Route path={'/searchMain'} element={<SearchMain/>}/>
+                    <Route path={'/UserJoinResult'} element={<UserJoinResult/>}/>
+                    <Route path={'/SellerJoinResult'} element={<SellerJoinResult/>}/>
+                    <Route path={'/footer'} element={<Footer/>}/>
 
-          <Route path={'/UserLikeStore'} element={<UserLikeStore/>}/>
-          {/*BJH*/}
-        </Route>
-      }
-      </Routes>
-    </BrowserRouter>
+                    <Route path={'/UserLikeStore'} element={<UserLikeStore/>}/>
+                    {/*BJH*/}
+                </Route>
+            }
+            </Routes>
+        </BrowserRouter>
 
-  );
+    );
 }
 
 export default ProjectRouter;
