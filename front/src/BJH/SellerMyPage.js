@@ -1,8 +1,27 @@
-import React from "react";
+import React, {useEffect} from "react";
 import './MyPage.css';
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 function SellerMyPage(props) {
+    let sellerInfo = sessionStorage.getItem("sellerInfo");
+    sellerInfo = JSON.parse(sellerInfo);
+    const productSellerId = sellerInfo.sellerId;
+
+    useEffect(() => {
+        return async () => {
+            const { data } = await axios.post(
+              "http://localhost:8080/getSellerMyPageData",
+              null,
+              {
+                  params: {
+                      sellerId: sellerInfo.sellerId,
+                  },
+              }
+            );
+        }
+    }, []);
+
     return (
         <div className={"container"}>
             <div className="wrap">
@@ -23,7 +42,7 @@ function SellerMyPage(props) {
                 <div className="summaryContainer text-center">
                     <div className="item">
                         <div className="number">102</div>
-                        <div>총 주문받은 상품</div>
+                        <div>찜 유저 수</div>
                     </div>
                     <div className="item">
                         <div className="number">80</div>
@@ -31,7 +50,7 @@ function SellerMyPage(props) {
                     </div>
                     <div className="item">
                         <div className="number">75</div>
-                        <div>배송 완료된 상품</div>
+                        <div>등록한 상품 수</div>
                     </div>
                 </div>
                 <div className="shippingStatusContainer">
