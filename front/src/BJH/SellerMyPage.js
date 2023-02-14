@@ -113,7 +113,7 @@ function SellerMyPage(props) {
                                 height: 24
                             }} src={"./Img/Bjh/right.png"}/></div>
                         </a>
-                        <Link to="/qnaAnswerWrite" className="item">
+                        <Link to="/answerWritePage" className="item">
                             <div className="ps-5 icon"><img style={{
                                 width: 24,
                                 height: 24
