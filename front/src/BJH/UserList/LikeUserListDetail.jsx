@@ -12,6 +12,9 @@ function LikeUserListDetail(props) {
   const [totalUser, setTotalUser] = useState(0);
   let total = 0;
   const [apexArray, setApexArray] = useState([40, 60]);
+  const [w, setW] = useState(0);
+  const [m, setM] = useState(0);
+  const [gene, setGene] = useState([]);
 
   useEffect(() => {
     return async () => {
@@ -44,41 +47,54 @@ function LikeUserListDetail(props) {
       console.log(data);
       setGender13Count(data[0]);
       setGender24Count(data[1]);
+      console.log("========Math.max(data)=========");
+
+      const maxValue = Math.max(...data);
+      const maxIndex = data.indexOf(maxValue);
+
+      console.log(maxValue);
+
+      console.log("========Math.max(data)=========");
       console.log("totalUser : ");
       console.log(totalUser);
     };
   }, []);
 
+  const [generationData, setGenerationData] = useState([]);
+  const [generationArray, setGenerationArray] = useState([]);
+  const [humanCountArray, setHumanCountArray] = useState([]);
 // 연령별 통계데이터받아오기
   useEffect(() => {
     return async () => {
       const { data } = await axios.post(
         "http://localhost:8080/getGenerationData",
         null,
-        null
+        {
+          params: {
+            productNum: productNum,
+          },
+        }
       );
-      console.log(data);
+
+      console.log(data[0].cnt);
+
+      for (let i = 0; i < data.length; i++) {
+        generationArray.push(`${Math.trunc(data[i].gen)}대`);
+        humanCountArray.push(data[i].cnt);
+
+      }
     };
   }, []);
 
 
-
-  const data1 = () => {
-    console.log(getZzimDetail);
-    console.log(totalUser);
-    console.log(gender13Count);
-  };
-
   return (
     <div className={"container text-center mt-5 mb-5"}>
       <h1 className={"mb-5"}>상품 통계</h1>
-
       <div className={"container"}>
         <div className={"d-flex"}>
           <div className={"me-5"}>
             {totalUser !== 0 ? (
               <ApexCharts
-                // series={apexArray}
                 series={[gender13Count, gender24Count]}
                 type={"pie"}
                 width={600}
@@ -148,10 +164,12 @@ function LikeUserListDetail(props) {
             ) : null}
           </div>
           <div>
+
+            {generationArray.length > 0 ? (
             <ApexCharts
               series={[
                 {
-                  data: [21, 22, 10, 28, 16, 21],
+                  data: humanCountArray,
                 },
               ]}
               type={"bar"}
@@ -176,7 +194,7 @@ function LikeUserListDetail(props) {
                 ],
                 plotOptions: {
                   bar: {
-                    columnWidth: "60%",
+                    columnWidth: "40%",
                     distributed: true,
                     borderRadius: 20,
                   },
@@ -216,23 +234,11 @@ function LikeUserListDetail(props) {
                   },
                 },
                 xaxis: {
-                  categories: [
-                    "10대",
-                    "20대",
-                    "30대",
-                    "40대",
-                    "50대",
-                    "60대 이상",
-                  ],
+                  categories: generationArray,
                   labels: {
                     style: {
                       colors: [
                         "#674188",
-                        "#698269",
-                        "#59C1BD",
-                        "#0D4C92",
-                        "#ECA869",
-                        "#B08BBB",
                       ],
                       fontSize: "20px",
                       fontFamily: "MICEMyungjo",
@@ -240,7 +246,7 @@ function LikeUserListDetail(props) {
                   },
                 },
               }}
-            />
+            />) : null}
           </div>
         </div>
       </div>

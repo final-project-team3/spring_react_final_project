@@ -74,8 +74,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<InterestedListUserInfoDto> getGenerationData() {
-        return userMapper.getGenerationData();
+    public List<InterestedListUserInfoDto> getGenerationData(int productNum) {
+        return userMapper.getGenerationData(productNum);
     }
 
     //    HSH

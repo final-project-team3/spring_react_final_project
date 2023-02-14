@@ -41,7 +41,7 @@ public interface UserMapper {
     //    GJY
     List<UserInterestedListDto> selectLikeData(String userId);
 
-    List<InterestedListUserInfoDto> getGenerationData();
+    List<InterestedListUserInfoDto> getGenerationData(int productNum);
     //    GJY
 
     //    BJH

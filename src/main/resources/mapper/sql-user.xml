@@ -113,14 +113,14 @@
     <!-- GJY -->
 
 
-    <select id="getGenerationData" resultType="com.fproject.project_team3.dto.join.InterestedListUserInfoDto">
+    <select id="getGenerationData" parameterType="int" resultType="com.fproject.project_team3.dto.join.InterestedListUserInfoDto">
         SELECT
         (floor((year(now())-
         case when 3 > userData.user_gender then 1899 else 1999 end -
         substr(userData.user_birth,1,2))/10)*10) as gen,
         count(*) as cnt
         from user_info userData, user_interested_list inter
-        where userData.user_id = inter.user_id
+        where userData.user_id = inter.user_id and inter.product_num = #{productNum}
         group by (floor((year(now())-
         case when 3 > userData.user_gender then 1899 else 1999 end -
         substr(userData.user_birth,1,2))/10)*10)

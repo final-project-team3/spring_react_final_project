@@ -102,10 +102,13 @@ public class UserRestController {
     }
 
     @PostMapping("/getGenerationData")
-    public List<InterestedListUserInfoDto> getGenerationData() {
-        List<InterestedListUserInfoDto> getGenerationData = userService.getGenerationData();
-        System.out.println(getGenerationData.get(1));
-        return null;
+    public List<InterestedListUserInfoDto> getGenerationData(@RequestParam("productNum") int productNum) {
+        List<InterestedListUserInfoDto> getGenerationData = userService.getGenerationData(productNum);
+//        String sendArray[];
+        for (int i = 0; i < getGenerationData.size(); i++) {
+            System.out.println(getGenerationData.get(i));
+        }
+        return getGenerationData;
     }
 
     //    GJY
