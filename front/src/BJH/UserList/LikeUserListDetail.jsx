@@ -12,8 +12,7 @@ function LikeUserListDetail(props) {
   const [totalUser, setTotalUser] = useState(0);
   let total = 0;
   const [apexArray, setApexArray] = useState([40, 60]);
-  const [w, setW] = useState(0);
-  const [m, setM] = useState(0);
+  const [wM, setWM] = useState("");
   const [gene, setGene] = useState([]);
 
   useEffect(() => {
@@ -52,7 +51,12 @@ function LikeUserListDetail(props) {
       const maxValue = Math.max(...data);
       const maxIndex = data.indexOf(maxValue);
 
-      console.log(maxValue);
+      console.log(maxIndex);
+      if (maxIndex == 0) {
+        setWM("남성");
+      } else {
+        setWM("여성");
+      }
 
       console.log("========Math.max(data)=========");
       console.log("totalUser : ");
@@ -78,10 +82,20 @@ function LikeUserListDetail(props) {
 
       console.log(data[0].cnt);
 
+
       for (let i = 0; i < data.length; i++) {
         generationArray.push(`${Math.trunc(data[i].gen)}대`);
         humanCountArray.push(data[i].cnt);
+        console.log("humanCountArray");
+        console.log(humanCountArray);
+        const maxValue = Math.max(...humanCountArray);
+        const maxIndex = humanCountArray.indexOf(maxValue);
 
+        console.log("==maxValue==");
+        console.log(maxIndex);
+        console.log(maxValue);
+        console.log(generationArray[maxIndex]);
+        setGene(generationArray[maxIndex]);
       }
     };
   }, []);
@@ -250,6 +264,7 @@ function LikeUserListDetail(props) {
           </div>
         </div>
       </div>
+      <h2>해당 제품은 {wM}, {gene}</h2>
     </div>
   );
 }
