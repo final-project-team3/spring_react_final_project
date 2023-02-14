@@ -70,7 +70,6 @@ const ProjectRouter = () => {
             <Routes>{role == "SELLER" ? <Route path={'/'} element={<Header/>}>
                     <Route index path={"/"} element={<SellerMyPage/>}/>
                     <Route path={"/mypage"} element={<SellerMyPage/>}/>
-                    <Route path={'/productSellerPage/:productSellerBusinessName'} element={<SellerProductList/>}/>
                     <Route path="/infoUpdate"
                            element={role == null ? <Login/> : role == "USER" ? <UserInfoUpdate/> : <SellerInfoUpdate/>}/>
                     <Route path={"/OptionList"} element={<OptionList/>}/>
@@ -94,6 +93,7 @@ const ProjectRouter = () => {
                 <Route path={'/'} element={<Header/>}>
                     {/*HSH*/}
                     <Route index element={<Main/>}/>
+                    <Route path={'/productSellerPage/:productSellerBusinessName'} element={<SellerProductList/>}/>
                     <Route path={'/productDetail/:productNum'} element={<ProductDetail/>}/>
                     <Route path={'/productList'} element={<ProductList/>}/>
                     <Route path={'/search/:searchContent'} element={<Search/>}/>
