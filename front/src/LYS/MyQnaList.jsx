@@ -5,6 +5,7 @@ import axios from "axios";
 import './MyReview.css';
 import MyReview from "./MyReview";
 import Pagination from "../GJY/Pagination";
+import MyQna from "./MyQna";
 
 function MyQnaList() {
 
@@ -47,12 +48,12 @@ function MyQnaList() {
                 </div>
                 {
                     myQnaList.slice(offset, offset + limit).map((item, index) => {
-
-                        return <MyReview key={index} reviewNum={item.reviewNum} id={item.userId}
-                                         date={item.reviewRegistrationDate}
-                                         content={item.reviewContent} productNum={item.productNum}
-                                         helpful={item.reviewHelpful} starPoint={item.reviewStarPoint}
-                                         deletedYn={item.reviewDeletedYn}/>
+                        return <MyQna key={index} reviewNum={item.qnaNum} id={item.userId}
+                                         date={item.qnaRegistrationDate}
+                                         content={item.qnaContent} productNum={item.productNum}
+                                         state={item.qnaState} answer={item.qnaAnswer}
+                                         AnswerRegistrationDate={item.qnaAnswerRegistrationDate}
+                        />
                     })
                 }
             </div>
