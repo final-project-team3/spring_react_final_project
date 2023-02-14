@@ -84,6 +84,7 @@ const ProjectRouter = () => {
                     <Route path="/qnaAnswerWrite" element={<QnaAnswerWrite/>}/>
                     <Route path={"/answerWritePage"} element={<AnswerWritePage/>}/>
                     <Route path={'*'} element={<NotExist/>}/>
+                    <Route path={'/productList'} element={<ProductList/>}/>
                 </Route> :
 
                 // 유저, 비로그인

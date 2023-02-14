@@ -32,13 +32,8 @@ function LikeUserList(props) {
     };
   }, []);
 
-  const dataTest = () => {
-    console.log(interestedListData);
-  };
-
   return (
     <div className={"ViewMain"}>
-      <button onClick={dataTest}>dataTest</button>
       <div className={"container"} id={"ViewMain-sub"}>
         <h2 className={"blind"}>여긴 본문부분</h2>
         <div className={"l-sidebar"}>
