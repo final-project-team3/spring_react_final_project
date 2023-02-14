@@ -64,7 +64,8 @@ const ProjectRouter = () => {
     <BrowserRouter>
       {/* 셀러 */}
       <Routes>{role == "SELLER" ? <Route path={'/'} element={<Header/>}>
-          <Route index element={<SellerMyPage/>}/>
+          <Route index path={"/"} element={<SellerMyPage/>}/>
+            <Route path={"/mypage"} element={<SellerMyPage/>}/>
           <Route path={'/productSellerPage/:productSellerBusinessName'} element={<SellerProductList/>}/>
           <Route path="/infoUpdate"
                  element={role == null ? <Login/> : role == "USER" ? <UserInfoUpdate/> : <SellerInfoUpdate/>}/>
