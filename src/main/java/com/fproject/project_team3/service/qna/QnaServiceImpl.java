@@ -37,4 +37,9 @@ public class QnaServiceImpl implements QnaService{
     public void answerWrite(QnaDto qnaDto) {
         qnaMapper.answerWrite(qnaDto);
     }
+
+    @Override
+    public List<QnaDto> getMyQna(String userId) {
+        return qnaMapper.getMyQna(userId);
+    }
 }

@@ -41,4 +41,9 @@ public class QnaController {
         qnaService.answerWrite(qnaDto);
         httpServletResponse.sendRedirect("http://localhost:3000/qnaAnswerWrite");
     }
+
+    @GetMapping("/getMyQna")
+    public List<QnaDto> getMyQna(@RequestParam("userId") String userId) {
+        return qnaService.getMyQna(userId);
+    }
 }

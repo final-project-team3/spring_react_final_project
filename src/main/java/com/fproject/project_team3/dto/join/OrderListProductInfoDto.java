@@ -11,4 +11,5 @@ public class OrderListProductInfoDto {
   private String userOrderDate;
   private String userOrderState;
   private String orderNum;
+  private String orderPrice;
 }

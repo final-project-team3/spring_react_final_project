@@ -305,7 +305,7 @@ const Main = () => {
                           <div className={"itemBox"}>
                             <div className={"box"}>
                               <div className={"prvImg row"}>
-                                <Link>
+                                <Link to={`productDetail/${item.productNum}`}>
                                   <div
                                     className={"pick-title-textGG"}
                                     style={{
@@ -391,7 +391,7 @@ const Main = () => {
                           <div className={"itemBox"}>
                             <div className={"box"}>
                               <div className={"prvImg"}>
-                                <Link>
+                                <Link to={`productDetail/${item.productNum}`}>
                                   <div
                                     className={"pick-title-textGG"}
                                     style={{
@@ -488,7 +488,7 @@ const Main = () => {
                       return (
                         <li className={"PrdBox"}>
                           <div className={"thumbnail"}>
-                            <Link>
+                            <Link to={`productDetail/${item.productNum}`}>
                               <div
                                 className={"pick-title-textGG"}
                                 style={{
