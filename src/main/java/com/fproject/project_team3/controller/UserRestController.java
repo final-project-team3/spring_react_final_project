@@ -104,7 +104,7 @@ public class UserRestController {
     @PostMapping("/getGenerationData")
     public List<InterestedListUserInfoDto> getGenerationData() {
         List<InterestedListUserInfoDto> getGenerationData = userService.getGenerationData();
-        System.out.println(getGenerationData);
+        System.out.println(getGenerationData.get(1));
         return null;
     }
 

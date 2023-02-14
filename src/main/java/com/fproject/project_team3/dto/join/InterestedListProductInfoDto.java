@@ -18,4 +18,6 @@ public class InterestedListProductInfoDto {
   private String productDeliveryDay;
   private String productSellerBusinessName;
   private int countProductNum;
+  private String userData;
+  private String inter;
 }
