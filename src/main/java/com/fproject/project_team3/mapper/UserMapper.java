@@ -1,5 +1,6 @@
 package com.fproject.project_team3.mapper;
 
+import com.fproject.project_team3.dto.join.InterestedListUserInfoDto;
 import com.fproject.project_team3.dto.user.UserInfoDto;
 import com.fproject.project_team3.dto.user.UserInterestedListDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -39,6 +40,8 @@ public interface UserMapper {
 
     //    GJY
     List<UserInterestedListDto> selectLikeData(String userId);
+
+    List<InterestedListUserInfoDto> getGenerationData(int productNum);
     //    GJY
 
     //    BJH

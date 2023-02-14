@@ -1,5 +1,6 @@
 package com.fproject.project_team3.controller;
 
+import com.fproject.project_team3.dto.join.InterestedListUserInfoDto;
 import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.user.UserInfoDto;
 import com.fproject.project_team3.dto.user.UserInterestedListDto;
@@ -98,6 +99,16 @@ public class UserRestController {
         System.out.println(userId);
         System.out.println(productNum);
         return null;
+    }
+
+    @PostMapping("/getGenerationData")
+    public List<InterestedListUserInfoDto> getGenerationData(@RequestParam("productNum") int productNum) {
+        List<InterestedListUserInfoDto> getGenerationData = userService.getGenerationData(productNum);
+//        String sendArray[];
+        for (int i = 0; i < getGenerationData.size(); i++) {
+            System.out.println(getGenerationData.get(i));
+        }
+        return getGenerationData;
     }
 
     //    GJY

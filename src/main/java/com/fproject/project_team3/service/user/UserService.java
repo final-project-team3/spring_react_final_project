@@ -1,5 +1,6 @@
 package com.fproject.project_team3.service.user;
 
+import com.fproject.project_team3.dto.join.InterestedListUserInfoDto;
 import com.fproject.project_team3.dto.user.UserInfoDto;
 import com.fproject.project_team3.dto.user.UserInterestedListDto;
 
@@ -37,6 +38,8 @@ public interface UserService {
 
     //    GJY
     List<UserInterestedListDto> selectLikeData(String userId);
+
+    List<InterestedListUserInfoDto> getGenerationData(int productNum);
     //    GJY
 
     //    BJH
