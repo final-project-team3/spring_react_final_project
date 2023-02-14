@@ -13,4 +13,6 @@ public interface QnaService {
     Object getReadyToAnswer(String sellerId);
 
     void answerWrite(QnaDto qnaDto);
+
+    List<QnaDto> getMyQna(String userId);
 }

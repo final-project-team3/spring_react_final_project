@@ -42,6 +42,13 @@
         SET qna_state = "답변완료", qna_answer = #{qnaAnswer}, qna_answer_registration_date = NOW()
         WHERE qna_num = #{qnaNum}
     </update>
+
+    <select id="getMyQna" parameterType="String" resultType="com.fproject.project_team3.dto.userAndseller.QnaDto">
+        SELECT *
+        from qna
+        WHERE user_id = #{userId}
+        ORDER BY qna_num DESC;
+    </select>
     <!-- LYS -->
 
     <!-- GJY -->

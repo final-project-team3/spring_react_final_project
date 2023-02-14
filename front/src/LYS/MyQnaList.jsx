@@ -8,7 +8,7 @@ import Pagination from "../GJY/Pagination";
 
 function MyQnaList() {
 
-    const [myReviewList, setMyReviewList] = useState([]);
+    const [myQnaList, setMyQnaList] = useState([]);
 
     // 페이지네이션
     const [limit, setLimit] = useState(3);
@@ -20,10 +20,10 @@ function MyQnaList() {
     userInfo = JSON.parse(userInfo);
 
     useEffect(() => {
-        axios.post('http://localhost:8080/getMyReview', null, {params: {userId: userInfo.userId}})
+        axios.get('http://localhost:8080/getMyQna', {params: {userId: userInfo.userId}})
             .then((req) => {
                 const {data} = req;
-                setMyReviewList(data);
+                setMyQnaList(data);
                 console.log(data);
             })
     }, []);
@@ -41,12 +41,12 @@ function MyQnaList() {
                         </div>
                         <div style={{
                             textAlign: "center"
-                        }} className="text-center name">리뷰 페이지
+                        }} className="text-center name">문의내역 페이지
                         </div>
                     </div>
                 </div>
                 {
-                    myReviewList.slice(offset, offset + limit).map((item, index) => {
+                    myQnaList.slice(offset, offset + limit).map((item, index) => {
 
                         return <MyReview key={index} reviewNum={item.reviewNum} id={item.userId}
                                          date={item.reviewRegistrationDate}
@@ -57,7 +57,7 @@ function MyQnaList() {
                 }
             </div>
             <Pagination
-                total={myReviewList.length}
+                total={myQnaList.length}
                 limit={limit}
                 page={page}
                 setPage={setPage}
