@@ -252,8 +252,7 @@ const ListItem = ({
                       src={
                         userInfo == null || userInfo === ""
                           ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
-                          : interestedIndex.indexOf(productNum) <
-                          0
+                          : interestedIndex.indexOf(productNum) < 0
                             ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
                             : "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"
                       }
