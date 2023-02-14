@@ -114,6 +114,16 @@ public class ProductRestController {
         return productService.getProductSellerInfo(productNum);
     }
 
+    @GetMapping("/getSellerIdProductList")
+    public List<ProductInfoDto> getSellerIdProductList(@RequestParam("sellerId") String sellerId) {
+        return productService.getSellerIdProductList(sellerId);
+    }
+
+    @PostMapping("/deleteProduct")
+    public void deleteProduct(@RequestParam("productNum") int productNum) {
+        productService.deleteProduct(productNum);
+    }
+
 
     //    HSH
 

@@ -95,6 +95,10 @@ public interface ProductMapper {
 
     SellerInfoDto getProductSellerInfo(int productNum);
 
+    List<ProductInfoDto> getSellerIdProductList(String sellerId);
+
+    void deleteProduct(int productNum);
+
     //    GJY
 
     //    BJH

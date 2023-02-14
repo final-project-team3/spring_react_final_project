@@ -145,13 +145,26 @@
           AND product_num = #{productNum}
     </delete>
 
-    <select id="getProductSellerInfo" parameterType="int" resultType="com.fproject.project_team3.dto.seller.SellerInfoDto">
+    <select id="getProductSellerInfo" parameterType="int"
+            resultType="com.fproject.project_team3.dto.seller.SellerInfoDto">
         SELECT *
         FROM seller_info as sInfo
                  INNER JOIN product_info as pi
                             ON pi.product_seller_id = sInfo.seller_id
         WHERE pi.product_num = #{productNum}
     </select>
+
+    <select id="getSellerIdProductList" parameterType="String"
+            resultType="com.fproject.project_team3.dto.product.ProductInfoDto">
+        SELECT *
+        FROM product_info
+        WHERE product_seller_id = #{sellerId}
+    </select>
+
+    <delete id="deleteProduct" parameterType="int">
+        DELETE FROM product_info
+        WHERE product_num = #{productNum};
+    </delete>
 
     <!-- HSH -->
 
@@ -253,20 +266,40 @@
     </update>
 
 
-<!--    이번 달 등록된 상품 최신순으로 4개 가져오기 -->
+    <!--    이번 달 등록된 상품 최신순으로 4개 가져오기 -->
     <select id="thisMonthData" resultType="com.fproject.project_team3.dto.product.ProductInfoDto">
-        SELECT FORMAT(product_price,0) productPrice, product_num, product_seller_id, product_seller_business_name, product_kind_num, product_name, product_content, product_img, product_registration_date, review_star_point, product_delivery_day
+        SELECT FORMAT(product_price, 0) productPrice,
+               product_num,
+               product_seller_id,
+               product_seller_business_name,
+               product_kind_num,
+               product_name,
+               product_content,
+               product_img,
+               product_registration_date,
+               review_star_point,
+               product_delivery_day
         FROM product_info
         where product_registration_date between date_format(now(), '%Y-%m-01') and last_day(now())
-        ORDER BY product_registration_date DESC
-            limit 4;
+        ORDER BY product_registration_date DESC limit 4;
 
     </select>
 
-<!--    랜덤 데이터 7개 가져오기 -->
+    <!--    랜덤 데이터 7개 가져오기 -->
     <select id="randomData" resultType="com.fproject.project_team3.dto.product.ProductInfoDto">
-        SELECT FORMAT(product_price,0) productPrice, product_num, product_seller_id, product_seller_business_name, product_kind_num, product_name, product_content, product_img, product_registration_date, review_star_point, product_delivery_day
-        FROM product_info ORDER BY RAND() LIMIT 7;
+        SELECT FORMAT(product_price, 0) productPrice,
+               product_num,
+               product_seller_id,
+               product_seller_business_name,
+               product_kind_num,
+               product_name,
+               product_content,
+               product_img,
+               product_registration_date,
+               review_star_point,
+               product_delivery_day
+        FROM product_info
+        ORDER BY RAND() LIMIT 7;
     </select>
     <!-- GJY -->
 

@@ -215,7 +215,7 @@ const Header = () => {
                         marginTop:20
                     }} className="px-5 ms-3 collapse navbar-collapse" id="collapsibleNavbar">
                         <ul className={'navbar-nav my-auto'}>
-                            <li className={'nav-item'}>
+                            <li hidden={role == "SELLER" ? true : false} className={'nav-item'}>
                                 <div className={'d-flex'}>
                                     <input id={"searchContent"} onClick={() => {
                                         setSearchContent($("#searchContent").val());
@@ -228,7 +228,7 @@ const Header = () => {
                                         <YesSearch/> : <NoSearch/>}
                                 </div>
                             </li>
-                            <div className={'nav-item dropdown'}>
+                            <div hidden={role == "SELLER" ? true : false} className={'nav-item dropdown'}>
                                 <Link id={'headerDropDown'}
                                       onClick={() => isClick == false ? setIsClick(true) : setIsClick(false)}
                                       className={"nav-link dropdown-toggle"} data-bs-toggle={'dropdown'}
@@ -287,7 +287,7 @@ const Header = () => {
             </nav>
 
             {/* 카테고리 영역 */}
-            <div className={'container'}>
+            <div hidden={role == "SELLER" ? true : false} className={'container'}>
                 <ul className={'d-flex justify-content-around'}>
                     <li></li>
                     {

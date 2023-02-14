@@ -76,6 +76,10 @@ public interface ProductService {
 
     List<ProductInfoDto> randomData();
 
+    List<ProductInfoDto> getSellerIdProductList(String sellerId);
+
+    void deleteProduct(int productNum);
+
 
     //    GJY
 

@@ -88,7 +88,7 @@ function SellerMyPage(props) {
                         {/*        height: 24*/}
                         {/*    }} src={"./Img/Bjh/right.png"}/></div>*/}
                         {/*</a>*/}
-                        <a href="/productR2" className="item">
+                        <a href="/productSelect" className="item">
                             <div className="ps-5 icon"><img style={{
                                 width: 24,
                                 height: 24

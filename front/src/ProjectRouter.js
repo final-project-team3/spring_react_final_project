@@ -47,6 +47,8 @@ import LikeProduct from "./BJH/UserList/LikeProduct";
 import UserLikeStore from "./BJH/UserList/UserLikeStore";
 import MyQnaList from "./LYS/MyQnaList";
 import NotExist from "./LYS/NotExist";
+import MyProductList from "./BJH/UserList/MyProductList";
+import ProductSelect from "./HSH/ProductSelect";
 
 
 const ProjectRouter = () => {
@@ -84,7 +86,8 @@ const ProjectRouter = () => {
                     <Route path="/qnaAnswerWrite" element={<QnaAnswerWrite/>}/>
                     <Route path={"/answerWritePage"} element={<AnswerWritePage/>}/>
                     <Route path={'*'} element={<NotExist/>}/>
-                    <Route path={'/productList'} element={<ProductList/>}/>
+                    <Route path={'/myProductList'} element={<MyProductList/>}/>
+                    <Route path={'/productSelect'} element={<ProductSelect/>}/>
                 </Route> :
 
                 // 유저, 비로그인

@@ -125,6 +125,16 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.randomData();
     }
 
+    @Override
+    public List<ProductInfoDto> getSellerIdProductList(String sellerId) {
+        return productMapper.getSellerIdProductList(sellerId);
+    }
+
+    @Override
+    public void deleteProduct(int productNum) {
+        productMapper.deleteProduct(productNum);
+    }
+
 
     //    HSH
 

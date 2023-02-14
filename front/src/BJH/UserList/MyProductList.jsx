@@ -5,30 +5,37 @@ import axios from "axios";
 import $ from "jquery";
 import Pagination from "../../GJY/Pagination";
 
-function ProductList(props) {
+function MyProductList(props) {
     let sellerInfo = sessionStorage.getItem("sellerInfo");
     sellerInfo = JSON.parse(sellerInfo);
     const sellerId = sellerInfo.sellerId;
-    // console.log(sellerInfo);
 
-    const [interestedListData, setInterestedListData] = useState([]);
+    const [productList, setProductList] = useState([]);
 
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
 
+    const deleteProduct = async (productNum) => {
+
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+            await axios.post("http://localhost:8080/deleteProduct", null, {params:{productNum:productNum}});
+            window.location.reload();
+        } else {
+            alert("삭제가 취소되었습니다.");
+        }
+    }
+
     useEffect(() => {
         return async () => {
-            const { data } = await axios.post(
-                "http://localhost:8080/getInterestedUserList",
-                null,
+            const { data } = await axios.get(
+                "http://localhost:8080/getSellerIdProductList",
                 {
-                    params: { sellerBusinessName: sellerInfo.sellerBusinessName },
+                    params: { sellerId: sellerInfo.sellerId },
                 }
             );
-
             console.log(data);
-            setInterestedListData(data);
+            setProductList(data);
         };
     }, []);
 
@@ -87,9 +94,9 @@ function ProductList(props) {
                 </div>
                 <div className={"content"}>
                     <div className={"likeUser"}>
-                        <h3 className={"usersList"}>찜 목록</h3>
+                        <h3 className={"usersList"}>등록 상품 목록</h3>
                         <span className={"listLittle"}>
-              내 상품을 찜한 고객 내역입니다.
+              {sellerInfo.sellerBusinessName}님이 등록한 상품 목록입니다.
             </span>
                     </div>
                     <div className={"content-sub"}>
@@ -118,15 +125,14 @@ function ProductList(props) {
                                 <th>상품 이미지</th>
                                 <th>상품명</th>
                                 <th>상품 가격</th>
-                                <th>찜 갯수</th>
                                 <th>상세보기</th>
                             </tr>
                             </thead>
                             <tbody>
-                            {interestedListData.length == 0 ? (
+                            {productList.length == 0 ? (
                                 <h2 className={"text-center mt-3"}>찜한 상품이 없습니다.</h2>
                             ) : (
-                                interestedListData
+                                productList
                                     .slice(offset, offset + limit)
                                     .map((item, index) => {
                                         return (
@@ -137,13 +143,15 @@ function ProductList(props) {
                                                 </td>
                                                 <td>{item.productName}</td>
                                                 <td>{item.productPrice}</td>
-                                                <td>{item.countProductNum}</td>
                                                 <td>
-                                                    <Link to={`/likeUserListDetail/${item.productNum}`}>
+                                                    <Link to={`/ProductEditPage`} state={{productPrevName:item.productName}}>
                                                         <button className={"btn btn-primary"}>
-                                                            분석
+                                                            수정
                                                         </button>
                                                     </Link>
+                                                    <button onClick={()=> {deleteProduct(item.productNum)}} className={"btn btn-danger"}>
+                                                        삭제
+                                                    </button>
                                                 </td>
                                             </tr>
                                         );
@@ -152,7 +160,7 @@ function ProductList(props) {
                             </tbody>
                         </table>
                         <Pagination
-                            total={interestedListData.length}
+                            total={productList.length}
                             limit={limit}
                             page={page}
                             setPage={setPage}
@@ -164,4 +172,4 @@ function ProductList(props) {
     );
 }
 
-export default ProductList;
+export default MyProductList;

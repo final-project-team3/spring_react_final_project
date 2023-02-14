@@ -3,6 +3,7 @@ import axios from "axios";
 import $ from "jquery";
 import FireBaseExample from "./FireBaseExample";
 import {getSpaceUntilMaxLength} from "@testing-library/user-event/dist/utils";
+import {useLocation, useNavigate} from "react-router-dom";
 
 // const tableTest = (props) => {
 //   return (
@@ -32,6 +33,10 @@ const ProductEditPage = () => {
   let sellerInfo = sessionStorage.getItem("sellerInfo");
   sellerInfo = JSON.parse(sellerInfo);
   const productSellerId = sellerInfo.sellerId;
+  const location = useLocation();
+  const {productPrevName} = location.state;
+  const navi = useNavigate();
+
 
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState("");
@@ -58,7 +63,7 @@ const ProductEditPage = () => {
         .post("http://localhost:8080/selectProductInfo", null, {
           params: {
             productSellerId: productSellerId,
-            productName: "테스터2수정할상품",
+            productName: productPrevName,
           },
         })
         .then((req) => {
@@ -228,6 +233,8 @@ const ProductEditPage = () => {
           my: "option",
         }
       })
+      alert("수정되었습니다.");
+      navi("/myProductList");
     })
   };
 
@@ -353,7 +360,12 @@ const ProductEditPage = () => {
       </div>
       <div className={"d-flex justify-content-end me-5 col-7 mt-5"}>
         <button className={"btn btn-primary me-5"} onClick={editFnc}>
-          수정 완료
+        </button>
+        <button className={"btn btn-warning me-5"} onClick={()=> {
+          alert("취소되었습니다.");
+          navi("/myProductList");
+        }}>
+          취소
         </button>
       </div>
     </div>
