@@ -1,6 +1,6 @@
-import React, {Component, useEffect, useState} from "react";
+import React, { Component, useEffect, useState } from "react";
 import $ from "jquery";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../BJH/Main.css";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
@@ -48,14 +48,14 @@ const mainImg1 = require("../HSH/Img/main1.jpg");
 const mainImg2 = require("../HSH/Img/main2.jpg");
 const mainImg3 = require("../HSH/Img/main3.jpg");
 
-const mainImg = [{url: mainImg1}, {url: mainImg2}, {url: mainImg3}];
+const mainImg = [{ url: mainImg1 }, { url: mainImg2 }, { url: mainImg3 }];
 
 const Main = () => {
   let userInfo = sessionStorage.getItem("userInfo");
   userInfo = JSON.parse(userInfo);
 
   const navi = useNavigate();
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
 
   const productInterestedFunc = async (productNum) => {
     // 로그인 하지 않았을 시
@@ -134,17 +134,17 @@ const Main = () => {
       title: "찜한 상품 삭제",
       text: "선택하신 찜한 상품을 삭제하시겠습니까?",
       showCancelButton: true, // cancel 버튼 보이기. 기본은 원래 없음
-      confirmButtonColor: '#3085d6', // confirm 버튼 색깔 지정
-      cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
-      confirmButtonText: '확인', // confirm 버튼 텍스트 지정
-      cancelButtonText: '취소',
+      confirmButtonColor: "#3085d6", // confirm 버튼 색깔 지정
+      cancelButtonColor: "#d33", // cancel 버튼 색깔 지정
+      confirmButtonText: "확인", // confirm 버튼 텍스트 지정
+      cancelButtonText: "취소",
     }).then((req) => {
       if (req.isConfirmed) {
         axios.post("http://localhost:8080/deleteProductLikeItem", null, {
           params: {
             userId: userInfo.userId,
-            productNum: productNum
-          }
+            productNum: productNum,
+          },
         });
         Swal.fire({
           position: "top-center",
@@ -154,12 +154,14 @@ const Main = () => {
         }).then(() => {
           console.log(imgSrc);
           window.location.reload();
-          imgSrc.prop("src", "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
+          imgSrc.prop(
+            "src",
+            "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
           );
-        })
+        });
       }
     });
-  }
+  };
 
   const settings = {
     dots: true,
@@ -202,7 +204,7 @@ const Main = () => {
 
   useEffect(() => {
     return async () => {
-      const {data} = await axios.post(
+      const { data } = await axios.post(
         "http://localhost:8080/thisMonthData",
         null,
         null
@@ -217,7 +219,7 @@ const Main = () => {
   // weekly 시옷's pick : 랜덤 7개 가져와서 순서대로 4개, 3개 할당 ( + 이번주로 date 한정?)
   useEffect(() => {
     return async () => {
-      const {data} = await axios.post(
+      const { data } = await axios.post(
         "http://localhost:8080/randomData",
         null,
         null
@@ -237,7 +239,7 @@ const Main = () => {
   useEffect(() => {
     if (userInfo !== null) {
       return async () => {
-        const {data} = await axios.post(
+        const { data } = await axios.post(
           "http://localhost:8080/selectLikeData",
           null,
           {
@@ -257,7 +259,6 @@ const Main = () => {
     }
   }, []);
 
-
   // GJY 끝
   return (
     <div>
@@ -268,7 +269,7 @@ const Main = () => {
             return (
               <div key={item.id}>
                 <ImageContainer>
-                  <Image src={item.url}/>
+                  <Image src={item.url} />
                 </ImageContainer>
               </div>
             );
@@ -293,7 +294,7 @@ const Main = () => {
                       </div>
                       <img
                         src={"./Img/Bjh/han_out.jpg"}
-                        style={{height: "auto"}}
+                        style={{ height: "auto" }}
                       />
                     </Link>
                   </div>
@@ -305,52 +306,71 @@ const Main = () => {
                           <div className={"itemBox"}>
                             <div className={"box"}>
                               <div className={"prvImg row"}>
-                                <Link to={`productDetail/${item.productNum}`}>
-                                  <div
-                                    className={"pick-title-textGG"}
-                                    style={{
-                                      height: 73,
-                                      marginTop: -38,
-                                      paddingRight: 20,
-                                      position: "absolute",
-                                      textAlign: "end",
-                                      top: "18%",
-                                      width: "90%",
-                                    }}
-                                  >
-                                    <img
-                                      id={"zzimImg4" + item.productNum}
-                                      src={
-                                        userInfo == null || userInfo === ""
-                                          ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
-                                          : interestedIndex.indexOf(
+                                <div
+                                  className={"pick-title-textGG"}
+                                  style={{
+                                    height: 73,
+                                    marginTop: -38,
+                                    paddingRight: 20,
+                                    position: "absolute",
+                                    textAlign: "end",
+                                    top: "18%",
+                                    width: "90%",
+                                  }}
+                                >
+                                  <img
+                                    id={"zzimImg4" + item.productNum}
+                                    src={
+                                      userInfo == null || userInfo === ""
+                                        ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
+                                        : interestedIndex.indexOf(
                                             item.productNum
                                           ) < 0
-                                            ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
-                                            : "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"
-                                      }
-                                      alt="이미지 없음"
-                                      style={{height: 30, width: 30}}
-                                      onClick={userInfo == null ? async ()=> {await productInterestedFunc(item.productNum)} : async () => {
-                                        if (
-                                          $("#zzimImg4" + item?.productNum).prop("src") ===
-                                          "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
-                                        ) {
-                                          await productInterestedFunc(item.productNum);
-                                          $("#zzimImg4" + item?.productNum).prop("src",
-                                            "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"
-                                          );
-                                        } else {
-                                          await deleteProductLikeItem(item.productNum, $("#zzimImg4") + item?.productNum)
-                                          // $("#zzimImg4" + item?.productNum).prop("src", "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
-                                          // );
-                                        }
-                                      }}
-                                    />
-                                  </div>
+                                        ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
+                                        : "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"
+                                    }
+                                    alt="이미지 없음"
+                                    style={{ height: 30, width: 30 }}
+                                    onClick={
+                                      userInfo == null
+                                        ? async () => {
+                                            await productInterestedFunc(
+                                              item.productNum
+                                            );
+                                          }
+                                        : async () => {
+                                            if (
+                                              $(
+                                                "#zzimImg4" + item?.productNum
+                                              ).prop("src") ===
+                                              "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
+                                            ) {
+                                              await productInterestedFunc(
+                                                item.productNum
+                                              );
+                                              $(
+                                                "#zzimImg4" + item?.productNum
+                                              ).prop(
+                                                "src",
+                                                "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"
+                                              );
+                                            } else {
+                                              await deleteProductLikeItem(
+                                                item.productNum,
+                                                $("#zzimImg4") +
+                                                  item?.productNum
+                                              );
+                                              // $("#zzimImg4" + item?.productNum).prop("src", "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
+                                              // );
+                                            }
+                                          }
+                                    }
+                                  />
+                                </div>
+                                <Link to={`productDetail/${item.productNum}`}>
                                   {/* 사진 크기가 안맞아서 억지로*/}
                                   <img
-                                    style={{height: 267, width: 200}}
+                                    style={{ height: 267, width: 200 }}
                                     className={"thumb"}
                                     src={item.productImg}
                                   />
@@ -358,7 +378,7 @@ const Main = () => {
                                 {/* value?*/}
                                 <Link
                                   className={"th-title text-start fs-6 mt-1"}
-                                  style={{textDecoration: "none"}}
+                                  style={{ textDecoration: "none" }}
                                 >
                                   <font color={"#FF6666"}>
                                     <b>pick! </b>
@@ -391,51 +411,65 @@ const Main = () => {
                           <div className={"itemBox"}>
                             <div className={"box"}>
                               <div className={"prvImg"}>
-                                <Link to={`productDetail/${item.productNum}`}>
-                                  <div
-                                    className={"pick-title-textGG"}
-                                    style={{
-                                      height: 73,
-                                      marginTop: -38,
-                                      paddingRight: 20,
-                                      position: "absolute",
-                                      textAlign: "end",
-                                      top: "18%",
-                                      width: "90%",
-                                    }}
-                                  >
-                                    <img
-                                      id={"zzimImg3" + item.productNum}
-                                      src={
-                                        userInfo == null || userInfo === ""
-                                          ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
-                                          : interestedIndex.indexOf(
+                                <div
+                                  className={"pick-title-textGG"}
+                                  style={{
+                                    height: 73,
+                                    marginTop: -38,
+                                    paddingRight: 20,
+                                    position: "absolute",
+                                    textAlign: "end",
+                                    top: "18%",
+                                    width: "90%",
+                                  }}
+                                >
+                                  <img
+                                    id={"zzimImg3" + item.productNum}
+                                    src={
+                                      userInfo == null || userInfo === ""
+                                        ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
+                                        : interestedIndex.indexOf(
                                             item.productNum
                                           ) < 0
-                                            ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
-                                            : "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"
-                                      }
-                                      alt="이미지 없음"
-                                      style={{height: 30, width: 30}}
-                                      onClick={userInfo == null ? null : async () => {
-                                        if (
-                                          $("#zzimImg3" + item?.productNum).prop("src") ===
-                                          "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
-                                        ) {
-                                          await productInterestedFunc(item.productNum);
-                                          $("#zzimImg3" + item?.productNum).prop("src",
-                                            "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"
-                                          );
-                                        } else {
-                                          await deleteProductLikeItem(item.productNum, $("#zzimImg3") + item?.productNum);
-                                        }
-
-                                      }}
-                                    />
-                                  </div>
-                                  {/* 사진 크기가 안맞아서 억지로*/}
+                                        ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
+                                        : "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"
+                                    }
+                                    alt="이미지 없음"
+                                    style={{ height: 30, width: 30 }}
+                                    onClick={
+                                      userInfo == null
+                                        ? null
+                                        : async () => {
+                                            if (
+                                              $(
+                                                "#zzimImg3" + item?.productNum
+                                              ).prop("src") ===
+                                              "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
+                                            ) {
+                                              await productInterestedFunc(
+                                                item.productNum
+                                              );
+                                              $(
+                                                "#zzimImg3" + item?.productNum
+                                              ).prop(
+                                                "src",
+                                                "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"
+                                              );
+                                            } else {
+                                              await deleteProductLikeItem(
+                                                item.productNum,
+                                                $("#zzimImg3") +
+                                                  item?.productNum
+                                              );
+                                            }
+                                          }
+                                    }
+                                  />
+                                </div>
+                                {/* 사진 크기가 안맞아서 억지로*/}
+                                <Link to={`productDetail/${item.productNum}`}>
                                   <img
-                                    style={{height: 267, width: 260}}
+                                    style={{ height: 267, width: 260 }}
                                     className={"thumb"}
                                     src={item.productImg}
                                   />
@@ -488,49 +522,60 @@ const Main = () => {
                       return (
                         <li className={"PrdBox"}>
                           <div className={"thumbnail"}>
+                            <div
+                              className={"pick-title-textGG"}
+                              style={{
+                                height: 73,
+                                marginTop: -38,
+                                paddingRight: 20,
+                                position: "absolute",
+                                textAlign: "end",
+                                top: "15%",
+                                width: "95%",
+                              }}
+                            >
+                              <img
+                                id={"zzimImgNew" + item.productNum}
+                                src={
+                                  userInfo == null || userInfo === ""
+                                    ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
+                                    : interestedIndex.indexOf(item.productNum) <
+                                      0
+                                    ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
+                                    : "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"
+                                }
+                                alt="이미지 없음"
+                                style={{ height: 30, width: 30 }}
+                                onClick={
+                                  userInfo == null
+                                    ? null
+                                    : async () => {
+                                        if (
+                                          $(
+                                            "#zzimImgNew" + item?.productNum
+                                          ).prop("src") ===
+                                          "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
+                                        ) {
+                                          $(
+                                            "#zzimImgNew" + item?.productNum
+                                          ).prop(
+                                            "src",
+                                            "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"
+                                          );
+                                          await productInterestedFunc(
+                                            item.productNum
+                                          );
+                                        } else {
+                                          await deleteProductLikeItem(
+                                            item.productNum,
+                                            $("#zzimImgNew") + item?.productNum
+                                          );
+                                        }
+                                      }
+                                }
+                              />
+                            </div>
                             <Link to={`productDetail/${item.productNum}`}>
-                              <div
-                                className={"pick-title-textGG"}
-                                style={{
-                                  height: 73,
-                                  marginTop: -38,
-                                  paddingRight: 20,
-                                  position: "absolute",
-                                  textAlign: "end",
-                                  top: "15%",
-                                  width: "95%",
-                                }}
-                              >
-                                <img
-                                  id={"zzimImgNew" + item.productNum}
-                                  src={
-                                    userInfo == null || userInfo === ""
-                                      ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
-                                      : interestedIndex.indexOf(
-                                        item.productNum
-                                      ) < 0
-                                        ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
-                                        : "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"
-                                  }
-                                  alt="이미지 없음"
-                                  style={{height: 30, width: 30}}
-                                  onClick={userInfo == null ? null : async () => {
-                                    if (
-                                      $("#zzimImgNew" + item?.productNum).prop("src") ===
-                                      "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
-                                    ) {
-                                      $("#zzimImgNew" + item?.productNum).prop("src",
-                                        "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"
-                                      );
-                                      await productInterestedFunc(item.productNum);
-
-                                    } else {
-                                      await deleteProductLikeItem(item.productNum, $("#zzimImgNew") + item?.productNum);
-                                    }
-
-                                  }}
-                                />
-                              </div>
                               <img
                                 className={"thumbImg"}
                                 src={item.productImg}
@@ -555,7 +600,7 @@ const Main = () => {
                   </ul>
                 </div>
                 <div className={"moreBtn"}>
-                  <Link to={'/productList'} className={"btnMore"}>
+                  <Link to={"/productList"} className={"btnMore"}>
                     <span>상품 더 보러 가기</span>
                     {/* 화살표는 걍 냅두자...*/}
                     <span className={"arrow_lb"}>
