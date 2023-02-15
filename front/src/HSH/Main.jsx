@@ -82,7 +82,7 @@ const Main = () => {
     } else {
       // 이미 찜한 상품인지 비교해서 있으면 1 반환 시킴 없으면 insert
       await axios
-        .get("http://localhost:8080/productInterestedInsert", {
+        .get("http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com/productInterestedInsert", {
           params: {
             productNum: productNum,
             userId: userInfo?.userId,
@@ -140,7 +140,7 @@ const Main = () => {
       cancelButtonText: "취소",
     }).then((req) => {
       if (req.isConfirmed) {
-        axios.post("http://localhost:8080/deleteProductLikeItem", null, {
+        axios.post("http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com/deleteProductLikeItem", null, {
           params: {
             userId: userInfo.userId,
             productNum: productNum,
@@ -201,61 +201,73 @@ const Main = () => {
 
   // 이번달에 등록된 상품 최근순으로 4개 가져오기
   const [thisMonthData, setThisMonthData] = useState([]);
-
+  const recentProduct = async () => {
+    const { data } = await axios.post(
+      "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com/thisMonthData",
+      null,
+      null
+    );
+    console.log("통신"+data[0]);
+    setThisMonthData(data);
+  };
   useEffect(() => {
-    return async () => {
-      const { data } = await axios.post(
-        "http://localhost:8080/thisMonthData",
-        null,
-        null
-      );
-      console.log(data);
-      setThisMonthData(data);
-    };
+
+
+    recentProduct();
+
+    // axios.post("http://localhost:8080/thisMonthData").then(res=>{
+    //   console.log("메인화면엑시오스"+ res.data);
+    // }).catch(e=>{
+    //   console.log(e);
+    // })
+
+
+
   }, []);
 
   const [randomData4, setRandomData4] = useState([]);
   const [randomData3, setRandomData3] = useState([]);
   // weekly 시옷's pick : 랜덤 7개 가져와서 순서대로 4개, 3개 할당 ( + 이번주로 date 한정?)
+  const mainItem7ea = async () => {
+    const { data } = await axios.post(
+      "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com/randomData");
+    console.log(data);
+    const slice3 = data.slice(0, 3);
+    console.log(slice3);
+    setRandomData3(slice3);
+    const slice4 = data.slice(3, 7);
+    console.log(slice4);
+    setRandomData4(slice4);
+  };
+
   useEffect(() => {
-    return async () => {
-      const { data } = await axios.post(
-        "http://localhost:8080/randomData",
-        null,
-        null
-      );
-      console.log(data);
-      const slice3 = data.slice(0, 3);
-      console.log(slice3);
-      setRandomData3(slice3);
-      const slice4 = data.slice(3, 7);
-      console.log(slice4);
-      setRandomData4(slice4);
-    };
+    mainItem7ea();
   }, []);
 
   const [interestedIndex, setInterestedIndex] = useState([]);
   // 좋아요 리스트
+  const likeList = async () => {
+    const { data } = await axios.post(
+      "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com/selectLikeData",
+      null,
+      {
+        params: {
+          userId: userInfo?.userId,
+        },
+      }
+    );
+    console.log("좋아요 리스트");
+    console.log(data);
+    for (let i = 0; i < data.length; i++) {
+      console.log("데이터확인");
+      console.log(data[i].productNum);
+      interestedIndex.push(data[i].productNum);
+    }
+  };
+
   useEffect(() => {
     if (userInfo !== null) {
-      return async () => {
-        const { data } = await axios.post(
-          "http://localhost:8080/selectLikeData",
-          null,
-          {
-            params: {
-              userId: userInfo?.userId,
-            },
-          }
-        );
-        console.log("좋아요 리스트");
-        console.log(data);
-        for (let i = 0; i < data.length; i++) {
-          console.log("데이터확인");
-          console.log(data[i].productNum);
-          interestedIndex.push(data[i].productNum);
-        }
-      };
+      likeList();
     }
   }, []);
 

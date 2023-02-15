@@ -1,19 +1,19 @@
 import React, {useEffect, useState} from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import $ from "jquery";
 
 const ListItem = ({
-  index,
-  productNum,
-  productImg,
-  productSellerBusinessName,
-  productPrice,
-  productName,
-}) => {
+                    index,
+                    productNum,
+                    productImg,
+                    productSellerBusinessName,
+                    productPrice,
+                    productName,
+                  }) => {
   const navi = useNavigate();
-  const { pathname } = useLocation();
+  const {pathname} = useLocation();
 
   /**
    * 찜 하는 함수
@@ -26,26 +26,28 @@ const ListItem = ({
   // 찜
   const [interestedIndex, setInterestedIndex] = useState([]);
   // 좋아요 리스트
+  const likeList = async () => {
+    const {data} = await axios.post(
+      "http://localhost:8080/selectLikeData",
+      null,
+      {
+        params: {
+          userId: userInfo?.userId,
+        },
+      }
+    );
+    console.log("좋아요 리스트");
+    console.log(data);
+    for (let i = 0; i < data.length; i++) {
+      console.log("데이터확인");
+      console.log(data[i].productNum);
+      interestedIndex.push(data[i].productNum);
+    }
+  };
+
   useEffect(() => {
     if (userInfo !== null) {
-      return async () => {
-        const { data } = await axios.post(
-          "http://localhost:8080/selectLikeData",
-          null,
-          {
-            params: {
-              userId: userInfo?.userId,
-            },
-          }
-        );
-        console.log("좋아요 리스트");
-        console.log(data);
-        for (let i = 0; i < data.length; i++) {
-          console.log("데이터확인");
-          console.log(data[i].productNum);
-          interestedIndex.push(data[i].productNum);
-        }
-      };
+      likeList();
     }
   }, []);
 
@@ -160,7 +162,7 @@ const ListItem = ({
   return (
     <div key={index} className={"mt-5 col-3"}>
       <Link to={`/productDetail/${productNum}`}>
-        <img width={300} src={productImg} />
+        <img width={300} src={productImg}/>
       </Link>
       <Link to={`/productSellerPage/${productSellerBusinessName}`}>
         <h5 className={"my-3"}>{productSellerBusinessName}</h5>
@@ -230,67 +232,66 @@ const ListItem = ({
         {/*</Link>*/}
 
 
-
-      {/* =================================================================== */}
+        {/* =================================================================== */}
         <ul className={"prdList grid4"}>
-              <li className={"PrdBox"}>
-                <div className={"thumbnail"}>
-                  <div
-                    className={"pick-title-textGG"}
-                    style={{
-                      height: 73,
-                      marginTop: -38,
-                      paddingRight: 20,
-                      position: "absolute",
-                      textAlign: "end",
-                      top: "15%",
-                      width: "95%",
-                    }}
-                  >
-                    <img
-                      id={"zzimImgNew" + productNum}
-                      src={
-                        userInfo == null || userInfo === ""
-                          ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
-                          : interestedIndex.indexOf(productNum) < 0
-                            ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
-                            : "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"
+          <li className={"PrdBox"}>
+            <div className={"thumbnail"}>
+              <div
+                className={"pick-title-textGG"}
+                style={{
+                  height: 73,
+                  marginTop: -38,
+                  paddingRight: 20,
+                  position: "absolute",
+                  textAlign: "end",
+                  top: "15%",
+                  width: "95%",
+                }}
+              >
+                <img
+                  id={"zzimImgNew" + productNum}
+                  src={
+                    userInfo == null || userInfo === ""
+                      ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
+                      : interestedIndex.indexOf(productNum) < 0
+                        ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
+                        : "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"
+                  }
+                  alt="이미지 없음"
+                  style={{height: 30, width: 30}}
+                  onClick={
+                    userInfo == null
+                      ? null
+                      : async () => {
+                        if (
+                          $(
+                            "#zzimImgNew" + productNum
+                          ).prop("src") ===
+                          "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
+                        ) {
+                          $(
+                            "#zzimImgNew" + productNum
+                          ).prop(
+                            "src",
+                            "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"
+                          );
+                          await productInterestedFunc(
+                            productNum
+                          );
+                        } else {
+                          await deleteProductLikeItem(
+                            productNum,
+                            $("#zzimImgNew") + productNum
+                          );
+                        }
                       }
-                      alt="이미지 없음"
-                      style={{ height: 30, width: 30 }}
-                      onClick={
-                        userInfo == null
-                          ? null
-                          : async () => {
-                            if (
-                              $(
-                                "#zzimImgNew" + productNum
-                              ).prop("src") ===
-                              "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"
-                            ) {
-                              $(
-                                "#zzimImgNew" + productNum
-                              ).prop(
-                                "src",
-                                "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"
-                              );
-                              await productInterestedFunc(
-                                productNum
-                              );
-                            } else {
-                              await deleteProductLikeItem(
-                                productNum,
-                                $("#zzimImgNew") + productNum
-                              );
-                            }
-                          }
-                      }
-                    />
-                  </div>
-                </div>
-              </li>
+                  }
+                />
+              </div>
+            </div>
+          </li>
         </ul>
-      {/* ========================================================================== */}
+        {/* ========================================================================== */}
       </div>
     </div>
   );
