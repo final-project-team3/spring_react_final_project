@@ -1,4 +1,3 @@
-import DetailRating from "./DetailRating";
 import styled from "styled-components";
 import React, {useState} from "react";
 import './MyReview.css';
