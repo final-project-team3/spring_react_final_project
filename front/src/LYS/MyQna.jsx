@@ -2,6 +2,11 @@ import DetailRating from "./DetailRating";
 import styled from "styled-components";
 import React, {useState} from "react";
 import './MyReview.css';
+import {default as Axios} from "axios";
+
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+})
 
 function MyReview(props) {
 

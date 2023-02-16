@@ -2,10 +2,14 @@ import React, {useCallback, useEffect, useState} from "react";
 import Popup from "./Popup";
 import styled from "styled-components";
 import $ from "jquery";
-import axios from "axios";
+import axios, {default as Axios} from "axios";
 import {useNavigate} from "react-router-dom";
 import data from "bootstrap/js/src/dom/data";
 import user from "../BJH/User";
+
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+})
 
 function UserInfoUpdate() {
     // 유효성 검사 true false 리스트 회원가입과 다르게 true를 4개 준 다음에 유효성 다 통과하면 업데이트
@@ -58,8 +62,8 @@ function UserInfoUpdate() {
     console.log(sessionUserInfo);
 
     useEffect(() => {
-        return async () => {
-            const {data} = await axios.post("http://localhost:8080/getUserInfo", null, {
+        const getUserInfo = async () => {
+            const {data} = await axios.post("/getUserInfo", null, {
                 params: {userId: sessionUserInfo.userId}
             })
             console.log(data);
@@ -72,6 +76,7 @@ function UserInfoUpdate() {
             setUserAddrRoad(data.userAddrRoad);
             setUserAddrDetail(data.userAddrDetail);
         }
+        getUserInfo();
     }, [])
 
 
@@ -161,7 +166,7 @@ function UserInfoUpdate() {
     async function checkTel() {
         var ph = $('#userTel').val(); // ph 저장
         var regExp = /^(010)[0-9]{3,4}[0-9]{4}$/;
-        let {data} = await axios.post("http://localhost:8080/telCheck", null, {
+        let {data} = await axios.post("/telCheck", null, {
             params: {
                 telData: ph
             }
@@ -280,7 +285,7 @@ function UserInfoUpdate() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeW>
-                                        <Input type={'string'} name={"userPass"} id={"userPass"} onClick={()=> {
+                                        <Input type={'string'} name={"userPass"} id={"userPass"} onClick={() => {
                                             checkPw();
                                             checkDoublePw();
                                             checkList[1] = false;
