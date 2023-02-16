@@ -1,33 +1,14 @@
 import React, {useEffect, useState} from "react";
-import axios from "axios";
+import axios, {default as Axios} from "axios";
 import $ from "jquery";
 import FireBaseExample from "./FireBaseExample";
 import {getSpaceUntilMaxLength} from "@testing-library/user-event/dist/utils";
 import {useLocation, useNavigate} from "react-router-dom";
 
-// const tableTest = (props) => {
-//   return (
-//     <tr>
-//       <td>
-//         <input type="text" id={`productOption1${index}`} value={props.option1Value} onChange={()=> {
-//           props.setStateList.
-//         }}/>
-//       </td>
-//       <td>
-//         <input type="text" id={props.id} value={props.option1Value} />
-//       </td>
-//       <td>
-//         <input type="text" id={`productOptionPrice${index}`} value={productOptionPrice[index]}/>
-//       </td>
-//       <td>
-//         <input type="text" id={`productQuantity${index}`} value={productQuantity[index]}/>
-//       </td>
-//       <td>
-//         <input type="text" id={`productCouponUseable${index}`} value={productCouponUseable[index]}/>
-//       </td>
-//     </tr>
-//   )
-// }
+const axios = Axios.create({
+  baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+});
+
 
 const ProductEditPage = () => {
   let sellerInfo = sessionStorage.getItem("sellerInfo");
@@ -57,10 +38,10 @@ const ProductEditPage = () => {
   const [productOptionNum, setProductOptionNum] = useState([]);
 
   useEffect(() => {
-    return () => {
+    const productInfoAll = () => {
       // 제품 info 테이블 데이터 전부
       axios
-        .post("http://localhost:8080/selectProductInfo", null, {
+        .post("/selectProductInfo", null, {
           params: {
             productSellerId: productSellerId,
             productName: productPrevName,
@@ -88,7 +69,7 @@ const ProductEditPage = () => {
           // $("#productImg").prop("src", data.productImg);
 
           const {data2} = axios
-            .post("http://localhost:8080/selectProductKindInfo", null, {
+            .post("/selectProductKindInfo", null, {
               params: {productKindNum: data.productKindNum},
             })
             .then((data2) => {
@@ -107,7 +88,7 @@ const ProductEditPage = () => {
             });
 
           const {data3} = axios
-            .post("http://localhost:8080/selectOptionData", null, {
+            .post("/selectOptionData", null, {
               params: {productNum: data.productNum},
             })
             .then((data3) => {
@@ -141,6 +122,8 @@ const ProductEditPage = () => {
             });
         });
     };
+
+    productInfoAll();
   }, []);
 
   $(function () {
@@ -214,7 +197,7 @@ const ProductEditPage = () => {
     }
 
     await
-      axios.post("http://localhost:8080/editDataUpdate", arrayAll, {
+      axios.post("/editDataUpdate", arrayAll, {
         params: {
           my: "info",
         }
@@ -228,7 +211,7 @@ const ProductEditPage = () => {
         productOptionPrice: productOptionPrice[i],
         productOptionNum: productOptionNum[i],
       };
-      await axios.post("http://localhost:8080/editDataUpdate", arrayAll2, {
+      await axios.post("/editDataUpdate", arrayAll2, {
         params: {
           my: "option",
         }

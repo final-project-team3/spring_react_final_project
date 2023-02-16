@@ -3,7 +3,11 @@ import React, { useRef, useState } from "react";
 import OptionList from "./OptionList";
 import CreateOption from "./CreateOption";
 import user from "../BJH/User";
-import axios from "axios";
+import axios, {default as Axios} from "axios";
+
+const axios = Axios.create({
+  baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+});
 
 function GwakApp() {
   const [iData, setIData] = useState(0);
@@ -54,7 +58,7 @@ function GwakApp() {
   const submitOption = async () => {
     // const config = {"Content-Type": 'application/json'};
 
-    await axios.post("http://localhost:8080/submitOption", users)
+    await axios.post("/submitOption", users)
       .then(res => {
         alert('성공');
         console.log(users);

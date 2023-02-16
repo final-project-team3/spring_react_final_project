@@ -7,7 +7,7 @@ function Test(props) {
 
   const BtnTest = () => {
     useEffect(() => {
-      return async () => {
+      const testbtnTest = async () => {
         const {data} = await axios.post("http://localhost:8080/testData", null, {params: {idx: 1},});
         setTestData(data);
         let url = URL.createObjectURL(data);
@@ -18,6 +18,9 @@ function Test(props) {
         console.log("-----------------------data------------------------");
         console.log(data);
       };
+
+      testbtnTest();
+
     }, [testData]);
   }
   return (
