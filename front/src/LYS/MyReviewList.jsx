@@ -55,9 +55,9 @@ function MyReviewList() {
                     </div>
                 </div>
                 {
-                    myReviewList.slice(offset, offset + limit).map((item, index) => {
+                    myReviewList.slice(offset, offset + limit).map((item) => {
 
-                        return <MyReview key={index} reviewNum={item.reviewNum} id={item.userId}
+                        return <MyReview key={item.reviewNum} reviewNum={item.reviewNum} id={item.userId}
                                          date={item.reviewRegistrationDate}
                                          content={item.reviewContent} productNum={item.productNum}
                                          helpful={item.reviewHelpful} starPoint={item.reviewStarPoint}
