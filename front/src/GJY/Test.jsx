@@ -8,7 +8,7 @@ function Test(props) {
   const BtnTest = () => {
     useEffect(() => {
       const testbtnTest = async () => {
-        const {data} = await axios.post("http://localhost:8080/testData", null, {params: {idx: 1},});
+        const {data} = await axios.post("/testData", null, {params: {idx: 1},});
         setTestData(data);
         let url = URL.createObjectURL(data);
         let img = document.getElementById('image');

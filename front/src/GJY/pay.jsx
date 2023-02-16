@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
-import axios, {default as Axios} from "axios";
+import {default as Axios} from "axios";
 
 const axios = Axios.create({
     baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"

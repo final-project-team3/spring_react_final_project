@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import OptionList from "./OptionList";
 import CreateOption from "./CreateOption";
 import user from "../BJH/User";
-import axios, {default as Axios} from "axios";
+import {default as Axios} from "axios";
 
 const axios = Axios.create({
   baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"

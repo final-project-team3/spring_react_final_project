@@ -3,7 +3,7 @@ import Popup from "../LYS/Popup";
 import styled from "styled-components";
 import Pay from "./pay";
 import {useLocation, useNavigate} from "react-router-dom";
-import axios, {default as Axios} from "axios";
+import {default as Axios} from "axios";
 import $ from 'jquery';
 
 const axios = Axios.create({

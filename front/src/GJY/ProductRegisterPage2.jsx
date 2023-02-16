@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios, {default as Axios} from "axios";
+import {default as Axios} from "axios";
 import data from "bootstrap/js/src/dom/data";
 import $ from "jquery";
 import FileUploadComponent from "./FileUploadComponent";

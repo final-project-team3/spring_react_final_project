@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import axios, {default as Axios} from "axios";
+import {default as Axios} from "axios";
 import $ from "jquery";
 import FireBaseExample from "./FireBaseExample";
 import {getSpaceUntilMaxLength} from "@testing-library/user-event/dist/utils";
