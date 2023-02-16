@@ -2,6 +2,8 @@ import DetailRating from "./DetailRating";
 import styled from "styled-components";
 import React, {useState} from "react";
 import './MyReview.css';
+import {useNavigate} from "react-router-dom";
+import myReviewList from "./MyReviewList";
 
 function MyReview(props) {
 
@@ -12,9 +14,13 @@ function MyReview(props) {
         alert("삭제 되었습니다.");
     }
 
+    const navi = useNavigate();
+
     const reviewUpdate = () => {
         setBtnCheck('/updateMyReview');
+        navi("/myReview");
         alert("수정 되었습니다.");
+
     }
 
     return (

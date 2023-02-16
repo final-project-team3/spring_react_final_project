@@ -42,7 +42,7 @@ public class ReviewRestController {
     public void updateMyReview(ReviewDto reviewDto, HttpServletResponse httpServletResponse) throws IOException {
         System.out.println(reviewDto);
         reviewService.updateMyReview(reviewDto);
-        httpServletResponse.sendRedirect( serverUrl + "/myReview");
+//        httpServletResponse.sendRedirect( serverUrl + "/myReview");
     }
 
     @PostMapping("/writeMyReview")
