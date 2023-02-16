@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./LikeUserList.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import axios, {default as Axios} from "axios";
 import $ from "jquery";
 import Pagination from "../../GJY/Pagination";
+
+
+const axios = Axios.create({
+  baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+});
 
 function LikeUserList(props) {
   let sellerInfo = sessionStorage.getItem("sellerInfo");
@@ -18,9 +23,9 @@ function LikeUserList(props) {
   const offset = (page - 1) * limit;
 
   useEffect(() => {
-    return async () => {
+    const interestedUserListAll = async () => {
       const { data } = await axios.post(
-        "http://localhost:8080/getInterestedUserList",
+        "/getInterestedUserList",
         null,
         {
           params: { sellerBusinessName: sellerInfo.sellerBusinessName },
@@ -30,6 +35,7 @@ function LikeUserList(props) {
       console.log(data);
       setInterestedListData(data);
     };
+    interestedUserListAll();
   }, []);
 
   return (

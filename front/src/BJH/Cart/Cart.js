@@ -3,8 +3,11 @@ import styled from "styled-components";
 import {useLocation} from "react-router-dom";
 // import Header from "../../components/Nav/Header";
 // import Footer from "../../components/Footer/Footer";
-import axios from "axios";
+import {default as Axios} from "axios";
 
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+});
 // import CartList from "./CartList";
 
 function Cart() {

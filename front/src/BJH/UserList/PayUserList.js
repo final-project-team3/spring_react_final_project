@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
 import './LikeUserList.css';
 import {Link} from "react-router-dom";
-import axios from "axios";
+import {default as Axios} from "axios";
 import Pagination from "../../GJY/Pagination";
 // import Pagination from "./Pagination";
 import "../../Fonts/Font.css";
-
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+});
 
 
 
@@ -23,14 +25,15 @@ function PayUserList(props) {
     const offset = (page - 1) * limit;
 
     useEffect(() => {
-        return async () => {
-            const {data} = await axios.post("http://localhost:8080/getPayUserList", null, {
+        const payUserListAll = async () => {
+            const {data} = await axios.post("/getPayUserList", null, {
                 params: {sellerBusinessName: sellerInfo.sellerBusinessName},
             });
 
             console.log(data);
             setOrderListData(data);
         };
+        payUserListAll();
     }, []);
 
     return (

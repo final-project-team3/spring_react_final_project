@@ -1,8 +1,12 @@
 import React, {useEffect, useState} from "react";
 import './LikeUserList.css';
 import {Link} from "react-router-dom";
-import axios from "axios";
+import {default as Axios} from "axios";
 import Swal from "sweetalert2";
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+});
+
 
 function LikeProduct(props) {
     let userInfo = sessionStorage.getItem("userInfo");
@@ -23,7 +27,7 @@ function LikeProduct(props) {
             cancelButtonText: '취소',
         }).then((req) => {
             if (req.isConfirmed) {
-                axios.post("http://localhost:8080/deleteProductLikeItem", null, {
+                axios.post("/deleteProductLikeItem", null, {
                     params: {
                         userId: userInfo.userId,
                         productNum: productNum
@@ -42,10 +46,12 @@ function LikeProduct(props) {
     }
 
     useEffect(() => {
-        return async () => {
-            const {data} = await axios.get("http://localhost:8080/getLikeProducts", {params: {userId: userInfo.userId}})
+        const likeProductsAll = async () => {
+            const {data} = await axios.get("/getLikeProducts", {params: {userId: userInfo.userId}})
             setProductLikeInfoList(data);
         }
+
+        likeProductsAll();
     }, [])
 
     return (

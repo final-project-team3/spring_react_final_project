@@ -2,10 +2,13 @@ import React, {Component, useState} from "react";
 import './loginSearch.css';
 import styled from "styled-components";
 import $ from "jquery";
-import axios from "axios";
+import {default as Axios} from "axios";
 import Swal from "sweetalert2";
 import {useNavigate} from "react-router-dom";
 
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+});
 
 function PasswordSearch() {
 
@@ -18,7 +21,7 @@ function PasswordSearch() {
     async function checkMail() {
         var mail = $('#userId').val();
         setMail(mail);
-        let {data} = await axios.post("http://localhost:8080/getEmailUserInfo", null, {
+        let {data} = await axios.post("/getEmailUserInfo", null, {
             params: {
                 email: mail
             }
@@ -96,7 +99,7 @@ function PasswordSearch() {
                     }
                     console.log(trueCnt);
                     if (trueCnt == 2) {
-                        await axios.post("http://localhost:8080/postPassMail", null, {
+                        await axios.post("/postPassMail", null, {
                             params: {
                                 mail: mail
                             }
