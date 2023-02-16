@@ -2,10 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {useLocation, useParams} from "react-router-dom";
 import RegistRating from "./RegistRating";
 import styled from "styled-components";
-import axios from "axios";
+import {default as Axios} from "axios";
 import swal from "sweetalert";
 import $ from "jquery";
 import data from "bootstrap/js/src/dom/data";
+
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+})
 
 function QnaWrite(props) {
     const {productNum} = useParams();
@@ -19,14 +23,15 @@ function QnaWrite(props) {
     const {pathname} = location.state.pathname;
 
     useEffect(() => {
-        return async () => {
-            const {data} = await axios.get("http://localhost:8080/getProductInfoFromDetail", {
+        const getProductInfoFromDetail = async () => {
+            const {data} = await axios.get("/getProductInfoFromDetail", {
                 params: {
                     productNum: productNum,
                 }
             })
             setProductInfo(data.productInfo);
         }
+        getProductInfoFromDetail();
     }, [])
 
     const writeQna = () => {
@@ -101,7 +106,8 @@ function QnaWrite(props) {
                                                         <div className="my-review__modify__review__content">
                                                             <div
                                                                 className="my-review__modify__review__content__text-wrap">
-                                                            <textarea name={'qnaContent'} id={'qnaContent'} value={qnaContent} style={{fontSize: 20}}
+                                                            <textarea name={'qnaContent'} id={'qnaContent'}
+                                                                      value={qnaContent} style={{fontSize: 20}}
                                                                       className="my-review__modify__review__content__text-area"
                                                                       placeholder="상품에 대한 궁금한 점을 작성해주세요. (10자 이상)"></textarea>
                                                             </div>
@@ -119,13 +125,16 @@ function QnaWrite(props) {
                                         </div>
                                         <div className={"text-md-start"}>
                                             <div className={"review_content"}>
-                                                <input hidden={true} name={'userId'} id={'userId'} value={userInfo.userId}/>
-                                                <input hidden={true} name={'productNum'} id={'productNum'} value={productNum}/>
+                                                <input hidden={true} name={'userId'} id={'userId'}
+                                                       value={userInfo.userId}/>
+                                                <input hidden={true} name={'productNum'} id={'productNum'}
+                                                       value={productNum}/>
                                             </div>
                                         </div>
                                         <div className={"text-md-start"}>
                                             <div className={"ui-button col-6 my-2"}>
-                                                <WriteButton id={"btn-write"} className={"btn btn-primary"} onClick={writeQna} type="button">문의 등록</WriteButton>
+                                                <WriteButton id={"btn-write"} className={"btn btn-primary"}
+                                                             onClick={writeQna} type="button">문의 등록</WriteButton>
                                             </div>
                                         </div>
                                         <hr/>

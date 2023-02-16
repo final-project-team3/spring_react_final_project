@@ -1,10 +1,14 @@
-import axios from "axios";
+import {default as Axios} from "axios";
 import React from "react";
 import styled from "styled-components";
 import Popup from "./Popup";
 import $ from "jquery";
 import {useNavigate} from "react-router-dom";
 import {string} from "prop-types";
+
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+})
 
 function SellerSignUp() {
     //메인페이지 이동
@@ -120,7 +124,7 @@ function SellerSignUp() {
     async function checkTel() {
         var ph = $('#sellerTel').val(); // ph 저장
         var regExp = /^(010)[0-9]{3,4}[0-9]{4}$/;
-        let {data} = await axios.post("http://localhost:8080/telCheck2", null, {
+        let {data} = await axios.post("/telCheck2", null, {
             params: {
                 telData: ph
             }
@@ -161,7 +165,7 @@ function SellerSignUp() {
     async function checkMail() {
         var mail = $('#sellerId').val();
         var regExp = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-        let {data} = await axios.post("http://localhost:8080/emailCheck2", null, {
+        let {data} = await axios.post("/emailCheck2", null, {
             params: {
                 email: mail
             }
@@ -329,7 +333,7 @@ function SellerSignUp() {
      * */
     const sendEmail = async () => {
         $("#emailCheck").attr('hidden', false);
-        const {data} = await axios.post('http://localhost:8080/emailConfirm', null, {params: {email: $("#sellerId").val()}});
+        const {data} = await axios.post('/emailConfirm', null, {params: {email: $("#sellerId").val()}});
         confirmNum = data;
         console.log(confirmNum);
     }
@@ -349,7 +353,7 @@ function SellerSignUp() {
     //사업자명
     async function businessNameCheck() {
         var bName = $('#businessName').val();
-        let {data} = await axios.post("http://localhost:8080/businessNameCheck", null, {
+        let {data} = await axios.post("/businessNameCheck", null, {
             params: {
                 businessNameData: bName
             }
@@ -377,7 +381,7 @@ function SellerSignUp() {
     //사업자 등록번호 business_num_ok business_num_blank business_num_exist business_num_not10
     async function businessNumCheck() {
         var bNum = $('#businessNum').val();
-        let {data} = await axios.post("http://localhost:8080/businessNumCheck", null, {
+        let {data} = await axios.post("/businessNumCheck", null, {
             params: {
                 businessNumData: bNum
             }

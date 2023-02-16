@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from "react";
 import DetailRating from "./DetailRating";
 import styled from "styled-components";
-import axios from "axios";
+import {default as Axios} from "axios";
 import './MyReview.css';
 import MyReview from "./MyReview";
 import Pagination from "../GJY/Pagination";
+
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+})
 
 function MyReviewList() {
 
@@ -20,12 +24,17 @@ function MyReviewList() {
     userInfo = JSON.parse(userInfo);
 
     useEffect(() => {
-        axios.post('http://localhost:8080/getMyReview', null, {params: {userId: userInfo.userId}})
-            .then((req) => {
-                const {data} = req;
-                setMyReviewList(data);
-                console.log(data);
-            })
+        const getMyReview = async () => {
+            axios.post('/getMyReview', null, {params: {userId: userInfo.userId}})
+                .then((req) => {
+                    const {data} = req;
+                    setMyReviewList(data);
+                    console.log(data);
+                })
+        };
+
+        getMyReview();
+
     }, []);
 
     return (

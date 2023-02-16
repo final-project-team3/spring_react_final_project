@@ -1,22 +1,30 @@
 import React, {useEffect, useState} from "react";
 import './ProductQna.css';
-import axios from "axios";
+import {default as Axios} from "axios";
 import {useParams} from "react-router-dom";
+
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+})
+
 
 function ProductQna(props) {
     const {productNum} = useParams();
     const [productInfo, setProductInfo] = useState();
 
     useEffect(() => {
-        return async () => {
-            const {data} = await axios.get("http://localhost:8080/getProductInfoFromDetail", {
+        const getProductInfoFromDetail = async () => {
+            const {data} = await axios.get("/getProductInfoFromDetail", {
                 params: {
                     productNum: productNum,
                 }
             })
             setProductInfo(data.productInfo);
-        }
-    }, [])
+        };
+
+        getProductInfoFromDetail();
+
+    }, []);
 
     return (
         <li className="product-qna tab-contents__content">
@@ -46,7 +54,8 @@ function ProductQna(props) {
                                 <i className="prod_inquiry-item__reply__icon"></i>
                                 <div className="prod-inquiry-item__reply__wrap">
                                     <div className={"row"}>
-                                        <strong className="prod-inquiry-item__reply__author col-6">{`${productInfo?.productSellerBusinessName}`}</strong>
+                                        <strong
+                                            className="prod-inquiry-item__reply__author col-6">{`${productInfo?.productSellerBusinessName}`}</strong>
                                         <p className={"col-6"}
                                            style={{alignItems: "end", margin: 0, padding: 0}}>{props.qnaState}</p>
                                     </div>

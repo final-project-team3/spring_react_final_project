@@ -1,6 +1,11 @@
 import React, {useState, useEffect} from "react";
 import {FaStar} from 'react-icons/fa';
 import styled from "styled-components";
+import {default as Axios} from "axios";
+
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+})
 
 
 const ARRAY = [0, 1, 2, 3, 4];

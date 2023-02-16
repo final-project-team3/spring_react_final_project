@@ -1,10 +1,14 @@
-import axios from "axios";
+import {default as Axios} from "axios";
 import React, {useState, useEffect} from "react";
 import {useNavigate} from 'react-router-dom';
 import styled from "styled-components";
 import Popup from "./Popup";
 import jquery from 'jquery';
 import $ from 'jquery';
+
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+})
 
 
 function UserSignUp() {
@@ -113,7 +117,7 @@ function UserSignUp() {
     async function checkTel() {
         var ph = $('#userTel').val(); // ph 저장
         var regExp = /^(010)[0-9]{3,4}[0-9]{4}$/;
-        let {data} = await axios.post("http://localhost:8080/telCheck", null, {
+        let {data} = await axios.post("/telCheck", null, {
             params: {
                 telData: ph
             }
@@ -154,7 +158,7 @@ function UserSignUp() {
     async function checkMail() {
         var mail = $('#userId').val();
         var regExp = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-        let {data} = await axios.post("http://localhost:8080/emailCheck", null, {
+        let {data} = await axios.post("/emailCheck", null, {
             params: {
                 email: mail
             }
@@ -321,7 +325,7 @@ function UserSignUp() {
      * */
     const sendEmail = async () => {
         $("#emailCheck").attr('hidden', false);
-        const {data} = await axios.post('http://localhost:8080/emailConfirm', null, {params: {email: $("#userId").val()}});
+        const {data} = await axios.post('/emailConfirm', null, {params: {email: $("#userId").val()}});
         confirmNum = data;
         console.log(confirmNum);
     }

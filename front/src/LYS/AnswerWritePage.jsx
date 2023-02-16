@@ -2,7 +2,11 @@ import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {Link, useLocation, useParams} from "react-router-dom";
 import $ from "jquery";
-import axios from "axios";
+import {default as Axios} from "axios";
+
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+})
 
 function AnswerWritePage(props) {
     const location = useLocation();

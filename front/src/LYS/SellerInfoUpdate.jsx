@@ -2,8 +2,12 @@ import React, {useCallback, useEffect, useState} from "react";
 import styled from "styled-components";
 import Popup from "./Popup";
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
+import {default as Axios} from "axios";
 import $ from "jquery";
+
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+})
 
 function SellerInfoUpdate() {
     let checkList = [];
@@ -53,8 +57,8 @@ function SellerInfoUpdate() {
     sessionSellerInfo = JSON.parse(sessionSellerInfo);
 
     useEffect(() => {
-        return async () => {
-            const {data} = await axios.post("http://localhost:8080/getSellerInfo", null, {
+        const getSellerInfo = async () => {
+            const {data} = await axios.post("/getSellerInfo", null, {
                 params: {sellerId: sessionSellerInfo.sellerId}
             })
             console.log(data);
@@ -67,6 +71,7 @@ function SellerInfoUpdate() {
             setSellerAddrRoad(data.sellerAddrRoad);
             setSellerAddrDetail(data.sellerAddrDetail);
         }
+        getSellerInfo();
     }, [])
 
     // 주소 체크
