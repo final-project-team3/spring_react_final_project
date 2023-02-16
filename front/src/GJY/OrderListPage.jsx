@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from "react";
-import axios from "axios";
+import {default as Axios} from "axios";
 import Pagination from "./Pagination";
 import PaymentPage from "./PaymentPage";
 import {Link} from "react-router-dom";
 import $ from 'jquery';
+
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+})
 
 function OrderListPage(props) {
 
@@ -35,14 +39,16 @@ function OrderListPage(props) {
     const offset = (page - 1) * limit;
 
     useEffect(() => {
-        return async () => {
-            const {data} = await axios.post("http://localhost:8080/order", null, {
+        const orderList = async () => {
+            const {data} = await axios.post("/order", null, {
                 params: {id: userInfo.userId},
             });
             console.log(data);
             setOrderListData(data);
             console.log(orderListData);
         };
+
+        orderList();
 
     }, []);
 
