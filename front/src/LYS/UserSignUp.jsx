@@ -10,7 +10,6 @@ const axios = Axios.create({
     baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
 })
 
-
 function UserSignUp() {
     const navigate = useNavigate();
     const toMain = () => {
