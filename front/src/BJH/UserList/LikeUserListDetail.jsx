@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import {default as Axios} from "axios";
 import ApexCharts from "react-apexcharts";
 import "../../Fonts/Font.css";
+const axios = Axios.create({
+  baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+});
 
 function LikeUserListDetail(props) {
   const { productNum } = useParams(); // 넘어온 productNum
@@ -16,9 +19,9 @@ function LikeUserListDetail(props) {
   const [gene, setGene] = useState([]);
 
   useEffect(() => {
-    return async () => {
+    const getZzimDetailAll = async () => {
       const { data } = await axios.post(
-        "http://localhost:8080/getZzimDetail",
+        "/getZzimDetail",
         null,
         {
           params: {
@@ -29,12 +32,13 @@ function LikeUserListDetail(props) {
       setGetZzimDetail(data);
       setTotalUser(data.length); // 총 인원수
     };
+    getZzimDetailAll();
   }, []);
 
   useEffect(() => {
-    return async () => {
+    const genderCountAll = async () => {
       const { data } = await axios.post(
-        "http://localhost:8080/genderCount",
+        "/genderCount",
         null,
         {
           params: {
@@ -62,6 +66,8 @@ function LikeUserListDetail(props) {
       console.log("totalUser : ");
       console.log(totalUser);
     };
+
+    genderCountAll();
   }, []);
 
   const [generationData, setGenerationData] = useState([]);
@@ -69,9 +75,9 @@ function LikeUserListDetail(props) {
   const [humanCountArray, setHumanCountArray] = useState([]);
 // 연령별 통계데이터받아오기
   useEffect(() => {
-    return async () => {
+    const generationDataAll = async () => {
       const { data } = await axios.post(
-        "http://localhost:8080/getGenerationData",
+        "/getGenerationData",
         null,
         {
           params: {
@@ -99,6 +105,8 @@ function LikeUserListDetail(props) {
         setGene(generationArray[maxIndex]);
       }
     };
+
+    generationDataAll();
   }, []);
 
 //

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import {default as Axios} from "axios";
 import data from "bootstrap/js/src/dom/data";
 import $ from "jquery";
 import FileUploadComponent from "./FileUploadComponent";
@@ -8,6 +8,10 @@ import Select from "react-select";
 import user from "../BJH/User";
 import { element } from "prop-types";
 import FireBaseExample from "./FireBaseExample";
+
+const axios = Axios.create({
+  baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+});
 
 function ProductRegisterPage2() {
   let sellerInfo = sessionStorage.getItem("sellerInfo");
@@ -100,17 +104,18 @@ function ProductRegisterPage2() {
 
   // 대분류, 소분류
   useEffect(() => {
-    return async () => {
-      const { data } = await axios.post("http://localhost:8080/selectList");
+    const BigAndSmall = async () => {
+      const { data } = await axios.post("/selectList");
       setBigKind(data);
     };
+    BigAndSmall();
   }, []);
 
   const getSmallKinds = async (e) => {
     $("#selectBigKind").val(e.target.value).prop("selected", true);
 
     const { data } = await axios.post(
-      "http://localhost:8080/selectSmallList",
+      "/selectSmallList",
       null,
       { params: { productKind: e.target.value } }
     );
@@ -128,7 +133,7 @@ function ProductRegisterPage2() {
 
     setProductNameCheckFlag(true);
     const { data } = await axios.post(
-      "http://localhost:8080/productNameCheck",
+      "/productNameCheck",
       null,
       {
         params: { productName: productName, productSellerId: productSellerId },
@@ -206,7 +211,7 @@ function ProductRegisterPage2() {
       setImageData(imageData);
 
       const { data } = await axios.post(
-        "http://localhost:8080/productInfoInsert",
+        "/productInfoInsert",
         productList
       );
 
@@ -217,7 +222,7 @@ function ProductRegisterPage2() {
       console.log(optionList);
 
       axios
-        .post("http://localhost:8080/productOptionInsert", optionList)
+        .post("/productOptionInsert", optionList)
         .then(() => {
           console.log("성공");
         })

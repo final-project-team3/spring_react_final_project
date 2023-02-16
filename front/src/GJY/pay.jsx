@@ -1,6 +1,10 @@
 import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
+import {default as Axios} from "axios";
+
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+});
 
 const Payment = (props) => {
     const navi = useNavigate();
@@ -11,10 +15,13 @@ const Payment = (props) => {
         iamport.src = "https://cdn.iamport.kr/js/iamport.payment-1.1.7.js";
         document.head.appendChild(jquery);
         document.head.appendChild(iamport);
-        return () => {
+
+        const returnData = () => {
             document.head.removeChild(jquery);
             document.head.removeChild(iamport);
         }
+
+        returnData();
     }, []);
 
     function randomString() {
@@ -52,7 +59,7 @@ const Payment = (props) => {
         if (success) {
             alert('결제 성공');
             let orderNum = randomString();
-            await axios.post("http://localhost:8080/insertOrderList", {
+            await axios.post("/insertOrderList", {
                 userId: props.deliveryId,
                 productNum: props.productNum,
                 productOrderQuantity: props.productOrderQuantity,

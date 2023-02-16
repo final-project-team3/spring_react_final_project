@@ -3,8 +3,12 @@ import Popup from "../LYS/Popup";
 import styled from "styled-components";
 import Pay from "./pay";
 import {useLocation, useNavigate} from "react-router-dom";
-import axios from "axios";
+import {default as Axios} from "axios";
 import $ from 'jquery';
+
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+});
 
 const styles = {
     vertical: {
@@ -78,11 +82,12 @@ function PaymentPage(props) {
 
 
     useEffect(() => {
-        return async () => {
-            const {data} = await axios.get("http://localhost:8080/getProductSellerInfo", {params: {productNum: productNum}});
+        const sellerInfoAll = async () => {
+            const {data} = await axios.get("/getProductSellerInfo", {params: {productNum: productNum}});
             setSellerInfo(data);
             console.log(data);
         }
+        sellerInfoAll();
     }, [])
 
     const showMoney = value => {

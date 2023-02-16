@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./LikeUserList.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import {default as Axios} from "axios";
 import $ from "jquery";
 import Pagination from "../../GJY/Pagination";
+
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+});
 
 function MyProductList(props) {
     let sellerInfo = sessionStorage.getItem("sellerInfo");
@@ -17,9 +21,8 @@ function MyProductList(props) {
     const offset = (page - 1) * limit;
 
     const deleteProduct = async (productNum) => {
-
         if (window.confirm("정말 삭제하시겠습니까?")) {
-            await axios.post("http://localhost:8080/deleteProduct", null, {params:{productNum:productNum}});
+            await axios.post("/deleteProduct", null, {params:{productNum:productNum}});
             window.location.reload();
         } else {
             alert("삭제가 취소되었습니다.");
@@ -27,9 +30,9 @@ function MyProductList(props) {
     }
 
     useEffect(() => {
-        return async () => {
+        const sellerIdProductListAll = async () => {
             const { data } = await axios.get(
-                "http://localhost:8080/getSellerIdProductList",
+                "/getSellerIdProductList",
                 {
                     params: { sellerId: sellerInfo.sellerId },
                 }
@@ -37,6 +40,7 @@ function MyProductList(props) {
             console.log(data);
             setProductList(data);
         };
+        sellerIdProductListAll();
     }, []);
 
     return (
