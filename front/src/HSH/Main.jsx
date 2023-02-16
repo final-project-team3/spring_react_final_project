@@ -6,8 +6,12 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import axios from "axios";
+import {default as Axios} from "axios";
 import Swal from "sweetalert2";
+
+const axios = Axios.create({
+  baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+})
 
 {
   /*BJH 시작*/
@@ -82,7 +86,7 @@ const Main = () => {
     } else {
       // 이미 찜한 상품인지 비교해서 있으면 1 반환 시킴 없으면 insert
       await axios
-        .get("http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com/productInterestedInsert", {
+        .get("/productInterestedInsert", {
           params: {
             productNum: productNum,
             userId: userInfo?.userId,
@@ -140,7 +144,7 @@ const Main = () => {
       cancelButtonText: "취소",
     }).then((req) => {
       if (req.isConfirmed) {
-        axios.post("http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com/deleteProductLikeItem", null, {
+        axios.post("/deleteProductLikeItem", null, {
           params: {
             userId: userInfo.userId,
             productNum: productNum,
@@ -203,25 +207,20 @@ const Main = () => {
   const [thisMonthData, setThisMonthData] = useState([]);
   const recentProduct = async () => {
     const { data } = await axios.post(
-      "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com/thisMonthData",
+      "/thisMonthData",
       null,
       null
     );
     console.log("통신"+data[0]);
     setThisMonthData(data);
   };
+
   useEffect(() => {
-
-
-    recentProduct();
-
-    // axios.post("http://localhost:8080/thisMonthData").then(res=>{
-    //   console.log("메인화면엑시오스"+ res.data);
-    // }).catch(e=>{
-    //   console.log(e);
-    // })
-
-
+    recentProduct().then(res => {
+      console.log("확인용 통신" + res);
+    }).catch(e => {
+      console.log("확인용 통신 에러" + e);
+    })
 
   }, []);
 
@@ -230,7 +229,7 @@ const Main = () => {
   // weekly 시옷's pick : 랜덤 7개 가져와서 순서대로 4개, 3개 할당 ( + 이번주로 date 한정?)
   const mainItem7ea = async () => {
     const { data } = await axios.post(
-      "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com/randomData");
+      "/randomData");
     console.log(data);
     const slice3 = data.slice(0, 3);
     console.log(slice3);
@@ -248,7 +247,7 @@ const Main = () => {
   // 좋아요 리스트
   const likeList = async () => {
     const { data } = await axios.post(
-      "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com/selectLikeData",
+      "/selectLikeData",
       null,
       {
         params: {
