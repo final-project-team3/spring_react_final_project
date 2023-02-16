@@ -2,11 +2,15 @@ import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import $ from "jquery";
-import axios from "axios";
+import {default as Axios} from "axios";
 import {sellerLogin, userLogin} from "../store";
 import styled from "styled-components";
 
 const Login = () => {
+
+    const axios = Axios.create({
+        baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+    })
 
     const dispatch = useDispatch();
     const navi = useNavigate();
@@ -19,7 +23,7 @@ const Login = () => {
         const id = $("#id").val();
         const pass = $("#pass").val();
 
-        const {data} = await axios.post(`http://localhost:8080/${loginChange}`, null, {
+        const {data} = await axios.post(`/${loginChange}`, null, {
             params: {
                 id: id, pass: pass
             }

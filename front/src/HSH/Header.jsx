@@ -2,7 +2,7 @@ import {Link, Outlet, useLocation, useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import {hover} from "@testing-library/user-event/dist/hover";
-import axios from "axios";
+import {default as Axios} from "axios";
 import $ from 'jquery';
 import Footer from "../BJH/Footer";
 import {useDispatch, useSelector} from "react-redux";
@@ -75,6 +75,10 @@ const Kind = (props) => {
 }
 
 const Header = () => {
+
+  const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+  })
   // 실시간 검색
   const getNowTime = () => {
     var today = new Date();
@@ -103,17 +107,18 @@ const Header = () => {
   const [searchTop10, setSearchTop10] = useState([]);
 
   useEffect(() => {
-    return async () => {
-      const {data} = await axios.get("http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com/getSearchTotal10");
+    const getSearchTotal10 = async () => {
+      const {data} = await axios.get("/getSearchTotal10");
       // console.log(data);
       setSearchTop10(data);
 
     }
+    getSearchTotal10()
   }, [])
 
   const minute = 60000;
   const timer = setInterval(async () => {
-    const {data} = await axios.get("http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com/getSearchTotal10");
+    const {data} = await axios.get("/getSearchTotal10");
     setSearchTop10(data);
     setNowTime(getNowTime);
     clearInterval(timer);
@@ -173,13 +178,13 @@ const Header = () => {
 
 
   useEffect(() => {
-    axios.post("http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com/getKind")
+    axios.post("/getKind")
       .then((req) => {
         const {data} = req;
         setBigKind(data);
 
         data.map((item, index, dataList) => {
-          axios.post("http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com/getSmallKind", null, {
+          axios.post("/getSmallKind", null, {
             params: {bigKind: item.productGender}
           })
             .then((req2) => {

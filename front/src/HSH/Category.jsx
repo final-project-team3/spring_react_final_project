@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useLocation, useParams} from "react-router-dom";
-import axios from "axios";
+import {default as Axios} from "axios";
 import $ from "jquery";
 import ListItem from "./ListItem";
 
 const Category = () => {
+    const axios = Axios.create({
+        baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+    })
+
     const {bigKind, smallKind} = useParams();
 
     const [categoryData, setCategoryData] = useState([]);
@@ -14,15 +18,16 @@ const Category = () => {
     const locationPath = location.pathname;
 
     useEffect(() => {
-        return async () => {
+        const categoryProductList = async () => {
 
-            const {data} = await axios.get("http://localhost:8080/categoryProductList", {
+            const {data} = await axios.get("/categoryProductList", {
                 params: {bigKind: bigKind, smallKind: smallKind}
             });
             console.log(data);
 
             setCategoryData(data);
         }
+        categoryProductList();
     }, [locationPath])
 
     return (

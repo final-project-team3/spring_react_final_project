@@ -7,11 +7,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import {default as Axios} from "axios";
-import Swal from "sweetalert2";
 
+import Swal from "sweetalert2";
 const axios = Axios.create({
   baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
 })
+
 
 {
   /*BJH 시작*/

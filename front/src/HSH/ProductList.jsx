@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from "react";
-import axios from "axios";
+import {default as Axios} from "axios";
 import {Link} from "react-router-dom";
 
 function ProductList(props) {
+
+    const axios = Axios.create({
+        baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+    })
     const [productList, setProductList] = useState([]);
     useEffect(() => {
-        return async () => {
-            const {data} = await axios.get("http://localhost:8080/getProductList");
+        const getProductList = async () => {
+            const {data} = await axios.get("/getProductList");
             setProductList(data);
         }
+        getProductList();
     }, [])
     return (
         <div>

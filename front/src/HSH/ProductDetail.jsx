@@ -2,7 +2,7 @@ import logo from '../logo.svg';
 import '../App.css';
 import Review from "../LYS/Review";
 import React, {useEffect, useState} from "react";
-import axios from "axios";
+import {default as Axios} from "axios";
 import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import Pagination from "../GJY/Pagination";
 import $ from 'jquery';
@@ -12,6 +12,10 @@ import Swal from "sweetalert2";
 import './ProductDetail.css';
 
 function ProductDetail(props) {
+
+    const axios = Axios.create({
+        baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+    })
     const {productNum} = useParams();
     const [optionValue, setOptionValue] = useState();
     const [buyList, setBuyList] = useState([]);
@@ -55,7 +59,7 @@ function ProductDetail(props) {
     const [reviewCheck, setReviewCheck] = useState(true);
 
     useEffect(() => {
-        axios.post('http://localhost:8080/getReview', null, {params: {productNum: productNum}})
+        axios.post('/getReview', null, {params: {productNum: productNum}})
             .then((req) => {
                 const {data} = req;
                 setReviewList(data);
@@ -63,7 +67,7 @@ function ProductDetail(props) {
     }, []);
 
     useEffect(() => {
-        axios.post('http://localhost:8080/getQna', null, {params: {productNum: productNum}})
+        axios.post('/getQna', null, {params: {productNum: productNum}})
             .then((req) => {
                 const {data} = req;
                 setQnaList(data);
@@ -71,8 +75,8 @@ function ProductDetail(props) {
     }, [])
 
     useEffect(() => {
-        return async () => {
-            const {data} = await axios.get("http://localhost:8080/getProductInfoFromDetail", {
+        const getProductInfoFromDetail = async () => {
+            const {data} = await axios.get("/getProductInfoFromDetail", {
                 params: {
                     productNum: productNum
                 }
@@ -83,6 +87,7 @@ function ProductDetail(props) {
             setProductInfo(productInfo)
             setProductOption(productOption);
         }
+        getProductInfoFromDetail();
     }, [])
 
     const pathname = useLocation();

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import axios from "axios";
+import {default as Axios} from "axios";
 import Swal from "sweetalert2";
 import $ from "jquery";
 
@@ -15,6 +15,10 @@ const ListItem = ({
   const navi = useNavigate();
   const {pathname} = useLocation();
 
+  const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+  })
+
   /**
    * 찜 하는 함수
    */
@@ -28,7 +32,7 @@ const ListItem = ({
   // 좋아요 리스트
   const likeList = async () => {
     const {data} = await axios.post(
-      "http://localhost:8080/selectLikeData",
+      "/selectLikeData",
       null,
       {
         params: {
@@ -66,7 +70,7 @@ const ListItem = ({
       cancelButtonText: "취소",
     }).then((req) => {
       if (req.isConfirmed) {
-        axios.post("http://localhost:8080/deleteProductLikeItem", null, {
+        axios.post("/deleteProductLikeItem", null, {
           params: {
             userId: userInfo.userId,
             productNum: productNum,
@@ -114,7 +118,7 @@ const ListItem = ({
     } else {
       // 이미 찜한 상품인지 비교해서 있으면 1 반환 시킴 없으면 insert
       await axios
-        .get("http://localhost:8080/productInterestedInsert", {
+        .get("/productInterestedInsert", {
           params: {
             productNum: productNum,
             userId: userInfo.userId,
@@ -176,61 +180,6 @@ const ListItem = ({
               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
           </h5>
         </Link>
-
-        {/* 찜 */}
-        {/*<Link onClick={() => productInterestedFunc(productNum)}>*/}
-        {/*  /!*<img className={'me-3'} width={30} src={"../Img/Bjh/wish.png"}/>*!/*/}
-        {/*  <img*/}
-        {/*    id={"#zzimImg4" + productNum}*/}
-        {/*    className={"me-3"}*/}
-        {/*    width={30}*/}
-        {/*    src={*/}
-        {/*      userInfo == null || userInfo === ""*/}
-        {/*        ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"*/}
-        {/*        : interestedIndex.indexOf(*/}
-        {/*          productNum*/}
-        {/*        ) < 0*/}
-        {/*          ? "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"*/}
-        {/*          : "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"*/}
-        {/*    }*/}
-        {/*    alt="이미지 없음"*/}
-        {/*    style={{ height: 30, width: 30 }}*/}
-        {/*    onClick={*/}
-        {/*      userInfo == null*/}
-        {/*        ? async () => {*/}
-        {/*          await productInterestedFunc(*/}
-        {/*            productNum*/}
-        {/*          );*/}
-        {/*        }*/}
-        {/*        : async () => {*/}
-        {/*          if (*/}
-        {/*            $(*/}
-        {/*              "#zzimImg4" + productNum*/}
-        {/*            ).prop("src") ===*/}
-        {/*            "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%ED%95%98%ED%8A%B8.png?alt=media&token=292bcb42-8d8e-4f7e-adfb-0d552e1c43d1"*/}
-        {/*          ) {*/}
-        {/*            await productInterestedFunc(*/}
-        {/*              productNum*/}
-        {/*            );*/}
-        {/*            $(*/}
-        {/*              "#zzimImg4" + productNum*/}
-        {/*            ).prop(*/}
-        {/*              "src",*/}
-        {/*              "https://firebasestorage.googleapis.com/v0/b/react-20f81.appspot.com/o/lee%2F%EB%B9%A8%EA%B0%84%ED%95%98%ED%8A%B8.png?alt=media&token=45bead7a-ee77-4f63-b39b-92731dc91d19"*/}
-        {/*            );*/}
-        {/*          } else {*/}
-        {/*            await deleteProductLikeItem(*/}
-        {/*              productNum,*/}
-        {/*              $(*/}
-        {/*                "#zzimImg4" + productNum*/}
-        {/*              )*/}
-        {/*            );*/}
-        {/*          }*/}
-        {/*        }*/}
-        {/*    }*/}
-        {/*  />*/}
-        {/*</Link>*/}
-
 
         {/* =================================================================== */}
         <ul className={"prdList grid4"}>

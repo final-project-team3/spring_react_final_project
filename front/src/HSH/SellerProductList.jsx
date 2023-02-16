@@ -1,16 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
-import axios from "axios";
+import {default as Axios} from "axios";
 import ListItem from "./ListItem";
 
 const SellerProductList = () => {
+
+    const axios = Axios.create({
+        baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+    })
     const {productSellerBusinessName} = useParams();
     const [sellerInfo, setSellerInfo] = useState();
     const [sellerProductList, setSellerProductList] = useState([]);
 
     useEffect(() => {
-        return async () => {
-            const {data} = await axios.get('http://localhost:8080/getSellerProductList', {
+        const getSellerProductList = async () => {
+            const {data} = await axios.get('/getSellerProductList', {
                 params: {
                     productSellerBusinessName: productSellerBusinessName
                 }
@@ -19,6 +23,7 @@ const SellerProductList = () => {
             setSellerInfo(data.sellerInfo);
             setSellerProductList(data.sellerProductList);
         }
+        getSellerProductList();
     }, [])
 
     return (

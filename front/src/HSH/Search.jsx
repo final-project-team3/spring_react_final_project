@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {Link, useLocation, useParams} from "react-router-dom";
-import axios from "axios";
+import {default as Axios} from "axios";
 import $ from "jquery";
 import ListItem from "./ListItem";
 
 
 const Search = () => {
+    const axios = Axios.create({
+        baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+    })
 
 
     // 검색 결과가 있는지 체크(실시간 검색을 위함)
@@ -26,9 +29,9 @@ const Search = () => {
     });
 
     useEffect(() => {
-        return async () => {
+        const getSearchProductList = async () => {
 
-            const {data} = await axios.post("http://localhost:8080/getSearchProductList", null, {
+            const {data} = await axios.post("/getSearchProductList", null, {
                 params: {searchContent: searchContent}
             });
             // console.log(data);
@@ -39,6 +42,7 @@ const Search = () => {
             }
             setSearchData(data);
         }
+        getSearchProductList();
     }, [locationPath])
 
     useEffect(() => {
@@ -46,13 +50,14 @@ const Search = () => {
         // console.log(searchCheck);
         if (searchCheck == true) {
             // console.log('테스트');
-            return async () => {
-                await axios.post('http://localhost:8080/searchContentTotalInsert', null, {
+            const searchContentTotalInsert = async () => {
+                await axios.post('/searchContentTotalInsert', null, {
                     params: {
                         searchContent: searchContent
                     }
                 })
             }
+            searchContentTotalInsert();
         }
         setSearchCheck(false);
     }, [searchCheck])
