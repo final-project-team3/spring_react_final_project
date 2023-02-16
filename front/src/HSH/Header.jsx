@@ -254,7 +254,7 @@ const Header = () => {
                         console.log(location.pathname.includes("/search"))
                         if (location.pathname.includes("/search")) {
                           navi(`/search/${item?.searchContent}`);
-                          window.location.reload();
+                          location.reload();
                         }
                       }}><p
                         className={'me-2'}>{index + 1}</p>{item?.searchContent}</Link></li>

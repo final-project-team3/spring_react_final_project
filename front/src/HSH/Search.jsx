@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link, useLocation, useParams} from "react-router-dom";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import {default as Axios} from "axios";
 import $ from "jquery";
 import ListItem from "./ListItem";
@@ -9,6 +9,8 @@ const Search = () => {
     const axios = Axios.create({
         baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
     })
+
+    const navi = useNavigate();
 
 
     // 검색 결과가 있는지 체크(실시간 검색을 위함)
@@ -24,7 +26,8 @@ const Search = () => {
 
     $(function () {
         if (locationPath != locationPath) {
-            window.location.reload();
+            // window.location.reload();
+            navi(locationPath);
         }
     });
 

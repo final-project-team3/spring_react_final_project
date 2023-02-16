@@ -12,6 +12,7 @@ import java.io.IOException;
 
 @RestController
 public class SellerRestController {
+    String serverUrl = "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080";
 
     @Autowired
     private SellerService sellerService;
@@ -22,7 +23,7 @@ public class SellerRestController {
     public void signUpSeller(SellerInfoDto sellerInfoDto, HttpServletResponse httpServletResponse) throws Exception {
         System.out.println(sellerInfoDto);
         sellerService.insertSeller(sellerInfoDto);
-        httpServletResponse.sendRedirect("http://localhost:3000/");
+        httpServletResponse.sendRedirect(serverUrl + "/");
     }
 //    사업자 로그인
     @PostMapping("sellerLogin")
@@ -42,7 +43,7 @@ public class SellerRestController {
     @PostMapping("/sellerInfoUpdate")
     public void sellerInfoUpdate(SellerInfoDto sellerInfoDto, HttpServletResponse httpServletResponse) throws IOException {
         sellerService.sellerInfoUpdate(sellerInfoDto);
-        httpServletResponse.sendRedirect("http://localhost:3000/");
+        httpServletResponse.sendRedirect(serverUrl + "/");
     }
 
     @PostMapping("/emailCheck2")

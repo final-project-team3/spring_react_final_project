@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import Popup from "./Popup";
 import styled from "styled-components";
 import $ from "jquery";
-import axios, {default as Axios} from "axios";
+import {default as Axios} from "axios";
 import {useNavigate} from "react-router-dom";
 import data from "bootstrap/js/src/dom/data";
 import user from "../BJH/User";

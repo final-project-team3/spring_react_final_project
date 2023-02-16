@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import DetailRating from "./DetailRating";
 import styled from "styled-components";
-import axios from "axios";
 import './MyReview.css';
 import MyReview from "./MyReview";
 import Pagination from "../GJY/Pagination";

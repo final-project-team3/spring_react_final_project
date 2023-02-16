@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./LikeUserList.css";
 import { Link } from "react-router-dom";
-import axios, {default as Axios} from "axios";
+import {default as Axios} from "axios";
 import $ from "jquery";
 import Pagination from "../../GJY/Pagination";
 

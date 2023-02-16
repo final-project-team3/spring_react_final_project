@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import './LikeUserList.css';
-import {Link} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {default as Axios} from "axios";
 import Swal from "sweetalert2";
 const axios = Axios.create({
@@ -11,6 +11,9 @@ const axios = Axios.create({
 function LikeProduct(props) {
     let userInfo = sessionStorage.getItem("userInfo");
     userInfo = JSON.parse(userInfo);
+
+    const navi = useNavigate();
+    const {pathname} = useLocation();
 
     const [productLikeInfoList, setProductLikeInfoList] = useState([]);
 
@@ -39,7 +42,8 @@ function LikeProduct(props) {
                     title: "해당 찜한 상품을 삭제하였습니다.",
                     timer: 3000,
                 }).then(() => {
-                    window.location.reload();
+                    // window.location.reload();
+                    navi(pathname);
                 })
             }
         });

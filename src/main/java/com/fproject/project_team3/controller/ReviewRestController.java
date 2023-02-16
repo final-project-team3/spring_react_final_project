@@ -14,6 +14,8 @@ import java.util.List;
 
 @RestController
 public class ReviewRestController {
+
+    String serverUrl = "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080";
     @Autowired
     private ReviewService reviewService;
 
@@ -33,20 +35,20 @@ public class ReviewRestController {
     public void deleteMyReview(ReviewDto reviewDto, HttpServletResponse httpServletResponse) throws IOException {
         System.out.println(reviewDto);
         reviewService.deleteMyReview(reviewDto);
-        httpServletResponse.sendRedirect("http://localhost:3000/myReview");
+        httpServletResponse.sendRedirect(serverUrl + "/myReview");
     }
 
     @PostMapping("/updateMyReview")
     public void updateMyReview(ReviewDto reviewDto, HttpServletResponse httpServletResponse) throws IOException {
         System.out.println(reviewDto);
         reviewService.updateMyReview(reviewDto);
-        httpServletResponse.sendRedirect("http://localhost:3000/myReview");
+        httpServletResponse.sendRedirect( serverUrl + "/myReview");
     }
 
     @PostMapping("/writeMyReview")
     public void writeMyReview(ReviewDto reviewDto, HttpServletResponse httpServletResponse) throws IOException {
         reviewService.writeMyReview(reviewDto);
-        httpServletResponse.sendRedirect("http://localhost:3000/myReview");
+        httpServletResponse.sendRedirect(serverUrl + "/myReview");
     }
 
     @GetMapping("/reviewWriteCheck")

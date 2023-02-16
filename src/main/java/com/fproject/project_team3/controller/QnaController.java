@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 public class QnaController {
+    String serverUrl = "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080";
     @Autowired
     private QnaService qnaService;
 
@@ -33,13 +34,13 @@ public class QnaController {
     public void writeQna(@RequestParam("pathname") String pathname, QnaDto qnaDto, HttpServletResponse httpServletResponse) throws IOException {
         System.out.println(pathname);
         qnaService.writeQna(qnaDto);
-        httpServletResponse.sendRedirect("http://localhost:3000" + pathname);
+        httpServletResponse.sendRedirect(serverUrl + pathname);
     }
 
     @PostMapping("/answerWrite")
     public void answerWrite(QnaDto qnaDto, HttpServletResponse httpServletResponse)throws IOException{
         qnaService.answerWrite(qnaDto);
-        httpServletResponse.sendRedirect("http://localhost:3000/qnaAnswerWrite");
+        httpServletResponse.sendRedirect(serverUrl + "/qnaAnswerWrite");
     }
 
     @GetMapping("/getMyQna")

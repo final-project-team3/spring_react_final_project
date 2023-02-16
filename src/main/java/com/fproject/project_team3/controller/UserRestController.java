@@ -22,6 +22,8 @@ import java.util.Map;
 
 @RestController
 public class UserRestController {
+
+    String serverUrl = "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080";
     @Autowired
     private UserService userService;
 
@@ -37,7 +39,7 @@ public class UserRestController {
     public void signUpUser(UserInfoDto userInfoDto, HttpServletResponse httpServletResponse) throws IOException {
         System.out.println(userInfoDto);
         userService.insertUser(userInfoDto);
-        httpServletResponse.sendRedirect("http://localhost:3000/");
+        httpServletResponse.sendRedirect(serverUrl + "/");
     }
 
     @PostMapping("/getUserInfo")
@@ -50,7 +52,7 @@ public class UserRestController {
     @PostMapping("/userInfoUpdate")
     public void userInfoUpdate(UserInfoDto userInfoDto, HttpServletResponse httpServletResponse) throws IOException {
         userService.userInfoUpdate(userInfoDto);
-        httpServletResponse.sendRedirect("http://localhost:3000/");
+        httpServletResponse.sendRedirect(serverUrl + "/");
     }
 
     @PostMapping("/emailCheck")
