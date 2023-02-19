@@ -21,9 +21,9 @@ public class SellerRestController {
 //     사업자 회원가입
     @PostMapping("/signUpSeller")
     public void signUpSeller(SellerInfoDto sellerInfoDto, HttpServletResponse httpServletResponse) throws Exception {
-        System.out.println(sellerInfoDto);
+//        System.out.println(sellerInfoDto);
         sellerService.insertSeller(sellerInfoDto);
-        httpServletResponse.sendRedirect(serverUrl + "/");
+//        httpServletResponse.sendRedirect(serverUrl + "/");
     }
 //    사업자 로그인
     @PostMapping("sellerLogin")

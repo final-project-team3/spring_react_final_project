@@ -39,7 +39,7 @@ public class UserRestController {
     public void signUpUser(UserInfoDto userInfoDto, HttpServletResponse httpServletResponse) throws IOException {
         System.out.println(userInfoDto);
         userService.insertUser(userInfoDto);
-        httpServletResponse.sendRedirect(serverUrl + "/");
+//        httpServletResponse.sendRedirect(serverUrl + "/");
     }
 
     @PostMapping("/getUserInfo")

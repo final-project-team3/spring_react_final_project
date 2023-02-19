@@ -462,7 +462,7 @@ function SellerSignUp() {
 
 
     //마지막으로 모든 배열 true확인
-    const checkAll = () => {
+    const checkAll = async () => {
         let checkVal = [$('#sellerId').val(), $("#sellerPass").val(), $("#sellerPass2").val(), $("#sellerName").val(), $("#sellerTel").val(),
             $("#sellerBirth").val(), $("#businessName").val(), $("#businessNum").val(), $("#sellerDeliveryPrice").val(), $("#sellerDeliveryFree").val(), $("#sigunguCode").val()]
 
@@ -482,8 +482,25 @@ function SellerSignUp() {
 
         if (checkList.every(AllChecked)) {
             alert("회원 가입을 축하합니다");
-            $("#btn-signUp").attr("type", "submit");
-            $("#btn-signUp").onclick();
+            // $("#btn-signUp").attr("type", "submit");
+            // $("#btn-signUp").onclick();
+            await axios.post("/signUpSeller", {
+                sellerId: $("#sellerId").val(),
+                sellerPass: $("#sellerPass").val(),
+                sellerName: $("#sellerName").val(),
+                sellerTel: $("#sellerTel").val(),
+                sellerBirth: $("#sellerBirth").val(),
+                sellerGender: $("#sellerGender").val(),
+                sellerBusinessName: $("#businessName").val(),
+                sellerBusinessNum: $("#businessNum").val(),
+                sellerDeliveryPrice: $("#sellerDeliveryPrice").val(),
+                sellerDeliveryFree: $("#sellerDeliveryFree").val(),
+                sellerAddrNum: $("#sigunguCode").val(),
+                sellerAddrJibun: $("#jibunAddress").val(),
+                sellerAddrRoad: $("#roadAddress").val(),
+                sellerAddrDetail: $("#addressDetail").val(),
+            })
+            navigate("/");
             console.log(checkList);
         } else {
             console.log(checkList);
@@ -500,7 +517,7 @@ function SellerSignUp() {
                         <SignupStep className="wrap">
                             <Title>환영합니다. 가입 정보를 입력해주세요</Title>
                         </SignupStep>
-                        <form action={'/signUpSeller'} method={'post'}>
+                        {/*<form action={'/signUpSeller'} method={'post'}>*/}
                             <FormBlock>
                                 <FormBlockHead>
                                     <AsteriskRed>*</AsteriskRed> 이메일
@@ -783,7 +800,7 @@ function SellerSignUp() {
                                     <BtnLogin onClick={checkAll} type="button" id={"btn-signUp"}>회원가입하기</BtnLogin>
                                 </FormBlockBody>
                             </FormBlockSubmit>
-                        </form>
+                        {/*</form>*/}
                         <FormBlockSubmit>
                             <FormBlockBody>
                                 <BtnBack id={"btn-back"} type={"button"} onClick={toMain}>메인페이지로 이동</BtnBack>

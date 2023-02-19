@@ -343,7 +343,7 @@ function UserSignUp() {
     };
 
     //마지막으로 모든배열 true확인 userId confirmNum userPass userPass2 userName userTel userBirth userGender sigunguCode jibunAddress roadAddress
-    const checkAll = () => {
+    const checkAll = async () => {
         let signUp = $('#btn-signUp');
         // 확인
         let checkVal = [$('#userId').val(), $("#userPass").val(), $("#userPass2").val(), $("#userName").val(), $("#userTel").val(), $("#userBirth").val(), $("#sigunguCode").val()]
@@ -364,10 +364,21 @@ function UserSignUp() {
 
         if (checkList.every(AllChecked) && true_cnt == 7) {
             alert("회원 가입을 축하합니다");
-            $("#btn-signUp").attr("type", "submit");
-            $("#btn-signUp").onclick();
-            console.log(true_cnt);
-            console.log(checkList);
+            // $("#btn-signUp").attr("type", "submit");
+            // $("#btn-signUp").onclick();
+            await axios.post("/signUpUser", {
+                userId: $("#userId").val(),
+                userPass: $("#userPass").val(),
+                userName: $("#userName").val(),
+                userTel: $("#userTel").val(),
+                userBirth: $("#userBirth").val(),
+                userGender: $("#userGender").val(),
+                userAddrNum: $("#sigunguCode").val(),
+                userAddrJibun: $("#jibunAddress").val(),
+                userAddrRoad: $("#roadAddress").val(),
+                userAddrDetail: $("#addressDetail").val(),
+            })
+            navigate("/");
         } else {
             // alert("공백란이나 잘못된 입력을 확인해 주세요");
             console.log(true_cnt);
@@ -385,7 +396,7 @@ function UserSignUp() {
                         <SignupStep className="wrap">
                             <Title>환영합니다. 가입 정보를 입력해주세요</Title>
                         </SignupStep>
-                        <form action={'/signUpUser'} method={'post'}>
+                        {/*<form action={'/signUpUser'} method={'post'}>*/}
                             <FormBlock>
                                 <FormBlockHead>
                                     <AsteriskRed>*</AsteriskRed> 이메일
@@ -588,7 +599,7 @@ function UserSignUp() {
                                     <BtnLogin onClick={checkAll} type="button" id={"btn-signUp"}>회원가입하기</BtnLogin>
                                 </FormBlockBody>
                             </FormBlockSubmit>
-                        </form>
+                        {/*</form>*/}
                         <FormBlockSubmit>
                             <FormBlockBody>
                                 <BtnBack id={"btn-back"} type={"button"} onClick={toMain}>메인페이지로 이동</BtnBack>
