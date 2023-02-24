@@ -218,7 +218,7 @@ function UserInfoUpdate() {
         }
     }
 
-    const checkAll = () => {
+    const checkAll = async () => {
         console.log(checkList);
         let update = $('#btn-update');
         // 확인
@@ -244,10 +244,21 @@ function UserInfoUpdate() {
 
         if (checkList.every(AllChecked) && true_cnt == checkVal.length) {
             alert("회원정보 수정이 완료 되었습니다.");
-            $("#btn-update").attr("type", "submit");
-            $("#btn-update").onclick();
-            console.log(true_cnt);
-            console.log(checkList);
+            // $("#btn-update").attr("type", "submit");
+            // $("#btn-update").onclick();
+            await axios.post("/userInfoUpdate", {
+                userId: $("#userId").val(),
+                userPass: $("#userPass").val(),
+                userName: $("#userName").val(),
+                userTel: $("#userTel").val(),
+                userBirth: $("#userBirth").val(),
+                userGender: $("#userGender").val(),
+                userAddrNum: $("#sigunguCode").val(),
+                userAddrJibun: $("#jibunAddress").val(),
+                userAddrRoad: $("#roadAddress").val(),
+                userAddrDetail: $("#addressDetail").val(),
+            })
+            navigate("/");
         } else {
             alert("잘못된 입력을 확인해 주세요");
             console.log(true_cnt);
@@ -266,7 +277,7 @@ function UserInfoUpdate() {
                         <SignupStep className="wrap">
                             <Title>환영합니다. 개인 정보를 수정해주세요</Title>
                         </SignupStep>
-                        <form action={'/userInfoUpdate'} method={'post'}>
+                        {/*<form action={'/userInfoUpdate'} method={'post'}>*/}
                             <FormBlock>
                                 <FormBlockHead>
                                     <AsteriskRed>*</AsteriskRed> 이메일
@@ -419,7 +430,7 @@ function UserInfoUpdate() {
                                     <BtnLogin onClick={checkAll} type="button" id={"btn-update"}>수정 완료</BtnLogin>
                                 </FormBlockBody>
                             </FormBlockSubmit>
-                        </form>
+                        {/*</form>*/}
                         <FormBlockSubmit>
                             <FormBlockBody>
                                 <BtnBack id={"btn-back"} type={"button"} onClick={toMain}>메인페이지로 이동</BtnBack>

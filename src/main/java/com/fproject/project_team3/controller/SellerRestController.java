@@ -4,6 +4,7 @@ import com.fproject.project_team3.dto.seller.SellerInfoDto;
 import com.fproject.project_team3.service.seller.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,7 @@ public class SellerRestController {
     //    HSH
 //     사업자 회원가입
     @PostMapping("/signUpSeller")
-    public void signUpSeller(SellerInfoDto sellerInfoDto, HttpServletResponse httpServletResponse) throws Exception {
+    public void signUpSeller(@RequestBody SellerInfoDto sellerInfoDto, HttpServletResponse httpServletResponse) throws Exception {
 //        System.out.println(sellerInfoDto);
         sellerService.insertSeller(sellerInfoDto);
 //        httpServletResponse.sendRedirect(serverUrl + "/");
@@ -41,9 +42,9 @@ public class SellerRestController {
     }
 
     @PostMapping("/sellerInfoUpdate")
-    public void sellerInfoUpdate(SellerInfoDto sellerInfoDto, HttpServletResponse httpServletResponse) throws IOException {
+    public void sellerInfoUpdate(@RequestBody SellerInfoDto sellerInfoDto, HttpServletResponse httpServletResponse) throws IOException {
         sellerService.sellerInfoUpdate(sellerInfoDto);
-        httpServletResponse.sendRedirect(serverUrl + "/");
+//        httpServletResponse.sendRedirect(serverUrl + "/");
     }
 
     @PostMapping("/emailCheck2")

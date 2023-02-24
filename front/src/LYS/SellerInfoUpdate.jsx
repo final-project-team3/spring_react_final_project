@@ -227,7 +227,7 @@ function SellerInfoUpdate() {
         }
     }
 
-    const checkAll = () => {
+    const checkAll = async () => {
         console.log(checkList);
         let update = $('#btn-update');
         // 확인
@@ -253,10 +253,23 @@ function SellerInfoUpdate() {
 
         if (checkList.every(AllChecked) && true_cnt == checkVal.length) {
             alert("회원정보 수정이 완료 되었습니다.");
-            $("#btn-update").attr("type", "submit");
-            $("#btn-update").onclick();
-            console.log(true_cnt);
-            console.log(checkList);
+            await axios.post("/sellerInfoUpdate", {
+                sellerId: $("#sellerId").val(),
+                sellerPass: $("#sellerPass").val(),
+                sellerName: $("#sellerName").val(),
+                sellerTel: $("#sellerTel").val(),
+                sellerBirth: $("#sellerBirth").val(),
+                sellerGender: $("#sellerGender").val(),
+                sellerBusinessName: $("#businessName").val(),
+                sellerBusinessNum: $("#businessNum").val(),
+                sellerDeliveryPrice: $("#sellerDeliveryPrice").val(),
+                sellerDeliveryFree: $("#sellerDeliveryFree").val(),
+                sellerAddrNum: $("#sigunguCode").val(),
+                sellerAddrJibun: $("#jibunAddress").val(),
+                sellerAddrRoad: $("#roadAddress").val(),
+                sellerAddrDetail: $("#addressDetail").val(),
+            })
+            navigate("/");
         } else {
             alert("잘못된 입력을 확인해 주세요");
             console.log(true_cnt);
@@ -274,7 +287,7 @@ function SellerInfoUpdate() {
                         <SignupStep className="wrap">
                             <Title>환영합니다. 개인 정보를 수정해주세요</Title>
                         </SignupStep>
-                        <form action={'/sellerInfoUpdate'} method={'post'}>
+                        {/*<form action={'/sellerInfoUpdate'} method={'post'}>*/}
                             <FormBlock>
                                 <FormBlockHead>
                                     <AsteriskRed>*</AsteriskRed> 이메일
@@ -406,7 +419,7 @@ function SellerInfoUpdate() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeWTypeL>
-                                        <Input name={"sellerBusinessName"} id={"businessName"} type="text"
+                                        <Input name={"sellerBusinessName"} id={"sellerBusinessName"} type="text"
                                                value={sellerInfo?.sellerBusinessName ? sellerInfo.sellerBusinessName : null}
                                                readOnly={true}
                                                style={{backgroundColor: "#c8c8c8"}}/>
@@ -420,7 +433,7 @@ function SellerInfoUpdate() {
                                 </FormBlockHead>
                                 <FormBlockBody>
                                     <InputTextSizeWTypeL>
-                                        <Input name={"sellerBusinessNum"} id={"businessNum"} type="text" readOnly={true}
+                                        <Input name={"sellerBusinessNum"} id={"sellerBusinessNum"} type="text" readOnly={true}
                                                value={sellerInfo?.sellerBusinessNum ? sellerInfo.sellerBusinessNum : null}
                                                style={{backgroundColor: "#c8c8c8"}}/>
                                     </InputTextSizeWTypeL>
@@ -452,7 +465,7 @@ function SellerInfoUpdate() {
                                         type="button" id={"btn-update"}>수정 완료</BtnLogin>
                                 </FormBlockBody>
                             </FormBlockSubmit>
-                        </form>
+                        {/*</form>*/}
                         <FormBlockSubmit>
                             <FormBlockBody>
                                 <BtnBack id={"btn-back"} type={"button"} onClick={toMain}>메인페이지로 이동</BtnBack>

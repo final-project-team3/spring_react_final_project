@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation, useParams} from "react-router-dom";
+import {useLocation, useParams, useNavigate} from "react-router-dom";
 import RegistRating from "./RegistRating";
 import styled from "styled-components";
 import {default as Axios} from "axios";
@@ -15,6 +15,8 @@ function QnaWrite(props) {
     const {productNum} = useParams();
     const [productInfo, setProductInfo] = useState();
     const [qnaContent, setQnaContent] = useState();
+
+    const navigate = useNavigate();
 
     let userInfo = sessionStorage.getItem("userInfo");
     userInfo = JSON.parse(userInfo);
@@ -34,14 +36,21 @@ function QnaWrite(props) {
         getProductInfoFromDetail();
     }, [])
 
-    const writeQna = () => {
+    const writeQna = async () => {
         var content = $('#qnaContent').val();
         if (content.length < 10) {
             swal("문의를 10자 이상 입력해주세요");
         } else {
             alert("문의가 등록 되었습니다.");
-            $("#btn-write").attr("type", "submit");
-            $("#btn-write").onclick();
+            await axios.post("/writeQna", {
+                qnaContent: $("#qnaContent").val(),
+                productNum: $("#productNum").val(),
+                userId: $("#userId").val(),
+                qnaTitle: $("#qnaTitle").val(),
+            })
+            navigate("/" + pathname)
+            // $("#btn-write").attr("type", "submit");
+            // $("#btn-write").onclick();
         }
     }
 
@@ -60,7 +69,7 @@ function QnaWrite(props) {
                 </div>
             </div>
 
-            <form action={"/writeQna"} method={'post'} style={{padding: 0, margin: 0}}>
+            <form style={{padding: 0, margin: 0}}>
                 <input value={pathname} name={"pathname"} hidden={true}/>
                 <div className={'mt-5'}>
                     <div className="reviewContainer">

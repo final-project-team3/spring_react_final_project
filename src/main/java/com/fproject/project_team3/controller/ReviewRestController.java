@@ -32,23 +32,23 @@ public class ReviewRestController {
     }
 
     @PostMapping("/deleteMyReview")
-    public void deleteMyReview(ReviewDto reviewDto, HttpServletResponse httpServletResponse) throws IOException {
+    public void deleteMyReview(@RequestBody ReviewDto reviewDto, HttpServletResponse httpServletResponse) throws IOException {
         System.out.println(reviewDto);
         reviewService.deleteMyReview(reviewDto);
-        httpServletResponse.sendRedirect(serverUrl + "/myReview");
+//        httpServletResponse.sendRedirect(serverUrl + "/myReview");
     }
 
     @PostMapping("/updateMyReview")
-    public void updateMyReview(ReviewDto reviewDto, HttpServletResponse httpServletResponse) throws IOException {
+    public void updateMyReview(@RequestBody ReviewDto reviewDto, HttpServletResponse httpServletResponse) throws IOException {
         System.out.println(reviewDto);
         reviewService.updateMyReview(reviewDto);
 //        httpServletResponse.sendRedirect( serverUrl + "/myReview");
     }
 
     @PostMapping("/writeMyReview")
-    public void writeMyReview(ReviewDto reviewDto, HttpServletResponse httpServletResponse) throws IOException {
+    public void writeMyReview(@RequestBody ReviewDto reviewDto, HttpServletResponse httpServletResponse) throws IOException {
         reviewService.writeMyReview(reviewDto);
-        httpServletResponse.sendRedirect(serverUrl + "/myReview");
+//        httpServletResponse.sendRedirect(serverUrl + "/myReview");
     }
 
     @GetMapping("/reviewWriteCheck")

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
-import {Link, useLocation, useParams} from "react-router-dom";
+import {Link, useLocation, useParams, useNavigate} from "react-router-dom";
 import $ from "jquery";
 import {default as Axios} from "axios";
 
@@ -9,11 +9,17 @@ const axios = Axios.create({
 })
 
 function AnswerWritePage(props) {
+    const axios = Axios.create({
+        baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+    })
+
+    const navi = useNavigate();
+
     const location = useLocation();
     const qnaInfo = location.state.qnaInfo;
     console.log(qnaInfo?.qnaContent);
 
-    const answerWrite = () => {
+    const answerWrite = async () => {
         var qnaAnswer = $('#qnaAnswer').val();
 
         if (qnaAnswer == '') {
@@ -21,9 +27,14 @@ function AnswerWritePage(props) {
             $("#btn-write").attr("type", "button");
             $("#btn-write").onclick();
         } else {
+            await axios.post("/answerWrite", {
+                qnaNum:$("#qnaNum").val(),
+                qnaAnswer:$("#qnaAnswer").val()
+            })
             alert("답변 완료 되었습니다.");
-            $("#btn-write").attr("type", "submit");
-            $("#btn-write").onclick();
+            navi("/qnaAnswerWrite");
+            // $("#btn-write").attr("type", "submit");
+            // $("#btn-write").onclick();
         }
     }
 
@@ -42,8 +53,9 @@ function AnswerWritePage(props) {
                 </div>
             </div>
 
-            <form action={"/answerWrite"} method={'post'} style={{padding: 0, margin: 0}}>
-                <input hidden value={qnaInfo.qnaNum} name={"qnaNum"}/>
+            {/*<form action={"/answerWrite"} method={'post'} style={{padding: 0, margin: 0}}>*/}
+                <form  style={{padding: 0, margin: 0}}>
+                <input hidden value={qnaInfo.qnaNum} name={"qnaNum"} id={"qnaNum"}/>
                 <div className={'mt-5'}>
                     <div className="reviewContainer">
                         <ul>

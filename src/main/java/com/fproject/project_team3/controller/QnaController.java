@@ -4,10 +4,7 @@ import com.fproject.project_team3.dto.product.ProductInfoDto;
 import com.fproject.project_team3.dto.userAndseller.QnaDto;
 import com.fproject.project_team3.service.qna.QnaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -31,16 +28,16 @@ public class QnaController {
     }
 
     @PostMapping("/writeQna")
-    public void writeQna(@RequestParam("pathname") String pathname, QnaDto qnaDto, HttpServletResponse httpServletResponse) throws IOException {
-        System.out.println(pathname);
+    public void writeQna(@RequestBody QnaDto qnaDto, HttpServletResponse httpServletResponse) throws IOException {
+//        System.out.println(pathname);
         qnaService.writeQna(qnaDto);
-        httpServletResponse.sendRedirect(serverUrl + pathname);
+//        httpServletResponse.sendRedirect(serverUrl + pathname);
     }
 
     @PostMapping("/answerWrite")
-    public void answerWrite(QnaDto qnaDto, HttpServletResponse httpServletResponse)throws IOException{
+    public void answerWrite(@RequestBody QnaDto qnaDto, HttpServletResponse httpServletResponse)throws IOException{
         qnaService.answerWrite(qnaDto);
-        httpServletResponse.sendRedirect(serverUrl + "/qnaAnswerWrite");
+//        httpServletResponse.sendRedirect(serverUrl + "/qnaAnswerWrite");
     }
 
     @GetMapping("/getMyQna")

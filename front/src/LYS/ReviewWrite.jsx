@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import './MyReview.css';
 import './ReviewWrite.css';
@@ -8,6 +8,10 @@ import swal from 'sweetalert';
 import RegistRating from "./RegistRating";
 
 function ReviewWrite() {
+    const axios = Axios.create({
+        baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+    })
+    const navi = useNavigate();
     const location = useLocation();
     const productInfo = location.state.productInfo;
 
@@ -15,16 +19,24 @@ function ReviewWrite() {
     const [score, setScore] = useState(0);
     console.log(productInfo);
 
-    const writeReview = () => {
+    const writeReview = async () => {
         var content = $('#reviewContent').val();
         if (score == 0) {
             swal("별점을 입력해주세요");
         } else if (content.length < 10) {
             swal("리뷰를 10자 이상 입력해주세요");
         } else {
+            await axios.post("/writeMyReview", {
+                userId:$("#userId").val(),
+                productNum:$("#productNum").val(),
+                reviewContent:$("#reviewContent").val(),
+                reviewStarPoint:$("reviewStarPoint").val(),
+                orderNum:$("#orderNum").val()
+            })
             alert("리뷰가 등록 되었습니다.");
-            $("#btn-write").attr("type", "submit");
-            $("#btn-write").onclick();
+            navi("/myReview")
+            // $("#btn-write").attr("type", "submit");
+            // $("#btn-write").onclick();
         }
     }
 
@@ -48,7 +60,8 @@ function ReviewWrite() {
                 </div>
             </div>
 
-            <form action={"/writeMyReview"} method={'post'} style={{padding: 0, margin: 0}}>
+            {/*<form action={"/writeMyReview"} method={'post'} style={{padding: 0, margin: 0}}>*/}
+            <form style={{padding: 0, margin: 0}}>
                 <div className={'mt-5'}>
                     <div className="reviewContainer">
                         <ul>
@@ -77,7 +90,8 @@ function ReviewWrite() {
                                                         </div>
                                                         <div className="review-table__cell col-10">
                                                             <div
-                                                                className="review-intake-form__product-title" style={{fontSize: 20}}>{`${productInfo.productName}, ${productInfo.productOrderQuantity}개`}</div>
+                                                                className="review-intake-form__product-title"
+                                                                style={{fontSize: 20}}>{`${productInfo.productName}, ${productInfo.productOrderQuantity}개`}</div>
                                                             <div
                                                                 className="my-review__modify__star js_reviewModifyStarContainer">
                                                                 <div className="my-review__modify__star__content">
@@ -94,7 +108,8 @@ function ReviewWrite() {
                                                         <div className="my-review__modify__review__content">
                                                             <div
                                                                 className="my-review__modify__review__content__text-wrap">
-                                                            <textarea name={'reviewContent'} id={'reviewContent'} style={{fontSize: 20}}
+                                                            <textarea name={'reviewContent'} id={'reviewContent'}
+                                                                      style={{fontSize: 20}}
                                                                       value={reviewContent}
                                                                       className="my-review__modify__review__content__text-area"
                                                                       placeholder="다른 고객님에게 도움이 되도록 상품에 대한 솔직한 평가를 남겨주세요. (10자 이상)"></textarea>
@@ -119,7 +134,7 @@ function ReviewWrite() {
                                                        value={productInfo.productNum}/>
                                                 <input hidden={true} name={'reviewStarPoint'} id={'reviewStarPoint'}
                                                        value={score}/>
-                                                <input hidden={true} name={'orderNum'} id={'reviewStarPoint'}
+                                                <input hidden={true} name={'orderNum'} id={'orderNum'}
                                                        value={productInfo.orderNum}/>
                                             </div>
                                         </div>

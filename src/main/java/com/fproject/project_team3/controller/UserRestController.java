@@ -8,10 +8,7 @@ import com.fproject.project_team3.service.email.EmailService;
 import com.fproject.project_team3.service.user.UserService;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +33,7 @@ public class UserRestController {
 
     //    LYS
     @PostMapping("/signUpUser")
-    public void signUpUser(UserInfoDto userInfoDto, HttpServletResponse httpServletResponse) throws IOException {
+    public void signUpUser(@RequestBody UserInfoDto userInfoDto, HttpServletResponse httpServletResponse) throws IOException {
         System.out.println(userInfoDto);
         userService.insertUser(userInfoDto);
 //        httpServletResponse.sendRedirect(serverUrl + "/");
@@ -50,9 +47,9 @@ public class UserRestController {
     }
 
     @PostMapping("/userInfoUpdate")
-    public void userInfoUpdate(UserInfoDto userInfoDto, HttpServletResponse httpServletResponse) throws IOException {
+    public void userInfoUpdate(@RequestBody UserInfoDto userInfoDto, HttpServletResponse httpServletResponse) throws IOException {
         userService.userInfoUpdate(userInfoDto);
-        httpServletResponse.sendRedirect(serverUrl + "/");
+//        httpServletResponse.sendRedirect(serverUrl + "/");
     }
 
     @PostMapping("/emailCheck")
