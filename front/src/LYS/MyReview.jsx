@@ -5,11 +5,11 @@ import './MyReview.css';
 import {useNavigate} from "react-router-dom";
 import myReviewList from "./MyReviewList";
 import $ from 'jquery';
-
+import {default as Axios} from "axios";
+const axios = Axios.create({
+    baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
+});
 function MyReview(props) {
-    const axios = Axios.create({
-        baseURL: "http://ec2-3-39-252-127.ap-northeast-2.compute.amazonaws.com:8080"
-    })
     const navi = useNavigate();
 
     const [btnCheck, setBtnCheck] = useState("");
