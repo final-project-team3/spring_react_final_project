@@ -1,4 +1,5 @@
 import React from 'react';
+import {useNavigate} from "react-router-dom";
 
 // 나중에 함수 사용할때 편하게 사용하기 위해서 미리 이렇게 만들어줌
 // 유저 로그인
@@ -32,6 +33,7 @@ const initState = {
 
 // 액션 결과를 걸러줌
 const reducer = (state = initState, action) => {
+    const navi = useNavigate();
     switch (action.type) {
         case"USER_LOGIN" :
             sessionStorage.setItem("role", action.role);
@@ -44,11 +46,13 @@ const reducer = (state = initState, action) => {
         case"USER_LOGOUT":
             sessionStorage.removeItem("role");
             sessionStorage.removeItem("userInfo");
-            window.location.reload();
+            // window.location.reload();
+            navi("/");
         case"SELLER_LOGOUT":
             sessionStorage.removeItem("role");
             sessionStorage.removeItem("sellerInfo");
-            window.location.reload();
+            // window.location.reload();
+            navi("/");
         default:
             return state;
     }
