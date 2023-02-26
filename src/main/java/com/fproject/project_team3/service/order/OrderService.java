@@ -14,7 +14,8 @@ public interface OrderService {
 
   List<OrderListProductInfoDto> getPayUserList(String sellerBusinessName);
 
-  List<InterestedListProductInfoDto> getInterestedUserList(String sellerBusinessName);
+  List<InterestedListProductInfoDto> getInterestedUserList(String productSellerBusinessName);
+
 
   List<UserInfoProductInfoDto> getZzimDetail(int productNum);
 

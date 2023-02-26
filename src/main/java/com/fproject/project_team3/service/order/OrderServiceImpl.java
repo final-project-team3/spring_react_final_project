@@ -31,8 +31,8 @@ public class OrderServiceImpl implements OrderService {
   }
 
   @Override
-  public List<InterestedListProductInfoDto> getInterestedUserList(String sellerBusinessName) {
-    return orderListMapper.getInterestedUserList(sellerBusinessName);
+  public List<InterestedListProductInfoDto> getInterestedUserList(String productSellerBusinessName) {
+    return orderListMapper.getInterestedUserList(productSellerBusinessName);
   }
 
   @Override

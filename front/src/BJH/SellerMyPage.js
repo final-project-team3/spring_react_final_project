@@ -76,18 +76,6 @@ function SellerMyPage(props) {
                 </div>
                 <div className={"row"}>
                     <div className="border-end border-opacity-10 listContainer col-6">
-                        {/*<a href="#" className="item">*/}
-                        {/*    <div className="ps-5 icon"><img style={{*/}
-                        {/*        width: 24,*/}
-                        {/*        height: 24*/}
-                        {/*    }} src={"./Img/Bjh/delivery.png"}/>*/}
-                        {/*    </div>*/}
-                        {/*    /!*<div className="text">발송한 상품 내역(삭제예정)</div>*!/*/}
-                        {/*    <div className="pe-5 right"><img style={{*/}
-                        {/*        width: 24,*/}
-                        {/*        height: 24*/}
-                        {/*    }} src={"./Img/Bjh/right.png"}/></div>*/}
-                        {/*</a>*/}
                         <Link to="/productSelect" className="item">
                             <div className="ps-5 icon"><img style={{
                                 width: 24,
@@ -127,33 +115,18 @@ function SellerMyPage(props) {
                         </Link>
                     </div>
                     <div className="listContainer col-6">
-                        <a href="/likeUserList" className="item">
+                        <Link to="/likeUserList" className="item">
                             <div className="ps-5 icon"><img style={{
                                 width: 24,
                                 height: 24
                             }} src={"./Img/Bjh/wish.png"}/>
                             </div>
                             <div className="text">찜한 고객 목록</div>
-                            <div className="pe-5 right"><img style={{
+                            <div className="pe-5 right"><img alt={"이미지없음"} style={{
                                 width: 24,
-                                height: 24
+                                height: 24,
                             }} src={"./Img/Bjh/right.png"}/></div>
-                        </a>
-                        {/*<a href="/orderUserList" className="item">*/}
-                        {/*    <div className="ps-5 icon"><img style={{*/}
-                        {/*        width: 24,*/}
-                        {/*        height: 24*/}
-                        {/*    }} src={"./Img/Bjh/wallet.png"}/>*/}
-                        {/*    </div>*/}
-                        {/*    <div className="text">*/}
-                        {/*        <span>주문한 고객 목록(삭제 예정)</span>*/}
-                        {/*    </div>*/}
-                        {/*    <div className="pe-5 right"><img style={{*/}
-                        {/*        width: 24,*/}
-                        {/*        height: 24*/}
-                        {/*    }} src={"./Img/Bjh/right.png"}/>*/}
-                        {/*    </div>*/}
-                        {/*</a>*/}
+                        </Link>
                         <a href="/payUserList" className="item">
                             <div className="ps-5 icon"><img style={{
                                 width: 24,

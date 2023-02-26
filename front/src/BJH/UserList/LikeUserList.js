@@ -32,7 +32,6 @@ function LikeUserList(props) {
         }
       );
 
-      console.log(data);
       setInterestedListData(data);
     };
     interestedUserListAll();
@@ -134,9 +133,9 @@ function LikeUserList(props) {
                 ) : (
                   interestedListData
                     .slice(offset, offset + limit)
-                    .map((item, index) => {
+                    .map((item) => {
                       return (
-                        <tr className="table-light" key={index}>
+                        <tr className="table-light" key={item.productNum}>
                           <td>{item.productNum}</td>
                           <td>
                             <img src={item.productImg} alt="" width={100} />

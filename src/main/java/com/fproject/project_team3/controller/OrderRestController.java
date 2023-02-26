@@ -36,8 +36,8 @@ public class OrderRestController {
 
     // 찜한 고객 리스트 조회
     @PostMapping("/getInterestedUserList")
-    public List<InterestedListProductInfoDto> getInterestedUserList(@RequestParam("sellerBusinessName") String sellerBusinessName) throws Exception {
-        List<InterestedListProductInfoDto> getInterestedUserList = orderService.getInterestedUserList(sellerBusinessName);
+    public List<InterestedListProductInfoDto> getInterestedUserList(@RequestParam("sellerBusinessName") String productSellerBusinessName) {
+        List<InterestedListProductInfoDto> getInterestedUserList = orderService.getInterestedUserList(productSellerBusinessName);
         return getInterestedUserList;
     }
 

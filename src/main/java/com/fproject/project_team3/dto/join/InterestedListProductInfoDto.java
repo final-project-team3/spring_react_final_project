@@ -4,11 +4,10 @@ import lombok.Data;
 
 @Data
 public class InterestedListProductInfoDto {
-  int userInterestedListNum;
-  int productNum;
-  String userId;
+  private String productNum;
   private String productSellerId;
-  private int productKindNum;
+  private String productSellerBusinessName;
+  private String productKindNum;
   private String productName;
   private String productPrice;
   private String productContent;
@@ -16,6 +15,5 @@ public class InterestedListProductInfoDto {
   private String productRegistrationDate;
   private String reviewStarPoint;
   private String productDeliveryDay;
-  private String productSellerBusinessName;
   private int countProductNum;
 }

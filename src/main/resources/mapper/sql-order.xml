@@ -34,12 +34,12 @@
     <!--    찜한 고객 리스트-->
     <select id="getInterestedUserList" parameterType="String"
             resultType="com.fproject.project_team3.dto.join.InterestedListProductInfoDto">
-        SELECT *, COUNT(*) countProductNum
+        SELECT info.*, COUNT(*) countProductNum
         FROM product_info info,
              user_interested_list interest
         WHERE info.product_num = interest.product_num
           AND info.product_seller_business_name = #{productSellerBusinessName}
-        group by interest.product_num;
+        GROUP BY interest.product_num, info.product_num;
     </select>
 
     <!--    찜 분석 -->
@@ -75,7 +75,8 @@
     <insert id="insertOrderList" parameterType="com.fproject.project_team3.dto.user.UserOrderListDto">
         INSERT INTO user_order_list(user_id, product_num, product_order_quantity, user_order_date, order_num,
                                     order_price)
-        VALUES (#{userId}, #{productNum}, #{productOrderQuantity}, DATE_FORMAT(now(), '%Y-%m-%d'), #{orderNum}, #{orderPrice})
+        VALUES (#{userId}, #{productNum}, #{productOrderQuantity}, DATE_FORMAT(now(), '%Y-%m-%d'), #{orderNum},
+                #{orderPrice})
     </insert>
     <!-- GJY -->
 

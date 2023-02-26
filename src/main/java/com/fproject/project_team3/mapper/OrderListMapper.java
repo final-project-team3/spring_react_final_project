@@ -15,7 +15,7 @@ public interface OrderListMapper {
 
     List<OrderListProductInfoDto> getPayUserList(String sellerId);
 
-    List<InterestedListProductInfoDto> getInterestedUserList(String sellerBusinessName);
+    List<InterestedListProductInfoDto> getInterestedUserList(String productSellerBusinessName);
 
     List<UserInfoProductInfoDto> getZzimDetail(int productNum);
 
